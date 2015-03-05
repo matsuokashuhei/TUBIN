@@ -13,6 +13,12 @@
 		A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D402891AA8B7C700F0AAD2 /* Images.xcassets */; };
 		A8D4028D1AA8B7C700F0AAD2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D4028B1AA8B7C700F0AAD2 /* LaunchScreen.xib */; };
 		A8D402991AA8B7C700F0AAD2 /* TUBINTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402981AA8B7C700F0AAD2 /* TUBINTests.swift */; };
+		A8D402B11AA8BCD500F0AAD2 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402AE1AA8BCCB00F0AAD2 /* YouTubeKit.framework */; };
+		A8D402B21AA8BCD500F0AAD2 /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402AE1AA8BCCB00F0AAD2 /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A8D403531AA8C34800F0AAD2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402BA1AA8C2B800F0AAD2 /* Alamofire.framework */; };
+		A8D403541AA8C34800F0AAD2 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402BA1AA8C2B800F0AAD2 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A8D403551AA8C34800F0AAD2 /* LlamaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402BB1AA8C2B800F0AAD2 /* LlamaKit.framework */; };
+		A8D403561AA8C34800F0AAD2 /* LlamaKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402BB1AA8C2B800F0AAD2 /* LlamaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +29,44 @@
 			remoteGlobalIDString = A8D4027C1AA8B7C700F0AAD2;
 			remoteInfo = TUBIN;
 		};
+		A8D402AD1AA8BCCB00F0AAD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8D401A21AA8B08700F0AAD2;
+			remoteInfo = YouTubeKit;
+		};
+		A8D402AF1AA8BCCB00F0AAD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8D401AD1AA8B08700F0AAD2;
+			remoteInfo = YouTubeKitTests;
+		};
+		A8D402B31AA8BCD500F0AAD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A8D401A11AA8B08700F0AAD2;
+			remoteInfo = YouTubeKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A8D402B51AA8BCD500F0AAD2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A8D402B21AA8BCD500F0AAD2 /* YouTubeKit.framework in Embed Frameworks */,
+				A8D403541AA8C34800F0AAD2 /* Alamofire.framework in Embed Frameworks */,
+				A8D403561AA8C34800F0AAD2 /* LlamaKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +79,9 @@
 		A8D402921AA8B7C700F0AAD2 /* TUBINTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TUBINTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D402971AA8B7C700F0AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D402981AA8B7C700F0AAD2 /* TUBINTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TUBINTests.swift; sourceTree = "<group>"; };
+		A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YouTubeKit.xcodeproj; path = YouTubeKit/YouTubeKit.xcodeproj; sourceTree = "<group>"; };
+		A8D402BA1AA8C2B800F0AAD2 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		A8D402BB1AA8C2B800F0AAD2 /* LlamaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LlamaKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +89,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8D402B11AA8BCD500F0AAD2 /* YouTubeKit.framework in Frameworks */,
+				A8D403531AA8C34800F0AAD2 /* Alamofire.framework in Frameworks */,
+				A8D403551AA8C34800F0AAD2 /* LlamaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +108,11 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
+				A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
 				A8D402951AA8B7C700F0AAD2 /* TUBINTests */,
 				A8D4027E1AA8B7C700F0AAD2 /* Products */,
+				A8D402B71AA8C2B800F0AAD2 /* Carthage */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +163,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A8D402A91AA8BCCB00F0AAD2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8D402AE1AA8BCCB00F0AAD2 /* YouTubeKit.framework */,
+				A8D402B01AA8BCCB00F0AAD2 /* YouTubeKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8D402B71AA8C2B800F0AAD2 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				A8D402B81AA8C2B800F0AAD2 /* Build */,
+			);
+			path = Carthage;
+			sourceTree = "<group>";
+		};
+		A8D402B81AA8C2B800F0AAD2 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				A8D402B91AA8C2B800F0AAD2 /* iOS */,
+			);
+			path = Build;
+			sourceTree = "<group>";
+		};
+		A8D402B91AA8C2B800F0AAD2 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A8D402BA1AA8C2B800F0AAD2 /* Alamofire.framework */,
+				A8D402BB1AA8C2B800F0AAD2 /* LlamaKit.framework */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +207,12 @@
 				A8D402791AA8B7C700F0AAD2 /* Sources */,
 				A8D4027A1AA8B7C700F0AAD2 /* Frameworks */,
 				A8D4027B1AA8B7C700F0AAD2 /* Resources */,
+				A8D402B51AA8BCD500F0AAD2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A8D402B41AA8BCD500F0AAD2 /* PBXTargetDependency */,
 			);
 			name = TUBIN;
 			productName = TUBIN;
@@ -179,6 +266,12 @@
 			mainGroup = A8D402741AA8B7C700F0AAD2;
 			productRefGroup = A8D4027E1AA8B7C700F0AAD2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A8D402A91AA8BCCB00F0AAD2 /* Products */;
+					ProjectRef = A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A8D4027C1AA8B7C700F0AAD2 /* TUBIN */,
@@ -186,6 +279,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A8D402AE1AA8BCCB00F0AAD2 /* YouTubeKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = YouTubeKit.framework;
+			remoteRef = A8D402AD1AA8BCCB00F0AAD2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A8D402B01AA8BCCB00F0AAD2 /* YouTubeKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = YouTubeKitTests.xctest;
+			remoteRef = A8D402AF1AA8BCCB00F0AAD2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A8D4027B1AA8B7C700F0AAD2 /* Resources */ = {
@@ -232,6 +342,11 @@
 			isa = PBXTargetDependency;
 			target = A8D4027C1AA8B7C700F0AAD2 /* TUBIN */;
 			targetProxy = A8D402931AA8B7C700F0AAD2 /* PBXContainerItemProxy */;
+		};
+		A8D402B41AA8BCD500F0AAD2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YouTubeKit;
+			targetProxy = A8D402B31AA8BCD500F0AAD2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -338,6 +453,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,6 +473,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,6 +542,7 @@
 				A8D4029E1AA8B7C700F0AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8D4029F1AA8B7C700F0AAD2 /* Build configuration list for PBXNativeTarget "TUBINTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +551,7 @@
 				A8D402A11AA8B7C700F0AAD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

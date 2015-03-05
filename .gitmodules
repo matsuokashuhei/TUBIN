@@ -1,0 +1,3 @@
+[submodule "YouTubeKit"]
+	path = YouTubeKit
+	url = https://github.com/matsuosh/YouTubeKit.git
