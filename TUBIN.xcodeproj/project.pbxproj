@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */; };
-		A8D402851AA8B7C700F0AAD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402841AA8B7C700F0AAD2 /* ViewController.swift */; };
 		A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D402861AA8B7C700F0AAD2 /* Main.storyboard */; };
 		A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D402891AA8B7C700F0AAD2 /* Images.xcassets */; };
 		A8D4028D1AA8B7C700F0AAD2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D4028B1AA8B7C700F0AAD2 /* LaunchScreen.xib */; };
@@ -115,7 +114,6 @@
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D402811AA8B7C700F0AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A8D402841AA8B7C700F0AAD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A8D402871AA8B7C700F0AAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8D402891AA8B7C700F0AAD2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A8D4028C1AA8B7C700F0AAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				A8D403B21AA8CC7300F0AAD2 /* Consts */,
 				A8D403671AA8CC4400F0AAD2 /* Externals */,
 				A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */,
-				A8D402841AA8B7C700F0AAD2 /* ViewController.swift */,
 				A8D402861AA8B7C700F0AAD2 /* Main.storyboard */,
 				A8D402891AA8B7C700F0AAD2 /* Images.xcassets */,
 				A8D4028B1AA8B7C700F0AAD2 /* LaunchScreen.xib */,
@@ -583,7 +580,6 @@
 				A8D403B01AA8CC4400F0AAD2 /* Toast.swift in Sources */,
 				A8D403B11AA8CC4400F0AAD2 /* VideoPlayerView.swift in Sources */,
 				A8D4039F1AA8CC4400F0AAD2 /* PlaylistsViewController.swift in Sources */,
-				A8D402851AA8B7C700F0AAD2 /* ViewController.swift in Sources */,
 				A8D403A01AA8CC4400F0AAD2 /* PlaylistViewController.swift in Sources */,
 				A8D403931AA8CC4400F0AAD2 /* Favorite.swift in Sources */,
 				A8D403AD1AA8CC4400F0AAD2 /* ScrubberView.swift in Sources */,
