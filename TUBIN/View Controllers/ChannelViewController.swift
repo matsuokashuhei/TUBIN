@@ -15,8 +15,23 @@ class ChannelViewController: UIViewController {
     let logger = XCGLogger.defaultInstance()
 
     @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBOutlet var videosView: UIView!
-    @IBOutlet var playlistsView: UIView!
+
+    @IBOutlet var videosView: UIView! /*{
+        didSet {
+            let controller = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
+            addChildViewController(controller)
+            videosView.addSubview(controller.view)
+            controller.view.frame = videosView.bounds
+        }
+    }*/
+    @IBOutlet var playlistsView: UIView! /*{
+        didSet {
+            let controller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+            addChildViewController(controller)
+            playlistsView.addSubview(controller.view)
+            controller.view.frame = playlistsView.bounds
+        }
+    }*/
 
     var containerViews: [UIView] = []
 
@@ -32,11 +47,26 @@ class ChannelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.None
+
+        let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
+        videosViewController.parameters = parameters
+        videosViewController.navigatable = true
+        addChildViewController(videosViewController)
+        videosView.addSubview(videosViewController.view)
+
+        let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        playlistsViewController.parameters = parameters
+        playlistsViewController.navigatable = true
+        addChildViewController(playlistsViewController)
+        playlistsView.addSubview(playlistsViewController.view)
+
         containerViews = [videosView, playlistsView]
 
         configure(segmentedControl)
         segmentChanged(segmentedControl)
 
+        /*
         if let videosViewController = childViewControllers[0] as? VideosViewController {
             //videosViewController.searchItems(parameters: ["channelId": self.channel.id, "order": "date"])
             videosViewController.parameters = parameters
@@ -45,12 +75,13 @@ class ChannelViewController: UIViewController {
             playlistsViewController.parameters = parameters
             //playlistsViewController.searchItems(parameters: ["channelId": self.channel.id, "order": "date"])
         }
+        */
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if navigatable {
-            navigationController?.setNavigationBarHidden(false, animated: false)
+            navigationController?.setNavigationBarHidden(false, animated: true)
             configure(navigationItem: navigationItem)
         }
     }
@@ -66,8 +97,7 @@ class ChannelViewController: UIViewController {
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = channel.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add
-            , target: self, action: "addChannelToBookmark")
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addChannelToBookmark")
         navigationItem.rightBarButtonItem = addButton
     }
 

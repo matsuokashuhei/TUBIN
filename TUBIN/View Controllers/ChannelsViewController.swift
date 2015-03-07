@@ -18,6 +18,10 @@ class ChannelsViewController: ItemsViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -25,6 +29,8 @@ class ChannelsViewController: ItemsViewController {
     override func configure(#tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: "ChannelTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ChannelTableViewCell")
+        tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
     override func configure(#navigationItem: UINavigationItem) {
@@ -94,62 +100,14 @@ class ChannelsViewController: ItemsViewController {
         }
     }
 
-    /*
-    override func searchItems(#parameters: [String: String]) {
-        super.searchItems(parameters: parameters)
-        if let category = category {
-            YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
-                switch result {
-                case .Success(let box):
-                    self.searchItemsCompletion(page: box.unbox.page, items: box.unbox.channels)
-                case .Failure(let box):
-                    self.errorCompletion(box.unbox)
-                }
-            }
-        } else {
-            YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
-                switch result {
-                case .Success(let box):
-                    self.searchItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.unbox)
-                }
-            }
-        }
-    }
-    
-    override func loadMoreItems(sender: UIButton) {
-        super.loadMoreItems(sender)
-        if let category = category {
-            YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
-                switch result {
-                case .Success(let box):
-                    self.loadMoreItemsCompletion(page: box.unbox.page, items: box.unbox.channels)
-                case .Failure(let box):
-                    self.errorCompletion(box.unbox)
-                }
-            }
-        } else {
-            YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
-                switch result {
-                case .Success(let box):
-                    self.loadMoreItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.unbox)
-                }
-            }
-        }
-    }
-    */
-
 }
 
 extension ChannelsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
             let item = items[indexPath.row] as Channel
+            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
             cell.configure(item)
             return cell
         } else {
@@ -162,4 +120,19 @@ extension ChannelsViewController: UITableViewDataSource {
 }
 
 extension ChannelsViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        /*
+        let channel = items[indexPath.row] as Channel
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let controller = storyboard.instantiateViewControllerWithIdentifier("ChannelsViewController") as ChannelsViewController
+        */
+        let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
+        controller.channel = items[indexPath.row] as Channel
+        controller.navigatable = true
+        if let navigationController = navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
+
 }

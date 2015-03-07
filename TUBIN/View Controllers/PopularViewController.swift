@@ -16,8 +16,24 @@ class PopularViewController: UIViewController {
             segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         }
     }
-    @IBOutlet var playlistsView: UIView!
-    @IBOutlet var channelsView: UIView!
+    @IBOutlet var playlistsView: UIView! {
+        didSet {
+            let controller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+            controller.search(parameters: parameters)
+            addChildViewController(controller)
+            playlistsView.addSubview(controller.view)
+            controller.view.frame = playlistsView.bounds
+        }
+    }
+    @IBOutlet var channelsView: UIView! {
+        didSet {
+            let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+            controller.search(parameters: parameters)
+            addChildViewController(controller)
+            channelsView.addSubview(controller.view)
+            controller.view.frame = channelsView.bounds
+        }
+    }
 
     var containerViews: [UIView] = []
 
@@ -26,15 +42,31 @@ class PopularViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        /*
+        let playlistViewcontroller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        playlistViewcontroller.parameters = parameters
+        addChildViewController(playlistViewcontroller)
+        playlistsView.addSubview(playlistViewcontroller.view)
+        view.frame = playlistsView.bounds
+
+        let channelsViewcontroller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        channelsViewcontroller.parameters = parameters
+        addChildViewController(channelsViewcontroller)
+        channelsView.addSubview(channelsViewcontroller.view)
+        view.frame = playlistsView.bounds
+        */
+
         containerViews = [playlistsView, channelsView]
         containerViews.last!.hidden = true
 
+        /*
         if let playlistsViewController = childViewControllers[0] as? PlaylistsViewController {
             playlistsViewController.search(parameters: parameters)
         }
         if let channelsViewController = childViewControllers[1] as? ChannelsViewController {
             channelsViewController.search(parameters: parameters)
         }
+        */
     }
 
     override func didReceiveMemoryWarning() {

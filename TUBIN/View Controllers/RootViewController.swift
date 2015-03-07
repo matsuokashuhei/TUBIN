@@ -12,7 +12,7 @@ import YouTubeKit
 
 class RootViewController: UIViewController {
 
-    let videoPlayer = VideoPlayer.sharedInstance
+    //let videoPlayer = VideoPlayer.sharedInstance
 
     @IBOutlet var miniPlayerView: MiniPlayerView! {
         didSet {
@@ -50,11 +50,13 @@ class RootViewController: UIViewController {
 extension RootViewController: MiniPlayerViewDelegate {
 
     func backToVideoPlayerViewController(video: Video) {
+        /*
         if let navigationController = childViewControllers.first as? UINavigationController {
             let destinationViewController = videoPlayer.controller
             destinationViewController.playingVideo = .NowPlaying
             navigationController.pushViewController(destinationViewController, animated: true)
         }
+        */
     }
 
 }

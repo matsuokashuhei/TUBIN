@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="TUBIN" customModuleProvider="target">
+            <connections>
+                <outlet property="channelsView" destination="K3N-RV-Lnc" id="7sy-jX-99o"/>
+                <outlet property="playlistsView" destination="8sj-QO-sQr" id="w42-dS-0hl"/>
+                <outlet property="searchBar" destination="ooM-nw-A0L" id="OoN-d7-xwq"/>
+                <outlet property="segmentedControl" destination="5Fr-Mg-pPd" id="Kpx-Xd-PDs"/>
+                <outlet property="suggestionsTableView" destination="w2X-Te-7g1" id="T6v-49-ySY"/>
+                <outlet property="videosView" destination="4iv-Zd-HNT" id="o8C-Dx-jbw"/>
+                <outlet property="view" destination="iN0-l3-epB" id="D1c-T9-z1o"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ooM-nw-A0L">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5Fr-Mg-pPd">
+                    <rect key="frame" x="8" y="44" width="584" height="29"/>
+                    <segments>
+                        <segment title="Videos"/>
+                        <segment title="Playlists"/>
+                        <segment title="Channels"/>
+                    </segments>
+                </segmentedControl>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w2X-Te-7g1">
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4iv-Zd-HNT">
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sj-QO-sQr">
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3N-RV-Lnc">
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="4iv-Zd-HNT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0OA-sm-uV7"/>
+                <constraint firstAttribute="trailing" secondItem="5Fr-Mg-pPd" secondAttribute="trailing" constant="8" id="5GE-zT-piN"/>
+                <constraint firstAttribute="trailing" secondItem="w2X-Te-7g1" secondAttribute="trailing" id="86o-tZ-7tG"/>
+                <constraint firstItem="w2X-Te-7g1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cy2-YC-Ng9"/>
+                <constraint firstItem="4iv-Zd-HNT" firstAttribute="top" secondItem="5Fr-Mg-pPd" secondAttribute="bottom" constant="8" id="Drp-nq-hg8"/>
+                <constraint firstItem="5Fr-Mg-pPd" firstAttribute="top" secondItem="ooM-nw-A0L" secondAttribute="bottom" id="IYR-9g-1vs"/>
+                <constraint firstAttribute="trailing" secondItem="8sj-QO-sQr" secondAttribute="trailing" id="NSl-zL-6QH"/>
+                <constraint firstAttribute="trailing" secondItem="K3N-RV-Lnc" secondAttribute="trailing" id="VzS-sO-OLF"/>
+                <constraint firstItem="8sj-QO-sQr" firstAttribute="top" secondItem="5Fr-Mg-pPd" secondAttribute="bottom" constant="8" id="aDy-e1-Tiv"/>
+                <constraint firstItem="5Fr-Mg-pPd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="baO-Ee-8Gj"/>
+                <constraint firstAttribute="trailing" secondItem="4iv-Zd-HNT" secondAttribute="trailing" id="dom-Zr-DTS"/>
+                <constraint firstItem="ooM-nw-A0L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="erW-vF-Y9A"/>
+                <constraint firstAttribute="bottom" secondItem="8sj-QO-sQr" secondAttribute="bottom" id="hDE-hZ-slV"/>
+                <constraint firstItem="8sj-QO-sQr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="i7m-oi-qBI"/>
+                <constraint firstItem="K3N-RV-Lnc" firstAttribute="top" secondItem="5Fr-Mg-pPd" secondAttribute="bottom" constant="8" id="jw8-VS-l10"/>
+                <constraint firstItem="K3N-RV-Lnc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kL3-1q-2Ob"/>
+                <constraint firstAttribute="bottom" secondItem="K3N-RV-Lnc" secondAttribute="bottom" id="pI7-6Q-doh"/>
+                <constraint firstAttribute="bottom" secondItem="w2X-Te-7g1" secondAttribute="bottom" id="rlQ-AB-nkc"/>
+                <constraint firstItem="ooM-nw-A0L" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uyo-Vd-3Mi"/>
+                <constraint firstItem="w2X-Te-7g1" firstAttribute="top" secondItem="5Fr-Mg-pPd" secondAttribute="bottom" constant="8" id="wfk-JU-eyi"/>
+                <constraint firstAttribute="bottom" secondItem="4iv-Zd-HNT" secondAttribute="bottom" id="whG-D7-aLU"/>
+                <constraint firstAttribute="trailing" secondItem="ooM-nw-A0L" secondAttribute="trailing" id="yN0-K8-xuP"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

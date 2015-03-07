@@ -26,6 +26,8 @@ class VideosViewController: ItemsViewController {
     override func configure(#tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
+        tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
     // MARK: - Navigation
@@ -70,31 +72,6 @@ class VideosViewController: ItemsViewController {
             }
         }
     }
-    /*
-    override func searchItems(#parameters: [String: String]) {
-        super.searchItems(parameters: parameters)
-        YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                self.searchItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-            case .Failure(let box):
-                self.errorCompletion(box.unbox)
-            }
-        }
-    }
-
-    override func loadMoreItems(sender: UIButton) {
-        super.loadMoreItems(sender)
-        YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in
-            switch response {
-            case .Success(let box):
-                self.loadMoreItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-            case .Failure(let box):
-                self.errorCompletion(box.unbox)
-            }
-        }
-    }
-    */
 
     // MARK: Notification
     func videoPlayerDidPrepareToPlay(notification: NSNotification) {

@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
         didSet {
             suggestionsTableView.delegate = self
             suggestionsTableView.dataSource = self
+            suggestionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SuggestionTableViewCell")
         }
     }
     var suggestions = [String]()
@@ -46,6 +47,19 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
+        addChildViewController(videosViewController)
+        videosView.addSubview(videosViewController.view)
+
+        let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        addChildViewController(playlistsViewController)
+        playlistsView.addSubview(playlistsViewController.view)
+
+        let channelsViewController = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        addChildViewController(channelsViewController)
+        channelsView.addSubview(channelsViewController.view)
+
         containerViews = [videosView, playlistsView, channelsView]
         configure(containerViews: containerViews)
     }
@@ -95,6 +109,7 @@ class SearchViewController: UIViewController {
 
 
     func search() {
+        containerViewAtSelectedSegmentIndex().hidden = false
         suggestionsTableView.hidden = true
         searchBar.resignFirstResponder()
         let itemsViewController = itemViewControllerAtSelectedSegmentIndex()
@@ -103,24 +118,6 @@ class SearchViewController: UIViewController {
         //itemsViewController.searchItems(parameters: ["q": searchBar.text])
     }
 }
-
-/*
-extension SearchViewController: UIScrollViewDelegate {
-
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        searchBar.resignFirstResponder()
-    }
-
-//    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//        let endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height
-//        logger.debug("endScrolling: \(endScrolling), scrollView.contentSize.height: \(scrollView.contentSize.height)")
-//        if endScrolling >= scrollView.contentSize.height {
-//            itemViewControllerAtSelectedSegmentIndex().loadMoreItems()
-//        }
-//    }
-
-}
-*/
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -156,16 +153,19 @@ extension SearchViewController: UISearchBarDelegate {
                 case .Success(let box):
                     Async.main {
                         self.suggestionsTableView.hidden = false
+                        self.containerViewAtSelectedSegmentIndex().hidden = true
                         self.suggestions = box.unbox
                         self.suggestionsTableView.reloadData()
                     }
                 case .Failure(let box):
                     self.logger.error(box.unbox.localizedDescription)
+                    self.containerViewAtSelectedSegmentIndex().hidden = false
                     self.suggestionsTableView.hidden = true
                     break
                 }
             }
         } else {
+            self.containerViewAtSelectedSegmentIndex().hidden = false
             self.suggestionsTableView.hidden = true
         }
     }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopularViewController" customModule="TUBIN" customModuleProvider="target">
+            <connections>
+                <outlet property="channelsView" destination="dtP-t2-rie" id="3RJ-aR-6Nu"/>
+                <outlet property="playlistsView" destination="pN2-pd-wRv" id="NXe-a8-jPW"/>
+                <outlet property="segmentedControl" destination="6FR-mQ-Qv3" id="J1h-dh-ld6"/>
+                <outlet property="view" destination="iN0-l3-epB" id="jWr-jC-ixB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6FR-mQ-Qv3">
+                    <rect key="frame" x="8" y="8" width="584" height="29"/>
+                    <segments>
+                        <segment title="Playlists"/>
+                        <segment title="Channels"/>
+                    </segments>
+                </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pN2-pd-wRv">
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtP-t2-rie">
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="pN2-pd-wRv" secondAttribute="bottom" id="06C-Df-hdQ"/>
+                <constraint firstAttribute="trailing" secondItem="pN2-pd-wRv" secondAttribute="trailing" id="791-Nn-Pka"/>
+                <constraint firstItem="pN2-pd-wRv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="K76-gb-q1R"/>
+                <constraint firstItem="dtP-t2-rie" firstAttribute="top" secondItem="6FR-mQ-Qv3" secondAttribute="bottom" constant="8" id="VKW-5y-cYv"/>
+                <constraint firstItem="6FR-mQ-Qv3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="YCI-Ku-hkr"/>
+                <constraint firstItem="6FR-mQ-Qv3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="d4H-pj-ltB"/>
+                <constraint firstItem="dtP-t2-rie" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eSY-Qg-5jE"/>
+                <constraint firstItem="pN2-pd-wRv" firstAttribute="top" secondItem="6FR-mQ-Qv3" secondAttribute="bottom" constant="8" id="erV-Nj-1Mh"/>
+                <constraint firstAttribute="trailing" secondItem="dtP-t2-rie" secondAttribute="trailing" id="xCq-Cs-lZf"/>
+                <constraint firstAttribute="bottom" secondItem="dtP-t2-rie" secondAttribute="bottom" id="ylY-mf-HDt"/>
+                <constraint firstAttribute="trailing" secondItem="6FR-mQ-Qv3" secondAttribute="trailing" constant="8" id="zsF-kz-ovF"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

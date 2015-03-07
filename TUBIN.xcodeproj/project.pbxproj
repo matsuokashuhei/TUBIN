@@ -8,6 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */; };
+		A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CC3E81AAB0456008669F2 /* iAd.framework */; };
+		A86CC3ED1AAB1166008669F2 /* GuideCategoriesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3EC1AAB1166008669F2 /* GuideCategoriesTableViewController.xib */; };
+		A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */; };
+		A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */; };
+		A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */; };
+		A8BD70F01AAB4F1B00499A71 /* PlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EF1AAB4F1B00499A71 /* PlaylistsViewController.xib */; };
+		A8BD70F21AAB4F3800499A71 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70F11AAB4F3800499A71 /* PlaylistViewController.xib */; };
+		A8BD70F41AAB504600499A71 /* PopularViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70F31AAB504600499A71 /* PopularViewController.xib */; };
+		A8BD70F61AAB562B00499A71 /* VideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */; };
+		A8BD70F81AAB5B8E00499A71 /* ChannelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70F71AAB5B8E00499A71 /* ChannelViewController.xib */; };
+		A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70F91AAB7A0F00499A71 /* SearchViewController.xib */; };
+		A8BD70FC1AAB7F4A00499A71 /* SuggestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70FB1AAB7F4A00499A71 /* SuggestionTableViewCell.xib */; };
+		A8BD70FE1AAB828300499A71 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70FD1AAB828300499A71 /* SettingsViewController.xib */; };
+		A8C432741AAADA0A00425E1B /* GuideCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C432731AAADA0A00425E1B /* GuideCategoriesTableViewController.swift */; };
+		A8C4327A1AAAE34900425E1B /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C432791AAAE34900425E1B /* VideoTableViewCell.xib */; };
+		A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C4327B1AAAE95300425E1B /* PlaylistTableViewCell.xib */; };
+		A8C4327E1AAAEB6700425E1B /* ChannelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C4327D1AAAEB6700425E1B /* ChannelTableViewCell.xib */; };
 		A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */; };
 		A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D402861AA8B7C700F0AAD2 /* Main.storyboard */; };
 		A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D402891AA8B7C700F0AAD2 /* Images.xcassets */; };
@@ -111,6 +129,24 @@
 
 /* Begin PBXFileReference section */
 		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		A86CC3E81AAB0456008669F2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		A86CC3EC1AAB1166008669F2 /* GuideCategoriesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoriesTableViewController.xib; sourceTree = "<group>"; };
+		A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
+		A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
+		A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
+		A8BD70EF1AAB4F1B00499A71 /* PlaylistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistsViewController.xib; sourceTree = "<group>"; };
+		A8BD70F11AAB4F3800499A71 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistViewController.xib; sourceTree = "<group>"; };
+		A8BD70F31AAB504600499A71 /* PopularViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopularViewController.xib; sourceTree = "<group>"; };
+		A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlayerViewController.xib; sourceTree = "<group>"; };
+		A8BD70F71AAB5B8E00499A71 /* ChannelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelViewController.xib; sourceTree = "<group>"; };
+		A8BD70F91AAB7A0F00499A71 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		A8BD70FB1AAB7F4A00499A71 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
+		A8BD70FD1AAB828300499A71 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		A8C432731AAADA0A00425E1B /* GuideCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		A8C432791AAAE34900425E1B /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
+		A8C4327B1AAAE95300425E1B /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
+		A8C4327D1AAAEB6700425E1B /* ChannelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelTableViewCell.xib; sourceTree = "<group>"; };
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D402811AA8B7C700F0AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8D402B11AA8BCD500F0AAD2 /* YouTubeKit.framework in Frameworks */,
 				A8D403531AA8C34800F0AAD2 /* Alamofire.framework in Frameworks */,
 				A8D403551AA8C34800F0AAD2 /* LlamaKit.framework in Frameworks */,
@@ -343,21 +380,32 @@
 		A8D403721AA8CC4400F0AAD2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A8D403731AA8CC4400F0AAD2 /* BookmarksViewController.swift */,
-				A8D403741AA8CC4400F0AAD2 /* ChannelsViewController.swift */,
-				A8D403751AA8CC4400F0AAD2 /* ChannelViewController.swift */,
+				A8D4037D1AA8CC4400F0AAD2 /* RootViewController.swift */,
 				A8D403761AA8CC4400F0AAD2 /* ContainerViewController.swift */,
+				A8D403791AA8CC4400F0AAD2 /* ItemsViewController.swift */,
+				A8D403811AA8CC4400F0AAD2 /* VideosViewController.swift */,
+				A8D4037A1AA8CC4400F0AAD2 /* PlaylistsViewController.swift */,
+				A8D403741AA8CC4400F0AAD2 /* ChannelsViewController.swift */,
+				A8D4037B1AA8CC4400F0AAD2 /* PlaylistViewController.swift */,
+				A8D403751AA8CC4400F0AAD2 /* ChannelViewController.swift */,
+				A8D4037E1AA8CC4400F0AAD2 /* SearchViewController.swift */,
+				A8D403731AA8CC4400F0AAD2 /* BookmarksViewController.swift */,
 				A8D403771AA8CC4400F0AAD2 /* FavoritesViewController.swift */,
 				A8D403781AA8CC4400F0AAD2 /* GuideCategoriesViewController.swift */,
-				A8D403791AA8CC4400F0AAD2 /* ItemsViewController.swift */,
-				A8D4037A1AA8CC4400F0AAD2 /* PlaylistsViewController.swift */,
-				A8D4037B1AA8CC4400F0AAD2 /* PlaylistViewController.swift */,
 				A8D4037C1AA8CC4400F0AAD2 /* PopularViewController.swift */,
-				A8D4037D1AA8CC4400F0AAD2 /* RootViewController.swift */,
-				A8D4037E1AA8CC4400F0AAD2 /* SearchViewController.swift */,
 				A8D4037F1AA8CC4400F0AAD2 /* SettingsViewController.swift */,
 				A8D403801AA8CC4400F0AAD2 /* VideoPlayerViewController.swift */,
-				A8D403811AA8CC4400F0AAD2 /* VideosViewController.swift */,
+				A8C432731AAADA0A00425E1B /* GuideCategoriesTableViewController.swift */,
+				A86CC3EC1AAB1166008669F2 /* GuideCategoriesTableViewController.xib */,
+				A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */,
+				A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */,
+				A8BD70EF1AAB4F1B00499A71 /* PlaylistsViewController.xib */,
+				A8BD70F11AAB4F3800499A71 /* PlaylistViewController.xib */,
+				A8BD70F31AAB504600499A71 /* PopularViewController.xib */,
+				A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */,
+				A8BD70F71AAB5B8E00499A71 /* ChannelViewController.xib */,
+				A8BD70F91AAB7A0F00499A71 /* SearchViewController.xib */,
+				A8BD70FD1AAB828300499A71 /* SettingsViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -376,6 +424,12 @@
 				A8D4038B1AA8CC4400F0AAD2 /* TabBar.swift */,
 				A8D4038C1AA8CC4400F0AAD2 /* Toast.swift */,
 				A8D4038D1AA8CC4400F0AAD2 /* VideoPlayerView.swift */,
+				A8C432791AAAE34900425E1B /* VideoTableViewCell.xib */,
+				A8C4327B1AAAE95300425E1B /* PlaylistTableViewCell.xib */,
+				A8C4327D1AAAEB6700425E1B /* ChannelTableViewCell.xib */,
+				A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */,
+				A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */,
+				A8BD70FB1AAB7F4A00499A71 /* SuggestionTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -391,6 +445,7 @@
 		E3B2F19A660D0D52A10E95B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A86CC3E81AAB0456008669F2 /* iAd.framework */,
 				C86F1F1E09D2F038920B8889 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -509,9 +564,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8BD70F01AAB4F1B00499A71 /* PlaylistsViewController.xib in Resources */,
 				A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */,
+				A8BD70F81AAB5B8E00499A71 /* ChannelViewController.xib in Resources */,
+				A8BD70F41AAB504600499A71 /* PopularViewController.xib in Resources */,
+				A8C4327E1AAAEB6700425E1B /* ChannelTableViewCell.xib in Resources */,
+				A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */,
+				A8BD70F21AAB4F3800499A71 /* PlaylistViewController.xib in Resources */,
+				A86CC3ED1AAB1166008669F2 /* GuideCategoriesTableViewController.xib in Resources */,
+				A8BD70F61AAB562B00499A71 /* VideoPlayerViewController.xib in Resources */,
+				A8C4327A1AAAE34900425E1B /* VideoTableViewCell.xib in Resources */,
+				A8BD70FE1AAB828300499A71 /* SettingsViewController.xib in Resources */,
+				A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */,
 				A8D4028D1AA8B7C700F0AAD2 /* LaunchScreen.xib in Resources */,
+				A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */,
 				A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */,
+				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
+				A8BD70FC1AAB7F4A00499A71 /* SuggestionTableViewCell.xib in Resources */,
+				A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */,
+				A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +659,7 @@
 				A8D4039A1AA8CC4400F0AAD2 /* ChannelViewController.swift in Sources */,
 				A8D403A81AA8CC4400F0AAD2 /* ContainerView.swift in Sources */,
 				A8D403911AA8CC4400F0AAD2 /* XCGLogger.swift in Sources */,
+				A8C432741AAADA0A00425E1B /* GuideCategoriesTableViewController.swift in Sources */,
 				A8D403A41AA8CC4400F0AAD2 /* SettingsViewController.swift in Sources */,
 				A8D403A11AA8CC4400F0AAD2 /* PopularViewController.swift in Sources */,
 				A8D4038E1AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift in Sources */,

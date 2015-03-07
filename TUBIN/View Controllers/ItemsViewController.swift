@@ -37,12 +37,14 @@ class ItemsViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         if navigatable {
             configure(navigationItem: navigationItem)
+        } else {
+            navigationController?.setNavigationBarHidden(true, animated: true)
         }
         super.viewWillAppear(animated)
     }
 
     func configure(#navigationItem: UINavigationItem) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 

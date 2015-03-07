@@ -23,6 +23,8 @@ class PlaylistsViewController: ItemsViewController {
     override func configure(#tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: "PlaylistTableViewCell", bundle: nil), forCellReuseIdentifier: "PlaylistTableViewCell")
+        tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
     // MARK: - Navigation
@@ -61,31 +63,6 @@ class PlaylistsViewController: ItemsViewController {
             }
         }
     }
-    /*
-    override func searchItems(#parameters: [String: String]) {
-        super.searchItems(parameters: parameters)
-        YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                self.searchItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-            case .Failure(let box):
-                self.errorCompletion(box.unbox)
-            }
-        }
-    }
-
-    override func loadMoreItems(sender: UIButton) {
-        super.loadMoreItems(sender)
-        YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                self.loadMoreItemsCompletion(page: box.unbox.page, items: box.unbox.items)
-            case .Failure(let box):
-                self.errorCompletion(box.unbox)
-            }
-        }
-    }
-    */
 
 }
 
@@ -107,4 +84,13 @@ extension PlaylistsViewController: UITableViewDataSource {
 }
 
 extension PlaylistsViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
+        controller.playlist = items[indexPath.row] as Playlist
+        controller.navigatable = true
+        if let navigationController = navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
 }

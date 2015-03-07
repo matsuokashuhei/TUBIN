@@ -119,7 +119,8 @@ class VideoPlayer: NSObject {
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         // ミニプレーヤー用のVideoViewControllerの作成
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        controller = storyboard.instantiateViewControllerWithIdentifier("VideoPlayerViewController") as VideoPlayerViewController
+        //controller = storyboard.instantiateViewControllerWithIdentifier("VideoPlayerViewController") as VideoPlayerViewController
+        controller = VideoPlayerViewController(nibName: "VideoPlayerViewController", bundle: NSBundle.mainBundle())
     }
 
     func setPlaylist(#videos: [Video], index: Int) {
