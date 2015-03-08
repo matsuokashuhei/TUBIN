@@ -45,6 +45,7 @@ class FavoritesViewController: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
     }
 
     // MARK: - Navigation

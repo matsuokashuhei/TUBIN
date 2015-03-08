@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoritesViewController" customModule="TUBIN" customModuleProvider="target">
+            <connections>
+                <outlet property="editButton" destination="HQR-nf-2QM" id="vem-0V-Tdf"/>
+                <outlet property="tableView" destination="EF9-d0-WrB" id="q8O-wE-zTd"/>
+                <outlet property="view" destination="iN0-l3-epB" id="yOB-Cw-Apw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iKp-Mh-fmE">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="GkZ-ir-9of"/>
+                        <barButtonItem title="Edit" style="plain" id="HQR-nf-2QM">
+                            <connections>
+                                <action selector="editButtonTapped" destination="-1" id="rhX-2j-H8R"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-d0-WrB">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EF9-d0-WrB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q4u-mG-JYQ"/>
+                <constraint firstAttribute="trailing" secondItem="iKp-Mh-fmE" secondAttribute="trailing" id="VEw-Pg-Gg6"/>
+                <constraint firstItem="iKp-Mh-fmE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oeY-l7-iif"/>
+                <constraint firstItem="EF9-d0-WrB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pxQ-OP-ypI"/>
+                <constraint firstAttribute="bottom" secondItem="iKp-Mh-fmE" secondAttribute="bottom" id="q3V-74-vkL"/>
+                <constraint firstItem="iKp-Mh-fmE" firstAttribute="top" secondItem="EF9-d0-WrB" secondAttribute="bottom" id="rfH-Mu-bJL"/>
+                <constraint firstAttribute="trailing" secondItem="EF9-d0-WrB" secondAttribute="trailing" id="tXs-yi-BOL"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

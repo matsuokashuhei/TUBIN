@@ -59,7 +59,6 @@ class ContainerViewController: UIViewController {
             let controller: UIViewController? = {
                 switch bookmark.name {
                 case "playlist":
-                    //let playlist = SwifTube.Playlist(object: bookmark)
                     let playlist = bookmark.item as Playlist
                     self.tabBar.add(item: playlist)
                     //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
@@ -68,7 +67,6 @@ class ContainerViewController: UIViewController {
                     controller.search()
                     return controller
                 case "channel":
-                    //let channel = SwifTube.Channel(object: bookmark)
                     let channel = bookmark.item as Channel
                     self.tabBar.add(item: channel)
                     //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
@@ -80,28 +78,26 @@ class ContainerViewController: UIViewController {
                     //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PopularViewController") as PopularViewController
                     let controller = PopularViewController(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
                     return controller
-/*
                 case "Guide":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("GuideCategoriesViewController") as GuideCategoriesViewController
+                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("GuideCategoriesViewController") as GuideCategoriesViewController
+                    let controller = GuideCategoriesViewController(nibName: "GuideCategoriesViewController", bundle: NSBundle.mainBundle())
                     return controller
                 case "Favorites":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("FavoritesViewController") as FavoritesViewController
+                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("FavoritesViewController") as FavoritesViewController
+                    let controller = FavoritesViewController(nibName: "FavoritesViewController", bundle: NSBundle.mainBundle())
                     return controller
-*/
                 case "Search":
                     self.tabBar.add(text: bookmark.name)
                     //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SearchViewController") as SearchViewController
                     let controller = SearchViewController(nibName: "SearchViewController", bundle: NSBundle.mainBundle())
                     return controller
+                /*
                 case "Guide":
                     self.tabBar.add(text: bookmark.name)
-                    /*
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("GuideCategoriesTableViewController") as GuideCategoriesTableViewController
-                    return controller
-                    */
-                    return GuideCategoriesTableViewController(nibName: "GuideCategoriesTableViewController", bundle: nil)
+                    return GuideCategoriesTableViewController(nibName: "GuideCategoriesTableViewController", bundle: NSBundle.mainBundle())
+                */
                 default:
                     return nil
                 }
@@ -114,12 +110,11 @@ class ContainerViewController: UIViewController {
         if let tab = self.tabBar.tabs.first {
             self.tabBar.centerTab(tab)
         }
-        /*
-        self.tabBar.add(text: "Settings")
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
-        self.addChildViewController(controller)
-        self.containerView.add(view: controller.view)
-        */
+        tabBar.add(text: "Settings")
+        //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
+        let controller = SettingsViewController(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
+        addChildViewController(controller)
+        containerView.add(view: controller.view)
         /*
         bookmarks = Bookmark.all()
         for (index, bookmark) in enumerate(bookmarks) {

@@ -123,7 +123,6 @@ extension ChannelsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         /*
-        let channel = items[indexPath.row] as Channel
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let controller = storyboard.instantiateViewControllerWithIdentifier("ChannelsViewController") as ChannelsViewController
         */

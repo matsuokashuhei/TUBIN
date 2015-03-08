@@ -51,13 +51,13 @@ class ChannelViewController: UIViewController {
 
         let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
         videosViewController.parameters = parameters
-        videosViewController.navigatable = true
+        videosViewController.navigatable = navigatable
         addChildViewController(videosViewController)
         videosView.addSubview(videosViewController.view)
 
         let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
         playlistsViewController.parameters = parameters
-        playlistsViewController.navigatable = true
+        playlistsViewController.navigatable = navigatable
         addChildViewController(playlistsViewController)
         playlistsView.addSubview(playlistsViewController.view)
 

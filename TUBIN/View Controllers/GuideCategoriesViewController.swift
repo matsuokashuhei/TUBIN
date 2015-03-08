@@ -20,6 +20,7 @@ class GuideCategoriesViewController: UIViewController {
             tableView.tableFooterView = UIView(frame: CGRectZero)
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.registerNib(UINib(nibName: "GuideCategoryTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "GuideCategoryTableViewCell")
         }
     }
 
@@ -70,6 +71,18 @@ class GuideCategoriesViewController: UIViewController {
 }
 
 extension GuideCategoriesViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let category = categories[indexPath.row]
+        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        controller.category = category
+        controller.navigatable = true
+        controller.search(parameters: ["categoryId": category.id])
+        if let navigationController = navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
+
 }
 
 extension GuideCategoriesViewController: UITableViewDataSource {

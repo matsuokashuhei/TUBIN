@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "EditTableViewCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +32,7 @@ class SettingsViewController: UIViewController {
 
     @IBAction func showFLEX(sender: UISwitch) {
         if sender.on {
-//            FLEXManager.sharedManager().showExplorer()
+            //FLEXManager.sharedManager().showExplorer()
         }
     }
 
@@ -52,12 +53,18 @@ extension SettingsViewController: UITableViewDelegate {
         }
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let controller = BookmarksViewController(nibName: "BookmarksViewController", bundle: NSBundle.mainBundle())
+        if let navigationController = navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
 }
 
 extension SettingsViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,6 +79,7 @@ extension SettingsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             var cell = tableView.dequeueReusableCellWithIdentifier("EditTableViewCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.text = "Bookmarks"
             return cell
         case 1:
             switch indexPath.row {

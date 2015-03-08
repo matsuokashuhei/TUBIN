@@ -67,6 +67,7 @@ class BookmarksViewController: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.registerNib(UINib(nibName: "BookmarkTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "BookmarkTableViewCell")
     }
 
     func setEditing(editing: Bool) {
