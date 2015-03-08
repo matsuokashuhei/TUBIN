@@ -28,7 +28,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNL-kI-AKc">
                                         <rect key="frame" x="8" y="8" width="120" height="68"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.75" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="WoR-2U-yFs"/>
                                             <constraint firstAttribute="width" secondItem="FNL-kI-AKc" secondAttribute="height" multiplier="16:9" id="lXh-6H-E91"/>
