@@ -206,13 +206,15 @@ extension ContainerViewController {
                         case "playlist":
                             let playlist = bookmark.item as Playlist
                             self.tabBar.add(item: playlist, index: self.bookmarks.count)
-                            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
+                            //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
+                            let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
                             controller.playlist = playlist
                             return controller
                         case "channel":
                             let channel = bookmark.item as Channel
                             self.tabBar.add(item: channel, index: self.bookmarks.count)
-                            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
+                            //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
+                            let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
                             controller.channel = channel
                             return controller
                         default:
