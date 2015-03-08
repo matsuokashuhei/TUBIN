@@ -11,7 +11,9 @@ import YouTubeKit
 import SVProgressHUD
 
 protocol YouTubePlayerDelegate {
-    func mediaIsPreparedToPlayDidChange(player: MPMoviePlayerController)
+    func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController)
+    func playingAtTime(controller: MPMoviePlayerController)
+    func moviePlaybackDidFinish(controller: MPMoviePlayerController)
 }
 
 class YouTubePlayer: NSObject {
@@ -116,6 +118,7 @@ class YouTubePlayer: NSObject {
 
     func moviePlaybackDidFinish(notification: NSNotification) {
         logger.debug("")
+        //stopTimer()
     }
 
     func mediaIsPreparedToPlayDidChange(notification: NSNotification) {
@@ -123,6 +126,7 @@ class YouTubePlayer: NSObject {
         if let player = notification.object as? MPMoviePlayerController {
             logger.debug("player.duration: \(player.duration)")
             delegate?.mediaIsPreparedToPlayDidChange(player)
+            startTimer()
         }
     }
 
@@ -153,4 +157,30 @@ class YouTubePlayer: NSObject {
             return false
         }
     }
+
+    var timer: NSTimer? {
+        willSet {
+            if let timer = timer {
+                timer.invalidate()
+            }
+        }
+    }
+    func startTimer() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "playingAtTime", userInfo: nil, repeats: true)
+    }
+
+    func stopTimer() {
+        if let timer = timer {
+            timer.invalidate()
+        }
+    }
+
+    func playingAtTime() {
+        delegate?.playingAtTime(player)
+    }
+
+    func seekToTime(seconds: Float) {
+        player.currentPlaybackTime = Double(seconds)
+    }
+
 }

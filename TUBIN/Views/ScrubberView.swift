@@ -50,12 +50,20 @@ class ScrubberView: UIView {
         startTimeLabel.text = formatTime(CMTimeMakeWithSeconds(Float64(slider.minimumValue), Int32(NSEC_PER_SEC)))
         endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(Float64(slider.maximumValue), Int32(NSEC_PER_SEC)))
     }
-    
+
+    func configure(duration: Double) {
+        configure(CMTimeMake(Int64(duration), 1))
+    }
+
     func setTime(currentTime: CMTime, duration: CMTime) {
         slider.value = Float(CMTimeGetSeconds(currentTime))
         startTimeLabel.text = formatTime(currentTime)
         let secondsOfEndTime = CMTimeGetSeconds(duration) - CMTimeGetSeconds(currentTime)
         endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(secondsOfEndTime, Int32(NSEC_PER_SEC)))
+    }
+
+    func setTime(currentTime: Double, duration: Double) {
+        setTime(CMTimeMake(Int64(currentTime), 1), duration: CMTimeMake(Int64(duration), 1))
     }
 
     func beginSeek(sender: UISlider) {

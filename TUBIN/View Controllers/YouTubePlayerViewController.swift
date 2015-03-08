@@ -13,7 +13,14 @@ import SVProgressHUD
 
 class YouTubePlayerViewController: UIViewController {
 
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet var videoView: UIView!
+    @IBOutlet var scrubberView: ScrubberView! {
+        didSet {
+            scrubberView.delegate = self
+        }
+    }
     @IBOutlet var previousButton: UIButton!
     @IBOutlet var playButton: UIButton! {
         didSet {
@@ -82,8 +89,38 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         controller.view.frame = videoView.bounds
-        controller.duration
+        scrubberView.configure(controller.duration)
         videoView.addSubview(controller.view)
     }
 
+    func playingAtTime(controller: MPMoviePlayerController) {
+        scrubberView.setTime(controller.currentPlaybackTime, duration: controller.duration)
+    }
+
+    func moviePlaybackDidFinish(controller: MPMoviePlayerController) {
+    }
+
+}
+
+extension YouTubePlayerViewController: ScrubberViewDelegate {
+
+    func beginSeek(slider: UISlider) {
+        logger.debug("")
+        player.pause()
+    }
+
+    func seekPositionChanged(slider: UISlider) {
+        logger.debug("")
+        seekToSeconds(slider.value)
+    }
+
+    func endSeek(slider: UISlider) {
+        logger.debug("")
+        player.play()
+    }
+
+    func seekToSeconds(seconds: Float) {
+        logger.debug("")
+        player.seekToTime(seconds)
+    }
 }
