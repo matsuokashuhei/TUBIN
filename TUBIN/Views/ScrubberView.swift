@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 protocol ScrubberViewDelegate {
     func beginSeek(slider: UISlider)
@@ -53,6 +54,11 @@ class ScrubberView: UIView {
 
     func configure(duration: Double) {
         configure(CMTimeMake(Int64(duration), 1))
+    }
+
+    func sync(controller: MPMoviePlayerController) {
+        configure(controller.duration)
+        setTime(controller.currentPlaybackTime, duration: controller.duration)
     }
 
     func setTime(currentTime: CMTime, duration: CMTime) {

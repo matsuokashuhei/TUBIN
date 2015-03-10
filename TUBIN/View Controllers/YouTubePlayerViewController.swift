@@ -44,6 +44,7 @@ class YouTubePlayerViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
         if player.isPlaying() {
+            scrubberView.sync(player.controller)
             addPlayerView(player.controller)
         }
         super.viewWillAppear(animated)
