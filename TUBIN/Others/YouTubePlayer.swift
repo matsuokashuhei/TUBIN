@@ -97,9 +97,15 @@ class YouTubePlayer: NSObject {
     }
 
     func startPlaying(video: Video) {
+        if let fileURL = video.fileURL() {
+            //controller.movieSourceType = .File
+            startPlaying(fileURL)
+            return
+        }
         video.streamURL { (result) -> Void in
             switch result {
             case .Success(let box):
+                //self.controller.movieSourceType = .Streaming
                 self.startPlaying(box.unbox)
             case .Failure(let box):
                 SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)

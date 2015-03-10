@@ -53,6 +53,7 @@ class ScrubberView: UIView {
     }
 
     func configure(duration: Double) {
+        logger.debug("duration: \(duration)")
         configure(CMTimeMake(Int64(duration), 1))
     }
 

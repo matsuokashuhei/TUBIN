@@ -8,7 +8,7 @@
 
 import UIKit
 import MediaPlayer
-import YouTubeKit
+//import YouTubeKit
 import SVProgressHUD
 
 class YouTubePlayerViewController: UIViewController {
@@ -43,13 +43,19 @@ class YouTubePlayerViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
+        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // 再生中 -> 再生 OK
         // 停止 -> 再生 ???
         scrubberView.sync(player.controller)
-        if player.isPlaying() {
-            addPlayerView(player.controller)
-        }
+        play()
+        addPlayerView(player.controller)
         super.viewWillAppear(animated)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        // Notification to Mini player
+        NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
+        super.viewWillDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,12 +74,22 @@ class YouTubePlayerViewController: UIViewController {
     // MARK: - Actions
     func tapPlayButton(button: UIButton) {
         if player.isPlaying() {
-            player.pause()
-            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+            pause()
         } else {
-            player.play()
-            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+            play()
         }
+    }
+
+    func play() {
+        if player.isPlaying() == false {
+            player.play()
+        }
+        playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+    }
+
+    func pause() {
+        player.pause()
+        playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
     }
 
     func addPlayerView(controller: MPMoviePlayerController) {

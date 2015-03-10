@@ -12,6 +12,53 @@ import YouTubeKit
 
 class RootViewController: UIViewController {
 
+    @IBOutlet var miniPlayerView: MiniPlayerView! {
+        didSet {
+            miniPlayerView.delegate = self
+            miniPlayerView.hide()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "showMiniPlayer:", name: ShowMiniPlayerNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideMiniPlayer:", name: HideMiniPlayerNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBannerShowable:", name: BannerShowableNotification, object: nil)
+        }
+    }
+
+    override func viewDidLoad() {
+        canDisplayBannerAds = true
+        super.viewDidLoad()
+    }
+
+    func setBannerShowable(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let showable = userInfo["showable"] as? Bool {
+                canDisplayBannerAds = showable
+            }
+        }
+    }
+
+    func showMiniPlayer(notification: NSNotification) {
+        miniPlayerView.show()
+    }
+
+    func hideMiniPlayer(notification: NSNotification) {
+        miniPlayerView.hide()
+    }
+
+}
+
+extension RootViewController: MiniPlayerViewDelegate {
+
+    func backToVideoPlayerViewController() {
+        if let navigationController = childViewControllers.first as? UINavigationController {
+            let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
+
+}
+
+/*
+class RootViewController: UIViewController {
+
     //let videoPlayer = VideoPlayer.sharedInstance
 
     @IBOutlet var miniPlayerView: MiniPlayerView! {
@@ -60,3 +107,5 @@ extension RootViewController: MiniPlayerViewDelegate {
     }
 
 }
+
+*/

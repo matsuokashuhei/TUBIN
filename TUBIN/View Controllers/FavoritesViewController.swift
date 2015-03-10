@@ -15,8 +15,6 @@ class FavoritesViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    let videoPlayer = VideoPlayer.sharedInstance
-
     @IBOutlet var tableView: UITableView!
 
     @IBOutlet var editButton: UIBarButtonItem!
@@ -46,26 +44,6 @@ class FavoritesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
-    }
-
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showVideo" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let destinationViewController = segue.destinationViewController as VideoPlayerViewController
-                let video = favorites[indexPath.row].video
-                if let playlist = videoPlayer.playlist {
-                    if video.id == playlist.playingVideo().id {
-                        destinationViewController.playingVideo = .NowPlaying
-                    }
-                }
-                let videos = favorites.map { (favorite) -> Video in
-                    return favorite.video
-                }
-                videoPlayer.setPlaylist(videos: videos, index: indexPath.row)
-            }
-        }
     }
 
     // MARK: - Parse
@@ -141,6 +119,15 @@ extension FavoritesViewController: UITableViewDelegate {
         return true
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let player = YouTubePlayer.sharedInstance
+        //player.setPlaylist(items as [Video], index: indexPath.row)
+        player.nowPlaying = favorites[indexPath.row].video
+        let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+        if let navigationController = navigationController {
+            navigationController.pushViewController(controller, animated: true)
+        }
+    }
 }
 
 // MARK: - Table view data source

@@ -5,7 +5,92 @@
 //  Created by matsuosh on 2015/02/08.
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
+import UIKit
+import MediaPlayer
 
+protocol MiniPlayerViewDelegate {
+    func backToVideoPlayerViewController()
+}
+
+class MiniPlayerView: UIView {
+
+    @IBOutlet var videoView: UIView!
+    @IBOutlet var previousButton: UIButton!
+    @IBOutlet var playButton: UIButton! {
+        didSet {
+            playButton.addTarget(self, action: "tapPlayButton:", forControlEvents: .TouchUpInside)
+        }
+    }
+    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var backButton: UIButton! {
+        didSet {
+            backButton.addTarget(self, action: "backToVideoPlayerViewController", forControlEvents: .TouchUpInside)
+        }
+    }
+    @IBOutlet var height: NSLayoutConstraint!
+
+    var player = YouTubePlayer.sharedInstance
+
+    var delegate: MiniPlayerViewDelegate?
+
+    func show() {
+        if player.isPlaying() {
+            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+            height.constant = 86
+            hidden = false
+            addPlayerView(player.controller)
+            /*
+            superview?.setNeedsLayout()
+            superview?.layoutIfNeeded()
+            */
+        }
+    }
+
+    func hide() {
+        height.constant = 0
+        hidden = true
+        /*
+        superview?.setNeedsLayout()
+        superview?.layoutIfNeeded()
+        */
+    }
+
+    func tapPlayButton(button: UIButton) {
+        if player.isPlaying() {
+            player.pause()
+            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+        } else {
+            player.play()
+            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        }
+    }
+
+    func backToVideoPlayerViewController() {
+        hide()
+        delegate?.backToVideoPlayerViewController()
+    }
+
+    func addPlayerView(controller: MPMoviePlayerController) {
+        if videoView.subviews.count > 0 {
+            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+                if let subview = object as? UIView {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        videoView.addSubview(controller.view)
+        controller.view.frame = videoView.bounds
+        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        videoView.addConstraints([
+            NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
+        ])
+    }
+}
+
+/*
 import UIKit
 import AVFoundation
 import YouTubeKit
@@ -126,3 +211,4 @@ extension MiniPlayerView: VideoPlayerDelegate {
     }
 
 }
+*/

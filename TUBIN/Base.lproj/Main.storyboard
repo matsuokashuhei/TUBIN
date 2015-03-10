@@ -23,53 +23,77 @@
                                     <segue destination="gib-DC-RKC" kind="embed" id="xqt-WK-ksi"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ruT-CA-6D0" customClass="MiniPlayerView" customModule="TUBIN" customModuleProvider="target">
+                            <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yk0-Xn-wNc" customClass="MiniPlayerView" customModule="TUBIN" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="516" width="600" height="84"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNL-kI-AKc">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-wX-KKK">
                                         <rect key="frame" x="8" y="8" width="120" height="68"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="WoR-2U-yFs"/>
-                                            <constraint firstAttribute="width" secondItem="FNL-kI-AKc" secondAttribute="height" multiplier="16:9" id="lXh-6H-E91"/>
+                                            <constraint firstAttribute="width" constant="120" id="ErE-nr-cmk"/>
+                                            <constraint firstAttribute="width" secondItem="cYB-wX-KKK" secondAttribute="height" multiplier="16:9" id="U1k-Rx-wvy"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c9-1z-Eoz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-TR-nvY" userLabel="previous">
                                         <rect key="frame" x="136" y="18" width="48" height="48"/>
                                         <state key="normal" image="ic_skip_previous_48px"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rX-g7-FxB">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osE-Dd-bJw" userLabel="play">
                                         <rect key="frame" x="192" y="18" width="48" height="48"/>
                                         <state key="normal" image="ic_play_circle_fill_48px"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yay-Ao-sDs">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59i-7J-oid" userLabel="next">
                                         <rect key="frame" x="248" y="18" width="48" height="48"/>
                                         <state key="normal" image="ic_skip_next_48px"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-Sa-fFT">
+                                        <rect key="frame" x="552" y="18" width="48" height="48"/>
+                                        <state key="normal" image="ic_chevron_right_48px"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="84" id="DO3-xA-Zli"/>
-                                    <constraint firstAttribute="centerY" secondItem="FNL-kI-AKc" secondAttribute="centerY" id="LyJ-Iy-cof"/>
-                                    <constraint firstItem="FNL-kI-AKc" firstAttribute="leading" secondItem="ruT-CA-6D0" secondAttribute="leading" constant="8" id="Z5C-N9-67e"/>
+                                    <constraint firstAttribute="centerY" secondItem="59i-7J-oid" secondAttribute="centerY" id="1Aa-na-hbu"/>
+                                    <constraint firstAttribute="centerY" secondItem="tuO-TR-nvY" secondAttribute="centerY" id="AJL-ML-OnK"/>
+                                    <constraint firstItem="59i-7J-oid" firstAttribute="leading" secondItem="osE-Dd-bJw" secondAttribute="trailing" constant="8" id="CkT-W6-UGq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xqh-Sa-fFT" secondAttribute="trailing" id="EWl-93-jOP"/>
+                                    <constraint firstAttribute="bottom" secondItem="cYB-wX-KKK" secondAttribute="bottom" constant="8" id="Hyk-x8-I41"/>
+                                    <constraint firstItem="osE-Dd-bJw" firstAttribute="leading" secondItem="tuO-TR-nvY" secondAttribute="trailing" constant="8" id="Kjb-sO-St0"/>
+                                    <constraint firstItem="cYB-wX-KKK" firstAttribute="leading" secondItem="yk0-Xn-wNc" secondAttribute="leading" constant="8" id="MY4-Gr-u0B"/>
+                                    <constraint firstAttribute="centerY" secondItem="Xqh-Sa-fFT" secondAttribute="centerY" id="U6a-nc-fcq"/>
+                                    <constraint firstItem="cYB-wX-KKK" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" constant="8" id="ZPX-Dk-YAI"/>
+                                    <constraint firstAttribute="height" constant="84" id="cIs-4s-qge"/>
+                                    <constraint firstAttribute="centerY" secondItem="osE-Dd-bJw" secondAttribute="centerY" id="yyj-st-MCA"/>
+                                    <constraint firstItem="tuO-TR-nvY" firstAttribute="leading" secondItem="cYB-wX-KKK" secondAttribute="trailing" constant="8" id="zbz-W4-aET"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="backButton" destination="Xqh-Sa-fFT" id="QZ2-qS-JnL"/>
+                                    <outlet property="height" destination="cIs-4s-qge" id="haf-Rn-fPW"/>
+                                    <outlet property="nextButton" destination="59i-7J-oid" id="Usl-Kh-FWt"/>
+                                    <outlet property="playButton" destination="osE-Dd-bJw" id="kc7-tz-GA9"/>
+                                    <outlet property="previousButton" destination="tuO-TR-nvY" id="p9H-G2-ySh"/>
+                                    <outlet property="videoView" destination="cYB-wX-KKK" id="hrZ-Xy-O1D"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ruT-CA-6D0" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="ME7-S2-PpH"/>
-                            <constraint firstItem="ruT-CA-6D0" firstAttribute="top" secondItem="eto-dd-wFc" secondAttribute="bottom" id="cAy-YP-uie"/>
-                            <constraint firstItem="B19-ds-5w5" firstAttribute="top" secondItem="ruT-CA-6D0" secondAttribute="bottom" id="dnP-57-EoK"/>
+                            <constraint firstItem="yk0-Xn-wNc" firstAttribute="top" secondItem="eto-dd-wFc" secondAttribute="bottom" id="5vh-Fv-ZUc"/>
+                            <constraint firstAttribute="trailing" secondItem="yk0-Xn-wNc" secondAttribute="trailing" id="Ig7-r5-H0Q"/>
+                            <constraint firstItem="yk0-Xn-wNc" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="iOi-a3-VsR"/>
                             <constraint firstItem="eto-dd-wFc" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="jo1-a6-gys"/>
-                            <constraint firstAttribute="trailing" secondItem="ruT-CA-6D0" secondAttribute="trailing" id="jtm-HE-ped"/>
                             <constraint firstAttribute="trailing" secondItem="eto-dd-wFc" secondAttribute="trailing" id="tbr-bX-CQr"/>
                             <constraint firstItem="eto-dd-wFc" firstAttribute="top" secondItem="2ZW-O1-U9M" secondAttribute="bottom" id="wnV-xL-da2"/>
+                            <constraint firstItem="B19-ds-5w5" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="bottom" id="xOR-ns-Rd0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="miniPlayerView" destination="yk0-Xn-wNc" id="eax-2e-mER"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GBI-eP-wdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="256"/>
+            <point key="canvasLocation" x="409" y="-356"/>
         </scene>
         <!--Videos View Controller-->
         <scene sceneID="SHE-En-5yX">
@@ -510,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Oa-QD-DdI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1755" y="204"/>
+            <point key="canvasLocation" x="1947" y="-408"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6Pm-en-pAv">
@@ -528,10 +552,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zs-8w-Wfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="204"/>
+            <point key="canvasLocation" x="1129" y="-408"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ic_chevron_right_48px" width="48" height="48"/>
         <image name="ic_play_circle_fill_48px" width="48" height="48"/>
         <image name="ic_skip_next_48px" width="48" height="48"/>
         <image name="ic_skip_previous_48px" width="48" height="48"/>
