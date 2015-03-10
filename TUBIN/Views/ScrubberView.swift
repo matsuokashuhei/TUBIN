@@ -69,17 +69,27 @@ class ScrubberView: UIView {
     func beginSeek(sender: UISlider) {
         delegate?.beginSeek(sender)
     }
+
     func seekPositionChanged(sender: UISlider) {
         delegate?.seekPositionChanged(sender)
     }
+
     func endSeek(sender: UISlider) {
         delegate?.endSeek(sender)
     }
 
     private func formatTime(time: CMTime) -> String {
-        let minutes = Int(CMTimeGetSeconds(time) / 60)
-        let seconds = Int(CMTimeGetSeconds(time) % 60)
-        return NSString(format: "%02ld:%02ld", minutes, seconds)
+        let _time = CMTimeGetSeconds(time)
+        let hours = Int(_time / 3600)
+        if hours > 0 {
+            let minutes = Int((_time / 60) % 60)
+            let seconds = Int(_time % 60)
+            return NSString(format: "%d:%02ld:%02ld", hours, minutes, seconds)
+        } else {
+            let minutes = Int(_time / 60)
+            let seconds = Int(_time % 60)
+            return NSString(format: "%02ld:%02ld", minutes, seconds)
+        }
     }
 
 }

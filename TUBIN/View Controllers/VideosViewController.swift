@@ -103,7 +103,8 @@ extension VideosViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let player = YouTubePlayer.sharedInstance
-        player.setPlaylist(items as [Video], index: indexPath.row)
+        //player.setPlaylist(items as [Video], index: indexPath.row)
+        player.nowPlaying = items[indexPath.row] as Video
         let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)

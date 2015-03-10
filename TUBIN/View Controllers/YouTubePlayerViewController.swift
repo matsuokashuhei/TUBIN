@@ -31,21 +31,21 @@ class YouTubePlayerViewController: UIViewController {
 
     var player = YouTubePlayer.sharedInstance
 
-    //var video: Video!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         edgesForExtendedLayout = UIRectEdge.None
 
         player.delegate = self
-        player.startPlaying()
         // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
+        if player.isPlaying() {
+            addPlayerView(player.controller)
+        }
         super.viewWillAppear(animated)
     }
 
@@ -55,7 +55,7 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func configure(#navigationItem: UINavigationItem) {
-        let video = player.playlist.currentVideo()
+        let video = player.nowPlaying
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addVideoToFavorite")
@@ -73,6 +73,26 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    func addPlayerView(controller: MPMoviePlayerController) {
+        if videoView.subviews.count > 0 {
+            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+                if let subview = object as? UIView {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        videoView.addSubview(controller.view)
+        controller.view.frame = videoView.bounds
+        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        videoView.addConstraints([
+            NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
+        ])
+    }
+
+
     /*
     // MARK: - Navigation
 
@@ -88,9 +108,9 @@ class YouTubePlayerViewController: UIViewController {
 extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
-        controller.view.frame = videoView.bounds
+        logger.debug("")
+        addPlayerView(controller)
         scrubberView.configure(controller.duration)
-        videoView.addSubview(controller.view)
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
@@ -98,6 +118,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
     func moviePlaybackDidFinish(controller: MPMoviePlayerController) {
+        logger.debug("")
     }
 
 }
