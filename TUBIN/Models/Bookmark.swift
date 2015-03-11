@@ -196,12 +196,12 @@ extension Bookmark {
         }
     }
 
-    class func destroy(bookmarks: [Bookmark], handler: (Result<Bool, NSError>) -> Void) {
-        let objects = bookmarks.map { (bookmark) -> PFObject in
-            return bookmark.toPFObject()
-        }
-        Parser.destroy(objects, handler: handler)
-    }
+//    class func remove(bookmarks: [Bookmark], handler: (Result<Bool, NSError>) -> Void) {
+//        let objects = bookmarks.map { (bookmark) -> PFObject in
+//            return bookmark.toPFObject()
+//        }
+//        Parser.destroy(objects, handler: handler)
+//    }
 
     class func exists(#id: String, handler: (Result<Bool, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("Bookmark")

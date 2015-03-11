@@ -31,8 +31,21 @@ class PlaylistViewController: ItemsViewController {
         super.configure(navigationItem: navigationItem)
         navigationItem.title = playlist.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addPlaylistToBookmark")
-        navigationItem.rightBarButtonItem = addButton
+        Bookmark.exists(id: playlist.id) { (result) in
+            switch result {
+            case .Success(let box):
+                if box.unbox {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                } else {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addPlaylistToBookmark")
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                }
+            case .Failure(let box):
+                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addPlaylistToBookmark")
+                self.navigationItem.rightBarButtonItem = bookmarkButton
+            }
+        }
     }
 
     override func configure(#tableView: UITableView) {
@@ -90,10 +103,18 @@ class PlaylistViewController: ItemsViewController {
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
+                Async.main {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                }
             case .Failure(let box):
                 SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
             }
         }
+    }
+
+    func removeFromBookmark() {
+        // TODO:
     }
 
     // MARK: Notifications
