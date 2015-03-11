@@ -49,25 +49,15 @@ class YouTubePlayer: NSObject {
 
     var playlist: [Video]!
     var nowPlaying: Video! {
-        /*
-        willSet(willPlaying) {
-            if let nowPlaying = nowPlaying {
-                println(nowPlaying.id)
-                println(willPlaying.id)
-                if nowPlaying.id != willPlaying.id {
-                    removeObservers()
-                }
-            }
-        }
-        */
         didSet(didPlaying) {
             if let didPlaying = didPlaying {
                 if nowPlaying.id == didPlaying.id {
                     return
+                } else {
+                    stop()
                 }
             }
             removeObservers()
-            addObservers()
             startPlaying()
         }
     }
@@ -82,9 +72,8 @@ class YouTubePlayer: NSObject {
     override init() {
         controller = MPMoviePlayerController()
         controller.controlStyle = .None
-        controller.shouldAutoplay = true
-        controller.scalingMode = MPMovieScalingMode.AspectFit
-        //player.movieSourceType = MPMovieSourceType.Streaming
+        //controller.shouldAutoplay = false
+        //controller.scalingMode = MPMovieScalingMode.AspectFit
         super.init()
     }
 
@@ -95,23 +84,17 @@ class YouTubePlayer: NSObject {
     */
 
     func startPlaying() {
-        logger.debug("")
-        debug(controller)
         startPlaying(nowPlaying)
     }
 
     func startPlaying(video: Video) {
-        logger.debug("video: \(video)")
-        debug(controller)
         if let fileURL = video.fileURL() {
-            //controller.movieSourceType = .File
             startPlaying(fileURL)
             return
         }
         video.streamURL { (result) -> Void in
             switch result {
             case .Success(let box):
-                //self.controller.movieSourceType = .Streaming
                 self.startPlaying(box.unbox)
             case .Failure(let box):
                 SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
@@ -119,10 +102,10 @@ class YouTubePlayer: NSObject {
         }
     }
 
-    func startPlaying(streamURL: NSURL) {
-        logger.debug("streamURL: \(streamURL)")
-        debug(controller)
-        controller.contentURL = streamURL
+    func startPlaying(URL: NSURL) {
+        logger.debug("URL: \(URL)")
+        addObservers()
+        controller.contentURL = URL
         controller.prepareToPlay()
     }
 
@@ -134,11 +117,13 @@ class YouTubePlayer: NSObject {
         controller.pause()
     }
 
+    func stop() {
+        controller.stop()
+    }
+
+
     func loadStateDidChange(notification: NSNotification) {
         if let player = notification.object as? MPMoviePlayerController {
-            logger.debug("")
-            debug(controller)
-            /*
             switch player.loadState {
             case MPMovieLoadState.Unknown:
                 logger.debug("Unknown")
@@ -152,19 +137,14 @@ class YouTubePlayer: NSObject {
             default:
                 logger.debug("\(player.loadState)")
             }
-            */
         }
     }
 
     func moviePlaybackDidFinish(notification: NSNotification) {
         logger.debug("")
-        debug(controller)
-        //stopTimer()
     }
 
     func mediaIsPreparedToPlayDidChange(notification: NSNotification) {
-        logger.debug("")
-        debug(controller)
         if let controller = notification.object as? MPMoviePlayerController {
             logger.debug("player.duration: \(controller.duration)")
             delegate?.mediaIsPreparedToPlayDidChange(controller)
@@ -174,9 +154,6 @@ class YouTubePlayer: NSObject {
 
     func moviePlayBackStateDidChange(notification: NSNotification) {
         if let controller = notification.object as? MPMoviePlayerController {
-            logger.debug("")
-            debug(controller)
-            /*
             switch controller.playbackState {
             case .Stopped:
                 logger.debug("Stopped")
@@ -191,7 +168,6 @@ class YouTubePlayer: NSObject {
             case .SeekingBackward:
                 logger.debug("SeekingBackward")
             }
-            */
         }
     }
 
@@ -210,40 +186,6 @@ class YouTubePlayer: NSObject {
 
     func seekToTime(seconds: Float) {
         controller.currentPlaybackTime = Double(seconds)
-    }
-
-    func debug(controller: MPMoviePlayerController) {
-        if controller.readyForDisplay {
-            logger.debug("readyForDisplay: true")
-        } else {
-            logger.debug("readyForDisplay: false")
-        }
-        switch controller.loadState {
-        case MPMovieLoadState.Unknown:
-            logger.debug("loadState: Unknown")
-        case MPMovieLoadState.Playable:
-            logger.debug("loadState: Playable")
-        case MPMovieLoadState.PlaythroughOK:
-            logger.debug("loadState: PlaythroughOK")
-        case MPMovieLoadState.Stalled:
-            logger.debug("loadState: Stalled")
-        default:
-            logger.debug("loadState: \(controller.loadState)")
-        }
-        switch controller.playbackState {
-        case .Stopped:
-            logger.debug("playbackState: Stopped")
-        case .Playing:
-            logger.debug("playbackState: Playing")
-        case .Paused:
-            logger.debug("playbackState: Paused")
-        case .Interrupted:
-            logger.debug("playbackState: Interrupted")
-        case .SeekingForward:
-            logger.debug("playbackState: SeekingForward")
-        case .SeekingBackward:
-            logger.debug("playbackState: SeekingBackward")
-        }
     }
 }
 

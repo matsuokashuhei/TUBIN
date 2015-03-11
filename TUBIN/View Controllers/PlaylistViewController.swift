@@ -124,6 +124,7 @@ extension PlaylistViewController: UITableViewDataSource {
 extension PlaylistViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         let player = YouTubePlayer.sharedInstance
         //player.setPlaylist(items as [Video], index: indexPath.row)
         player.nowPlaying = items[indexPath.row] as Video

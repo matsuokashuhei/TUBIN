@@ -8,7 +8,6 @@
 
 import UIKit
 import MediaPlayer
-//import YouTubeKit
 import SVProgressHUD
 
 class YouTubePlayerViewController: UIViewController {
@@ -43,12 +42,14 @@ class YouTubePlayerViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
-        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // 再生中 -> 再生 OK
         // 停止 -> 再生 ???
         scrubberView.sync(player.controller)
-        play()
+        //play()
         addPlayerView(player.controller)
+        if player.isPlaying() {
+            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        }
         super.viewWillAppear(animated)
     }
 
@@ -81,9 +82,10 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func play() {
-        if player.isPlaying() == false {
-            player.play()
-        }
+        player.play()
+//        if player.isPlaying() == false {
+//            player.play()
+//        }
         playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
     }
 
@@ -122,6 +124,19 @@ class YouTubePlayerViewController: UIViewController {
     }
     */
 
+    // MARK: Actions
+    func addVideoToFavorite() {
+        let video = player.nowPlaying
+        Favorite.add(video) { (result) in
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
+            case .Failure(let box):
+                self.logger.error(box.unbox.localizedDescription)
+                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+            }
+        }
+    }
 }
 
 extension YouTubePlayerViewController: YouTubePlayerDelegate {

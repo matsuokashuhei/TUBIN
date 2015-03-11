@@ -70,6 +70,12 @@ class ScrubberView: UIView {
     }
 
     func setTime(currentTime: Double, duration: Double) {
+        if isnan(currentTime) {
+            return
+        }
+        if isnan(duration) {
+            return
+        }
         setTime(CMTimeMake(Int64(currentTime), 1), duration: CMTimeMake(Int64(duration), 1))
     }
 
