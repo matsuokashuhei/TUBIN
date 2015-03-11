@@ -36,19 +36,17 @@ class YouTubePlayerViewController: UIViewController {
         edgesForExtendedLayout = UIRectEdge.None
 
         player.delegate = self
-        // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
-        // 再生中 -> 再生 OK
-        // 停止 -> 再生 ???
         scrubberView.sync(player.controller)
-        //play()
         addPlayerView(player.controller)
         if player.isPlaying() {
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        } else {
+            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
         }
         super.viewWillAppear(animated)
     }
@@ -68,8 +66,6 @@ class YouTubePlayerViewController: UIViewController {
         let video = player.nowPlaying
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        //let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addVideoToFavorite")
-
         Favorite.exists(video) { (result) in
             switch result {
             case .Success(let box):
@@ -98,9 +94,6 @@ class YouTubePlayerViewController: UIViewController {
 
     func play() {
         player.play()
-//        if player.isPlaying() == false {
-//            player.play()
-//        }
         playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
     }
 
@@ -175,6 +168,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
+        playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
         addPlayerView(controller)
         scrubberView.configure(controller.duration)
     }

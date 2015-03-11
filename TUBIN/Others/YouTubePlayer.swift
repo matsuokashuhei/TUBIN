@@ -121,7 +121,6 @@ class YouTubePlayer: NSObject {
         controller.stop()
     }
 
-
     func loadStateDidChange(notification: NSNotification) {
         if let player = notification.object as? MPMoviePlayerController {
             switch player.loadState {
