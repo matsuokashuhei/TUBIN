@@ -157,62 +157,48 @@ extension Favorite {
         }
     }
 
-    /*
-    class func add(video: SwifTube.Video, completion: (succeeded: Bool, error: NSError!) -> Void) {
-        // 重複してたら事前に削除する。
-        let query = Parser.sharedInstance.query("Favorite")
-        query.whereKey("id", equalTo: video.id)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let error = error {
-                // エラー
-                completion(succeeded: false, error: error)
-                return
-            }
-            if let objects = objects {
-                PFObject.unpinAllInBackground(objects, block: { (succeeded, error) -> Void in
-                    // ダウンロード
-                    Favorite.download(video, completion: { (destinationURL, error) -> Void in
-                        if let destinationURl = destinationURL {
-                            //video.fileURL = destinationURl
-                            // すべてのお気に入りを入手して、これから追加するビデオのindexを決める。
-                            Favorite.count { (count, error) in
-                                if let error = error {
-                                    // エラー
-                                    completion(succeeded: false, error: error)
+    class func remove(video: Video, handler: (Result<Bool, NSError>) -> Void) {
+        Favorite.exists(video) { (result) in
+            switch result {
+            case .Success(let box):
+                if box.unbox {
+                    Favorite.find(id: video.id) { (result) in
+                        switch result {
+                        case .Success(let box):
+                            box.unbox.unpinInBackgroundWithBlock() { (succeeded, error) in
+                                if succeeded {
+                                    if FileManager.existsFile(video.fileName()) {
+                                        FileManager.remove(video.fileName()) { (result) in
+                                            switch result {
+                                            case .Success(let box):
+                                                handler(.Success(box))
+                                            case .Failure(let box):
+                                                handler(.Failure(box))
+                                            }
+                                        }
+                                    } else {
+                                        handler(.Success(Box(true)))
+                                    }
                                     return
                                 }
-                                var favorite = Favorite(index: count + 1, video: video)
-                                let object = favorite.toPFObject()
-                                // お気に入りにビデオを保存する。
-                                object.pinInBackgroundWithBlock { (succeeded, error) in
-                                    if succeeded {
-                                        // TODO: 通知
-                                        completion(succeeded: true, error: nil)
-                                    } else {
-                                        // エラー
-                                        if let error = error {
-                                            completion(succeeded: false, error: error)
-                                        } else {
-                                            completion(succeeded: false, error: nil)
-                                        }
-                                    }
+                                if let error = error {
+                                    handler(.Failure(Box(error)))
+                                } else {
+                                    handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
                                 }
                             }
-                        } else {
-                            if let error = error {
-                                completion(succeeded: false, error: error)
-                            } else {
-                                completion(succeeded: false, error: nil)
-                            }
+                        case .Failure(let box):
+                            handler(.Failure(box))
                         }
-        
-                    })
-                })
+                    }
+                } else {
+                    handler(.Success(Box(true)))
+                }
+            case .Failure(let box):
+                handler(.Failure(box))
             }
-            completion(succeeded: false, error: nil)
         }
     }
-    */
 
     class func edit(#updates: [Favorite], removes: [Favorite]) -> Result<Bool, NSError> {
         for (index, favorite) in enumerate(updates) {
@@ -252,93 +238,5 @@ extension Favorite {
         }
         return .Success(Box(true))
     }
-
-    /*
-    class func edit(#updates: [Favorite], removes: [Favorite]) -> (succeeded: Bool, error: NSError!) {
-        var succeeded = true
-        for (index, favorite) in enumerate(updates) {
-            if favorite.index == index + 1 {
-                continue
-            }
-            if let object = Favorite.find(id: favorite.video.id) {
-                object["index"] = index + 1
-                if !object.pin() {
-                    succeeded = false
-                }
-            }
-        }
-        for favorite in removes {
-            if let object = Favorite.find(id: favorite.video.id) {
-                if object.unpin() {
-                    if let fileURL = favorite.fileURL {
-                        var error: NSError?
-                        NSFileManager.defaultManager().removeItemAtURL(fileURL, error: &error)
-                        if let error = error {
-                            Logger.error(error.description)
-                            succeeded = false
-                        }
-                    }
-                } else {
-                    succeeded = false
-                }
-            }
-        }
-        return (succeeded: succeeded, error: nil)
-    }
-    */
-
-    /*
-    class func storedIn(video: SwifTube.Video, completion: (fileURL: NSURL?) -> Void) {
-        var fileURL: NSURL?
-        if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask)[0] as? NSURL {
-            fileURL = directoryURL.URLByAppendingPathComponent("Caches").URLByAppendingPathComponent("\(video.id).mp4")
-        }
-        if let fileURL = fileURL {
-            if let path = fileURL.path {
-                if NSFileManager.defaultManager().fileExistsAtPath(path) {
-                    completion(fileURL: fileURL)
-                } else {
-                    completion(fileURL: nil)
-                }
-            } else {
-                completion(fileURL: nil)
-            }
-        } else {
-            completion(fileURL: nil)
-        }
-    }
-
-    class func download(video: SwifTube.Video, completion: (fileURL: NSURL!, error: NSError!) -> Void) {
-        ViewHelper.showLoadingIndicator(true)
-        video.streamURL(completion: { (streamURL, error) -> Void in
-            ViewHelper.showLoadingIndicator(false)
-            if let error = error {
-                completion(fileURL: nil, error: error)
-            }
-            if let streamURL = streamURL {
-                var fileURL: NSURL?
-                let destination: (NSURL, NSHTTPURLResponse) -> (NSURL) = { (temporaryURL, response) in
-                    if let directoryURL = NSFileManager.defaultManager().URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask)[0] as? NSURL {
-                        fileURL = directoryURL.URLByAppendingPathComponent("Caches").URLByAppendingPathComponent("\(video.id).mp4")
-                        return fileURL!
-                    } else {
-                        return temporaryURL
-                    }
-                }
-                ViewHelper.showLoadingIndicator(true)
-                Alamofire.download(.GET, streamURL, destination).response { (_, _, _, error) in
-                    ViewHelper.showLoadingIndicator(false)
-                    if let error = error {
-                        completion(fileURL: nil, error: error)
-                        return
-                    }
-                    completion(fileURL: fileURL, error: nil)
-                }
-            } else {
-                completion(fileURL: nil, error: nil)
-            }
-        })
-    }
-    */
 
 }

@@ -7,6 +7,7 @@
 //
 
 let AddItemToFavoritesNotification = "AddItemToFavoritesNotification"
+let ReloadFavoritesNotification = "ReloadFavoritesNotification"
 let AddItemToBookmarksNotification = "AddItemToBookmarksNotification"
 
 let BookmarksEditedNotification = "BookmarkEditedNotification"

@@ -68,8 +68,23 @@ class YouTubePlayerViewController: UIViewController {
         let video = player.nowPlaying
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addVideoToFavorite")
-        navigationItem.rightBarButtonItem = addButton
+        //let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addVideoToFavorite")
+
+        Favorite.exists(video) { (result) in
+            switch result {
+            case .Success(let box):
+                if box.unbox {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                } else {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
+            case .Failure(let box):
+                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                self.navigationItem.rightBarButtonItem = favoriteButton
+            }
+        }
     }
 
     // MARK: - Actions
@@ -131,6 +146,23 @@ class YouTubePlayerViewController: UIViewController {
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
+            case .Failure(let box):
+                self.logger.error(box.unbox.localizedDescription)
+                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+            }
+        }
+    }
+
+    func removeFromFavorite() {
+        let video = player.nowPlaying
+        Favorite.remove(video) { (result) in
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ReloadFavoritesNotification, object: self))
+                Async.main {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
             case .Failure(let box):
                 self.logger.error(box.unbox.localizedDescription)
                 SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)

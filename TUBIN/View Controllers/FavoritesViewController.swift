@@ -32,6 +32,7 @@ class FavoritesViewController: UIViewController {
         fetch()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: AddItemToFavoritesNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: ReloadFavoritesNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
