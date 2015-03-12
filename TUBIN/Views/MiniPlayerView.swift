@@ -15,13 +15,21 @@ protocol MiniPlayerViewDelegate {
 class MiniPlayerView: UIView {
 
     @IBOutlet var videoView: UIView!
-    @IBOutlet var previousButton: UIButton!
-    @IBOutlet var playButton: UIButton! {
+    @IBOutlet var previousButton: UIButton! {
         didSet {
-            playButton.addTarget(self, action: "tapPlayButton:", forControlEvents: .TouchUpInside)
+            previousButton.addTarget(self, action: "previousButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var playButton: UIButton! {
+        didSet {
+            playButton.addTarget(self, action: "playButtonTapped:", forControlEvents: .TouchUpInside)
+        }
+    }
+    @IBOutlet var nextButton: UIButton! {
+        didSet {
+            nextButton.addTarget(self, action: "nextButtonTapped:", forControlEvents: .TouchUpInside)
+        }
+    }
     @IBOutlet var backButton: UIButton! {
         didSet {
             backButton.addTarget(self, action: "backToVideoPlayerViewController", forControlEvents: .TouchUpInside)
@@ -34,28 +42,21 @@ class MiniPlayerView: UIView {
     var delegate: MiniPlayerViewDelegate?
 
     func show() {
+        // TODO: 再生の準備〜再生の間の場合は、ミニプレーヤーが出ない。
         if player.isPlaying() {
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
             height.constant = 86
             hidden = false
             addPlayerView(player.controller)
-            /*
-            superview?.setNeedsLayout()
-            superview?.layoutIfNeeded()
-            */
         }
     }
 
     func hide() {
         height.constant = 0
         hidden = true
-        /*
-        superview?.setNeedsLayout()
-        superview?.layoutIfNeeded()
-        */
     }
 
-    func tapPlayButton(button: UIButton) {
+    func playButtonTapped(button: UIButton) {
         if player.isPlaying() {
             player.pause()
             playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
@@ -63,6 +64,14 @@ class MiniPlayerView: UIView {
             player.play()
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
         }
+    }
+
+    func previousButtonTapped(button: UIButton) {
+        // TODO:
+    }
+
+    func nextButtonTapped(button: UIButton) {
+        // TODO:
     }
 
     func backToVideoPlayerViewController() {

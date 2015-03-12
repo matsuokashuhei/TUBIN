@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import YouTubeKit
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -19,25 +20,38 @@ class YouTubePlayerViewController: UIViewController {
             scrubberView.delegate = self
         }
     }
-    @IBOutlet var previousButton: UIButton!
-    @IBOutlet var playButton: UIButton! {
+    @IBOutlet var previousButton: UIButton! {
         didSet {
-            playButton.addTarget(self, action: "tapPlayButton:", forControlEvents: .TouchUpInside)
+            previousButton.addTarget(self, action: "previousButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var nextButton: UIButton!
+    @IBOutlet var playButton: UIButton! {
+        didSet {
+            playButton.addTarget(self, action: "playButtonTapped:", forControlEvents: .TouchUpInside)
+        }
+    }
+    @IBOutlet var nextButton: UIButton! {
+        didSet {
+            nextButton.addTarget(self, action: "nextButtonTapped:", forControlEvents: .TouchUpInside)
+        }
+    }
 
     var player = YouTubePlayer.sharedInstance
+
+    var video: Video!
+    var playlist: [Video]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         edgesForExtendedLayout = UIRectEdge.None
 
-        player.delegate = self
+        player.nowPlaying = video
+        player.playlist = playlist
     }
 
     override func viewWillAppear(animated: Bool) {
+        player.delegate = nil
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
         scrubberView.sync(player.controller)
@@ -53,6 +67,7 @@ class YouTubePlayerViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         // Notification to Mini player
         NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
+        player.delegate = nil
         super.viewWillDisappear(animated)
     }
 
@@ -62,7 +77,6 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func configure(#navigationItem: UINavigationItem) {
-        let video = player.nowPlaying
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         Favorite.exists(video) { (result) in
@@ -83,7 +97,7 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     // MARK: - Actions
-    func tapPlayButton(button: UIButton) {
+    func playButtonTapped(button: UIButton) {
         if player.isPlaying() {
             pause()
         } else {
@@ -91,14 +105,22 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    func previousButtonTapped(button: UIButton) {
+        // TODO:
+    }
+
+    func nextButtonTapped(button: UIButton) {
+        // TODO:
+    }
+
     func play() {
         player.play()
-        playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        //playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
     }
 
     func pause() {
         player.pause()
-        playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+        //playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
     }
 
     func addPlayerView(controller: MPMoviePlayerController) {
@@ -140,12 +162,11 @@ class YouTubePlayerViewController: UIViewController {
         indicator.startAnimating()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
 
-        let video = player.nowPlaying
         Favorite.add(video) { (result) in
             indicator.stopAnimating()
             switch result {
             case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
                 Async.main {
                     let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
                     self.navigationItem.rightBarButtonItem = favoriteButton
@@ -160,7 +181,6 @@ class YouTubePlayerViewController: UIViewController {
 
     func removeFromFavorite() {
         navigationItem.rightBarButtonItem?.enabled = true
-        let video = player.nowPlaying
         Favorite.remove(video) { (result) in
             self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
@@ -181,19 +201,28 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
-        playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
-        addPlayerView(controller)
-        scrubberView.configure(controller.duration)
+//        addPlayerView(controller)
+//        scrubberView.configure(controller.duration)
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
         scrubberView.setTime(controller.currentPlaybackTime, duration: controller.duration)
     }
 
-    func moviePlaybackDidFinish(controller: MPMoviePlayerController) {
+    func playbackDidFinish(controller: MPMoviePlayerController) {
         logger.debug("")
     }
 
+    func playBackStateDidChange(controller: MPMoviePlayerController) {
+        switch controller.playbackState {
+        case .Playing:
+            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        case .Paused, .Stopped:
+            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+        default:
+            break
+        }
+    }
 }
 
 extension YouTubePlayerViewController: ScrubberViewDelegate {

@@ -120,10 +120,14 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
-        let player = YouTubePlayer.sharedInstance
+        //let player = YouTubePlayer.sharedInstance
         //player.setPlaylist(items as [Video], index: indexPath.row)
-        player.nowPlaying = favorites[indexPath.row].video
+        //player.nowPlaying = favorites[indexPath.row].video
         let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+        controller.video = favorites[indexPath.row].video
+        controller.playlist = favorites.map { (favorite) -> Video in
+            return favorite.video
+        }
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }

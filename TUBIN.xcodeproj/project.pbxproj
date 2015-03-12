@@ -424,10 +424,10 @@
 				A8BD70F31AAB504600499A71 /* PopularViewController.xib */,
 				A8D4037F1AA8CC4400F0AAD2 /* SettingsViewController.swift */,
 				A8BD70FD1AAB828300499A71 /* SettingsViewController.xib */,
-				A8D403801AA8CC4400F0AAD2 /* VideoPlayerViewController.swift */,
-				A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */,
 				A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */,
 				A899AE891AAC67490011D5DE /* YouTubePlayerViewController.xib */,
+				A8D403801AA8CC4400F0AAD2 /* VideoPlayerViewController.swift */,
+				A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
