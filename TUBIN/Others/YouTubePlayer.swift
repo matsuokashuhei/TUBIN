@@ -8,7 +8,6 @@
 
 import MediaPlayer
 import YouTubeKit
-import SVProgressHUD
 
 protocol YouTubePlayerDelegate {
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController)
@@ -84,10 +83,7 @@ class YouTubePlayer: NSObject {
     */
 
     func startPlaying() {
-        startPlaying(nowPlaying)
-    }
-
-    func startPlaying(video: Video) {
+        let video = nowPlaying
         if let fileURL = video.fileURL() {
             startPlaying(fileURL)
             return
@@ -97,7 +93,7 @@ class YouTubePlayer: NSObject {
             case .Success(let box):
                 self.startPlaying(box.unbox)
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }

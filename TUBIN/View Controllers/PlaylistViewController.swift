@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
-import SVProgressHUD
 
 class PlaylistViewController: ItemsViewController {
 
@@ -99,7 +98,9 @@ class PlaylistViewController: ItemsViewController {
 
     // MARK: Bookmark
     func addPlaylistToBookmark() {
+        navigationItem.rightBarButtonItem?.enabled = true
         Bookmark.add(playlist) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
@@ -108,7 +109,7 @@ class PlaylistViewController: ItemsViewController {
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }

@@ -8,7 +8,6 @@
 
 import UIKit
 import LlamaKit
-import SVProgressHUD
 
 class BookmarksViewController: UIViewController {
 
@@ -99,8 +98,7 @@ class BookmarksViewController: UIViewController {
                     }
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: BookmarksEditedNotification, object: self))
                 case .Failure(let box):
-                    self.logger.error(box.unbox.localizedDescription)
-                    SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
                 }
             }
             edited = false

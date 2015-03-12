@@ -25,7 +25,7 @@ class Spinner {
         return Singleton.instance
     }
 
-    init() {
+    func configure() {
         // SVProgressHUD
         SVProgressHUD.setBackgroundColor(UIColor.clearColor())
         SVProgressHUD.setForegroundColor(UIColor.redColor())
@@ -35,10 +35,12 @@ class Spinner {
     }
 
     func show() {
+        configure()
         SVProgressHUD.show()
     }
 
     func dissmiss() {
+        configure()
         SVProgressHUD.dismiss()
     }
 

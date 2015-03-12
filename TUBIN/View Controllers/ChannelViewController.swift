@@ -8,7 +8,6 @@
 
 import UIKit
 import YouTubeKit
-import SVProgressHUD
 
 class ChannelViewController: UIViewController {
 
@@ -143,7 +142,9 @@ class ChannelViewController: UIViewController {
     }
 
     func addChannelToBookmark() {
+        navigationItem.rightBarButtonItem?.enabled = true
         Bookmark.add(channel) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
@@ -152,8 +153,7 @@ class ChannelViewController: UIViewController {
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }

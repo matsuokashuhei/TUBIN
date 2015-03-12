@@ -52,7 +52,7 @@ class ContainerViewController: UIViewController {
         case .Success(let box):
             bookmarks = box.unbox
         case .Failure(let box):
-            SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+            Alert.error(box.unbox)
             return
         }
         for bookmark in bookmarks {
@@ -233,7 +233,7 @@ extension ContainerViewController {
                 self.containerView.layoutIfNeeded()
                 SVProgressHUD.showSuccessWithStatus("")
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
         /*

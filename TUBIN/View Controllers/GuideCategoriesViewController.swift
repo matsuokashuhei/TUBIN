@@ -8,7 +8,6 @@
 
 import UIKit
 import LlamaKit
-import SVProgressHUD
 import YouTubeKit
 
 class GuideCategoriesViewController: UIViewController {
@@ -63,7 +62,7 @@ class GuideCategoriesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }

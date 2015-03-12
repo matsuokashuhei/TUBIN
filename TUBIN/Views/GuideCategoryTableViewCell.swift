@@ -9,7 +9,6 @@
 import UIKit
 import LlamaKit
 import YouTubeKit
-import SVProgressHUD
 
 class GuideCategoryTableViewCell: UITableViewCell {
 
@@ -40,13 +39,13 @@ class GuideCategoryTableViewCell: UITableViewCell {
                         case .Success(let box):
                             self.thumbnailImageView.image = box.unbox
                         case .Failure(let box):
-                            SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                            Alert.error(box.unbox)
                         }
 
                     }
                 }
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }

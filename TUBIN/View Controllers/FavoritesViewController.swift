@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
-import SVProgressHUD
 
 class FavoritesViewController: UIViewController {
 
@@ -59,7 +58,7 @@ class FavoritesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }
@@ -82,8 +81,7 @@ class FavoritesViewController: UIViewController {
                 case .Success(let box):
                     Spinner.dismiss()
                 case .Failure(let box):
-                    logger.error(box.unbox.localizedDescription)
-                    SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
                 }
             }
         }

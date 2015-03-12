@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
-import SVProgressHUD
 
 class ItemsViewController: UIViewController {
 
@@ -80,17 +79,6 @@ class ItemsViewController: UIViewController {
         Spinner.show()
     }
 
-    /*
-    func searchItems(#parameters: [String: String]) {
-        self.parameters = parameters
-        SVProgressHUD.show()
-    }
-
-    func loadMoreItems(sender: UIButton) {
-        SVProgressHUD.show()
-    }
-    */
-
     func searchCompletion(#page: Page, items: [Item]) {
         Async.background {
             self.items = items
@@ -122,7 +110,7 @@ class ItemsViewController: UIViewController {
     func errorCompletion(error: NSError) {
         logger.error(error.localizedDescription)
         Spinner.dismiss()
-        SVProgressHUD.showErrorWithStatus(error.localizedDescription)
+        Alert.error(error)
     }
 
     // MARK: - Actions
@@ -143,7 +131,7 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
                 case .Failure(let box):
-                    SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
                 }
             })
             return
@@ -154,7 +142,7 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": playlist]))
                 case .Failure(let box):
-                    SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
                 }
             })
             return
@@ -165,7 +153,7 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": channel]))
                 case .Failure(let box):
-                    SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
                 }
             })
             return

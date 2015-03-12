@@ -33,19 +33,20 @@ class Toast {
             kCRToastSubtitleFontKey: UIFont(name: "AvenirNext-Regular", size: 12.0)!,
             kCRToastNotificationPresentationTypeKey: CRToastPresentationType.Cover.rawValue,
             //kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
-            kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
+            //kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastAnimationInTypeKey: CRToastAnimationType.Linear.rawValue,
             kCRToastAnimationOutTypeKey: CRToastAnimationType.Linear.rawValue,
             kCRToastAnimationInDirectionKey: CRToastAnimationDirection.Top.rawValue,
-            kCRToastAnimationOutDirectionKey: CRToastAnimationDirection.Top.rawValue
+            kCRToastAnimationOutDirectionKey: CRToastAnimationDirection.Top.rawValue,
+            kCRToastTimeIntervalKey: NSTimeInterval(0.5)
+
         ]
         CRToastManager.setDefaultOptions(options)
     }
 
     func bookmark(#item: Item) {
         let options: [String: AnyObject] = [
-//            kCRToastTextKey: item.title,
-//            kCRToastSubtitleTextKey: "bookmarked!"
+            kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastTextKey: "bookmarked!",
         ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
@@ -67,6 +68,7 @@ class Toast {
 
     func favorite(#item: Item) {
         let options: [String: AnyObject] = [
+            kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
             kCRToastTextKey: item.title,
             kCRToastSubtitleTextKey: "favorited!"
         ]

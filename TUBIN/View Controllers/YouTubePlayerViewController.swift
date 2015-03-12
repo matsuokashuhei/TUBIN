@@ -8,7 +8,6 @@
 
 import UIKit
 import MediaPlayer
-import SVProgressHUD
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -134,21 +133,36 @@ class YouTubePlayerViewController: UIViewController {
 
     // MARK: Actions
     func addVideoToFavorite() {
+
+        //navigationItem.rightBarButtonItem?.enabled = true
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+        indicator.color = view.tintColor
+        indicator.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
+
         let video = player.nowPlaying
         Favorite.add(video) { (result) in
+            indicator.stopAnimating()
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
+                Async.main {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                self.navigationItem.rightBarButtonItem = favoriteButton
+                Alert.error(box.unbox)
             }
         }
     }
 
     func removeFromFavorite() {
+        navigationItem.rightBarButtonItem?.enabled = true
         let video = player.nowPlaying
         Favorite.remove(video) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ReloadFavoritesNotification, object: self))
@@ -157,8 +171,7 @@ class YouTubePlayerViewController: UIViewController {
                     self.navigationItem.rightBarButtonItem = favoriteButton
                 }
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
-                SVProgressHUD.showErrorWithStatus(box.unbox.localizedDescription)
+                Alert.error(box.unbox)
             }
         }
     }
