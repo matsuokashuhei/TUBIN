@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -49,18 +49,18 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="0dk-SA-eTc" firstAttribute="leading" secondItem="Y5U-OA-dSU" secondAttribute="leading" constant="8" id="3W3-Av-Fxy"/>
                     <constraint firstAttribute="trailing" secondItem="BuM-la-ZAF" secondAttribute="trailing" constant="8" id="4kx-cL-ksk"/>
+                    <constraint firstAttribute="bottom" secondItem="0dk-SA-eTc" secondAttribute="bottom" constant="7.5" id="9oL-ro-tcH"/>
+                    <constraint firstItem="0dk-SA-eTc" firstAttribute="top" secondItem="Y5U-OA-dSU" secondAttribute="top" constant="8" id="Btq-yc-u3v"/>
                     <constraint firstAttribute="trailing" secondItem="zac-XB-n0Y" secondAttribute="trailing" constant="8" id="Dg0-f7-Hlj"/>
                     <constraint firstItem="zac-XB-n0Y" firstAttribute="leading" secondItem="0dk-SA-eTc" secondAttribute="trailing" constant="8" id="J00-3r-Cju"/>
                     <constraint firstItem="BuM-la-ZAF" firstAttribute="top" secondItem="Y5U-OA-dSU" secondAttribute="top" constant="8" id="JaN-Tb-JYn"/>
-                    <constraint firstItem="0dk-SA-eTc" firstAttribute="top" secondItem="Y5U-OA-dSU" secondAttribute="top" constant="8" id="WvS-qW-Uxv"/>
                     <constraint firstItem="j1l-4M-mcI" firstAttribute="leading" secondItem="0dk-SA-eTc" secondAttribute="trailing" constant="8" id="Xe7-yM-2uq"/>
-                    <constraint firstAttribute="bottom" secondItem="zac-XB-n0Y" secondAttribute="bottom" constant="8" id="cGb-9D-yoP"/>
                     <constraint firstItem="BuM-la-ZAF" firstAttribute="leading" secondItem="0dk-SA-eTc" secondAttribute="trailing" constant="8" id="cpX-4l-ppt"/>
                     <constraint firstItem="j1l-4M-mcI" firstAttribute="top" secondItem="BuM-la-ZAF" secondAttribute="bottom" id="eJ1-5f-PZw"/>
-                    <constraint firstAttribute="bottom" secondItem="0dk-SA-eTc" secondAttribute="bottom" constant="8" id="kYo-Hj-bCl"/>
+                    <constraint firstAttribute="bottom" secondItem="zac-XB-n0Y" secondAttribute="bottom" constant="7.5" id="jQf-Il-fQU"/>
                     <constraint firstItem="j1l-4M-mcI" firstAttribute="trailing" secondItem="Y5U-OA-dSU" secondAttribute="trailingMargin" id="qQP-gp-06k"/>
-                    <constraint firstItem="0dk-SA-eTc" firstAttribute="leading" secondItem="Y5U-OA-dSU" secondAttribute="leading" constant="8" id="z92-3r-pPn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

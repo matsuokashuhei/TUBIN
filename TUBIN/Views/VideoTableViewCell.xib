@@ -60,18 +60,18 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="3EH-DI-QyV" firstAttribute="leading" secondItem="8kW-3Y-6bF" secondAttribute="leading" constant="78" id="1i5-sN-XyO"/>
-                    <constraint firstAttribute="bottom" secondItem="uDf-IL-g9Y" secondAttribute="bottom" constant="8" id="A33-JE-l3F"/>
+                    <constraint firstAttribute="bottom" secondItem="uDf-IL-g9Y" secondAttribute="bottom" constant="7.5" id="Abo-kD-ihe"/>
                     <constraint firstItem="izH-Fj-G9n" firstAttribute="leading" secondItem="uDf-IL-g9Y" secondAttribute="trailing" constant="8" id="BZs-rL-TZg"/>
                     <constraint firstItem="NMn-k7-BM8" firstAttribute="top" secondItem="8kW-3Y-6bF" secondAttribute="top" constant="8" id="G4E-7Z-gUy"/>
                     <constraint firstItem="NMn-k7-BM8" firstAttribute="leading" secondItem="uDf-IL-g9Y" secondAttribute="trailing" constant="8" id="Jd0-C2-YQo"/>
                     <constraint firstAttribute="trailing" secondItem="izH-Fj-G9n" secondAttribute="trailing" constant="8" id="LiI-DZ-3Eh"/>
                     <constraint firstAttribute="trailing" secondItem="JnT-LR-kPL" secondAttribute="trailing" constant="8" id="Soh-hv-M2I"/>
-                    <constraint firstItem="uDf-IL-g9Y" firstAttribute="leading" secondItem="8kW-3Y-6bF" secondAttribute="leading" constant="8" id="a55-5P-BiH"/>
                     <constraint firstAttribute="bottom" secondItem="3EH-DI-QyV" secondAttribute="bottom" constant="8" id="eEp-sQ-uHv"/>
-                    <constraint firstItem="uDf-IL-g9Y" firstAttribute="top" secondItem="8kW-3Y-6bF" secondAttribute="top" constant="8" id="rhk-es-YDo"/>
-                    <constraint firstAttribute="bottom" secondItem="izH-Fj-G9n" secondAttribute="bottom" constant="8" id="siT-4Q-q0u"/>
+                    <constraint firstItem="uDf-IL-g9Y" firstAttribute="leading" secondItem="8kW-3Y-6bF" secondAttribute="leading" constant="8" id="g2q-mB-hhO"/>
+                    <constraint firstItem="uDf-IL-g9Y" firstAttribute="top" secondItem="8kW-3Y-6bF" secondAttribute="top" constant="8" id="gg5-yV-lMz"/>
                     <constraint firstItem="JnT-LR-kPL" firstAttribute="top" secondItem="NMn-k7-BM8" secondAttribute="bottom" id="u9F-is-4jW"/>
                     <constraint firstAttribute="trailing" secondItem="NMn-k7-BM8" secondAttribute="trailing" constant="8" id="ucP-dG-t64"/>
+                    <constraint firstAttribute="bottom" secondItem="izH-Fj-G9n" secondAttribute="bottom" constant="7.5" id="vpk-ut-PEk"/>
                     <constraint firstItem="JnT-LR-kPL" firstAttribute="leading" secondItem="uDf-IL-g9Y" secondAttribute="trailing" constant="8" id="wbp-f9-Et5"/>
                 </constraints>
             </tableViewCellContentView>
