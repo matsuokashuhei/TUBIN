@@ -62,7 +62,7 @@ class BookmarksViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
-        tableView.rowHeight = 70
+        //tableView.rowHeight = 76
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.dataSource = self
         tableView.delegate = self

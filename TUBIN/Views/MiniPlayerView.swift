@@ -14,6 +14,8 @@ protocol MiniPlayerViewDelegate {
 
 class MiniPlayerView: UIView {
 
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet var videoView: UIView!
     @IBOutlet var previousButton: UIButton! {
         didSet {
@@ -42,8 +44,10 @@ class MiniPlayerView: UIView {
     var delegate: MiniPlayerViewDelegate?
 
     func show() {
+        logger.debug("player.isPlaying(): \(player.isPlaying())")
         // TODO: 再生の準備〜再生の間の場合は、ミニプレーヤーが出ない。
         if player.isPlaying() {
+            player.delegate = self
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
             height.constant = 86
             hidden = false
@@ -67,11 +71,11 @@ class MiniPlayerView: UIView {
     }
 
     func previousButtonTapped(button: UIButton) {
-        // TODO:
+        player.playPreviousVideo()
     }
 
     func nextButtonTapped(button: UIButton) {
-        // TODO:
+        player.playNextVideo()
     }
 
     func backToVideoPlayerViewController() {
@@ -96,6 +100,45 @@ class MiniPlayerView: UIView {
             NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
         ])
+        controller.play()
+    }
+}
+
+extension MiniPlayerView: YouTubePlayerDelegate {
+
+    func durationAvailable(controller: MPMoviePlayerController) {
+        logger.debug("controller.duration: \(controller.duration)")
+    }
+
+    func readyForDisplay(controller: MPMoviePlayerController) {
+        logger.debug("")
+    }
+
+    func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
+        logger.debug("")
+        addPlayerView(controller)
+    }
+
+    func playingAtTime(controller: MPMoviePlayerController) {
+        logger.debug("")
+    }
+
+    func playbackDidFinish(controller: MPMoviePlayerController) {
+        logger.debug("")
+    }
+
+    func playBackStateDidChange(controller: MPMoviePlayerController) {
+        switch controller.playbackState {
+        case .Playing:
+            logger.debug("Playing")
+            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+        case .Paused, .Stopped:
+            logger.debug("Paused, Stopped")
+            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+        default:
+            logger.debug("\(controller.playbackState.rawValue)")
+            break
+        }
     }
 }
 

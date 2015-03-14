@@ -48,7 +48,7 @@ class ItemsViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
-        tableView.rowHeight = 100
+        //tableView.rowHeight = 106
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         tableView.delegate = self

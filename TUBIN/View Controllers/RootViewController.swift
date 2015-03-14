@@ -50,6 +50,8 @@ extension RootViewController: MiniPlayerViewDelegate {
     func backToVideoPlayerViewController() {
         if let navigationController = childViewControllers.first as? UINavigationController {
             let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+            controller.video = YouTubePlayer.sharedInstance.nowPlaying
+            controller.playlist = YouTubePlayer.sharedInstance.playlist
             navigationController.pushViewController(controller, animated: true)
         }
     }

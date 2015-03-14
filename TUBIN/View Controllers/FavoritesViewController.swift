@@ -39,7 +39,7 @@ class FavoritesViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
-        tableView.rowHeight = 100
+        //tableView.rowHeight = 106
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
@@ -120,9 +120,6 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
-        //let player = YouTubePlayer.sharedInstance
-        //player.setPlaylist(items as [Video], index: indexPath.row)
-        //player.nowPlaying = favorites[indexPath.row].video
         let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
         controller.video = favorites[indexPath.row].video
         controller.playlist = favorites.map { (favorite) -> Video in

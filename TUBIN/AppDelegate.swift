@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parser.configure()
         // ネットワーク・インジケーター
         BigBrother.addToSharedSession()
-        // 
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }

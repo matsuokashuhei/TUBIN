@@ -42,6 +42,7 @@ class YouTubePlayerViewController: UIViewController {
     var playlist: [Video]!
 
     override func viewDidLoad() {
+        logger.debug("")
         super.viewDidLoad()
 
         edgesForExtendedLayout = UIRectEdge.None
@@ -51,12 +52,13 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        player.delegate = nil
+        logger.debug("")
+        player.delegate = self
         navigationController?.setNavigationBarHidden(false, animated: true)
         configure(navigationItem: navigationItem)
-        scrubberView.sync(player.controller)
-        addPlayerView(player.controller)
-        if player.isPlaying() {
+        if player.isPlaying() && player.nowPlaying.id == video.id {
+            scrubberView.sync(player.controller)
+            addPlayerView(player.controller)
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
         } else {
             playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
@@ -65,6 +67,7 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewWillDisappear(animated: Bool) {
+        logger.debug("")
         // Notification to Mini player
         NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
         player.delegate = nil
@@ -106,21 +109,30 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func previousButtonTapped(button: UIButton) {
-        // TODO:
+        if player.isPlaying() {
+            logger.debug("player.controller.currentPlaybackTime: \(player.controller.currentPlaybackTime)")
+            if player.controller.currentPlaybackTime < 3 {
+                if let video = player.previousVideo() {
+                    player.nowPlaying = video
+                }
+            } else {
+                player.seekToTime(0)
+            }
+        }
     }
 
     func nextButtonTapped(button: UIButton) {
-        // TODO:
+        if let video = player.nextVideo() {
+            player.nowPlaying = video
+        }
     }
 
     func play() {
         player.play()
-        //playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
     }
 
     func pause() {
         player.pause()
-        //playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
     }
 
     func addPlayerView(controller: MPMoviePlayerController) {
@@ -143,17 +155,8 @@ class YouTubePlayerViewController: UIViewController {
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: Actions
+
     func addVideoToFavorite() {
 
         //navigationItem.rightBarButtonItem?.enabled = true
@@ -199,10 +202,19 @@ class YouTubePlayerViewController: UIViewController {
 
 extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
+    func durationAvailable(controller: MPMoviePlayerController) {
+        logger.debug("controller.duration: \(controller.duration)")
+        scrubberView.configure(controller.duration)
+    }
+
+    func readyForDisplay(controller: MPMoviePlayerController) {
+        logger.debug("")
+    }
+
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
-//        addPlayerView(controller)
-//        scrubberView.configure(controller.duration)
+        addPlayerView(controller)
+        play()
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
@@ -216,34 +228,34 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     func playBackStateDidChange(controller: MPMoviePlayerController) {
         switch controller.playbackState {
         case .Playing:
+            logger.debug("Playing")
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
         case .Paused, .Stopped:
+            logger.debug("Paused, Stopped")
             playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
         default:
+            logger.debug("\(controller.playbackState.rawValue)")
             break
         }
     }
+
 }
 
 extension YouTubePlayerViewController: ScrubberViewDelegate {
 
     func beginSeek(slider: UISlider) {
-        logger.debug("")
         player.pause()
     }
 
     func seekPositionChanged(slider: UISlider) {
-        logger.debug("")
         seekToSeconds(slider.value)
     }
 
     func endSeek(slider: UISlider) {
-        logger.debug("")
         player.play()
     }
 
     func seekToSeconds(seconds: Float) {
-        logger.debug("")
         player.seekToTime(seconds)
     }
 }
