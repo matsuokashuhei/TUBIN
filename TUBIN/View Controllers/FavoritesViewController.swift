@@ -39,7 +39,6 @@ class FavoritesViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
-        //tableView.rowHeight = 106
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self

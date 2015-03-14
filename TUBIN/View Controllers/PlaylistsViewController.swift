@@ -19,7 +19,7 @@ class PlaylistsViewController: ItemsViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     override func configure(#tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self

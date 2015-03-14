@@ -15,7 +15,6 @@ class GuideCategoriesViewController: UIViewController {
     // MARK: - YouTube search
     @IBOutlet var tableView: UITableView! {
         didSet {
-            //tableView.rowHeight = 76
             tableView.tableFooterView = UIView(frame: CGRectZero)
             tableView.dataSource = self
             tableView.delegate = self
