@@ -32,10 +32,10 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Bookmarkの取得
-        configureContents()
+        loadBookmarks()
         // Notificationの設定
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addItemToBookmarks:", name: AddItemToBookmarksNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadContents:", name: BookmarksEditedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -46,7 +46,7 @@ class ContainerViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    func configureContents() {
+    func loadBookmarks() {
         let result = Bookmark.all()
         switch result {
         case .Success(let box):
@@ -61,7 +61,6 @@ class ContainerViewController: UIViewController {
                 case "playlist":
                     let playlist = bookmark.item as Playlist
                     self.tabBar.add(item: playlist)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
                     let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
                     controller.playlist = playlist
                     controller.search()
@@ -69,35 +68,25 @@ class ContainerViewController: UIViewController {
                 case "channel":
                     let channel = bookmark.item as Channel
                     self.tabBar.add(item: channel)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
                     let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
                     controller.channel = channel
                     return controller
                 case "Popular":
                     self.tabBar.add(text: bookmark.name)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PopularViewController") as PopularViewController
                     let controller = PopularViewController(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
                     return controller
                 case "Guide":
                     self.tabBar.add(text: bookmark.name)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("GuideCategoriesViewController") as GuideCategoriesViewController
                     let controller = GuideCategoriesViewController(nibName: "GuideCategoriesViewController", bundle: NSBundle.mainBundle())
                     return controller
                 case "Favorites":
                     self.tabBar.add(text: bookmark.name)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("FavoritesViewController") as FavoritesViewController
                     let controller = FavoritesViewController(nibName: "FavoritesViewController", bundle: NSBundle.mainBundle())
                     return controller
                 case "Search":
                     self.tabBar.add(text: bookmark.name)
-                    //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SearchViewController") as SearchViewController
                     let controller = SearchViewController(nibName: "SearchViewController", bundle: NSBundle.mainBundle())
                     return controller
-                /*
-                case "Guide":
-                    self.tabBar.add(text: bookmark.name)
-                    return GuideCategoriesTableViewController(nibName: "GuideCategoriesTableViewController", bundle: NSBundle.mainBundle())
-                */
                 default:
                     return nil
                 }
@@ -111,58 +100,9 @@ class ContainerViewController: UIViewController {
             self.tabBar.centerTab(tab)
         }
         tabBar.add(text: "Settings")
-        //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
         let controller = SettingsViewController(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
         addChildViewController(controller)
         containerView.add(view: controller.view)
-        /*
-        bookmarks = Bookmark.all()
-        for (index, bookmark) in enumerate(bookmarks) {
-            let controller: UIViewController? = {
-                switch bookmark.name {
-                case "playlist":
-                    //let playlist = SwifTube.Playlist(object: bookmark)
-                    let playlist = bookmark.item as SwifTube.Playlist
-                    self.tabBar.add(item: playlist)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
-                    controller.playlist = playlist
-                    return controller
-                case "channel":
-                    //let channel = SwifTube.Channel(object: bookmark)
-                    let channel = bookmark.item as SwifTube.Channel
-                    self.tabBar.add(item: channel)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
-                    controller.channel = channel
-                    return controller
-                case "Popular":
-                    self.tabBar.add(text: bookmark.name)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PopularViewController") as PopularViewController
-                    return controller
-                case "Favorites":
-                    self.tabBar.add(text: bookmark.name)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("FavoritesViewController") as FavoritesViewController
-                    return controller
-                case "Search":
-                    self.tabBar.add(text: bookmark.name)
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SearchViewController") as SearchViewController
-                    return controller
-                default:
-                    return nil
-                }
-            }()
-            if let controller = controller {
-                self.addChildViewController(controller)
-                self.containerView.add(view: controller.view)
-            }
-        }
-        if let tab = self.tabBar.tabs.first {
-            self.tabBar.centerTab(tab)
-        }
-        self.tabBar.add(text: "Settings")
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("SettingsViewController") as SettingsViewController
-        self.addChildViewController(controller)
-        self.containerView.add(view: controller.view)
-        */
     }
 
     func resetContents() {
@@ -179,9 +119,9 @@ extension ContainerViewController {
 
     // Notification
 
-    func reloadContents(notfication: NSNotification) {
+    func reloadBookmarks(notfication: NSNotification) {
         resetContents()
-        configureContents()
+        loadBookmarks()
         //Async.main {
             self.tabBar.setNeedsLayout()
             self.tabBar.layoutIfNeeded()
@@ -206,14 +146,12 @@ extension ContainerViewController {
                         case "playlist":
                             let playlist = bookmark.item as Playlist
                             self.tabBar.add(item: playlist, index: self.bookmarks.count)
-                            //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
                             let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
                             controller.playlist = playlist
                             return controller
                         case "channel":
                             let channel = bookmark.item as Channel
                             self.tabBar.add(item: channel, index: self.bookmarks.count)
-                            //let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
                             let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
                             controller.channel = channel
                             return controller
@@ -236,40 +174,6 @@ extension ContainerViewController {
                 Alert.error(box.unbox)
             }
         }
-        /*
-        Bookmark.all(skip: bookmarks.count) { (bookmarks, error) -> Void in
-            Logger.debug("Bookmark.all: \(bookmarks.count)")
-            for (index, bookmark) in enumerate(bookmarks) {
-                let controller: UIViewController? = {
-                    switch bookmark.name {
-                    case "playlist":
-                        let playlist = bookmark.item as SwifTube.Playlist
-                        self.tabBar.add(item: playlist, index: self.bookmarks.count)
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("PlaylistViewController") as PlaylistViewController
-                        controller.playlist = playlist
-                        return controller
-                    case "channel":
-                        let channel = bookmark.item as SwifTube.Channel
-                        self.tabBar.add(item: channel, index: self.bookmarks.count)
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ChannelViewController") as ChannelViewController
-                        controller.channel = channel
-                        return controller
-                    default:
-                        return nil
-                    }
-                }()
-                if let controller = controller {
-                    self.addChildViewController(controller)
-                    self.containerView.add(view: controller.view, index: self.bookmarks.count)
-                    self.bookmarks.append(bookmark)
-                }
-            }
-            self.tabBar.setNeedsLayout()
-            self.tabBar.layoutIfNeeded()
-            self.containerView.setNeedsLayout()
-            self.containerView.layoutIfNeeded()
-        }
-        */
     }
 
 }
