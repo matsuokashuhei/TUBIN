@@ -184,37 +184,42 @@ class TabBar: UIView {
 
     func centerTab(tab: Tab) {
         logger.debug("")
+        if scrollView.contentSize.width <= frame.width {
+            scrollView.setContentOffset(CGPointZero, animated: true)
+            return
+        }
 
         func contentOffsetOfTabs(tab: Tab) -> CGPoint {
             let x = Tab.size().width * CGFloat(indexOfTabs(tab)) + Tab.size().width / 2
             return CGPoint(x: x, y: tab.frame.origin.y)
         }
 
-        if scrollView.contentSize.width > frame.width {
-            var offsetOfTabs = contentOffsetOfTabs(tab)
-            let minOffsetX = scrollView.center.x
-            let maxOffsetX = scrollView.contentSize.width - (scrollView.frame.width / 2)
-            logger.verbose("scrollView.contentSize.width: \(scrollView.contentSize.width)")
-            logger.verbose("scrollView.frame.width: \(scrollView.frame.width)")
-            logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x), minOffsetX: \(minOffsetX), maxOffsetX: \(maxOffsetX)")
-            let x: CGFloat = {
-                switch offsetOfTabs.x {
-                case let offsetX where offsetX < minOffsetX:
-                    return 0
-                case let offsetX where offsetX > maxOffsetX:
-                    return self.scrollView.contentSize.width - self.scrollView.frame.width
-                default:
-                    return offsetOfTabs.x - minOffsetX
-                }
-            }()
-            offsetOfTabs.x = x
-            logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x)")
-            scrollView.setContentOffset(offsetOfTabs, animated: true)
-        }
+        var offsetOfTabs = contentOffsetOfTabs(tab)
+        let minOffsetX = scrollView.center.x
+        let maxOffsetX = scrollView.contentSize.width - (scrollView.frame.width / 2)
+        logger.verbose("scrollView.contentSize.width: \(scrollView.contentSize.width)")
+        logger.verbose("scrollView.frame.width: \(scrollView.frame.width)")
+        logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x), minOffsetX: \(minOffsetX), maxOffsetX: \(maxOffsetX)")
+        let x: CGFloat = {
+            switch offsetOfTabs.x {
+            case let offsetX where offsetX < minOffsetX:
+                return 0
+            case let offsetX where offsetX > maxOffsetX:
+                return self.scrollView.contentSize.width - self.scrollView.frame.width
+            default:
+                return offsetOfTabs.x - minOffsetX
+            }
+        }()
+        offsetOfTabs.x = x
+        logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x)")
+        scrollView.setContentOffset(offsetOfTabs, animated: true)
     }
 
     func syncContentOffset(containerView: UIScrollView) {
-        //let containerViewRelatedOffsetX = (containerView.contentOffset.x + containerView.frame.width) / containerView.contentSize.width
+        if scrollView.contentSize.width <= frame.width {
+            scrollView.setContentOffset(CGPointZero, animated: true)
+            return
+        }
         let containerViewRelatedOffsetX = containerView.contentOffset.x / containerView.contentSize.width
         var offsetX = scrollView.contentSize.width * containerViewRelatedOffsetX + (Tab.size().width * 0.5)
         let minOffsetX = scrollView.center.x
