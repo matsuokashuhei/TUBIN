@@ -10,9 +10,12 @@ import UIKit
 
 protocol ContainerViewDelegate {
     func containerView(containerView: ContainerView, indexOfContentViews index: Int)
+    func containerViewDidScroll(scrollView: UIScrollView)
 }
 
 class ContainerView: UIView {
+
+    let logger = XCGLogger.defaultInstance()
 
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
@@ -74,13 +77,15 @@ extension ContainerView: UIScrollViewDelegate {
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.x <= 0 {
+        switch scrollView.contentOffset.x {
+        case let x where x < 0:
             return
-        }
-        // TODO: タブの動きをなめらかにする。
-        let n = (scrollView.contentOffset.x % scrollView.frame.width) / scrollView.frame.width
-        if n != 0 {
-            //Logger.debug("n: \(n)")
+        case let x where x > scrollView.contentSize.width:
+            return
+        case let x where 0 < x && x < scrollView.contentSize.width:
+            delegate?.containerViewDidScroll(scrollView)
+        default:
+            return
         }
     }
 }

@@ -8,7 +8,7 @@
         <!--Root View Controller-->
         <scene sceneID="8hR-tN-y2T">
             <objects>
-                <viewController id="cOC-N2-Udz" customClass="RootViewController" customModule="TUBIN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cOC-N2-Udz" customClass="RootViewController" customModule="TUBIN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2ZW-O1-U9M"/>
                         <viewControllerLayoutGuide type="bottom" id="B19-ds-5w5"/>
@@ -466,7 +466,7 @@
         <!--Container View Controller-->
         <scene sceneID="MN9-hS-0bb">
             <objects>
-                <viewController id="fZj-At-Dj4" customClass="ContainerViewController" customModule="TUBIN" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="fZj-At-Dj4" customClass="ContainerViewController" customModule="TUBIN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xSe-9b-yc2"/>
                         <viewControllerLayoutGuide type="bottom" id="PgK-HD-r6n"/>

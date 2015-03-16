@@ -31,9 +31,17 @@ class ContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // ------------------
         // Bookmarkの取得
+        // ------------------
         loadBookmarks()
+        // ------------------
         // Notificationの設定
+        // ------------------
+        // Device orientation
+        //UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        // Bookmark
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addItemToBookmarks:", name: AddItemToBookmarksNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
     }
@@ -96,16 +104,23 @@ class ContainerViewController: UIViewController {
                 self.containerView.add(view: controller.view)
             }
         }
-        if let tab = self.tabBar.tabs.first {
-            self.tabBar.centerTab(tab)
-        }
         tabBar.add(text: "Settings")
         let controller = SettingsViewController(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
         addChildViewController(controller)
         containerView.add(view: controller.view)
+        if let tab = self.tabBar.tabs.first {
+            //self.tabBar.centerTab(tab)
+            self.tabBar.selectTab(tab)
+        }
     }
 
-    func resetContents() {
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        let index = tabBar.indexOfSelectedTab()
+        containerView.scrollToIndexOfContentViews(index)
+    }
+
+
+    func resetBookmarks() {
         for childViewController in childViewControllers {
             childViewController.removeFromParentViewController()
         }
@@ -120,14 +135,14 @@ extension ContainerViewController {
     // Notification
 
     func reloadBookmarks(notfication: NSNotification) {
-        resetContents()
+        resetBookmarks()
         loadBookmarks()
         //Async.main {
             self.tabBar.setNeedsLayout()
             self.tabBar.layoutIfNeeded()
             self.containerView.setNeedsLayout()
             self.containerView.layoutIfNeeded()
-            self.tabBar.centerTabAtIndex(self.containerView.views.count)
+            self.tabBar.selectTabAtIndex(self.containerView.views.count)
         //}
         SVProgressHUD.showSuccessWithStatus("")
     }
@@ -176,12 +191,33 @@ extension ContainerViewController {
         }
     }
 
+    /*
+    func orientationChanged(notification: NSNotification) {
+        // http://program.station.ez-net.jp/special/handbook/objective-c/uidevice/orientation.asp
+        /*
+        let device = notification.object as UIDevice
+        switch device.orientation {
+        case .Portrait, .PortraitUpsideDown:
+            logger.debug("")
+            let index = tabBar.indexOfSelectedTab()
+            containerView.scrollToIndexOfContentViews(index)
+        default:
+            break
+        }
+        */
+        let index = tabBar.indexOfSelectedTab()
+        containerView.scrollToIndexOfContentViews(index)
+    }
+    */
+
 }
 
 extension ContainerViewController: TabBarDelegate {
 
     func tabBar(tabBar: TabBar, didSelectTabAtIndex index: Int) {
+        containerView.delegate = nil
         containerView.scrollToIndexOfContentViews(index)
+        containerView.delegate = self
     }
 
 }
@@ -189,7 +225,10 @@ extension ContainerViewController: TabBarDelegate {
 extension ContainerViewController: ContainerViewDelegate {
 
     func containerView(containerView: ContainerView, indexOfContentViews index: Int) {
-        tabBar.centerTabAtIndex(index)
+        tabBar.selectTabAtIndex(index)
     }
 
+    func containerViewDidScroll(scrollView: UIScrollView) {
+        tabBar.syncContentOffset(scrollView)
+    }
 }

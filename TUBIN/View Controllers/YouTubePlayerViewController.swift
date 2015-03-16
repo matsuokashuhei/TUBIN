@@ -204,6 +204,8 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func durationAvailable(controller: MPMoviePlayerController) {
         logger.debug("controller.duration: \(controller.duration)")
+        video = player.nowPlaying
+        configure(navigationItem: navigationItem)
         scrubberView.configure(controller.duration)
     }
 

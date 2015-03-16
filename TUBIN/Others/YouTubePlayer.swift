@@ -39,6 +39,7 @@ class YouTubePlayer: NSObject {
                     return
                 }
             }
+            removeObservers()
             stop()
             startPlaying()
         }
@@ -178,25 +179,23 @@ extension YouTubePlayer {
     func durationAvailable(notification: NSNotification) {
         logger.debug("")
         if let player = notification.object as? MPMoviePlayerController {
-            /*
             if isnormal(player.duration) {
                 delegate?.durationAvailable(controller)
             }
-            */
-            delegate?.durationAvailable(controller)
+            //delegate?.durationAvailable(controller)
         }
     }
 
     func readyForDisplay(notification: NSNotification) {
         logger.debug("")
-        if let player = notification.object as? MPMoviePlayerController {
+        if let controller = notification.object as? MPMoviePlayerController {
             delegate?.readyForDisplay(controller)
         }
     }
 
     func loadStateDidChange(notification: NSNotification) {
-        if let player = notification.object as? MPMoviePlayerController {
-            switch player.loadState {
+        if let controller = notification.object as? MPMoviePlayerController {
+            switch controller.loadState {
             case MPMovieLoadState.Unknown:
                 logger.debug("Unknown")
             case MPMovieLoadState.Playable:
@@ -206,12 +205,16 @@ extension YouTubePlayer {
             case MPMovieLoadState.Stalled:
                 logger.debug("Stalled")
             default:
-                logger.debug("\(player.loadState)")
+                logger.debug("\(controller.loadState)")
             }
         }
     }
 
     func playbackDidFinish(notification: NSNotification) {
+        playNextVideo()
+        if let controller = notification.object as? MPMoviePlayerController {
+            delegate?.playbackDidFinish(controller)
+        }
         logger.debug("")
     }
 
