@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -26,6 +26,12 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="oVs-Vh-E7W" secondAttribute="height" multiplier="16:9" id="cbV-sw-WH9"/>
                     </constraints>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="226"/>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="451"/>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPi-Ik-WBO" customClass="ScrubberView" customModule="TUBIN" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="346" width="600" height="35"/>
@@ -54,7 +60,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="4IZ-Wz-6KZ"/>
                         <constraint firstItem="7P1-5H-Pou" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="9" id="4cz-hJ-tzx"/>
@@ -68,6 +74,9 @@
                         <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="leading" secondItem="7P1-5H-Pou" secondAttribute="trailing" constant="8" id="gcD-Vh-cN8"/>
                         <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="3" id="rju-MB-EDN"/>
                     </constraints>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="0.0" y="234" width="400" height="35"/>
+                    </variation>
                     <connections>
                         <outlet property="endTimeLabel" destination="6Tg-68-RX1" id="P51-aM-Nvs"/>
                         <outlet property="slider" destination="1XQ-pE-8ZQ" id="DkQ-WK-5Z4"/>
@@ -77,14 +86,23 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-nq-1jK" userLabel="play">
                     <rect key="frame" x="276" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_play_circle_fill_48px"/>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="176" y="277" width="48" height="48"/>
+                    </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
                     <rect key="frame" x="332" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_next_48px"/>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="232" y="277" width="48" height="48"/>
+                    </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-xZ-A2T" userLabel="previous">
                     <rect key="frame" x="220" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_previous_48px"/>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="120" y="277" width="48" height="48"/>
+                    </variation>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -96,13 +114,39 @@
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="leading" secondItem="PCU-xZ-A2T" secondAttribute="trailing" constant="8" id="J8o-aK-hg4"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="bottom" constant="8" id="Jel-TT-eCA"/>
                 <constraint firstAttribute="trailing" secondItem="oVs-Vh-E7W" secondAttribute="trailing" id="LXV-bb-GnI"/>
+                <constraint firstItem="BPi-Ik-WBO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QhG-dB-Xjr"/>
+                <constraint firstAttribute="centerY" secondItem="Ecd-nq-1jK" secondAttribute="centerY" id="Qsp-oU-b0m"/>
                 <constraint firstItem="oVs-Vh-E7W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RyO-mb-1Lo"/>
                 <constraint firstItem="BPi-Ik-WBO" firstAttribute="top" secondItem="oVs-Vh-E7W" secondAttribute="bottom" constant="8" id="Sx1-D7-ydj"/>
                 <constraint firstItem="PCU-xZ-A2T" firstAttribute="centerY" secondItem="Ecd-nq-1jK" secondAttribute="centerY" id="VXc-HW-3oZ"/>
                 <constraint firstAttribute="centerX" secondItem="Ecd-nq-1jK" secondAttribute="centerX" id="YQA-cq-Cqr"/>
+                <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="iLt-cc-HOb"/>
+                <constraint firstAttribute="bottom" secondItem="BPi-Ik-WBO" secondAttribute="bottom" id="qiK-rU-0Wa"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="centerY" secondItem="htR-39-Q0L" secondAttribute="centerY" id="rtP-Qu-qQd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="QhG-dB-Xjr"/>
+                    <exclude reference="iLt-cc-HOb"/>
+                    <exclude reference="qiK-rU-0Wa"/>
+                    <exclude reference="Qsp-oU-b0m"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact">
+                <mask key="subviews">
+                    <include reference="oVs-Vh-E7W"/>
+                    <include reference="BPi-Ik-WBO"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="QhG-dB-Xjr"/>
+                    <exclude reference="Sx1-D7-ydj"/>
+                    <include reference="iLt-cc-HOb"/>
+                    <include reference="qiK-rU-0Wa"/>
+                    <exclude reference="Jel-TT-eCA"/>
+                    <include reference="Qsp-oU-b0m"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

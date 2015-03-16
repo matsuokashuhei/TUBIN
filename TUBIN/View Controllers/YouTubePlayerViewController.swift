@@ -45,7 +45,16 @@ class YouTubePlayerViewController: UIViewController {
         logger.debug("")
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.None
+        // Device orientation
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+
+        switch UIDevice.currentDevice().orientation {
+        case .Portrait, .PortraitUpsideDown:
+            edgesForExtendedLayout = UIRectEdge.None
+        default:
+            edgesForExtendedLayout = UIRectEdge.Top
+        }
 
         player.nowPlaying = video
         player.playlist = playlist
@@ -66,12 +75,12 @@ class YouTubePlayerViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
         logger.debug("")
         // Notification to Mini player
-        NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
         player.delegate = nil
-        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
+        super.viewDidDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -260,4 +269,28 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
     func seekToSeconds(seconds: Float) {
         player.seekToTime(seconds)
     }
+
+}
+
+extension YouTubePlayerViewController {
+
+    func orientationChanged(notification: NSNotification) {
+        // http://program.station.ez-net.jp/special/handbook/objective-c/uidevice/orientation.asp
+        let device = notification.object as UIDevice
+        switch device.orientation {
+        case .Portrait, .PortraitUpsideDown:
+            logger.debug(".Portrait, .PortraitUpsideDown")
+            edgesForExtendedLayout = UIRectEdge.Top
+        case .LandscapeLeft, .LandscapeRight:
+            logger.debug(".LandscapeLeft, .LandscapeRight")
+            edgesForExtendedLayout = UIRectEdge.None
+        default:
+            break
+        }
+        view.setNeedsUpdateConstraints()
+        view.updateConstraintsIfNeeded()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+
 }
