@@ -23,11 +23,12 @@ class Tab: UIView {
         didSet {
             if let selected = selected {
                 if selected {
-                    label.backgroundColor = tintColor
+                    label.backgroundColor = tintColor.colorWithAlphaComponent(1.0)
+                    //label.textColor = tintColor.colorWithAlphaComponent(0.0)
                     label.textColor = UIColor.whiteColor()
                 } else {
-                    label.backgroundColor = UIColor.whiteColor()
-                    label.textColor = tintColor
+                    label.backgroundColor = tintColor.colorWithAlphaComponent(0.0)
+                    label.textColor = tintColor.colorWithAlphaComponent(1.0)
                 }
             }
         }
@@ -82,7 +83,7 @@ class Tab: UIView {
         label.numberOfLines = 3
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         label.font = UIFont(name: "Avenir Next", size: 10)
-        label.textColor = tintColor
+        //label.textColor = tintColor
         label.userInteractionEnabled = true
         //label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapTab:"))
     }
@@ -168,10 +169,9 @@ class TabBar: UIView {
     }
 
     func tabTapped(sender: UITapGestureRecognizer) {
-        var tab = sender.view as Tab
+        let tab = sender.view as Tab
         selectTab(tab)
-        let index = NSArray(array: tabs).indexOfObject(tab)
-        delegate?.tabBar(self, didSelectTabAtIndex: index)
+        delegate?.tabBar(self, didSelectTabAtIndex: indexOfTabs(tab))
     }
 
     func selectTab(tab: Tab) {
@@ -216,6 +216,7 @@ class TabBar: UIView {
     }
 
     func syncContentOffset(containerView: UIScrollView) {
+        syncSelectedTab(containerView)
         if scrollView.contentSize.width <= frame.width {
             scrollView.setContentOffset(CGPointZero, animated: true)
             return
@@ -237,6 +238,33 @@ class TabBar: UIView {
         logger.debug("containerViewRelatedOffsetX: \(containerViewRelatedOffsetX), offsetX: \(offsetX), x: \(x)")
         offsetX = x
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+    }
+
+    func syncSelectedTab(containerView: UIScrollView) {
+        let offset = containerView.contentOffset.x / containerView.frame.width
+        let left = Int(offset)
+        let right = left + 1
+        let alpha = offset - CGFloat(left)
+        logger.debug("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
+        if offset > 0 {
+            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
+            if alpha > 0.5 {
+                tabs[left].label.textColor = tintColor.colorWithAlphaComponent(alpha)
+            } else {
+                tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 - alpha)
+            }
+            if right < tabs.count {
+                tabs[right].label.backgroundColor = tintColor.colorWithAlphaComponent(alpha)
+                if alpha < 0.5 {
+                    tabs[right].label.textColor = tintColor.colorWithAlphaComponent(1 - alpha)
+                } else {
+                    tabs[right].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(alpha)
+                }
+            }
+        } else {
+            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
+            tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 + alpha)
+        }
     }
 
     func selectTabAtIndex(index: Int) {

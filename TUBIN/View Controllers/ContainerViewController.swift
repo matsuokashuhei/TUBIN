@@ -71,7 +71,7 @@ class ContainerViewController: UIViewController {
                     self.tabBar.add(item: playlist)
                     let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
                     controller.playlist = playlist
-                    controller.search()
+                    //controller.search()
                     return controller
                 case "channel":
                     let channel = bookmark.item as Channel
