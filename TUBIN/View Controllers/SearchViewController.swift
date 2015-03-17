@@ -48,6 +48,8 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        edgesForExtendedLayout = UIRectEdge.None
+
         let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
         addChildViewController(videosViewController)
         videosView.addSubview(videosViewController.view)

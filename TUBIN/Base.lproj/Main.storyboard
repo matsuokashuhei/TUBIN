@@ -478,7 +478,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7F-hy-KfM" customClass="TabBar" customModule="TUBIN" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Jl-uT8">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Jl-uT8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     </scrollView>
                                 </subviews>
@@ -497,7 +497,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBN-6W-oRe" customClass="ContainerView" customModule="TUBIN" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="600" height="452"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NJR-he-YK8">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJR-he-YK8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="452"/>
                                     </scrollView>
                                 </subviews>
