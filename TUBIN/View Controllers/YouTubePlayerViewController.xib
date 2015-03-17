@@ -148,6 +148,7 @@
                 <mask key="subviews">
                     <include reference="oVs-Vh-E7W"/>
                     <include reference="BPi-Ik-WBO"/>
+                    <exclude reference="Ngb-u7-E1o"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="QhG-dB-Xjr"/>
