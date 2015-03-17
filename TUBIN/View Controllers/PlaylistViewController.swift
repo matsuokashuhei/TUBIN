@@ -20,10 +20,13 @@ class PlaylistViewController: ItemsViewController {
         }
     }
 
+    @IBOutlet var channelView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlayerDidPrepareToPlay:", name: VideoPlayerDidPrepareToPlayNotification, object: nil)
         search()
+        configure(channelView: channelView)
     }
 
     override func configure(#navigationItem: UINavigationItem) {
@@ -52,6 +55,15 @@ class PlaylistViewController: ItemsViewController {
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
+    }
+
+    func configure(#channelView: UIView) {
+        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        controller.search(parameters: ["channelId": playlist.channelId])
+        controller.navigatable = navigatable
+        controller.view.frame = channelView.bounds
+        addChildViewController(controller)
+        channelView.addSubview(controller.view)
     }
 
     // MARK: - Navigation

@@ -26,7 +26,6 @@ class GuideCategoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         search()
     }
 

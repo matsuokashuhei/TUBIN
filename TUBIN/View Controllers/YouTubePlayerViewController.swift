@@ -35,11 +35,14 @@ class YouTubePlayerViewController: UIViewController {
             nextButton.addTarget(self, action: "nextButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
+    @IBOutlet var channelView: UIView!
 
     var player = YouTubePlayer.sharedInstance
 
     var video: Video!
     var playlist: [Video]!
+
+    let navigatable = true
 
     override func viewDidLoad() {
         logger.debug("")
@@ -58,27 +61,40 @@ class YouTubePlayerViewController: UIViewController {
 
         player.nowPlaying = video
         player.playlist = playlist
+
+        configure(channelView: channelView)
+    }
+
+    override func viewWillLayoutSubviews() {
+        logger.debug("")
+        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
     }
 
     override func viewWillAppear(animated: Bool) {
         logger.debug("")
-        player.delegate = self
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        // Navigation
+        navigationController?.setNavigationBarHidden(!navigatable, animated: true)
         configure(navigationItem: navigationItem)
+        // YouTube player
+        player.delegate = self
         if player.isPlaying() && player.nowPlaying.id == video.id {
             scrubberView.sync(player.controller)
-            addPlayerView(player.controller)
+            configure(player.controller)
             playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
         } else {
+            player.nowPlaying = video
             playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
         }
         super.viewWillAppear(animated)
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        player.delegate = nil
+    }
+
     override func viewDidDisappear(animated: Bool) {
         logger.debug("")
         // Notification to Mini player
-        player.delegate = nil
         NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
         super.viewDidDisappear(animated)
     }
@@ -108,7 +124,16 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    func configure(#channelView: UIView) {
+        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        controller.search(parameters: ["channelId": video.channelId])
+        controller.navigatable = navigatable
+        controller.view.frame = channelView.bounds
+        addChildViewController(controller)
+        channelView.addSubview(controller.view)
+    }
     // MARK: - Actions
+
     func playButtonTapped(button: UIButton) {
         if player.isPlaying() {
             pause()
@@ -144,7 +169,7 @@ class YouTubePlayerViewController: UIViewController {
         player.pause()
     }
 
-    func addPlayerView(controller: MPMoviePlayerController) {
+    func configure(controller: MPMoviePlayerController) {
         if videoView.subviews.count > 0 {
             (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
                 if let subview = object as? UIView {
@@ -224,7 +249,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
-        addPlayerView(controller)
+        configure(controller)
         play()
     }
 

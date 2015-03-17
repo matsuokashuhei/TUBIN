@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YouTubePlayerViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
+                <outlet property="channelView" destination="Ngb-u7-E1o" id="zLF-eQ-qCv"/>
                 <outlet property="nextButton" destination="htR-39-Q0L" id="V5B-sX-ijD"/>
                 <outlet property="playButton" destination="Ecd-nq-1jK" id="6rt-bF-2IL"/>
                 <outlet property="previousButton" destination="PCU-xZ-A2T" id="bpy-ig-5Qg"/>
@@ -104,6 +105,13 @@
                         <rect key="frame" x="120" y="277" width="48" height="48"/>
                     </variation>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngb-u7-E1o">
+                    <rect key="frame" x="0.0" y="494" width="600" height="106"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="106" id="fMd-Qh-jIF"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -114,12 +122,15 @@
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="leading" secondItem="PCU-xZ-A2T" secondAttribute="trailing" constant="8" id="J8o-aK-hg4"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="bottom" constant="8" id="Jel-TT-eCA"/>
                 <constraint firstAttribute="trailing" secondItem="oVs-Vh-E7W" secondAttribute="trailing" id="LXV-bb-GnI"/>
+                <constraint firstItem="Ngb-u7-E1o" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="McX-sE-jJo"/>
                 <constraint firstItem="BPi-Ik-WBO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QhG-dB-Xjr"/>
                 <constraint firstAttribute="centerY" secondItem="Ecd-nq-1jK" secondAttribute="centerY" id="Qsp-oU-b0m"/>
                 <constraint firstItem="oVs-Vh-E7W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RyO-mb-1Lo"/>
                 <constraint firstItem="BPi-Ik-WBO" firstAttribute="top" secondItem="oVs-Vh-E7W" secondAttribute="bottom" constant="8" id="Sx1-D7-ydj"/>
                 <constraint firstItem="PCU-xZ-A2T" firstAttribute="centerY" secondItem="Ecd-nq-1jK" secondAttribute="centerY" id="VXc-HW-3oZ"/>
+                <constraint firstAttribute="trailing" secondItem="Ngb-u7-E1o" secondAttribute="trailing" id="WDh-bA-btk"/>
                 <constraint firstAttribute="centerX" secondItem="Ecd-nq-1jK" secondAttribute="centerX" id="YQA-cq-Cqr"/>
+                <constraint firstAttribute="bottom" secondItem="Ngb-u7-E1o" secondAttribute="bottom" id="daK-df-bbA"/>
                 <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="iLt-cc-HOb"/>
                 <constraint firstAttribute="bottom" secondItem="BPi-Ik-WBO" secondAttribute="bottom" id="qiK-rU-0Wa"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="centerY" secondItem="htR-39-Q0L" secondAttribute="centerY" id="rtP-Qu-qQd"/>
