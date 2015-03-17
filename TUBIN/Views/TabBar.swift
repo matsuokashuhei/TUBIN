@@ -23,12 +23,19 @@ class Tab: UIView {
         didSet {
             if let selected = selected {
                 if selected {
-                    label.backgroundColor = tintColor.colorWithAlphaComponent(1.0)
-                    //label.textColor = tintColor.colorWithAlphaComponent(0.0)
-                    label.textColor = UIColor.whiteColor()
+                    UIView.animateWithDuration(0.5) {
+                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
+                        self.label.textColor = UIColor.whiteColor()
+                    }
+//                    label.backgroundColor = tintColor.colorWithAlphaComponent(1.0)
+//                    label.textColor = UIColor.whiteColor()
                 } else {
-                    label.backgroundColor = tintColor.colorWithAlphaComponent(0.0)
-                    label.textColor = tintColor.colorWithAlphaComponent(1.0)
+                    UIView.animateWithDuration(0.3) {
+                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
+                        self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
+                    }
+//                    label.backgroundColor = tintColor.colorWithAlphaComponent(0.0)
+//                    label.textColor = tintColor.colorWithAlphaComponent(1.0)
                 }
             }
         }
@@ -116,8 +123,6 @@ class TabBar: UIView {
     */
     let logger = XCGLogger.defaultInstance()
 
-    //let tabSize = CGSize(width: 80, height: 44)
-
     @IBOutlet weak var scrollView: UIScrollView!
 
     var tabs: [Tab] = []
@@ -137,15 +142,10 @@ class TabBar: UIView {
             tab.frame.origin.x = tab.frame.size.width * CGFloat(index)
             tab.frame.origin.y = 0
         }
-        selectTab(selectedTab())
+        let indexOfSelectTab = indexOfSelectedTab()
+        selectTabAtIndex(indexOfSelectTab)
+        delegate?.tabBar(self, didSelectTabAtIndex: indexOfSelectTab)
     }
-
-    /*
-    override func updateConstraints() {
-        super.updateConstraints()
-        layoutSubviews()
-    }
-    */
 
     func add(#item: Item) {
         let tab = Tab(item: item)
@@ -180,6 +180,11 @@ class TabBar: UIView {
         }
         tab.selected = true
         centerTab(tab)
+    }
+
+    func selectTabAtIndex(index: Int) {
+        let tab = tabAtIndex(index)
+        selectTab(tab)
     }
 
     func centerTab(tab: Tab) {
@@ -267,18 +272,6 @@ class TabBar: UIView {
         }
     }
 
-    func selectTabAtIndex(index: Int) {
-        let tab = tabAtIndex(index)
-        selectTab(tab)
-    }
-
-    func clearTabs() {
-        for subview in scrollView.subviews {
-            subview.removeFromSuperview()
-        }
-        tabs.removeAll(keepCapacity: false)
-    }
-
     func tabAtIndex(index: Int) -> Tab {
         if index < 0 {
             return tabs.first!
@@ -287,6 +280,10 @@ class TabBar: UIView {
             return tabs[index]
         }
         return tabs.last!
+    }
+
+    func selectedTab() -> Tab {
+        return tabAtIndex(indexOfSelectedTab())
     }
 
     func indexOfTabs(tab: Tab) -> Int {
@@ -304,8 +301,11 @@ class TabBar: UIView {
         return 0
     }
 
-    func selectedTab() -> Tab {
-        return tabAtIndex(indexOfSelectedTab())
+    func clearTabs() {
+        for subview in scrollView.subviews {
+            subview.removeFromSuperview()
+        }
+        tabs.removeAll(keepCapacity: false)
     }
 
 }
