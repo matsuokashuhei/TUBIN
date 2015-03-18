@@ -51,13 +51,7 @@ class YouTubePlayerViewController: UIViewController {
         // Device orientation
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-
-        switch UIDevice.currentDevice().orientation {
-        case .Portrait, .PortraitUpsideDown:
-            edgesForExtendedLayout = UIRectEdge.None
-        default:
-            edgesForExtendedLayout = UIRectEdge.Top
-        }
+        configureRectEdge()
 
         player.nowPlaying = video
         player.playlist = playlist
@@ -70,8 +64,15 @@ class YouTubePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
     }
 
+    override func viewWillLayoutSubviews() {
+        logger.debug("")
+    }
+    override func viewDidLayoutSubviews() {
+        logger.debug("")
+    }
     override func viewWillAppear(animated: Bool) {
         logger.debug("")
+        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // Navigation
         navigationController?.setNavigationBarHidden(!navigatable, animated: true)
         configure(navigationItem: navigationItem)
@@ -300,14 +301,22 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
 extension YouTubePlayerViewController {
 
     func orientationChanged(notification: NSNotification) {
+        logger.debug("")
         // http://program.station.ez-net.jp/special/handbook/objective-c/uidevice/orientation.asp
         let device = notification.object as UIDevice
-        switch device.orientation {
-        case .Portrait, .PortraitUpsideDown:
-            logger.debug(".Portrait, .PortraitUpsideDown")
-            edgesForExtendedLayout = UIRectEdge.Top
-        case .LandscapeLeft, .LandscapeRight:
-            logger.debug(".LandscapeLeft, .LandscapeRight")
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            switch device.orientation {
+            case .Portrait, .PortraitUpsideDown:
+                logger.debug(".Portrait, .PortraitUpsideDown")
+                edgesForExtendedLayout = UIRectEdge.Top
+            case .LandscapeLeft, .LandscapeRight:
+                logger.debug(".LandscapeLeft, .LandscapeRight")
+                edgesForExtendedLayout = UIRectEdge.None
+            default:
+                break
+            }
+        case .Pad:
             edgesForExtendedLayout = UIRectEdge.None
         default:
             break
