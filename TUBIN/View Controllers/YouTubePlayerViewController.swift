@@ -48,10 +48,12 @@ class YouTubePlayerViewController: UIViewController {
         logger.debug("")
         super.viewDidLoad()
 
-        // Device orientation
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        configureRectEdge()
+        edgesForExtendedLayout = UIRectEdge.None
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
+                edgesForExtendedLayout = UIRectEdge.Top
+            }
+        }
 
         player.nowPlaying = video
         player.playlist = playlist
@@ -61,15 +63,18 @@ class YouTubePlayerViewController: UIViewController {
 
     override func viewWillLayoutSubviews() {
         logger.debug("")
-        NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
+        edgesForExtendedLayout = UIRectEdge.None
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
+                edgesForExtendedLayout = UIRectEdge.Top
+            }
+        }
     }
 
-    override func viewWillLayoutSubviews() {
-        logger.debug("")
-    }
     override func viewDidLayoutSubviews() {
         logger.debug("")
     }
+
     override func viewWillAppear(animated: Bool) {
         logger.debug("")
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
@@ -133,6 +138,27 @@ class YouTubePlayerViewController: UIViewController {
         addChildViewController(controller)
         channelView.addSubview(controller.view)
     }
+
+    func configure(controller: MPMoviePlayerController) {
+        if videoView.subviews.count > 0 {
+            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+                if let subview = object as? UIView {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        videoView.addSubview(controller.view)
+        controller.view.frame = videoView.bounds
+        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        videoView.addConstraints([
+            NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
+        ])
+        //controller.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "videoViewTapped"))
+    }
+
     // MARK: - Actions
 
     func playButtonTapped(button: UIButton) {
@@ -170,71 +196,32 @@ class YouTubePlayerViewController: UIViewController {
         player.pause()
     }
 
-    func configure(controller: MPMoviePlayerController) {
-        if videoView.subviews.count > 0 {
-            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
-                if let subview = object as? UIView {
-                    subview.removeFromSuperview()
-                }
-            }
-        }
-        videoView.addSubview(controller.view)
-        controller.view.frame = videoView.bounds
-        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        videoView.addConstraints([
-            NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
-        ])
-    }
-
-
-    // MARK: Actions
-
-    func addVideoToFavorite() {
-
-        //navigationItem.rightBarButtonItem?.enabled = true
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-        indicator.color = view.tintColor
-        indicator.startAnimating()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
-
-        Favorite.add(video) { (result) in
-            indicator.stopAnimating()
-            switch result {
-            case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
-                Async.main {
-                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
-                    self.navigationItem.rightBarButtonItem = favoriteButton
-                }
-            case .Failure(let box):
-                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
-                self.navigationItem.rightBarButtonItem = favoriteButton
-                Alert.error(box.unbox)
-            }
+    /*
+    var showOnlyVideoView: Bool = false {
+        didSet {
+            navigationController?.setNavigationBarHidden(showOnlyVideoView, animated: true)
+            previousButton.hidden = showOnlyVideoView
+            playButton.hidden = showOnlyVideoView
+            nextButton.hidden = showOnlyVideoView
         }
     }
 
-    func removeFromFavorite() {
-        navigationItem.rightBarButtonItem?.enabled = true
-        Favorite.remove(video) { (result) in
-            self.navigationItem.rightBarButtonItem?.enabled = false
-            switch result {
-            case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ReloadFavoritesNotification, object: self))
-                Async.main {
-                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
-                    self.navigationItem.rightBarButtonItem = favoriteButton
-                }
-            case .Failure(let box):
-                Alert.error(box.unbox)
-            }
-        }
+    func videoViewTapped() {
+        logger.debug("showOnlyVideoView: \(showOnlyVideoView)")
+        showOnlyVideoView = !showOnlyVideoView
     }
+
+    func showOnlyVideoView(showOnly: Bool) {
+        navigationController?.setNavigationBarHidden(showOnly, animated: true)
+        previousButton.hidden = showOnly
+        playButton.hidden = showOnly
+        nextButton.hidden = showOnly
+    }
+    */
+
 }
 
+// MARK: - YouTubePlayerDelegate
 extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func durationAvailable(controller: MPMoviePlayerController) {
@@ -277,7 +264,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
 }
-
+// MARK: - ScrubberViewDelegate
 extension YouTubePlayerViewController: ScrubberViewDelegate {
 
     func beginSeek(slider: UISlider) {
@@ -298,33 +285,47 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
 
 }
 
+// MARK: - Parse
 extension YouTubePlayerViewController {
 
-    func orientationChanged(notification: NSNotification) {
-        logger.debug("")
-        // http://program.station.ez-net.jp/special/handbook/objective-c/uidevice/orientation.asp
-        let device = notification.object as UIDevice
-        switch UIDevice.currentDevice().userInterfaceIdiom {
-        case .Phone:
-            switch device.orientation {
-            case .Portrait, .PortraitUpsideDown:
-                logger.debug(".Portrait, .PortraitUpsideDown")
-                edgesForExtendedLayout = UIRectEdge.Top
-            case .LandscapeLeft, .LandscapeRight:
-                logger.debug(".LandscapeLeft, .LandscapeRight")
-                edgesForExtendedLayout = UIRectEdge.None
-            default:
-                break
+    func addVideoToFavorite() {
+
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+        indicator.color = view.tintColor
+        indicator.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
+
+        Favorite.add(video) { (result) in
+            indicator.stopAnimating()
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
+                Async.main {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
+            case .Failure(let box):
+                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                self.navigationItem.rightBarButtonItem = favoriteButton
+                Alert.error(box.unbox)
             }
-        case .Pad:
-            edgesForExtendedLayout = UIRectEdge.None
-        default:
-            break
         }
-        view.setNeedsUpdateConstraints()
-        view.updateConstraintsIfNeeded()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
     }
 
+    func removeFromFavorite() {
+        navigationItem.rightBarButtonItem?.enabled = true
+        Favorite.remove(video) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: ReloadFavoritesNotification, object: self))
+                Async.main {
+                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
+            case .Failure(let box):
+                Alert.error(box.unbox)
+            }
+        }
+    }
 }
