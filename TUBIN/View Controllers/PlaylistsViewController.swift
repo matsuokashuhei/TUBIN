@@ -12,6 +12,8 @@ import LlamaKit
 
 class PlaylistsViewController: ItemsViewController {
 
+    var channel: Channel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = UIRectEdge.None
@@ -26,18 +28,6 @@ class PlaylistsViewController: ItemsViewController {
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "PlaylistTableViewCell", bundle: nil), forCellReuseIdentifier: "PlaylistTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
-    }
-
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showPlaylist" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let destinationViewController = segue.destinationViewController as PlaylistViewController
-                destinationViewController.playlist = items[indexPath.row] as Playlist
-                destinationViewController.navigatable = true
-            }
-        }
     }
 
     // MARK: - YouTube search
@@ -89,9 +79,25 @@ extension PlaylistsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
         controller.playlist = items[indexPath.row] as Playlist
+        controller.channel = channel
         controller.navigatable = true
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
     }
+}
+
+// MARK: - Navigation
+extension PlaylistsViewController {
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showPlaylist" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                let destinationViewController = segue.destinationViewController as PlaylistViewController
+                destinationViewController.playlist = items[indexPath.row] as Playlist
+                destinationViewController.navigatable = true
+            }
+        }
+    }
+
 }

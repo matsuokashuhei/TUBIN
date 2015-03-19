@@ -14,13 +14,15 @@ class PlaylistViewController: ItemsViewController {
 
     let videoPlayer = VideoPlayer.sharedInstance
 
+    var channel: Channel?
+
     var playlist: Playlist! {
         didSet {
             parameters = ["playlistId": playlist.id]
         }
     }
 
-    @IBOutlet var channelView: UIView!
+    @IBOutlet var channelView: ChannelView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,13 @@ class PlaylistViewController: ItemsViewController {
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
-    func configure(#channelView: UIView) {
+    func configure(#channelView: ChannelView) {
+        if let channel = channel {
+            if channel.id == playlist.channelId {
+                channelView.height.constant = 0
+                return
+            }
+        }
         let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
         controller.search(parameters: ["channelId": playlist.channelId])
         controller.navigatable = navigatable
@@ -162,6 +170,7 @@ extension PlaylistViewController: UITableViewDelegate {
         let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
         controller.video = items[indexPath.row] as Video
         controller.playlist = items as [Video]
+        controller.channel = channel
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }

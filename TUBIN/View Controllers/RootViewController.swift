@@ -41,6 +41,8 @@ class RootViewController: UIViewController {
 
     func hideMiniPlayer(notification: NSNotification) {
         miniPlayerView.hide()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
 
 }

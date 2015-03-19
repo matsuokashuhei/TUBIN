@@ -35,10 +35,11 @@ class YouTubePlayerViewController: UIViewController {
             nextButton.addTarget(self, action: "nextButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var channelView: UIView!
+    @IBOutlet var channelView: ChannelView!
 
     var player = YouTubePlayer.sharedInstance
 
+    var channel: Channel?
     var video: Video!
     var playlist: [Video]!
 
@@ -129,7 +130,13 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
-    func configure(#channelView: UIView) {
+    func configure(#channelView: ChannelView) {
+        if let channel = channel {
+            if channel.id == video.channelId {
+                channelView.height.constant = 0
+                return
+            }
+        }
         let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
         controller.search(parameters: ["channelId": video.channelId])
         controller.navigatable = navigatable

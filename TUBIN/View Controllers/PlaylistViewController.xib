@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaylistViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
-                <outlet property="channelView" destination="isA-Ow-nh3" id="nzl-EJ-n87"/>
+                <outlet property="channelView" destination="isA-Ow-nh3" id="Bnc-U0-iGh"/>
                 <outlet property="tableView" destination="9Hm-nI-cuk" id="YjE-d8-lIF"/>
                 <outlet property="view" destination="iN0-l3-epB" id="xcc-Do-qbd"/>
             </connections>
@@ -20,12 +20,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="494"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isA-Ow-nh3">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isA-Ow-nh3" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="494" width="600" height="106"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="106" id="0uD-Xl-8Ta"/>
                     </constraints>
+                    <connections>
+                        <outlet property="height" destination="0uD-Xl-8Ta" id="x0B-lS-4hm"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

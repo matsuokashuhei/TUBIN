@@ -12,6 +12,8 @@ import LlamaKit
 
 class VideosViewController: ItemsViewController {
 
+    var channel: Channel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = UIRectEdge.None
@@ -91,6 +93,7 @@ extension VideosViewController: UITableViewDelegate {
         let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
         controller.video = items[indexPath.row] as Video
         controller.playlist = items as [Video]
+        controller.channel = channel
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
