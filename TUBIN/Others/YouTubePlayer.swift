@@ -202,8 +202,10 @@ extension YouTubePlayer {
                 logger.debug("Playable")
             case MPMovieLoadState.PlaythroughOK:
                 logger.debug("PlaythroughOK")
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             case MPMovieLoadState.Stalled:
                 logger.debug("Stalled")
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             default:
                 logger.debug("\(controller.loadState)")
             }
