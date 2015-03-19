@@ -65,6 +65,17 @@ class PlaylistViewController: ItemsViewController {
                 channelView.height.constant = 0
                 return
             }
+        } else {
+            YouTubeKit.search(parameters: ["channelId": playlist.channelId]) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
+                switch result {
+                case .Success(let box):
+                    if let channel = box.unbox.items.first {
+                       self.channel = channel
+                    }
+                case .Failure(let box):
+                    break
+                }
+            }
         }
         let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
         controller.search(parameters: ["channelId": playlist.channelId])
