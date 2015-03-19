@@ -60,21 +60,12 @@ class YouTubePlayerViewController: UIViewController {
             }
         }
 
-        // UIDeviceOrientationDidChangeNotification
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: UIDevice.currentDevice())
-
         super.viewDidLoad()
     }
 
-    override func viewWillLayoutSubviews() {
-        logger.debug("")
-        edgesForExtendedLayout = UIRectEdge.None
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
-                edgesForExtendedLayout = UIRectEdge.Top
-            }
-        }
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        configure(UIDevice.currentDevice().orientation)
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
     }
 
     override func viewDidLayoutSubviews() {
@@ -87,6 +78,8 @@ class YouTubePlayerViewController: UIViewController {
         // Navigation
         navigationController?.setNavigationBarHidden(!navigatable, animated: true)
         configure(navigationItem: navigationItem)
+        // Trait
+        configure(UIDevice.currentDevice().orientation)
         // YouTube player
         player.delegate = self
         if player.isPlaying() && player.nowPlaying.id == video.id {
@@ -97,7 +90,7 @@ class YouTubePlayerViewController: UIViewController {
             player.nowPlaying = video
             playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
         }
-        showOnlyVideoView = false
+        showPlayerController()
         super.viewWillAppear(animated)
     }
 
@@ -114,7 +107,6 @@ class YouTubePlayerViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func configure(#navigationItem: UINavigationItem) {
@@ -171,6 +163,19 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    func configure(orientation: UIDeviceOrientation) {
+        edgesForExtendedLayout = UIRectEdge.None
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            // iPhone
+            if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
+                // Portait
+                showPlayerController()
+            } else {
+                edgesForExtendedLayout = UIRectEdge.Top
+            }
+        }
+    }
+
     // MARK: - Actions
 
     func playButtonTapped(button: UIButton) {
@@ -202,27 +207,18 @@ class YouTubePlayerViewController: UIViewController {
 
     func play() {
         player.play()
-        hidePlayerController(delay: 3.0)
+        hidePlayerController()
     }
 
     func pause() {
         player.pause()
     }
 
-    var showOnlyVideoView: Bool = false {
-        didSet {
-            if showOnlyVideoView {
-                hidePlayerController()
-            } else {
-                showPlayerController()
-            }
-        }
-    }
-
     func videoViewTapped() {
-        logger.debug("showOnlyVideoView: \(showOnlyVideoView)")
-        if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
-            showOnlyVideoView = !showOnlyVideoView
+        if navigationController!.navigationBarHidden {
+            showPlayerController()
+        } else{
+            hidePlayerController()
         }
     }
 
@@ -234,7 +230,7 @@ class YouTubePlayerViewController: UIViewController {
             view.alpha = alpha
             view.hidden = false
         }
-        hidePlayerController(delay: 3.0)
+        //hidePlayerController(delay: 3.0)
         /*
         if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
             let delay = UInt64(3.0) * NSEC_PER_SEC
@@ -246,8 +242,8 @@ class YouTubePlayerViewController: UIViewController {
         */
     }
 
-    func hidePlayerController(delay: Double = 0) {
-        let delay = UInt64(3.0) * NSEC_PER_SEC
+    func hidePlayerController() {
+        let delay = UInt64(0.5) * NSEC_PER_SEC
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) { () in
             if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
@@ -256,7 +252,7 @@ class YouTubePlayerViewController: UIViewController {
             if self.player.isPlaying() == false {
                 return
             }
-            let duration = 0.5
+            let duration = 1.0
             let alpha = CGFloat(0)
             UIView.animateWithDuration(duration, animations: { () -> Void in
                 self.navigationController?.navigationBar.alpha = alpha
@@ -264,7 +260,7 @@ class YouTubePlayerViewController: UIViewController {
                     view.alpha = alpha
                 }
             }) { (finished) in
-                self.navigationController?.setNavigationBarHidden(self.showOnlyVideoView, animated: false)
+                self.navigationController?.setNavigationBarHidden(true, animated: false)
                 for view in [self.previousButton, self.playButton, self.nextButton, self.scrubberView] as [UIView] {
                     view.hidden = true
                 }
@@ -273,7 +269,6 @@ class YouTubePlayerViewController: UIViewController {
     }
 
 }
-
 
 // MARK: - UIGestureRecognizerDelegate
 extension YouTubePlayerViewController: UIGestureRecognizerDelegate {
@@ -331,6 +326,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
 }
+
 // MARK: - ScrubberViewDelegate
 extension YouTubePlayerViewController: ScrubberViewDelegate {
 
@@ -348,28 +344,6 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
 
     func seekToSeconds(seconds: Float) {
         player.seekToTime(seconds)
-    }
-
-}
-
-// MARK: - Notifications
-extension YouTubePlayerViewController {
-
-    func orientationChanged(notification: NSNotification) {
-        showPlayerController()
-        /*
-        let device = notification.object as UIDevice
-
-        if UIDeviceOrientationIsLandscape(device.orientation) {
-            // 横向きの場合
-            if showOnlyVideoView == false {
-                // プレイヤーコントローラーが出ていたら隠す。(縦向きでは必ずでるから、出ているはず。)
-                showOnlyVideoView = false
-            }
-        } else {
-            showPlayerController()
-        }
-        */
     }
 
 }
