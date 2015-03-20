@@ -16,7 +16,6 @@ class PlaylistsViewController: ItemsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = UIRectEdge.None
     }
 
     override func didReceiveMemoryWarning() {

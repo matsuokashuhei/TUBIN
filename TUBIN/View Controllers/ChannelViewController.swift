@@ -46,7 +46,7 @@ class ChannelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.None
+        edgesForExtendedLayout = .None
 
         let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
         videosViewController.parameters = parameters
@@ -54,6 +54,7 @@ class ChannelViewController: UIViewController {
         videosViewController.channel = channel
         addChildViewController(videosViewController)
         videosView.addSubview(videosViewController.view)
+        videosViewController.view.frame = videosView.bounds
 
         let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
         playlistsViewController.parameters = parameters
@@ -61,6 +62,7 @@ class ChannelViewController: UIViewController {
         playlistsViewController.channel = channel
         addChildViewController(playlistsViewController)
         playlistsView.addSubview(playlistsViewController.view)
+        playlistsViewController.view.frame = playlistsView.bounds
 
         containerViews = [videosView, playlistsView]
 

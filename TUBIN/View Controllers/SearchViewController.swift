@@ -48,19 +48,20 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        edgesForExtendedLayout = UIRectEdge.None
-
         let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
         addChildViewController(videosViewController)
         videosView.addSubview(videosViewController.view)
+        videosViewController.view.frame = videosView.bounds
 
         let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
         addChildViewController(playlistsViewController)
         playlistsView.addSubview(playlistsViewController.view)
+        playlistsViewController.view.frame = playlistsView.bounds
 
         let channelsViewController = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
         addChildViewController(channelsViewController)
         channelsView.addSubview(channelsViewController.view)
+        channelsViewController.view.frame = channelsView.bounds
 
         containerViews = [videosView, playlistsView, channelsView]
         configure(containerViews: containerViews)
