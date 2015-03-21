@@ -6,7 +6,8 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 
-import SVProgressHUD
+import PKHUD
+import TAOverlay
 
 class Spinner {
 
@@ -28,22 +29,22 @@ class Spinner {
     }
 
     func configure() {
-        // SVProgressHUD
-        SVProgressHUD.setBackgroundColor(UIColor.clearColor())
-        SVProgressHUD.setForegroundColor(UIColor.redColor())
-        SVProgressHUD.setRingThickness(4)
-        SVProgressHUD.setFont(UIFont(name: "AvenirNext-Regular", size: 15.0)!)
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Clear)
+        // PKHUD
+        HUDController.sharedController.dimsBackground = false
+        HUDController.sharedController.userInteractionOnUnderlyingViewsEnabled = false
     }
 
     func show() {
         configure()
-        SVProgressHUD.show()
+        // PKHUD
+        HUDController.sharedController.contentView = HUDContentView.SystemActivityIndicatorView()
+        HUDController.sharedController.show()
     }
 
     func dissmiss() {
+        // PKHUD
         configure()
-        SVProgressHUD.dismiss()
+        HUDController.sharedController.hide()
     }
 
 }
