@@ -38,9 +38,6 @@ class ContainerViewController: UIViewController {
         // ------------------
         // Notificationの設定
         // ------------------
-        // Device orientation
-        //UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
         // Bookmark
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addItemToBookmarks:", name: AddItemToBookmarksNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
@@ -71,7 +68,6 @@ class ContainerViewController: UIViewController {
                     self.tabBar.add(item: playlist)
                     let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
                     controller.playlist = playlist
-                    //controller.search()
                     return controller
                 case "channel":
                     let channel = bookmark.item as Channel
@@ -112,8 +108,6 @@ class ContainerViewController: UIViewController {
             //self.tabBar.centerTab(tab)
             self.tabBar.selectTab(tab)
         }
-        //view.setNeedsLayout()
-        //view.layoutIfNeeded()
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -192,25 +186,6 @@ extension ContainerViewController {
             }
         }
     }
-
-    /*
-    func orientationChanged(notification: NSNotification) {
-        // http://program.station.ez-net.jp/special/handbook/objective-c/uidevice/orientation.asp
-        /*
-        let device = notification.object as UIDevice
-        switch device.orientation {
-        case .Portrait, .PortraitUpsideDown:
-            logger.debug("")
-            let index = tabBar.indexOfSelectedTab()
-            containerView.scrollToIndexOfContentViews(index)
-        default:
-            break
-        }
-        */
-        let index = tabBar.indexOfSelectedTab()
-        containerView.scrollToIndexOfContentViews(index)
-    }
-    */
 
 }
 
