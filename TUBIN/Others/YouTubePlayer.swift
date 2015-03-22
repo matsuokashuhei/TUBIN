@@ -26,22 +26,24 @@ class YouTubePlayer: NSObject {
 
     var delegate: YouTubePlayerDelegate?
 
-    enum State {
-        case Loading, Playing, Stopped
-    }
-    var state = State.Stopped
-
     var playlist: [Video]!
     var nowPlaying: Video! {
         didSet(didPlaying) {
             if let didPlaying = didPlaying {
-                if nowPlaying.id == didPlaying.id {
-                    return
+                if didPlaying.id == nowPlaying.id {
+                    if controller.playbackState == .Playing {
+                        return
+                    } else {
+                        play()
+                    }
+                } else {
+                    stop()
+                    startPlaying()
                 }
+            } else {
+                stop()
+                startPlaying()
             }
-            removeObservers()
-            stop()
-            startPlaying()
         }
     }
 
@@ -57,20 +59,23 @@ class YouTubePlayer: NSObject {
         controller.controlStyle = .None
         controller.shouldAutoplay = false
         super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadStateDidChange:", name: MPMoviePlayerLoadStateDidChangeNotification, object: controller)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playBackStateDidChange:", name: MPMoviePlayerPlaybackStateDidChangeNotification, object: controller)
     }
 
     func startPlaying() {
         let video = nowPlaying
         if let fileURL = video.fileURL() {
             startPlaying(fileURL)
-            return
-        }
-        video.streamURL { (result) -> Void in
-            switch result {
-            case .Success(let box):
-                self.startPlaying(box.unbox)
-            case .Failure(let box):
-                Alert.error(box.unbox)
+        } else {
+            video.streamURL { (result) -> Void in
+                switch result {
+                case .Success(let box):
+                    self.startPlaying(box.unbox)
+                case .Failure(let box):
+                    self.logger.error(box.unbox.localizedDescription)
+                    Alert.error(box.unbox)
+                }
             }
         }
     }
@@ -91,17 +96,12 @@ class YouTubePlayer: NSObject {
     }
 
     func stop() {
+        removeObservers()
         controller.stop()
     }
 
     func nextVideo() -> Video? {
         let index = (playlist as NSArray).indexOfObject(nowPlaying) + 1
-        /*
-        if index < playlist.count {
-            nowPlaying = playlist[index]
-            return nowPlaying
-        }
-        */
         if index < playlist.count {
             return playlist[index]
         }
@@ -110,12 +110,6 @@ class YouTubePlayer: NSObject {
 
     func previousVideo() -> Video? {
         let index = (playlist as NSArray).indexOfObject(nowPlaying) - 1
-        /*
-        if index >= 0  {
-            nowPlaying = playlist[index]
-            return nowPlaying
-        }
-        */
         if index >= 0  {
             return playlist[index]
         }
@@ -138,18 +132,6 @@ class YouTubePlayer: NSObject {
         }
     }
 
-    func isPlaying() -> Bool {
-        return controller.playbackState == .Playing
-        /*
-        switch controller.playbackState {
-        case .Playing:
-            return true
-        default:
-            return false
-        }
-        */
-    }
-
 }
 
 extension YouTubePlayer {
@@ -160,20 +142,16 @@ extension YouTubePlayer {
         removeObservers()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "durationAvailable:", name: MPMovieDurationAvailableNotification, object: controller)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readyForDisplay:", name: MPMoviePlayerReadyForDisplayDidChangeNotification, object: controller)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadStateDidChange:", name: MPMoviePlayerLoadStateDidChangeNotification, object: controller)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playbackDidFinish:", name: MPMoviePlayerPlaybackDidFinishNotification, object: controller)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mediaIsPreparedToPlayDidChange:", name: MPMediaPlaybackIsPreparedToPlayDidChangeNotification, object: controller)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playBackStateDidChange:", name: MPMoviePlayerPlaybackStateDidChangeNotification, object: controller)
     }
 
     func removeObservers() {
         logger.debug("")
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMovieDurationAvailableNotification, object: controller)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerReadyForDisplayDidChangeNotification, object: controller)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerLoadStateDidChangeNotification, object: controller)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerPlaybackDidFinishNotification, object: controller)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMediaPlaybackIsPreparedToPlayDidChangeNotification, object: controller)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerPlaybackStateDidChangeNotification, object: controller)
     }
 
     func durationAvailable(notification: NSNotification) {
@@ -182,7 +160,6 @@ extension YouTubePlayer {
             if isnormal(player.duration) {
                 delegate?.durationAvailable(controller)
             }
-            //delegate?.durationAvailable(controller)
         }
     }
 
@@ -202,10 +179,8 @@ extension YouTubePlayer {
                 logger.debug("Playable")
             case MPMovieLoadState.PlaythroughOK:
                 logger.debug("PlaythroughOK")
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             case MPMovieLoadState.Stalled:
                 logger.debug("Stalled")
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             default:
                 logger.debug("\(controller.loadState)")
             }
@@ -213,11 +188,11 @@ extension YouTubePlayer {
     }
 
     func playbackDidFinish(notification: NSNotification) {
+        logger.debug("")
         playNextVideo()
         if let controller = notification.object as? MPMoviePlayerController {
             delegate?.playbackDidFinish(controller)
         }
-        logger.debug("")
     }
 
     func mediaIsPreparedToPlayDidChange(notification: NSNotification) {
@@ -257,6 +232,7 @@ extension YouTubePlayer {
     func seekToTime(seconds: Float) {
         controller.currentPlaybackTime = Double(seconds)
     }
+
 }
 
 class Timer {

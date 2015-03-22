@@ -77,20 +77,21 @@ class YouTubePlayerViewController: UIViewController {
         logger.debug("")
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // Navigation
-        navigationController?.setNavigationBarHidden(!navigatable, animated: true)
         configure(navigationItem: navigationItem)
         // Trait
         configure(UIDevice.currentDevice().orientation)
         // YouTube player
         player.delegate = self
-        if player.isPlaying() && player.nowPlaying.id == video.id {
-            scrubberView.sync(player.controller)
-            configure(player.controller)
-            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
-        } else {
-            player.nowPlaying = video
-            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
+        if player.controller.playbackState == .Playing {
+            if video.id == player.nowPlaying.id {
+                scrubberView.sync(player.controller)
+                addPlayerView(player.controller)
+            } else {
+                player.nowPlaying = video
+                playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Disabled)
+            }
         }
+        playBackStateDidChange(player.controller)
         showPlayerController()
         super.viewWillAppear(animated)
     }
@@ -111,6 +112,9 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func configure(#navigationItem: UINavigationItem) {
+        // Navigation bar
+        navigationController?.setNavigationBarHidden(!navigatable, animated: true)
+        // Navigation item
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         Favorite.exists(video) { (result) in
@@ -145,14 +149,8 @@ class YouTubePlayerViewController: UIViewController {
         channelView.addSubview(controller.view)
     }
 
-    func configure(controller: MPMoviePlayerController) {
-        if videoView.subviews.count > 0 {
-            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
-                if let subview = object as? UIView {
-                    subview.removeFromSuperview()
-                }
-            }
-        }
+    func addPlayerView(controller: MPMoviePlayerController) {
+        removePlayerView(videoView)
         videoView.addSubview(controller.view)
         controller.view.frame = videoView.bounds
         controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -167,6 +165,16 @@ class YouTubePlayerViewController: UIViewController {
             recognizer.delegate = self
             controller.view.gestureRecognizers?.removeAll(keepCapacity: true)
             controller.view.addGestureRecognizer(recognizer)
+        }
+    }
+
+    func removePlayerView(videoView: UIView) {
+        if videoView.subviews.count > 0 {
+            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+                if let subview = object as? UIView {
+                    subview.removeFromSuperview()
+                }
+            }
         }
     }
 
@@ -188,7 +196,7 @@ class YouTubePlayerViewController: UIViewController {
     // MARK: - Actions
 
     func playButtonTapped(button: UIButton) {
-        if player.isPlaying() {
+        if player.controller.playbackState == .Playing {
             pause()
         } else {
             play()
@@ -196,10 +204,11 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func previousButtonTapped(button: UIButton) {
-        if player.isPlaying() {
+        if player.controller.playbackState == .Playing {
             logger.debug("player.controller.currentPlaybackTime: \(player.controller.currentPlaybackTime)")
             if player.controller.currentPlaybackTime < 3 {
                 if let video = player.previousVideo() {
+                    removePlayerView(videoView)
                     player.nowPlaying = video
                 }
             } else {
@@ -210,6 +219,7 @@ class YouTubePlayerViewController: UIViewController {
 
     func nextButtonTapped(button: UIButton) {
         if let video = player.nextVideo() {
+            removePlayerView(videoView)
             player.nowPlaying = video
         }
     }
@@ -260,7 +270,7 @@ class YouTubePlayerViewController: UIViewController {
             if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
                 return
             }
-            if self.player.isPlaying() == false {
+            if self.player.controller.playbackState != .Playing {
                 return
             }
             let duration = 1.0
@@ -310,7 +320,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
-        configure(controller)
+        addPlayerView(controller)
         play()
     }
 
@@ -342,7 +352,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
 extension YouTubePlayerViewController: ScrubberViewDelegate {
 
     func beginSeek(slider: UISlider) {
-        player.pause()
+        pause()
     }
 
     func seekPositionChanged(slider: UISlider) {
@@ -350,7 +360,7 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
     }
 
     func endSeek(slider: UISlider) {
-        player.play()
+        play()
     }
 
     func seekToSeconds(seconds: Float) {
