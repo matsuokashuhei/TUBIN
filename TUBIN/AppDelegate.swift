@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: fontName]
         // Parse
         Parser.configure()
-        // ネットワーク・インジケーター
-        //BigBrother.addToSharedSession()
+        // ------------------
+        // In-app Purchase
+        // ------------------
+        if SKPaymentQueue.canMakePayments() {
+            logger.debug("SKPaymentQueue.canMakePayments")
+        }
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }
