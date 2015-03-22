@@ -38,6 +38,10 @@ class RootViewController: UIViewController {
     }
 
     func showMiniPlayer(notification: NSNotification) {
+        let playbackState = YouTubePlayer.sharedInstance.controller.playbackState
+        if playbackState == .Paused || playbackState == .Stopped {
+            return
+        }
         miniPlayerView.show()
         view.setNeedsLayout()
         view.layoutIfNeeded()

@@ -27,6 +27,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="oVs-Vh-E7W" secondAttribute="height" multiplier="16:9" id="cbV-sw-WH9"/>
                     </constraints>
+                    <variation key="heightClass=compact" misplaced="YES">
+                        <rect key="frame" x="-55" y="0.0" width="710" height="400"/>
+                    </variation>
                     <variation key="widthClass=compact" misplaced="YES">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="226"/>
                     </variation>

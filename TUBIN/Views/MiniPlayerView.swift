@@ -7,6 +7,7 @@
 //
 import UIKit
 import MediaPlayer
+import YouTubeKit
 
 protocol MiniPlayerViewDelegate {
     func backToVideoPlayerViewController()
@@ -90,7 +91,7 @@ class MiniPlayerView: UIView {
             NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
         ])
-        controller.play()
+        //controller.play()
     }
 
     func removePlayerView(videoView: UIView) {
@@ -106,6 +107,9 @@ class MiniPlayerView: UIView {
 
 extension MiniPlayerView: YouTubePlayerDelegate {
 
+    func prepareToPlay(video: Video) {
+    }
+
     func durationAvailable(controller: MPMoviePlayerController) {
         logger.debug("controller.duration: \(controller.duration)")
     }
@@ -117,6 +121,7 @@ extension MiniPlayerView: YouTubePlayerDelegate {
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         logger.debug("")
         addPlayerView(controller)
+        player.play()
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {

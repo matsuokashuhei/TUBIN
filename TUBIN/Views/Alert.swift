@@ -5,7 +5,7 @@
 //  Created by matsuosh on 2015/03/13.
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
-import SVProgressHUD
+import PKHUD
 
 class Alert {
 
@@ -23,20 +23,22 @@ class Alert {
     }
 
     func configure() {
-        // SVProgressHUD
-        SVProgressHUD.setBackgroundColor(UIColor.whiteColor())
-        SVProgressHUD.setForegroundColor(UIColor.redColor())
-        SVProgressHUD.setErrorImage(UIImage(named: "ic_warning_48px"))
-        SVProgressHUD.setRingThickness(4)
-        SVProgressHUD.setFont(UIFont(name: "AvenirNext-Regular", size: 15.0)!)
-        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Clear)
+        HUDController.sharedController.dimsBackground = true
+        HUDController.sharedController.userInteractionOnUnderlyingViewsEnabled = true
     }
 
     func error(error: NSError?) {
         configure()
+        let image = UIImage(named: "ic_warning_48px")
         if let error = error {
             logger.error(error.localizedDescription)
+            //HUDController.sharedController.contentView = HUDContentView.StatusView(title: "ERROR", subtitle: error.localizedDescription, image: HUDAssets.crossImage)
+            HUDController.sharedController.contentView = HUDContentView.StatusView(title: "ERROR", subtitle: error.localizedDescription, image: image)
+        } else {
+            //HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: HUDAssets.crossImage)
+            HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: image)
         }
-        SVProgressHUD.showErrorWithStatus("")
+        HUDController.sharedController.show()
+        HUDController.sharedController.hide(afterDelay: 1.0)
     }
 }

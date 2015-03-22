@@ -10,6 +10,7 @@ import MediaPlayer
 import YouTubeKit
 
 protocol YouTubePlayerDelegate {
+    func prepareToPlay(video: Video)
     func durationAvailable(controller: MPMoviePlayerController)
     func readyForDisplay(controller: MPMoviePlayerController)
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController)
@@ -29,6 +30,7 @@ class YouTubePlayer: NSObject {
     var playlist: [Video]!
     var nowPlaying: Video! {
         didSet(didPlaying) {
+            logger.debug(debug(controller))
             if let didPlaying = didPlaying {
                 if didPlaying.id == nowPlaying.id {
                     if controller.playbackState == .Playing {
@@ -65,6 +67,7 @@ class YouTubePlayer: NSObject {
 
     func startPlaying() {
         let video = nowPlaying
+        delegate?.prepareToPlay(video)
         if let fileURL = video.fileURL() {
             startPlaying(fileURL)
         } else {
@@ -73,6 +76,7 @@ class YouTubePlayer: NSObject {
                 case .Success(let box):
                     self.startPlaying(box.unbox)
                 case .Failure(let box):
+                    self.controller.contentURL = nil
                     self.logger.error(box.unbox.localizedDescription)
                     Alert.error(box.unbox)
                 }
@@ -81,14 +85,17 @@ class YouTubePlayer: NSObject {
     }
 
     func startPlaying(URL: NSURL) {
-        logger.debug("URL: \(URL)")
         addObservers()
         controller.contentURL = URL
         controller.prepareToPlay()
     }
 
     func play() {
-        controller.play()
+        if let contentURL = controller.contentURL {
+            controller.play()
+        } else {
+            startPlaying()
+        }
     }
 
     func pause() {
@@ -223,7 +230,7 @@ extension YouTubePlayer {
         }
     }
 
-    // MARK Timer
+    // MARK: - Timer
 
     func playingAtTime() {
         delegate?.playingAtTime(controller)
@@ -233,6 +240,39 @@ extension YouTubePlayer {
         controller.currentPlaybackTime = Double(seconds)
     }
 
+    // MARK: - Debug
+    func debug(controller: MPMoviePlayerController) -> String {
+        var message = "controller: "
+        message += "playbackState: "
+        switch controller.playbackState {
+        case .Stopped:
+            message += "Stopped"
+        case .Playing:
+            message += "Playing"
+        case .Paused:
+            message += "Paused"
+        case .Interrupted:
+            message += "Interrupted"
+        case .SeekingForward:
+            message += "SeekingForward"
+        case .SeekingBackward:
+            message += "SeekingBackward"
+        }
+        message += ", loadState: "
+        switch controller.loadState {
+        case MPMovieLoadState.Unknown:
+            message += "Unknown"
+        case MPMovieLoadState.Playable:
+            message += "Playable"
+        case MPMovieLoadState.PlaythroughOK:
+            message += "PlaythroughOK"
+        case MPMovieLoadState.Stalled:
+            message += "Stalled"
+        default:
+            message += "?"
+        }
+        return message
+    }
 }
 
 class Timer {

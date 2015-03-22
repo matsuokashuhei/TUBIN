@@ -69,12 +69,7 @@ class YouTubePlayerViewController: UIViewController {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
     }
 
-    override func viewDidLayoutSubviews() {
-        logger.debug("")
-    }
-
     override func viewWillAppear(animated: Bool) {
-        logger.debug("")
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // Navigation
         configure(navigationItem: navigationItem)
@@ -101,7 +96,6 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewDidDisappear(animated: Bool) {
-        logger.debug("")
         // Notification to Mini player
         NSNotificationCenter.defaultCenter().postNotificationName(ShowMiniPlayerNotification, object: self)
         super.viewDidDisappear(animated)
@@ -142,8 +136,9 @@ class YouTubePlayerViewController: UIViewController {
             }
         }
         let controller = ChannelsViewController()
-        controller.search(parameters: ["channelId": video.channelId])
         controller.navigatable = navigatable
+        controller.spinnable = false
+        controller.search(parameters: ["channelId": video.channelId])
         controller.view.frame = channelView.bounds
         addChildViewController(controller)
         channelView.addSubview(controller.view)
@@ -213,6 +208,11 @@ class YouTubePlayerViewController: UIViewController {
                 }
             } else {
                 player.seekToTime(0)
+            }
+        } else {
+            if let video = player.previousVideo() {
+                removePlayerView(videoView)
+                player.nowPlaying = video
             }
         }
     }
@@ -307,10 +307,14 @@ extension YouTubePlayerViewController: UIGestureRecognizerDelegate {
 // MARK: - YouTubePlayerDelegate
 extension YouTubePlayerViewController: YouTubePlayerDelegate {
 
+    func prepareToPlay(video: Video) {
+        self.video = video
+        configure(navigationItem: navigationItem)
+        configure(channelView: channelView)
+    }
+
     func durationAvailable(controller: MPMoviePlayerController) {
         logger.debug("controller.duration: \(controller.duration)")
-        video = player.nowPlaying
-        configure(navigationItem: navigationItem)
         scrubberView.configure(controller.duration)
     }
 

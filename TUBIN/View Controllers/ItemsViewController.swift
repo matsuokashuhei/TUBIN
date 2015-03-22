@@ -24,6 +24,8 @@ class ItemsViewController: UIViewController {
 
     var navigatable = false
 
+    var spinnable = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,11 +73,15 @@ class ItemsViewController: UIViewController {
     }
 
     func search() {
-        Spinner.show()
+        if spinnable {
+            Spinner.show()
+        }
     }
 
     func searchMore() {
-        Spinner.show()
+        if spinnable {
+            Spinner.show()
+        }
     }
 
     func searchCompletion(#page: Page, items: [Item]) {
@@ -86,7 +92,9 @@ class ItemsViewController: UIViewController {
             }
         }.main {
             self.tableView.reloadData()
-            Spinner.dismiss()
+            if self.spinnable {
+                Spinner.dismiss()
+            }
         }
     }
 
@@ -102,13 +110,17 @@ class ItemsViewController: UIViewController {
             }
         }.main {
             self.tableView.reloadData()
-            Spinner.dismiss()
+            if self.spinnable {
+                Spinner.dismiss()
+            }
         }
     }
 
     func errorCompletion(error: NSError) {
         logger.error(error.localizedDescription)
-        Spinner.dismiss()
+        if spinnable {
+            Spinner.dismiss()
+        }
         Alert.error(error)
     }
 
