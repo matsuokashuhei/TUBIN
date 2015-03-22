@@ -112,6 +112,8 @@ class ContainerViewController: UIViewController {
             //self.tabBar.centerTab(tab)
             self.tabBar.selectTab(tab)
         }
+        //view.setNeedsLayout()
+        //view.layoutIfNeeded()
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {

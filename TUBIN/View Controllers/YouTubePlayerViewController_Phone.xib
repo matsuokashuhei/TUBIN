@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -44,7 +44,7 @@
                                 <constraint firstAttribute="width" constant="54" id="tmC-mK-cs3"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1XQ-pE-8ZQ">
@@ -57,7 +57,7 @@
                                 <constraint firstAttribute="width" constant="54" id="FOD-C5-2f9"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -135,12 +135,16 @@
                 <constraint firstAttribute="centerX" secondItem="Ecd-nq-1jK" secondAttribute="centerX" id="YQA-cq-Cqr"/>
                 <constraint firstAttribute="bottom" secondItem="Ngb-u7-E1o" secondAttribute="bottom" id="daK-df-bbA"/>
                 <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="iLt-cc-HOb"/>
+                <constraint firstAttribute="centerX" secondItem="oVs-Vh-E7W" secondAttribute="centerX" id="krN-Ih-bzV"/>
+                <constraint firstAttribute="centerY" secondItem="oVs-Vh-E7W" secondAttribute="centerY" id="pkh-8b-YOA"/>
                 <constraint firstAttribute="bottom" secondItem="BPi-Ik-WBO" secondAttribute="bottom" id="qiK-rU-0Wa"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="centerY" secondItem="htR-39-Q0L" secondAttribute="centerY" id="rtP-Qu-qQd"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="krN-Ih-bzV"/>
+                    <exclude reference="pkh-8b-YOA"/>
                     <exclude reference="QhG-dB-Xjr"/>
                     <exclude reference="iLt-cc-HOb"/>
                     <exclude reference="qiK-rU-0Wa"/>
@@ -154,6 +158,10 @@
                     <exclude reference="Ngb-u7-E1o"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="LXV-bb-GnI"/>
+                    <exclude reference="RyO-mb-1Lo"/>
+                    <include reference="krN-Ih-bzV"/>
+                    <include reference="pkh-8b-YOA"/>
                     <include reference="QhG-dB-Xjr"/>
                     <exclude reference="Sx1-D7-ydj"/>
                     <include reference="iLt-cc-HOb"/>

@@ -12,6 +12,8 @@ import YouTubeKit
 
 class RootViewController: UIViewController {
 
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet var miniPlayerView: MiniPlayerView! {
         didSet {
             miniPlayerView.delegate = self
@@ -53,7 +55,14 @@ extension RootViewController: MiniPlayerViewDelegate {
 
     func backToVideoPlayerViewController() {
         if let navigationController = childViewControllers.first as? UINavigationController {
-            let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+            //let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+            let controller: YouTubePlayerViewController = {
+                if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+                    return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
+                } else {
+                    return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Pad", bundle: NSBundle.mainBundle())
+                }
+            }()
             controller.video = YouTubePlayer.sharedInstance.nowPlaying
             controller.playlist = YouTubePlayer.sharedInstance.playlist
             navigationController.pushViewController(controller, animated: true)

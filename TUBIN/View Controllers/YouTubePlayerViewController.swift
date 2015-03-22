@@ -54,12 +54,16 @@ class YouTubePlayerViewController: UIViewController {
         configure(channelView: channelView)
 
         // Auto layout
+        /*
         edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
             }
         }
+        */
+        //automaticallyAdjustsScrollViewInsets = false
+        //edgesForExtendedLayout = .Top
 
         super.viewDidLoad()
     }
@@ -176,8 +180,10 @@ class YouTubePlayerViewController: UIViewController {
             // iPhone
             if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
                 // Portait
+                view.backgroundColor = UIColor.whiteColor()
                 showPlayerController()
             } else {
+                view.backgroundColor = UIColor.blackColor()
                 edgesForExtendedLayout = UIRectEdge.Top
             }
         }
@@ -214,7 +220,9 @@ class YouTubePlayerViewController: UIViewController {
 
     func play() {
         player.play()
-        hidePlayerController()
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            hidePlayerController()
+        }
     }
 
     func pause() {

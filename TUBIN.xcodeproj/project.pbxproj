@@ -17,7 +17,7 @@
 		A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */; };
 		A899AE871AAC648D0011D5DE /* YouTubePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899AE861AAC648D0011D5DE /* YouTubePlayer.swift */; };
 		A899AE8A1AAC67490011D5DE /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */; };
-		A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE891AAC67490011D5DE /* YouTubePlayerViewController.xib */; };
+		A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */; };
 		A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */; };
 		A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */; };
 		A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */; };
@@ -83,6 +83,8 @@
 		A8D403B11AA8CC4400F0AAD2 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4038D1AA8CC4400F0AAD2 /* VideoPlayerView.swift */; };
 		A8D403B41AA8CC9800F0AAD2 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403B31AA8CC9800F0AAD2 /* Notifications.swift */; };
 		A8D403B61AA8CCA500F0AAD2 /* YouTubeKit+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403B51AA8CCA500F0AAD2 /* YouTubeKit+Download.swift */; };
+		A8E17F311ABD61E100DAF54A /* AF+Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */; };
+		A8E17F341ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E17F331ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,7 +146,7 @@
 		A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkTableViewCell.xib; sourceTree = "<group>"; };
 		A899AE861AAC648D0011D5DE /* YouTubePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayer.swift; sourceTree = "<group>"; };
 		A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayerViewController.swift; sourceTree = "<group>"; };
-		A899AE891AAC67490011D5DE /* YouTubePlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController.xib; sourceTree = "<group>"; };
+		A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController_Phone.xib; sourceTree = "<group>"; };
 		A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
@@ -211,6 +213,8 @@
 		A8D403B31AA8CC9800F0AAD2 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		A8D403B51AA8CCA500F0AAD2 /* YouTubeKit+Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Download.swift"; sourceTree = "<group>"; };
 		A8D403B71AA8CCCF00F0AAD2 /* TUBIN-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TUBIN-Bridging-Header.h"; sourceTree = "<group>"; };
+		A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AF+Date+Extension.swift"; sourceTree = "<group>"; };
+		A8E17F331ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController_Pad.xib; sourceTree = "<group>"; };
 		C86F1F1E09D2F038920B8889 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC4E299ADCEB0834ABF32773 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -365,6 +369,7 @@
 				A8D403651AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift */,
 				A8D403661AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift */,
 				A8D403B51AA8CCA500F0AAD2 /* YouTubeKit+Download.swift */,
+				A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -427,7 +432,8 @@
 				A8D4037F1AA8CC4400F0AAD2 /* SettingsViewController.swift */,
 				A8BD70FD1AAB828300499A71 /* SettingsViewController.xib */,
 				A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */,
-				A899AE891AAC67490011D5DE /* YouTubePlayerViewController.xib */,
+				A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */,
+				A8E17F331ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib */,
 				A8D403801AA8CC4400F0AAD2 /* VideoPlayerViewController.swift */,
 				A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */,
 			);
@@ -591,7 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8BD70F01AAB4F1B00499A71 /* PlaylistsViewController.xib in Resources */,
-				A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController.xib in Resources */,
+				A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib in Resources */,
 				A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */,
 				A8BD70F81AAB5B8E00499A71 /* ChannelViewController.xib in Resources */,
 				A8BD70F41AAB504600499A71 /* PopularViewController.xib in Resources */,
@@ -607,6 +613,7 @@
 				A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */,
 				A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */,
 				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
+				A8E17F341ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib in Resources */,
 				A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */,
 				A899AE7E1AAC4F4B0011D5DE /* BookmarksViewController.xib in Resources */,
 				A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */,
@@ -691,6 +698,7 @@
 				A8D403911AA8CC4400F0AAD2 /* XCGLogger.swift in Sources */,
 				A8D403A41AA8CC4400F0AAD2 /* SettingsViewController.swift in Sources */,
 				A8D403A11AA8CC4400F0AAD2 /* PopularViewController.swift in Sources */,
+				A8E17F311ABD61E100DAF54A /* AF+Date+Extension.swift in Sources */,
 				A8D4038E1AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift in Sources */,
 				A8D403AB1AA8CC4400F0AAD2 /* LoadMoreTableViewCell.swift in Sources */,
 				A8D403A71AA8CC4400F0AAD2 /* BookmarkTableViewCell.swift in Sources */,

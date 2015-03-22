@@ -119,7 +119,14 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
-        let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController", bundle: NSBundle.mainBundle())
+        //let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
+        let controller: YouTubePlayerViewController = {
+            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+                return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
+            } else {
+                return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Pad", bundle: NSBundle.mainBundle())
+            }
+        }()
         controller.video = favorites[indexPath.row].video
         controller.playlist = favorites.map { (favorite) -> Video in
             return favorite.video
