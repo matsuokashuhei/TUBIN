@@ -18,7 +18,7 @@ class PopularViewController: UIViewController {
     }
     @IBOutlet var playlistsView: UIView! {
         didSet {
-            let controller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+            let controller = PlaylistsViewController()
             controller.search(parameters: parameters)
             addChildViewController(controller)
             playlistsView.addSubview(controller.view)
@@ -27,7 +27,7 @@ class PopularViewController: UIViewController {
     }
     @IBOutlet var channelsView: UIView! {
         didSet {
-            let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+            let controller = ChannelsViewController()
             controller.search(parameters: parameters)
             addChildViewController(controller)
             channelsView.addSubview(controller.view)
@@ -39,17 +39,21 @@ class PopularViewController: UIViewController {
 
     var parameters = ["order": "viewCount"]
 
+    convenience override init() {
+        self.init(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         /*
-        let playlistViewcontroller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        let playlistViewcontroller = PlaylistsViewController()
         playlistViewcontroller.parameters = parameters
         addChildViewController(playlistViewcontroller)
         playlistsView.addSubview(playlistViewcontroller.view)
         view.frame = playlistsView.bounds
 
-        let channelsViewcontroller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        let channelsViewcontroller = ChannelsViewController()
         channelsViewcontroller.parameters = parameters
         addChildViewController(channelsViewcontroller)
         channelsView.addSubview(channelsViewcontroller.view)

@@ -14,6 +14,10 @@ class PlaylistsViewController: ItemsViewController {
 
     var channel: Channel?
 
+    convenience override init() {
+        self.init(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -76,7 +80,7 @@ extension PlaylistsViewController: UITableViewDataSource {
 extension PlaylistsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
+        let controller = PlaylistViewController()
         controller.playlist = items[indexPath.row] as Playlist
         controller.channel = channel
         controller.navigatable = true

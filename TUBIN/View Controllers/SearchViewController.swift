@@ -45,20 +45,24 @@ class SearchViewController: UIViewController {
 
     var delegate: SearchViewControllerDelegate?
 
+    convenience override init() {
+        self.init(nibName: "SearchViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
+        let videosViewController = VideosViewController()
         addChildViewController(videosViewController)
         videosView.addSubview(videosViewController.view)
         videosViewController.view.frame = videosView.bounds
 
-        let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        let playlistsViewController = PlaylistsViewController()
         addChildViewController(playlistsViewController)
         playlistsView.addSubview(playlistsViewController.view)
         playlistsViewController.view.frame = playlistsView.bounds
 
-        let channelsViewController = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        let channelsViewController = ChannelsViewController()
         addChildViewController(channelsViewController)
         channelsView.addSubview(channelsViewController.view)
         channelsViewController.view.frame = channelsView.bounds

@@ -12,6 +12,10 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
+    convenience override init() {
+        self.init(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -54,7 +58,7 @@ extension SettingsViewController: UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let controller = BookmarksViewController(nibName: "BookmarksViewController", bundle: NSBundle.mainBundle())
+        let controller = BookmarksViewController()
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }

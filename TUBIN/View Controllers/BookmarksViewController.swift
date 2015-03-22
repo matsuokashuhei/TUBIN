@@ -18,6 +18,10 @@ class BookmarksViewController: UIViewController {
     var bookmarks = [Bookmark]()
     var edited = false
 
+    convenience override init() {
+        self.init(nibName: "BookmarksViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -15,22 +15,8 @@ class ChannelViewController: UIViewController {
 
     @IBOutlet var segmentedControl: UISegmentedControl!
 
-    @IBOutlet var videosView: UIView! /*{
-        didSet {
-            let controller = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
-            addChildViewController(controller)
-            videosView.addSubview(controller.view)
-            controller.view.frame = videosView.bounds
-        }
-    }*/
-    @IBOutlet var playlistsView: UIView! /*{
-        didSet {
-            let controller = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
-            addChildViewController(controller)
-            playlistsView.addSubview(controller.view)
-            controller.view.frame = playlistsView.bounds
-        }
-    }*/
+    @IBOutlet var videosView: UIView!
+    @IBOutlet var playlistsView: UIView!
 
     var containerViews: [UIView] = []
 
@@ -43,12 +29,16 @@ class ChannelViewController: UIViewController {
 
     var navigatable = false
 
+    convenience override init() {
+        self.init(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         edgesForExtendedLayout = .None
 
-        let videosViewController = VideosViewController(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
+        let videosViewController = VideosViewController()
         videosViewController.parameters = parameters
         videosViewController.navigatable = navigatable
         videosViewController.channel = channel
@@ -56,7 +46,7 @@ class ChannelViewController: UIViewController {
         videosView.addSubview(videosViewController.view)
         videosViewController.view.frame = videosView.bounds
 
-        let playlistsViewController = PlaylistsViewController(nibName: "PlaylistsViewController", bundle: NSBundle.mainBundle())
+        let playlistsViewController = PlaylistsViewController()
         playlistsViewController.parameters = parameters
         playlistsViewController.navigatable = navigatable
         playlistsViewController.channel = channel
@@ -69,16 +59,6 @@ class ChannelViewController: UIViewController {
         configure(segmentedControl)
         segmentChanged(segmentedControl)
 
-        /*
-        if let videosViewController = childViewControllers[0] as? VideosViewController {
-            //videosViewController.searchItems(parameters: ["channelId": self.channel.id, "order": "date"])
-            videosViewController.parameters = parameters
-        }
-        if let playlistsViewController = childViewControllers[1] as? PlaylistsViewController {
-            playlistsViewController.parameters = parameters
-            //playlistsViewController.searchItems(parameters: ["channelId": self.channel.id, "order": "date"])
-        }
-        */
     }
 
     override func viewWillAppear(animated: Bool) {

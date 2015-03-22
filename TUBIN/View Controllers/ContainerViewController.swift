@@ -66,30 +66,30 @@ class ContainerViewController: UIViewController {
                 case "playlist":
                     let playlist = bookmark.item as Playlist
                     self.tabBar.add(item: playlist)
-                    let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
+                    let controller = PlaylistViewController()
                     controller.playlist = playlist
                     return controller
                 case "channel":
                     let channel = bookmark.item as Channel
                     self.tabBar.add(item: channel)
-                    let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
+                    let controller = ChannelViewController()
                     controller.channel = channel
                     return controller
                 case "Popular":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = PopularViewController(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
+                    let controller = PopularViewController()
                     return controller
                 case "Guide":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = GuideCategoriesViewController(nibName: "GuideCategoriesViewController", bundle: NSBundle.mainBundle())
+                    let controller = GuideCategoriesViewController()
                     return controller
                 case "Favorites":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = FavoritesViewController(nibName: "FavoritesViewController", bundle: NSBundle.mainBundle())
+                    let controller = FavoritesViewController()
                     return controller
                 case "Search":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = SearchViewController(nibName: "SearchViewController", bundle: NSBundle.mainBundle())
+                    let controller = SearchViewController()
                     return controller
                 default:
                     return nil
@@ -101,7 +101,7 @@ class ContainerViewController: UIViewController {
             }
         }
         tabBar.add(text: "Settings")
-        let controller = SettingsViewController(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
+        let controller = SettingsViewController()
         addChildViewController(controller)
         containerView.add(view: controller.view)
         if let tab = self.tabBar.tabs.first {
@@ -157,13 +157,13 @@ extension ContainerViewController {
                         case "playlist":
                             let playlist = bookmark.item as Playlist
                             self.tabBar.add(item: playlist, index: self.bookmarks.count)
-                            let controller = PlaylistViewController(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
+                            let controller = PlaylistViewController()
                             controller.playlist = playlist
                             return controller
                         case "channel":
                             let channel = bookmark.item as Channel
                             self.tabBar.add(item: channel, index: self.bookmarks.count)
-                            let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
+                            let controller = ChannelViewController()
                             controller.channel = channel
                             return controller
                         default:

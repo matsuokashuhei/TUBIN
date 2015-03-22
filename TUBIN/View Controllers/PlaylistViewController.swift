@@ -24,6 +24,10 @@ class PlaylistViewController: ItemsViewController {
 
     @IBOutlet var channelView: ChannelView!
 
+    convenience override init() {
+        self.init(nibName: "PlaylistViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "videoPlayerDidPrepareToPlay:", name: VideoPlayerDidPrepareToPlayNotification, object: nil)
@@ -77,7 +81,7 @@ class PlaylistViewController: ItemsViewController {
                 }
             }
         }
-        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        let controller = ChannelsViewController()
         controller.search(parameters: ["channelId": playlist.channelId])
         controller.navigatable = navigatable
         controller.view.frame = channelView.bounds
@@ -178,14 +182,7 @@ extension PlaylistViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
-        //let controller = YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
-        let controller: YouTubePlayerViewController = {
-            if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-                return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
-            } else {
-                return YouTubePlayerViewController(nibName: "YouTubePlayerViewController_Pad", bundle: NSBundle.mainBundle())
-            }
-        }()
+        let controller = YouTubePlayerViewController(device: UIDevice.currentDevice())
         controller.video = items[indexPath.row] as Video
         controller.playlist = items as [Video]
         controller.channel = channel

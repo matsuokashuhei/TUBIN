@@ -45,6 +45,14 @@ class YouTubePlayerViewController: UIViewController {
 
     let navigatable = true
 
+    convenience init(device: UIDevice) {
+        if device.userInterfaceIdiom == .Phone {
+            self.init(nibName: "YouTubePlayerViewController_Phone", bundle: NSBundle.mainBundle())
+        } else {
+            self.init(nibName: "YouTubePlayerViewController_Pad", bundle: NSBundle.mainBundle())
+        }
+    }
+
     override func viewDidLoad() {
         logger.debug("")
 
@@ -52,18 +60,6 @@ class YouTubePlayerViewController: UIViewController {
         player.playlist = playlist
 
         configure(channelView: channelView)
-
-        // Auto layout
-        /*
-        edgesForExtendedLayout = UIRectEdge.None
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            if UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation) {
-                edgesForExtendedLayout = UIRectEdge.Top
-            }
-        }
-        */
-        //automaticallyAdjustsScrollViewInsets = false
-        //edgesForExtendedLayout = .Top
 
         super.viewDidLoad()
     }
@@ -141,7 +137,7 @@ class YouTubePlayerViewController: UIViewController {
                 return
             }
         }
-        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        let controller = ChannelsViewController()
         controller.search(parameters: ["channelId": video.channelId])
         controller.navigatable = navigatable
         controller.view.frame = channelView.bounds

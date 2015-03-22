@@ -14,6 +14,10 @@ class ChannelsViewController: ItemsViewController {
 
     var category: GuideCategory!
 
+    convenience override init() {
+        self.init(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = UIRectEdge.None
@@ -123,11 +127,7 @@ extension ChannelsViewController: UITableViewDataSource {
 extension ChannelsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let controller = storyboard.instantiateViewControllerWithIdentifier("ChannelsViewController") as ChannelsViewController
-        */
-        let controller = ChannelViewController(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
+        let controller = ChannelViewController()
         controller.channel = items[indexPath.row] as Channel
         controller.navigatable = true
         if let navigationController = navigationController {

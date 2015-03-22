@@ -24,6 +24,10 @@ class GuideCategoriesViewController: UIViewController {
 
     var categories: [GuideCategory] = []
 
+    convenience override init() {
+        self.init(nibName: "GuideCategoriesViewController", bundle: NSBundle.mainBundle())
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         search()
@@ -71,7 +75,7 @@ extension GuideCategoriesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let category = categories[indexPath.row]
-        let controller = ChannelsViewController(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
+        let controller = ChannelsViewController()
         controller.category = category
         controller.navigatable = true
         controller.search(parameters: ["categoryId": category.id])
