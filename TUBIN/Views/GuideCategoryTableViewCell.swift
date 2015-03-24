@@ -37,7 +37,6 @@ class GuideCategoryTableViewCell: UITableViewCell {
                     channel.thumbnailImage() { result in
                         switch result {
                         case .Success(let box):
-                            self.logger.debug("\(box.unbox.size)")
                             self.thumbnailImageView.image = box.unbox
                             self.thumbnailImageView.contentMode = .ScaleAspectFit
                         case .Failure(let box):
