@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "EditTableViewCell")
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "StoreTableViewCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,30 +53,43 @@ extension SettingsViewController: UITableViewDelegate {
         switch section {
         case 0:
             return "Edit"
+        case 1:
+            return ""
         default:
             return "Develop"
         }
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let controller = BookmarksViewController()
-        if let navigationController = navigationController {
-            navigationController.pushViewController(controller, animated: true)
+        switch indexPath.section {
+        case 0:
+            let controller = BookmarksViewController()
+            if let navigationController = navigationController {
+                navigationController.pushViewController(controller, animated: true)
+            }
+        case 1:
+            let controller = StoreViewController()
+            if let navigationController = navigationController {
+                navigationController.pushViewController(controller, animated: true)
+            }
+        default:
+            break
         }
     }
+
 }
 
 extension SettingsViewController: UITableViewDataSource {
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
-            return 2
+            return 1
         }
     }
 
@@ -84,18 +98,13 @@ extension SettingsViewController: UITableViewDataSource {
         case 0:
             var cell = tableView.dequeueReusableCellWithIdentifier("EditTableViewCell", forIndexPath: indexPath) as UITableViewCell
             cell.textLabel?.text = "Bookmarks"
+            cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)!
             return cell
         case 1:
-            switch indexPath.row {
-            case 0:
-                var cell = tableView.dequeueReusableCellWithIdentifier("DebugTableViewCell", forIndexPath: indexPath) as UITableViewCell
-                return cell
-            case 1:
-                var cell = tableView.dequeueReusableCellWithIdentifier("iAdTableViewCell", forIndexPath: indexPath) as UITableViewCell
-                return cell
-            default:
-                return UITableViewCell()
-            }
+            var cell = tableView.dequeueReusableCellWithIdentifier("StoreTableViewCell", forIndexPath: indexPath) as UITableViewCell
+            cell.textLabel?.text = "Upgrade"
+            cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)!
+            return cell
         default:
             return UITableViewCell()
         }

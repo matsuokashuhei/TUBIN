@@ -12,6 +12,8 @@
 		A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CC3E81AAB0456008669F2 /* iAd.framework */; };
 		A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */; };
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
+		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
+		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
 		A899AE7C1AAC4C310011D5DE /* GuideCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */; };
 		A899AE7E1AAC4F4B0011D5DE /* BookmarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */; };
 		A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */; };
@@ -142,6 +144,8 @@
 		A86CC3E81AAB0456008669F2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
+		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
 		A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoriesViewController.xib; sourceTree = "<group>"; };
 		A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarksViewController.xib; sourceTree = "<group>"; };
 		A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkTableViewCell.xib; sourceTree = "<group>"; };
@@ -439,6 +443,8 @@
 				A8E17F331ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib */,
 				A8D403801AA8CC4400F0AAD2 /* VideoPlayerViewController.swift */,
 				A8BD70F51AAB562B00499A71 /* VideoPlayerViewController.xib */,
+				A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */,
+				A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -616,6 +622,7 @@
 				A8C4327A1AAAE34900425E1B /* VideoTableViewCell.xib in Resources */,
 				A8BD70FE1AAB828300499A71 /* SettingsViewController.xib in Resources */,
 				A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */,
+				A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */,
 				A8D4028D1AA8B7C700F0AAD2 /* LaunchScreen.xib in Resources */,
 				A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */,
 				A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */,
@@ -697,6 +704,7 @@
 				A8D4039F1AA8CC4400F0AAD2 /* PlaylistsViewController.swift in Sources */,
 				A8D403A01AA8CC4400F0AAD2 /* PlaylistViewController.swift in Sources */,
 				A8D403931AA8CC4400F0AAD2 /* Favorite.swift in Sources */,
+				A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */,
 				A8D403AD1AA8CC4400F0AAD2 /* ScrubberView.swift in Sources */,
 				A8C614461AB1E22E00C47B1B /* Alert.swift in Sources */,
 				A8D4038F1AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift in Sources */,
