@@ -415,6 +415,7 @@ extension NSDate {
         let minutes = round(seconds/60)
         let hours = round(minutes/60)
         let days = round(hours/24)
+        //let years = round(days/365)
 
         if seconds < 10 {
             return NSLocalizedString("just now", comment: "relative time")
@@ -446,7 +447,31 @@ extension NSDate {
             }
         }
 
-        return self.toString()
+        if days < 31 {
+            if days == 7 {
+                return NSLocalizedString("1 week ago", comment: "relative time")
+            } else {
+                return NSLocalizedString("\(Int(days / 7)) weeks ago", comment: "relative time")
+            }
+        }
+
+        if days < 365 {
+            if days == 31 {
+                return NSLocalizedString("1 month ago", comment: "relative time")
+            } else {
+                return NSLocalizedString("\(Int(days / 30)) months ago", comment: "relative time")
+            }
+        }
+
+        if days == 365 {
+            return NSLocalizedString("1 year ago", comment: "relative time")
+        }
+
+        if days / 365 == 1 {
+            return NSLocalizedString("1 year ago", comment: "relative time")
+        } else {
+            return NSLocalizedString("\(Int(days / 365)) years ago", comment: "relative time")
+        }
     }
 
 

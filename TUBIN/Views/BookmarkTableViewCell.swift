@@ -35,7 +35,11 @@ class BookmarkTableViewCell: UITableViewCell {
             playlist.thumbnailImage() { (result) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.thumbnailImageView.image = box.unbox
+                    let image = box.unbox
+                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+//                    self.thumbnailImageView.image = box.unbox
+//                    self.thumbnailImageView.contentMode = .ScaleAspectFill
                 case .Failure(let box):
                     self.logger.error(box.unbox.localizedDescription)
                 }
@@ -48,6 +52,7 @@ class BookmarkTableViewCell: UITableViewCell {
                 switch result {
                 case .Success(let box):
                     self.thumbnailImageView.image = box.unbox
+                    self.thumbnailImageView.contentMode = .ScaleAspectFit
                 case .Failure(let box):
                     self.logger.error(box.unbox.localizedDescription)
                 }
@@ -60,4 +65,14 @@ class BookmarkTableViewCell: UITableViewCell {
             channelTitleLabel.hidden = true
         }
     }
+
+    private func standardToWide(standard: CGSize) -> CGRect {
+        var wide = CGRectZero
+        wide.origin.x = 0
+        wide.origin.y = (standard.height / 16.0) * 2
+        wide.size.width = standard.width
+        wide.size.height = standard.height - (standard.height / 16.0) * 4
+        return wide
+    }
+
 }

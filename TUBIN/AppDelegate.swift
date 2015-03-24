@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BigBrother
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

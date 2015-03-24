@@ -432,6 +432,7 @@
         <!--Guide Categories View Controller-->
         <scene sceneID="OVJ-J2-CtT">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HyB-Y0-LQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="GuideCategoriesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kaa-OJ-tyM" customClass="GuideCategoriesViewController" customModule="TUBIN" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yav-Hr-BML"/>
@@ -459,7 +460,6 @@
                         <outlet property="tableView" destination="97r-MS-iJm" id="Ayg-dz-GC6"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HyB-Y0-LQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2400" y="1708"/>
         </scene>

@@ -29,14 +29,6 @@ class ItemTableTableViewCell: UITableViewCell {
 
     func configure(item: Item) {
         titleLabel.text = item.title
-        if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.sd_setImageWithURL(URL)
-        }
-        /*
-        if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.sd_setImageWithURL(URL)
-        }
-        */
         /*
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
@@ -47,9 +39,15 @@ class ItemTableTableViewCell: UITableViewCell {
             }
         }
         */
+        /*
+        if let URL = NSURL(string: item.thumbnailURL) {
+            thumbnailImageView.sd_setImageWithURL(URL)
+        }
+        */
+
     }
 
-    func formatStringFromInt(integer: Int) -> String {
+    private func formatStringFromInt(integer: Int) -> String {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
         formatter.groupingSeparator = ","
@@ -57,7 +55,7 @@ class ItemTableTableViewCell: UITableViewCell {
         return formatter.stringFromNumber(NSNumber(integer: integer))!
     }
 
-    func formatStringFromInt64(longLong: Int64) -> String {
+    private func formatStringFromInt64(longLong: Int64) -> String {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
         formatter.groupingSeparator = ","
@@ -65,15 +63,17 @@ class ItemTableTableViewCell: UITableViewCell {
         return formatter.stringFromNumber(NSNumber(longLong: longLong))!
     }
 
-    func formatStringFromInt(longLong: String) -> String {
+    private func formatStringFromInt(longLong: String) -> String {
         return formatStringFromInt64(NSString(string: longLong).longLongValue)
-        /*
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .DecimalStyle
-        formatter.groupingSeparator = ","
-        formatter.groupingSize = 3
-        return formatter.stringFromNumber(NSNumber(longLong: longLong))!
-        */
+    }
+
+    private func standardToWide(standard: CGSize) -> CGRect {
+        var wide = CGRectZero
+        wide.origin.x = 0
+        wide.origin.y = (standard.height / 16.0) * 2
+        wide.size.width = standard.width
+        wide.size.height = standard.height - (standard.height / 16.0) * 4
+        return wide
     }
 }
 
@@ -82,41 +82,50 @@ class VideoTableViewCell: ItemTableTableViewCell {
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var channelTitle: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
-    @IBOutlet weak var favoriteLabel: UILabel!
+    @IBOutlet weak var publishedAtLabel: UILabel!
 
     override func configure(item: Item) {
         super.configure(item)
+        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
+            switch result {
+            case .Success(let box):
+                let image = box.unbox
+                let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                self.thumbnailImageView.image = UIImage(CGImage: rect)
+            case .Failure(let box):
+                self.logger.error(box.unbox.localizedDescription)
+            }
+        }
         let video = item as Video
         durationLabel.text = video.duration
-        channelTitle.text = video.channelTitle
-        video.viewCount
-        viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) views"
-    }
-
-    /*
-    override func configure(item: SwifTube.Item) {
-        super.configure(item)
-        let video = item as SwifTube.Video
-        durationLabel.text = video.duration
-        channelTitle.text = video.channelTitle
-        viewCountLabel.text = "\(formatStringFromInt(video.viewCount)) views"
-        if let fileURL = video.fileURL {
-            //favoriteLabel.text = NSString.awesomeIcon(FaStar)
-            favoriteLabel.text = "⭐️"
+        if let publishedAt = video.publishedAt {
+            publishedAtLabel.text = publishedAt.relativeTimeToString()
         } else {
-            favoriteLabel.text = ""
+            publishedAtLabel.text = ""
         }
+        viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) views"
+        channelTitle.text = video.channelTitle
     }
-    */
 }
 
 class PlaylistTableViewCell: ItemTableTableViewCell {
     
     @IBOutlet weak var channelTitle: UILabel!
     @IBOutlet weak var itemCountLabel: UILabel!
+    @IBOutlet weak var publishedAtLabel: UILabel!
 
     override func configure(item: Item) {
         super.configure(item)
+        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
+            switch result {
+            case .Success(let box):
+                let image = box.unbox
+                let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                self.thumbnailImageView.image = UIImage(CGImage: rect)
+            case .Failure(let box):
+                self.logger.error(box.unbox.localizedDescription)
+            }
+        }
         let playlist = item as Playlist
         channelTitle.text = playlist.channelTitle
         if let itemCount = playlist.itemCount {
@@ -126,18 +135,6 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         }
     }
 
-    /*
-    override func configure(item: SwifTube.Item) {
-        super.configure(item)
-        let playlist = item as SwifTube.Playlist
-        channelTitle.text = playlist.channelTitle
-        if let itemCount = playlist.itemCount {
-            itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
-        } else {
-            itemCountLabel.text = ""
-        }
-    }
-    */
 }
 
 class ChannelTableViewCell: ItemTableTableViewCell {
@@ -147,6 +144,15 @@ class ChannelTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
+            switch result {
+            case .Success(let box):
+                self.thumbnailImageView.image = box.unbox
+                self.thumbnailImageView.contentMode = .ScaleAspectFit
+            case .Failure(let box):
+                self.logger.error(box.unbox.localizedDescription)
+            }
+        }
         let channel = item as Channel
         if let subscriberCount = channel.subscriberCount {
             subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"
@@ -160,28 +166,4 @@ class ChannelTableViewCell: ItemTableTableViewCell {
         }
     }
 
-    /*
-    override func configure(item: SwifTube.Item) {
-        super.configure(item)
-        /*
-        if let viewCount = item.viewCount {
-            viewCountLabel.text = "\(formatStringFromInt(viewCount)) views"
-        } else {
-            viewCountLabel.text = ""
-        }
-        */
-        let channel = item as SwifTube.Channel
-        if let subscriberCount = channel.subscriberCount {
-            subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"
-        } else {
-            subscriberCountLabel.text = ""
-        }
-
-        if let videoCount = channel.videoCount {
-            videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
-        } else {
-            videoCountLabel.text = ""
-        }
-    }
-    */
 }
