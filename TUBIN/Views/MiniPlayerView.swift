@@ -136,13 +136,13 @@ extension MiniPlayerView: YouTubePlayerDelegate {
         switch controller.playbackState {
         case .Playing:
             logger.debug("Playing")
-            playButton.setImage(UIImage(named: "ic_pause_circle_fill_48px"), forState: .Normal)
+            playButton.setImage(UIImage(named: "ic_pause_circle_outline_48px"), forState: .Normal)
         case .Paused, .Stopped:
             logger.debug("Paused, Stopped")
-            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+            playButton.setImage(UIImage(named: "ic_play_circle_outline_48px"), forState: .Normal)
         default:
             logger.debug("\(controller.playbackState.rawValue)")
-            playButton.setImage(UIImage(named: "ic_play_circle_fill_48px"), forState: .Normal)
+            playButton.setImage(UIImage(named: "ic_play_circle_outline_48px"), forState: .Normal)
             break
         }
     }
