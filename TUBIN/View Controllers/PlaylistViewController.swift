@@ -12,8 +12,6 @@ import LlamaKit
 
 class PlaylistViewController: ItemsViewController {
 
-    let videoPlayer = VideoPlayer.sharedInstance
-
     var channel: Channel?
 
     var playlist: Playlist! {
@@ -89,23 +87,6 @@ class PlaylistViewController: ItemsViewController {
         channelView.addSubview(controller.view)
     }
 
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showVideo" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let destinationViewController = segue.destinationViewController as VideoPlayerViewController
-                let video = items[indexPath.row] as Video
-                if let playlist = videoPlayer.playlist {
-                    if video.id == playlist.playingVideo().id {
-                        destinationViewController.playingVideo = .NowPlaying
-                    }
-                }
-                videoPlayer.setPlaylist(videos: items as [Video], index: indexPath.row)
-            }
-        }
-    }
-
     // MARK: - YouTube search
     override func search() {
         super.search()
@@ -153,12 +134,6 @@ class PlaylistViewController: ItemsViewController {
         // TODO:
     }
 
-    // MARK: Notifications
-    func videoPlayerDidPrepareToPlay(notification: NSNotification) {
-        let video = VideoPlayer.sharedInstance.playlist.playingVideo()
-        let index = NSArray(array: items).indexOfObject(video)
-        tableView.selectRowAtIndexPath(NSIndexPath(forItem: index, inSection: 0), animated: true, scrollPosition: .Middle)
-    }
 }
 
 extension PlaylistViewController: UITableViewDataSource {
