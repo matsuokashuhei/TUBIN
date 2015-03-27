@@ -327,7 +327,14 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
         logger.debug("")
         addPlayerView(controller)
         play()
-        History.add(video) { (result) in }
+        History.add(video) { (result) in
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "WatchVideoNotification", object: self))
+            case .Failure(let box):
+                Alert.error(box.unbox)
+            }
+        }
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {

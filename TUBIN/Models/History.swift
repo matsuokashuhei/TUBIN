@@ -35,6 +35,25 @@ class History {
 
 extension History {
 
+    class func all(handler: (Result<[History], NSError>) -> Void) {
+        let query = Parser.sharedInstance.query("History")
+        query.addDescendingOrder("watchedAt")
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let objects = objects as? [PFObject] {
+                let histories = objects.map { (object) -> History in
+                    return History(object: object)
+                }
+                handler(.Success(Box(histories)))
+                return
+            }
+            if let error = error {
+                handler(.Failure(Box(error)))
+                return
+            }
+            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+        }
+    }
+
     class func find(#id: String, handler: (Result<PFObject, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("History")
         query.whereKey("id", equalTo: id)
@@ -67,7 +86,8 @@ extension History {
         exists(video) { (result) -> Void in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                let exists = box.unbox
+                if exists {
                     self.find(id: video.id, handler: { (result) -> Void in
                         switch result {
                         case .Success(let box):

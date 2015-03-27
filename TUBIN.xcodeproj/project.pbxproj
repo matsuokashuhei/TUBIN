@@ -17,6 +17,8 @@
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
 		A88CF3541AC5A068005276DD /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3531AC5A068005276DD /* SwiftyUserDefaults.swift */; };
 		A88CF3571AC5EB0C005276DD /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3561AC5EB0C005276DD /* History.swift */; };
+		A88CF35A1AC5F0AA005276DD /* HistoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */; };
+		A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */; };
 		A88D7BC01AC43D020085A8F8 /* YouTubePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88D7BBF1AC43D020085A8F8 /* YouTubePlayerViewController.xib */; };
 		A899AE7C1AAC4C310011D5DE /* GuideCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */; };
 		A899AE7E1AAC4F4B0011D5DE /* BookmarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */; };
@@ -152,6 +154,8 @@
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
 		A88CF3531AC5A068005276DD /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		A88CF3561AC5EB0C005276DD /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoriesViewController.swift; sourceTree = "<group>"; };
+		A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoriesViewController.xib; sourceTree = "<group>"; };
 		A88D7BBF1AC43D020085A8F8 /* YouTubePlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController.xib; sourceTree = "<group>"; };
 		A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoriesViewController.xib; sourceTree = "<group>"; };
 		A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarksViewController.xib; sourceTree = "<group>"; };
@@ -405,8 +409,8 @@
 			children = (
 				A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */,
 				A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */,
-				A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */,
 				A88CF3561AC5EB0C005276DD /* History.swift */,
+				A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -454,6 +458,8 @@
 				A8E17F331ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib */,
 				A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */,
 				A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */,
+				A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */,
+				A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */,
 				A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */,
 				A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */,
+				A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */,
 				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
 				A8E17F341ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib in Resources */,
 				A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */,
@@ -755,6 +762,7 @@
 				A8D403A91AA8CC4400F0AAD2 /* GuideCategoryTableViewCell.swift in Sources */,
 				A8D403AA1AA8CC4400F0AAD2 /* ItemTableViewCell.swift in Sources */,
 				A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */,
+				A88CF35A1AC5F0AA005276DD /* HistoriesViewController.swift in Sources */,
 				A8D4039D1AA8CC4400F0AAD2 /* GuideCategoriesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
