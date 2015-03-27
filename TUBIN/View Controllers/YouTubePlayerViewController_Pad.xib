@@ -17,7 +17,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BackgroundView" customModule="TUBIN" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -95,6 +95,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="84" id="Phu-TC-yia"/>
                     </constraints>
+                    <connections>
+                        <outlet property="height" destination="Phu-TC-yia" id="Ja7-gY-c3d"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -116,7 +119,7 @@
                 <constraint firstItem="AIc-ij-rpt" firstAttribute="top" secondItem="elD-it-69q" secondAttribute="bottom" constant="8" id="w38-OD-FwT"/>
                 <constraint firstAttribute="centerX" secondItem="bKa-D3-lYu" secondAttribute="centerX" id="wbs-sB-T4Q"/>
             </constraints>
-            <point key="canvasLocation" x="541" y="484"/>
+            <point key="canvasLocation" x="346" y="480"/>
         </view>
     </objects>
     <resources>

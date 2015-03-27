@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YouTubePlayerViewController" customModule="TUBIN" customModuleProvider="target">
+            <connections>
+                <outlet property="channelView" destination="Wgg-eJ-EzX" id="c8X-oB-Cq3"/>
+                <outlet property="nextButton" destination="e0P-K1-Koe" id="7Fs-tI-8W8"/>
+                <outlet property="playButton" destination="a8A-c7-vZW" id="DAc-A9-TCQ"/>
+                <outlet property="previousButton" destination="3a5-5I-9Az" id="UU3-ds-ATT"/>
+                <outlet property="scrubberView" destination="Rnn-xJ-kGJ" id="YEu-N7-w5d"/>
+                <outlet property="videoView" destination="gNU-Ec-l4t" id="a2a-kP-iSm"/>
+                <outlet property="view" destination="iN0-l3-epB" id="JOX-h0-2lr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BackgroundView" customModule="TUBIN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNU-Ec-l4t">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="gNU-Ec-l4t" secondAttribute="height" multiplier="16:9" id="QMQ-ag-QCF"/>
+                    </constraints>
+                    <variation key="widthClass=compact" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="226"/>
+                    </variation>
+                    <variation key="widthClass=regular" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="451"/>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rnn-xJ-kGJ" customClass="ScrubberView" customModule="TUBIN" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="338" width="600" height="40"/>
+                    <subviews>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hvC-Zz-JsI">
+                            <rect key="frame" x="64" y="5" width="472" height="31"/>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQv-Pq-V8t">
+                            <rect key="frame" x="8" y="10" width="50" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="SgK-xX-0Aa"/>
+                                <constraint firstAttribute="width" constant="50" id="XmF-Rs-Pfc"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yag-EL-rvX">
+                            <rect key="frame" x="542" y="10" width="50" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="Str-Is-b1u"/>
+                                <constraint firstAttribute="width" constant="50" id="axa-NN-bEq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="kQv-Pq-V8t" firstAttribute="top" secondItem="Rnn-xJ-kGJ" secondAttribute="top" constant="10" id="1Jt-as-lP1"/>
+                        <constraint firstItem="yag-EL-rvX" firstAttribute="top" secondItem="Rnn-xJ-kGJ" secondAttribute="top" constant="10" id="85U-J7-c9d"/>
+                        <constraint firstAttribute="bottom" secondItem="hvC-Zz-JsI" secondAttribute="bottom" constant="5" id="KZp-Aw-GC1"/>
+                        <constraint firstItem="hvC-Zz-JsI" firstAttribute="top" secondItem="Rnn-xJ-kGJ" secondAttribute="top" constant="5" id="ZMx-y6-9js"/>
+                        <constraint firstItem="hvC-Zz-JsI" firstAttribute="leading" secondItem="kQv-Pq-V8t" secondAttribute="trailing" constant="8" id="ZXx-xi-kKG"/>
+                        <constraint firstAttribute="height" constant="40" id="bpb-bo-axt"/>
+                        <constraint firstItem="yag-EL-rvX" firstAttribute="leading" secondItem="hvC-Zz-JsI" secondAttribute="trailing" constant="8" id="dkX-ox-lIs"/>
+                        <constraint firstAttribute="bottom" secondItem="yag-EL-rvX" secondAttribute="bottom" constant="10" id="f0s-mT-Bf8"/>
+                        <constraint firstAttribute="trailing" secondItem="yag-EL-rvX" secondAttribute="trailing" constant="8" id="gzc-OJ-3d4"/>
+                        <constraint firstAttribute="bottom" secondItem="kQv-Pq-V8t" secondAttribute="bottom" constant="10" id="hMs-Yz-fPe"/>
+                        <constraint firstItem="kQv-Pq-V8t" firstAttribute="leading" secondItem="Rnn-xJ-kGJ" secondAttribute="leading" constant="8" id="rpm-56-6Mb"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="endTimeLabel" destination="yag-EL-rvX" id="e6i-IO-3mh"/>
+                        <outlet property="slider" destination="hvC-Zz-JsI" id="OXw-oA-c96"/>
+                        <outlet property="startTimeLabel" destination="kQv-Pq-V8t" id="26H-1K-OcT"/>
+                    </connections>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8A-c7-vZW" userLabel="play">
+                    <rect key="frame" x="268" y="386" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="ibk-Qp-Jg5"/>
+                        <constraint firstAttribute="height" constant="64" id="x55-xa-ovZ"/>
+                    </constraints>
+                    <state key="normal" image="ic_play_circle_outline_96px"/>
+                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="168" y="280" width="64" height="64"/>
+                    </variation>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0P-K1-Koe" userLabel="next">
+                    <rect key="frame" x="348" y="394" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="HGb-kV-vN8"/>
+                        <constraint firstAttribute="height" constant="48" id="XOL-Ik-hGi"/>
+                    </constraints>
+                    <state key="normal" image="ic_skip_next_48px"/>
+                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="240" y="288" width="48" height="48"/>
+                    </variation>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3a5-5I-9Az" userLabel="prev">
+                    <rect key="frame" x="204" y="394" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="U3R-9p-3JV"/>
+                        <constraint firstAttribute="width" constant="48" id="zPx-iq-R56"/>
+                    </constraints>
+                    <state key="normal" image="ic_skip_previous_48px"/>
+                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="112" y="288" width="48" height="48"/>
+                    </variation>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgg-eJ-EzX" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="516" width="600" height="84"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="84" id="VRo-id-Nts"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="height" destination="VRo-id-Nts" id="Ejl-2W-rXl"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="a8A-c7-vZW" secondAttribute="centerX" id="HkI-YS-ceB"/>
+                <constraint firstItem="a8A-c7-vZW" firstAttribute="top" secondItem="Rnn-xJ-kGJ" secondAttribute="bottom" constant="8" id="HyD-Mj-xol"/>
+                <constraint firstAttribute="trailing" secondItem="Wgg-eJ-EzX" secondAttribute="trailing" id="IqM-jf-w8k"/>
+                <constraint firstItem="a8A-c7-vZW" firstAttribute="leading" secondItem="3a5-5I-9Az" secondAttribute="trailing" constant="16" id="P3Y-v1-YTT"/>
+                <constraint firstAttribute="trailing" secondItem="Rnn-xJ-kGJ" secondAttribute="trailing" id="aBt-jH-wUw"/>
+                <constraint firstItem="Wgg-eJ-EzX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aFs-rY-KzG"/>
+                <constraint firstItem="Rnn-xJ-kGJ" firstAttribute="top" secondItem="gNU-Ec-l4t" secondAttribute="bottom" id="c9M-0h-L7a"/>
+                <constraint firstItem="e0P-K1-Koe" firstAttribute="leading" secondItem="a8A-c7-vZW" secondAttribute="trailing" constant="16" id="frA-eg-GAe"/>
+                <constraint firstItem="gNU-Ec-l4t" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mZ0-0p-DeK"/>
+                <constraint firstAttribute="trailing" secondItem="gNU-Ec-l4t" secondAttribute="trailing" id="pXP-z2-Jwo"/>
+                <constraint firstItem="a8A-c7-vZW" firstAttribute="centerY" secondItem="e0P-K1-Koe" secondAttribute="centerY" id="rnF-T4-WD8"/>
+                <constraint firstItem="Rnn-xJ-kGJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uaF-Dg-jeE"/>
+                <constraint firstItem="gNU-Ec-l4t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wYt-QB-Z7i"/>
+                <constraint firstItem="3a5-5I-9Az" firstAttribute="centerY" secondItem="a8A-c7-vZW" secondAttribute="centerY" id="wuw-iD-cWk"/>
+                <constraint firstAttribute="bottom" secondItem="Wgg-eJ-EzX" secondAttribute="bottom" id="xXm-27-eAp"/>
+            </constraints>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="subviews">
+                    <exclude reference="Wgg-eJ-EzX"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="521" y="409"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_play_circle_outline_96px" width="96" height="96"/>
+        <image name="ic_skip_next_48px" width="48" height="48"/>
+        <image name="ic_skip_previous_48px" width="48" height="48"/>
+    </resources>
+</document>

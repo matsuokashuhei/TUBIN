@@ -176,15 +176,16 @@ class YouTubePlayerViewController: UIViewController {
     func configure(orientation: UIDeviceOrientation) {
         edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            logger.debug("UIDevice.currentDevice().userInterfaceIdiom: .Phone")
             // iPhone
             if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
                 // Portait
-                view.backgroundColor = UIColor.whiteColor()
                 showPlayerController()
             } else {
-                view.backgroundColor = UIColor.blackColor()
                 edgesForExtendedLayout = UIRectEdge.Top
             }
+        } else {
+            logger.debug("UIDevice.currentDevice().userInterfaceIdiom: .Pad")
         }
     }
 

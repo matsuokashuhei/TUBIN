@@ -18,24 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // ロガー
         XCGLogger.defaultInstance().setup(logLevel: .Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+
         // 外観
         let fontName = UIFont(name: "AvenirNext-Regular", size: 15.0)!
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: fontName]
+        //Appearance.apply(.Dark)
+
         // Parse
         Parser.configure()
-        // ------------------
-        // In-app Purchase
-        // ------------------
-        if SKPaymentQueue.canMakePayments() {
-            logger.debug("SKPaymentQueue.canMakePayments")
-        }
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
-    }
-
-    override func remoteControlReceivedWithEvent(event: UIEvent) {
-        logger.debug("event: \(event)")
-        VideoPlayer.sharedInstance.remoteControlReceivedWithEvent(event)
     }
 
 }

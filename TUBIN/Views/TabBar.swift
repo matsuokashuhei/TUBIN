@@ -24,18 +24,16 @@ class Tab: UIView {
             if let selected = selected {
                 if selected {
                     UIView.animateWithDuration(0.5) {
-                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
+//                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
+                        self.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
                         self.label.textColor = UIColor.whiteColor()
                     }
-//                    label.backgroundColor = tintColor.colorWithAlphaComponent(1.0)
-//                    label.textColor = UIColor.whiteColor()
                 } else {
-                    UIView.animateWithDuration(0.3) {
-                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
+                    UIView.animateWithDuration(0.5) {
+//                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
+                        self.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
                         self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
                     }
-//                    label.backgroundColor = tintColor.colorWithAlphaComponent(0.0)
-//                    label.textColor = tintColor.colorWithAlphaComponent(1.0)
                 }
             }
         }
@@ -45,15 +43,6 @@ class Tab: UIView {
         self.item = item
         super.init()
         configure(item)
-        /*
-        item.thumbnailImage { (image, error) -> Void in
-            if let image = image {
-                self.imageView = UIImageView(image: image)
-                self.addSubview(self.imageView!)
-                self.imageView?.frame = CGRect(x: 0, y: 1, width: 42, height: 28)
-            }
-        }
-        */
     }
 
     init(text: String) {
@@ -65,6 +54,9 @@ class Tab: UIView {
 
     private func configure() {
         frame.size = Tab.size()
+        layer.borderWidth = 0.5
+        //layer.borderColor = UIColor.clearColor().CGColor
+        layer.borderColor = Appearance.tintColor().CGColor
         configure(label)
     }
 
@@ -77,22 +69,17 @@ class Tab: UIView {
 
     func configure(text: String) {
         configure()
-        label.text =  text
+        label.text = text
         addSubview(label)
     }
 
     func configure(label: UILabel) {
         label.frame = self.bounds
-        label.layer.borderWidth = 0.5
-        //tab.layer.borderColor = UIColor.grayColor().CGColor
-        label.layer.borderColor = tintColor.CGColor
         label.textAlignment = NSTextAlignment.Center
         label.numberOfLines = 3
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         label.font = UIFont(name: "Avenir Next", size: 10)
-        //label.textColor = tintColor
         label.userInteractionEnabled = true
-        //label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapTab:"))
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -174,12 +161,25 @@ class TabBar: UIView {
         delegate?.tabBar(self, didSelectTabAtIndex: indexOfTabs(tab))
     }
 
+    /*
     func selectTab(tab: Tab) {
         for tab in tabs {
             tab.selected = false
         }
         tab.selected = true
         centerTab(tab)
+    }
+    */
+    func selectTab(selectedTab: Tab) {
+        for tab in tabs {
+            if tab == selectedTab {
+                continue
+            } else {
+                tab.selected = false
+            }
+        }
+        selectedTab.selected = true
+        centerTab(selectedTab)
     }
 
     func selectTabAtIndex(index: Int) {
@@ -252,14 +252,16 @@ class TabBar: UIView {
         let alpha = offset - CGFloat(left)
         logger.debug("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
         if offset > 0 {
-            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
+//            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
+            tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
             if alpha > 0.5 {
                 tabs[left].label.textColor = tintColor.colorWithAlphaComponent(alpha)
             } else {
                 tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 - alpha)
             }
             if right < tabs.count {
-                tabs[right].label.backgroundColor = tintColor.colorWithAlphaComponent(alpha)
+//                tabs[right].label.backgroundColor = tintColor.colorWithAlphaComponent(alpha)
+                tabs[right].backgroundColor = tintColor.colorWithAlphaComponent(alpha)
                 if alpha < 0.5 {
                     tabs[right].label.textColor = tintColor.colorWithAlphaComponent(1 - alpha)
                 } else {
@@ -267,7 +269,8 @@ class TabBar: UIView {
                 }
             }
         } else {
-            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
+//            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
+            tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
             tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 + alpha)
         }
     }
