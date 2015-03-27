@@ -114,15 +114,28 @@ class PlaylistViewController: ItemsViewController {
 
     // MARK: Bookmark
     func addPlaylistToBookmark() {
-        navigationItem.rightBarButtonItem?.enabled = true
-        Bookmark.add(playlist) { (result) in
-            self.navigationItem.rightBarButtonItem?.enabled = false
+        Bookmark.count { (result)in
             switch result {
             case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
-                Async.main {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                if box.unbox < Configration.Defaults.maxNumberOfSubscribes {
+                    self.navigationItem.rightBarButtonItem?.enabled = true
+                    Bookmark.add(self.playlist) { (result) in
+                        self.navigationItem.rightBarButtonItem?.enabled = false
+                        switch result {
+                        case .Success(let box):
+                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
+                            Async.main {
+                                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                                self.navigationItem.rightBarButtonItem = bookmarkButton
+                            }
+                        case .Failure(let box):
+                            Alert.error(box.unbox)
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: nil, message: "Cannot subscribe to any more Playlist", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             case .Failure(let box):
                 Alert.error(box.unbox)

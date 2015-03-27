@@ -126,18 +126,32 @@ class ChannelViewController: UIViewController {
     }
 
     func addChannelToBookmark() {
-        navigationItem.rightBarButtonItem?.enabled = true
-        Bookmark.add(channel) { (result) in
-            self.navigationItem.rightBarButtonItem?.enabled = false
+        Bookmark.count { (result) in
             switch result {
             case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
-                Async.main {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                if box.unbox < Configration.Defaults.maxNumberOfSubscribes {
+                    self.navigationItem.rightBarButtonItem?.enabled = true
+                    Bookmark.add(self.channel) { (result) in
+                        self.navigationItem.rightBarButtonItem?.enabled = false
+                        switch result {
+                        case .Success(let box):
+                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
+                            Async.main {
+                                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                                self.navigationItem.rightBarButtonItem = bookmarkButton
+                            }
+                        case .Failure(let box):
+                            Alert.error(box.unbox)
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: nil, message: "Cannot subscribe to any more Channel", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             case .Failure(let box):
                 Alert.error(box.unbox)
+                return
             }
         }
     }

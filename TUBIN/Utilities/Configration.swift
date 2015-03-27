@@ -16,11 +16,11 @@ class Configration: NSObject {
         }
         return Singleton.instance
     }
-    
-    var backgroundColor: UIColor
 
-    override init() {
-        backgroundColor = UIColor.darkGrayColor()
+    struct Defaults {
+        static let maxNumberOfSubscribes = 19
+        static let maxNumberOfFavorites = 20
+        static let maxNumberOfHistories = 30
     }
 
 }

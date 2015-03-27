@@ -376,23 +376,35 @@ extension YouTubePlayerViewController {
 
     func addVideoToFavorite() {
 
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-        indicator.color = view.tintColor
-        indicator.startAnimating()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
-
-        Favorite.add(video) { (result) in
-            indicator.stopAnimating()
+        Favorite.count { (result)in
             switch result {
             case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
-                Async.main {
-                    let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
-                    self.navigationItem.rightBarButtonItem = favoriteButton
+                if box.unbox < Configration.Defaults.maxNumberOfFavorites {
+                    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+                    indicator.startAnimating()
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
+
+                    Favorite.add(self.video) { (result) in
+                        indicator.stopAnimating()
+                        switch result {
+                        case .Success(let box):
+                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
+                            Async.main {
+                                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
+                                self.navigationItem.rightBarButtonItem = favoriteButton
+                            }
+                        case .Failure(let box):
+                            let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                            self.navigationItem.rightBarButtonItem = favoriteButton
+                            Alert.error(box.unbox)
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: nil, message: "Cannot add to favorites", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             case .Failure(let box):
-                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
-                self.navigationItem.rightBarButtonItem = favoriteButton
                 Alert.error(box.unbox)
             }
         }
