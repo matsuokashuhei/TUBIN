@@ -162,10 +162,10 @@ extension StoreViewController: SKPaymentTransactionObserver {
                 }
                 // トランザクションの終了
                 switch transaction.transactionState {
-                case .Deferred:
-                    break
-                default:
+                case .Purchased, .Failed, .Restored:
                     SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+                default:
+                    break
                 }
             }
         }
