@@ -74,10 +74,8 @@ extension Bookmark {
                     return Bookmark(object: object)
                 }
                 handler(.Success(Box(bookmarks)))
-                return
             case .Failure(let box):
                 handler(.Failure(box))
-                return
             }
         }
     }

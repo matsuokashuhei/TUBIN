@@ -40,13 +40,17 @@ class GuideCategoryTableViewCell: UITableViewCell {
                             self.thumbnailImageView.image = box.unbox
                             self.thumbnailImageView.contentMode = .ScaleAspectFit
                         case .Failure(let box):
-                            Alert.error(box.unbox)
+                            let error = box.unbox
+                            self.logger.error(error.localizedDescription)
+                            Alert.error(error)
                         }
 
                     }
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }

@@ -123,6 +123,7 @@ class ItemsViewController: UIViewController {
         if spinnable {
             Spinner.dismiss()
         }
+        logger.error(error.localizedDescription)
         Alert.error(error)
     }
 
@@ -144,6 +145,8 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
                 case .Failure(let box):
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
                     Alert.error(box.unbox)
                 }
             })
@@ -155,6 +158,8 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": playlist]))
                 case .Failure(let box):
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
                     Alert.error(box.unbox)
                 }
             })
@@ -166,6 +171,8 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": channel]))
                 case .Failure(let box):
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
                     Alert.error(box.unbox)
                 }
             })

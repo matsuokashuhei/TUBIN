@@ -61,7 +61,9 @@ class FavoritesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }
@@ -84,7 +86,9 @@ class FavoritesViewController: UIViewController {
                 case .Success(let box):
                     Spinner.dismiss()
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
+                    Alert.error(error)
                 }
             }
         }

@@ -11,6 +11,8 @@ import YouTubeKit
 
 class HistoriesViewController: UIViewController {
 
+    let logger = XCGLogger.defaultInstance()
+
     @IBOutlet weak var tableView: UITableView!
 
     var histories = [History]()
@@ -52,7 +54,9 @@ class HistoriesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }

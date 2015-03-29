@@ -57,7 +57,9 @@ class ContainerViewController: UIViewController {
         case .Success(let box):
             bookmarks = box.unbox
         case .Failure(let box):
-            Alert.error(box.unbox)
+            let error = box.unbox
+            self.logger.error(error.localizedDescription)
+            Alert.error(error)
             return
         }
         for bookmark in bookmarks {
@@ -180,9 +182,10 @@ extension ContainerViewController {
                 self.tabBar.layoutIfNeeded()
                 self.containerView.setNeedsLayout()
                 self.containerView.layoutIfNeeded()
-                SVProgressHUD.showSuccessWithStatus("")
             case .Failure(let box):
-                Alert.error(box.unbox)
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }

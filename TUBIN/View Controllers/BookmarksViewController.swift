@@ -102,7 +102,9 @@ class BookmarksViewController: UIViewController {
                     }
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: BookmarksEditedNotification, object: self))
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
+                    Alert.error(error)
                 }
             }
             edited = false

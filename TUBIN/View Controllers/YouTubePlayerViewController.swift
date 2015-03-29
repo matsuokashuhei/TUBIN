@@ -332,6 +332,8 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "WatchVideoNotification", object: self))
             case .Failure(let box):
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
                 Alert.error(box.unbox)
             }
         }
@@ -405,6 +407,8 @@ extension YouTubePlayerViewController {
                         case .Failure(let box):
                             let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
                             self.navigationItem.rightBarButtonItem = favoriteButton
+                            let error = box.unbox
+                            self.logger.error(error.localizedDescription)
                             Alert.error(box.unbox)
                         }
                     }
@@ -414,6 +418,8 @@ extension YouTubePlayerViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             case .Failure(let box):
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
                 Alert.error(box.unbox)
             }
         }
@@ -431,6 +437,8 @@ extension YouTubePlayerViewController {
                     self.navigationItem.rightBarButtonItem = favoriteButton
                 }
             case .Failure(let box):
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
                 Alert.error(box.unbox)
             }
         }

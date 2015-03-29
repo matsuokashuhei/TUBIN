@@ -77,7 +77,8 @@ class YouTubePlayer: NSObject {
                     self.startPlaying(box.unbox)
                 case .Failure(let box):
                     self.controller.contentURL = nil
-                    self.logger.error(box.unbox.localizedDescription)
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
                     Alert.error(box.unbox)
                 }
             }

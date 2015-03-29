@@ -141,7 +141,9 @@ class ChannelViewController: UIViewController {
                                 self.navigationItem.rightBarButtonItem = bookmarkButton
                             }
                         case .Failure(let box):
-                            Alert.error(box.unbox)
+                            let error = box.unbox
+                            self.logger.error(error.localizedDescription)
+                            Alert.error(error)
                         }
                     }
                 } else {
@@ -150,8 +152,9 @@ class ChannelViewController: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
-                return
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }

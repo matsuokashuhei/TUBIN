@@ -46,12 +46,15 @@ class FileManager {
             if exists(fileURL) {
                 remove(fileURL) { (result) in
                     handler(result)
-                    return
                 }
+            } else {
+                handler(.Success(Box(true)))
             }
+        } else {
+            handler(.Success(Box(true)))
         }
-        handler(.Failure(Box(Error.Unknown.toNSError())))
     }
+
     class func remove(fileURL: NSURL, handler: (Result<Bool, NSError>) -> Void) {
         var error: NSError?
         NSFileManager.defaultManager().removeItemAtURL(fileURL, error: &error)

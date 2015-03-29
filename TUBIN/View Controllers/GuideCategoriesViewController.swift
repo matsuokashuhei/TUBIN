@@ -12,6 +12,8 @@ import YouTubeKit
 
 class GuideCategoriesViewController: UIViewController {
 
+    let logger = XCGLogger.defaultInstance()
+
     // MARK: - YouTube search
     @IBOutlet var tableView: UITableView! {
         didSet {
@@ -64,7 +66,9 @@ class GuideCategoriesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
             }
         }
     }
