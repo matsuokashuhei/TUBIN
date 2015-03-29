@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoreViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
+                <outlet property="restoreButton" destination="WMY-bw-AMc" id="bCn-cB-Kjd"/>
                 <outlet property="upgradeButton" destination="WeL-Hj-ghY" id="ZJy-Zq-PVS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

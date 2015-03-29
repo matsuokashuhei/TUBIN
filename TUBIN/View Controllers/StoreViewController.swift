@@ -95,7 +95,6 @@ extension StoreViewController: SKProductsRequestDelegate {
     func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
         if let product = response.products.first as? SKProduct {
             self.product = product
-
             if let price = formatPrice(product) {
                 upgradeButton.setTitle("UPGRADE \(price)", forState: .Normal)
             }
