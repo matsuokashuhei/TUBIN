@@ -16,16 +16,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
         // ロガー
         XCGLogger.defaultInstance().setup(logLevel: .Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 
         // 外観
-        let fontName = UIFont(name: "AvenirNext-Regular", size: 15.0)!
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: fontName]
-        //Appearance.apply(.Dark)
+        Appearance.apply(.Light)
 
         // Parse
         Parser.configure()
+
+        // Settings
+        if !Defaults.hasKey("launched") {
+            Defaults["launched"] = true
+            Defaults["upgraded"] = false
+            Defaults["maxNumberOfHistories"] = 15
+            Defaults["maxNumberOfFavorites"] = 30
+            // Subscribes + 4 (Popular, Guide, Favorites, Search)
+            Defaults["maxNumberOfSubscribes"] = 14
+        }
+
+        let launched = Defaults["launched"].bool!
+        logger.debug("launced: \(launched)")
+        let upgraded = Defaults["upgraded"].bool!
+        logger.debug("upgraded: \(upgraded)")
+        let maxNumberOfHistories = Defaults["maxNumberOfHistories"].int!
+        logger.debug("maxNumberOfHistories: \(maxNumberOfHistories)")
+        let maxNumberOfFavorites = Defaults["maxNumberOfFavorites"].int!
+        logger.debug("maxNumberOfFavorites: \(maxNumberOfFavorites)")
+        let maxNumberOfSubscribes = Defaults["maxNumberOfSubscribes"].int!
+        logger.debug("maxNumberOfSubscribes: \(maxNumberOfSubscribes)")
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }

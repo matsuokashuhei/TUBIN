@@ -13,6 +13,10 @@ class Alert {
         sharedInstance.error(error)
     }
 
+    class func success(message: String) {
+        sharedInstance.success(message)
+    }
+
     let logger = XCGLogger.defaultInstance()
 
     class var sharedInstance: Alert {
@@ -38,6 +42,14 @@ class Alert {
             //HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: HUDAssets.crossImage)
             HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: image)
         }
+        HUDController.sharedController.show()
+        HUDController.sharedController.hide(afterDelay: 1.0)
+    }
+
+    func success(message: String) {
+        configure()
+        let image = UIImage(named: "ic_check_48px")
+        HUDController.sharedController.contentView = HUDContentView.StatusView(title: "SUCCESS", subtitle: message, image: image)
         HUDController.sharedController.show()
         HUDController.sharedController.hide(afterDelay: 1.0)
     }

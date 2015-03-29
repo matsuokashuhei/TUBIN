@@ -19,9 +19,8 @@ class StoreViewController: UIViewController {
         didSet {
             if SKPaymentQueue.canMakePayments() {
                 upgradeButton.addTarget(self, action: "upgradeButtonClicked:", forControlEvents: .TouchUpInside)
-            } else {
-                upgradeButton.enabled = false
             }
+            upgradeButton.enabled = false
         }
     }
 
@@ -29,9 +28,8 @@ class StoreViewController: UIViewController {
         didSet {
             if SKPaymentQueue.canMakePayments() {
                 restoreButton.addTarget(self, action: "restoreButtonClicked:", forControlEvents: .TouchUpInside)
-            } else {
-                restoreButton.enabled = false
             }
+            restoreButton.enabled = false
         }
     }
 
@@ -46,7 +44,9 @@ class StoreViewController: UIViewController {
 
         navigationItem.title = "Store"
 
-        requestProduct()
+        if SKPaymentQueue.canMakePayments() {
+            requestProduct()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -96,7 +96,9 @@ extension StoreViewController: SKProductsRequestDelegate {
         if let product = response.products.first as? SKProduct {
             self.product = product
             if let price = formatPrice(product) {
+                upgradeButton.enabled = true
                 upgradeButton.setTitle("UPGRADE \(price)", forState: .Normal)
+                restoreButton.enabled = true
             }
         }
     }
@@ -139,6 +141,7 @@ extension StoreViewController: SKPaymentTransactionObserver {
                     Spinner.show()
                 case .Purchased:
                     logger.debug("Purchased")
+                    upgradeApp()
                     Spinner.dismiss()
                 case .Failed:
                     logger.debug("Failed")
@@ -154,6 +157,7 @@ extension StoreViewController: SKPaymentTransactionObserver {
                     }
                 case .Restored:
                     logger.debug("Restored")
+                    restoreApp()
                     Spinner.dismiss()
                 case .Deferred:
                     logger.debug("Defered")
@@ -188,5 +192,13 @@ extension StoreViewController: SKPaymentTransactionObserver {
     func paymentQueue(queue: SKPaymentQueue!, updatedDownloads downloads: [AnyObject]!) {
         logger.debug("")
         // TODO:
+    }
+
+    func upgradeApp() {
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: UpgradeAppNotification, object: self))
+    }
+
+    func restoreApp() {
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: RestoreAppNotification, object: self))
     }
 }

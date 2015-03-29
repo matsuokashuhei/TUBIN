@@ -129,7 +129,8 @@ class ChannelViewController: UIViewController {
         Bookmark.count { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox < Configration.Defaults.maxNumberOfSubscribes {
+                let count = box.unbox
+                if count < Defaults["maxNumberOfSubscribes"].int! {
                     self.navigationItem.rightBarButtonItem?.enabled = true
                     Bookmark.add(self.channel) { (result) in
                         self.navigationItem.rightBarButtonItem?.enabled = false

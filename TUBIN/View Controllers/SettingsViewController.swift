@@ -29,22 +29,6 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showBookmarks" {
-            let destinationViewController = segue.destinationViewController as BookmarksViewController
-        }
-    }
-
-    @IBAction func showFLEX(sender: UISwitch) {
-        if sender.on {
-            //FLEXManager.sharedManager().showExplorer()
-        }
-    }
-
-    @IBAction func showAdBanner(sender: UISwitch) {
-        NSNotificationCenter.defaultCenter().postNotificationName(BannerShowableNotification, object: self, userInfo: ["showable": sender.on])
-    }
-
 }
 
 extension SettingsViewController: UITableViewDelegate {

@@ -128,7 +128,7 @@ extension History {
     class func destroy(handler: (Result<Bool, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("History")
         query.addDescendingOrder("watchedAt")
-        query.skip = Configration.Defaults.maxNumberOfHistories
+        query.skip = Defaults["maxNumberOfHistories"].int!
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if let objects = objects as? [PFObject] {
                 if objects.count > 0 {

@@ -20,12 +20,19 @@ class RootViewController: UIViewController {
             miniPlayerView.hide()
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "showMiniPlayer:", name: ShowMiniPlayerNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideMiniPlayer:", name: HideMiniPlayerNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "setBannerShowable:", name: BannerShowableNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "upgradeApp:", name: UpgradeAppNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "restoreApp:", name: RestoreAppNotification, object: nil)
         }
     }
 
     override func viewDidLoad() {
-        canDisplayBannerAds = true
+        if let upgraded = Defaults["upgraded"].bool {
+            if upgraded {
+                canDisplayBannerAds = false
+            } else {
+                canDisplayBannerAds = true
+            }
+        }
         super.viewDidLoad()
     }
 
@@ -35,6 +42,19 @@ class RootViewController: UIViewController {
                 canDisplayBannerAds = showable
             }
         }
+    }
+
+    func upgradeApp(notification: NSNotification) {
+        Defaults["upgraded"] = true
+        Defaults["maxNumberOfHistories"] = 999
+        Defaults["maxNumberOfFavorites"] = 9999
+        Defaults["maxNumberOfSubscribes"] = 9999
+        canDisplayBannerAds = false
+    }
+
+    func restoreApp(notification: NSNotification) {
+        Alert.success("Restored App")
+        upgradeApp(notification)
     }
 
     func showMiniPlayer(notification: NSNotification) {

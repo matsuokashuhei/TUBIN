@@ -390,7 +390,8 @@ extension YouTubePlayerViewController {
         Favorite.count { (result)in
             switch result {
             case .Success(let box):
-                if box.unbox < Configration.Defaults.maxNumberOfFavorites {
+                let count = box.unbox
+                if count < Defaults["maxNumberOfFavorites"].int! {
                     let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
                     indicator.startAnimating()
                     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)

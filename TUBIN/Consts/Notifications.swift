@@ -18,5 +18,6 @@ let HideMiniPlayerNotification = "HideMiniPlayerNotification"
 // VideoPlayer
 let VideoPlayerDidPrepareToPlayNotification = "VideoPlayerDidPrepareToPlayNotification"
 
-// Banner
-let BannerShowableNotification = "BannerShowableNotification"
+// In-app
+let UpgradeAppNotification = "UpgradeAppNotification"
+let RestoreAppNotification = "RestoreAppNotification"
