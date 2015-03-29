@@ -76,18 +76,6 @@ class StoreViewController: UIViewController {
         SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
     }
 
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-    }
-
-    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
-    }
-
 }
 
 extension StoreViewController: SKProductsRequestDelegate {
@@ -196,9 +184,15 @@ extension StoreViewController: SKPaymentTransactionObserver {
 
     func upgradeApp() {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: UpgradeAppNotification, object: self))
+        if let navigationController = navigationController {
+            navigationController.popViewControllerAnimated(true)
+        }
     }
 
     func restoreApp() {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: RestoreAppNotification, object: self))
+        if let navigationController = navigationController {
+            navigationController.popViewControllerAnimated(true)
+        }
     }
 }
