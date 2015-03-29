@@ -14,6 +14,10 @@
 		A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */; };
 		A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CC3E81AAB0456008669F2 /* iAd.framework */; };
 		A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */; };
+		A876C93F1AC86554000D88D8 /* texgyreadventor-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A876C93B1AC86554000D88D8 /* texgyreadventor-bold.otf */; };
+		A876C9401AC86554000D88D8 /* texgyreadventor-bolditalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A876C93C1AC86554000D88D8 /* texgyreadventor-bolditalic.otf */; };
+		A876C9411AC86554000D88D8 /* texgyreadventor-italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A876C93D1AC86554000D88D8 /* texgyreadventor-italic.otf */; };
+		A876C9421AC86554000D88D8 /* texgyreadventor-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A876C93E1AC86554000D88D8 /* texgyreadventor-regular.otf */; };
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
@@ -64,7 +68,6 @@
 		A8D403921AA8CC4400F0AAD2 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */; };
 		A8D403931AA8CC4400F0AAD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */; };
 		A8D403941AA8CC4400F0AAD2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */; };
-		A8D403961AA8CC4400F0AAD2 /* Configration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403701AA8CC4400F0AAD2 /* Configration.swift */; };
 		A8D403971AA8CC4400F0AAD2 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403711AA8CC4400F0AAD2 /* FileManager.swift */; };
 		A8D403981AA8CC4400F0AAD2 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403731AA8CC4400F0AAD2 /* BookmarksViewController.swift */; };
 		A8D403991AA8CC4400F0AAD2 /* ChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403741AA8CC4400F0AAD2 /* ChannelsViewController.swift */; };
@@ -153,6 +156,10 @@
 		A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		A86CC3E81AAB0456008669F2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
+		A876C93B1AC86554000D88D8 /* texgyreadventor-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyreadventor-bold.otf"; sourceTree = "<group>"; };
+		A876C93C1AC86554000D88D8 /* texgyreadventor-bolditalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyreadventor-bolditalic.otf"; sourceTree = "<group>"; };
+		A876C93D1AC86554000D88D8 /* texgyreadventor-italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyreadventor-italic.otf"; sourceTree = "<group>"; };
+		A876C93E1AC86554000D88D8 /* texgyreadventor-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "texgyreadventor-regular.otf"; sourceTree = "<group>"; };
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
@@ -203,7 +210,6 @@
 		A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		A8D403701AA8CC4400F0AAD2 /* Configration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configration.swift; sourceTree = "<group>"; };
 		A8D403711AA8CC4400F0AAD2 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		A8D403731AA8CC4400F0AAD2 /* BookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
 		A8D403741AA8CC4400F0AAD2 /* ChannelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +279,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A876C93A1AC86554000D88D8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A876C93B1AC86554000D88D8 /* texgyreadventor-bold.otf */,
+				A876C93C1AC86554000D88D8 /* texgyreadventor-bolditalic.otf */,
+				A876C93D1AC86554000D88D8 /* texgyreadventor-italic.otf */,
+				A876C93E1AC86554000D88D8 /* texgyreadventor-regular.otf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A899AE841AAC646C0011D5DE /* Others */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +338,7 @@
 				A8D402891AA8B7C700F0AAD2 /* Images.xcassets */,
 				A8D4028B1AA8B7C700F0AAD2 /* LaunchScreen.xib */,
 				A8D402801AA8B7C700F0AAD2 /* Supporting Files */,
+				A876C93A1AC86554000D88D8 /* Resources */,
 			);
 			path = TUBIN;
 			sourceTree = "<group>";
@@ -422,7 +440,6 @@
 		A8D4036F1AA8CC4400F0AAD2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				A8D403701AA8CC4400F0AAD2 /* Configration.swift */,
 				A8D403711AA8CC4400F0AAD2 /* FileManager.swift */,
 			);
 			path = Utilities;
@@ -641,8 +658,10 @@
 				A8BD70F21AAB4F3800499A71 /* PlaylistViewController.xib in Resources */,
 				A8C4327A1AAAE34900425E1B /* VideoTableViewCell.xib in Resources */,
 				A88D7BC01AC43D020085A8F8 /* YouTubePlayerViewController.xib in Resources */,
+				A876C9411AC86554000D88D8 /* texgyreadventor-italic.otf in Resources */,
 				A8BD70FE1AAB828300499A71 /* SettingsViewController.xib in Resources */,
 				A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */,
+				A876C9401AC86554000D88D8 /* texgyreadventor-bolditalic.otf in Resources */,
 				A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */,
 				A8D4028D1AA8B7C700F0AAD2 /* LaunchScreen.xib in Resources */,
 				A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */,
@@ -651,11 +670,13 @@
 				A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */,
 				A8584C561AC6AE640066691E /* UserViewController.xib in Resources */,
 				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
+				A876C93F1AC86554000D88D8 /* texgyreadventor-bold.otf in Resources */,
 				A8E17F341ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib in Resources */,
 				A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */,
 				A899AE7E1AAC4F4B0011D5DE /* BookmarksViewController.xib in Resources */,
 				A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */,
 				A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */,
+				A876C9421AC86554000D88D8 /* texgyreadventor-regular.otf in Resources */,
 				A899AE7C1AAC4C310011D5DE /* GuideCategoriesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,7 +773,6 @@
 				A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */,
 				A8D4039C1AA8CC4400F0AAD2 /* FavoritesViewController.swift in Sources */,
 				A8D403A21AA8CC4400F0AAD2 /* RootViewController.swift in Sources */,
-				A8D403961AA8CC4400F0AAD2 /* Configration.swift in Sources */,
 				A8D403991AA8CC4400F0AAD2 /* ChannelsViewController.swift in Sources */,
 				A88CF3541AC5A068005276DD /* SwiftyUserDefaults.swift in Sources */,
 				A8D4039B1AA8CC4400F0AAD2 /* ContainerViewController.swift in Sources */,

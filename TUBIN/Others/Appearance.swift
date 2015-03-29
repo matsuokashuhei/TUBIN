@@ -78,40 +78,58 @@ class Appearance {
         statusBarView.backgroundColor = backgroundColor
         window?.rootViewController?.view.addSubview(statusBarView)
         */
-        UINavigationBar.appearance().barTintColor = backgroundColor
-        UINavigationBar.appearance().tintColor = tintColor
+
+        // UINavigationBar
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: fontColor, NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 15.0)!]
+        //UINavigationBar.appearance().barTintColor = tintColor
+        //UINavigationBar.appearance().tintColor = tintColor
+
         // UITableView
         UITableView.appearance().backgroundColor = backgroundColor
         UITableViewCell.appearance().backgroundColor = backgroundColor
         UITableViewCell.appearance().tintColor = tintColor
+
         // TabBar
         TabBar.appearance().tintColor = tintColor
         TabBar.appearance().backgroundColor = backgroundColor
+
         // UIScrollView
         UIScrollView.appearance().backgroundColor = UIColor.clearColor()
+
         // Tab
         Tab.appearance().tintColor = tintColor
         Tab.appearance().backgroundColor = backgroundColor
+
         // ContainerView
         ContainerView.appearance().backgroundColor = backgroundColor
+
         // UILabel
-        UILabel.appearance().textColor = fontColor
+        //UILabel.appearance().textColor = fontColor
+
         // UISegmentedControl
         UISegmentedControl.appearance().tintColor = tintColor
         UISegmentedControl.appearance().backgroundColor = backgroundColor
+        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Selected)
+
         // UIButton
         UIButton.appearance().tintColor = tintColor
+
         // ScrubberView
         ScrubberView.appearance().tintColor = tintColor
+
         // UIProgressView
         UIProgressView.appearance().tintColor = tintColor
+
         // UIActivityIndicatorView
         UIActivityIndicatorView.appearance().color = tintColor
-        //ScrubberView.appearance().backgroundColor = backgroundColor
+
         // ChannelView
         ChannelView.appearance().backgroundColor = backgroundColor
+
         // SearchViewController, CHannelViewController, PopularViewController, YouTubePlayerViewController
         BackgroundView.appearance().backgroundColor = backgroundColor
+
         // MiniPlayerView
         MiniPlayerView.appearance().backgroundColor = backgroundColor
     }
