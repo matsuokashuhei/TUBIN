@@ -61,7 +61,7 @@ class BookmarksViewController: UIViewController {
     }
 
     func configure(#navigationItem: UINavigationItem) {
-        navigationItem.title = "Bookmark"
+        navigationItem.title = "Subscribes"
         setEditing(false)
     }
 
