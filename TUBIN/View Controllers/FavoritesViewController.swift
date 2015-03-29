@@ -149,6 +149,11 @@ extension FavoritesViewController: UITableViewDataSource {
         return cell
     }
 
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.alpha = 0
+        UIView.animateWithDuration(0.5, animations: { cell.alpha = 1 })
+    }
+
 }
 
 // MARK: - Notification
