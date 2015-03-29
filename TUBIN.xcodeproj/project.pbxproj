@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A8584C551AC6AE640066691E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8584C531AC6AE640066691E /* UserViewController.swift */; };
+		A8584C561AC6AE640066691E /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8584C541AC6AE640066691E /* UserViewController.xib */; };
 		A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */; };
 		A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */; };
 		A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CC3E81AAB0456008669F2 /* iAd.framework */; };
@@ -145,6 +147,8 @@
 
 /* Begin PBXFileReference section */
 		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A8584C531AC6AE640066691E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		A8584C541AC6AE640066691E /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		A86CC3E81AAB0456008669F2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -460,6 +464,8 @@
 				A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */,
 				A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */,
 				A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */,
+				A8584C531AC6AE640066691E /* UserViewController.swift */,
+				A8584C541AC6AE640066691E /* UserViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -643,6 +649,7 @@
 				A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */,
 				A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */,
 				A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */,
+				A8584C561AC6AE640066691E /* UserViewController.xib in Resources */,
 				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
 				A8E17F341ABD65C100DAF54A /* YouTubePlayerViewController_Pad.xib in Resources */,
 				A8BD70FA1AAB7A0F00499A71 /* SearchViewController.xib in Resources */,
@@ -736,6 +743,7 @@
 				A8D403A71AA8CC4400F0AAD2 /* BookmarkTableViewCell.swift in Sources */,
 				A899AE871AAC648D0011D5DE /* YouTubePlayer.swift in Sources */,
 				A8D403981AA8CC4400F0AAD2 /* BookmarksViewController.swift in Sources */,
+				A8584C551AC6AE640066691E /* UserViewController.swift in Sources */,
 				A8D403B41AA8CC9800F0AAD2 /* Notifications.swift in Sources */,
 				A899AE8A1AAC67490011D5DE /* YouTubePlayerViewController.swift in Sources */,
 				A8D403AC1AA8CC4400F0AAD2 /* MiniPlayerView.swift in Sources */,

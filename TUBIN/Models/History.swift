@@ -111,13 +111,39 @@ extension History {
                 Parser.save(object, handler: { (result) -> Void in
                     switch result {
                     case .Success(let box):
-                        handler(.Success(Box(true)))
+                        //handler(.Success(Box(true)))
+                        self.destroy({ (result) -> Void in
+                            handler(result)
+                        })
                     case .Failure(let box):
                         handler(.Failure(box))
                     }
                 })
             case .Failure(let box):
                 handler(.Failure(box))
+            }
+        }
+    }
+
+    class func destroy(handler: (Result<Bool, NSError>) -> Void) {
+        let query = Parser.sharedInstance.query("History")
+        query.addDescendingOrder("watchedAt")
+        query.skip = Configration.Defaults.maxNumberOfHistories
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let objects = objects as? [PFObject] {
+                if objects.count > 0 {
+                    Parser.destroy(objects, handler: { (result) -> Void in
+                        handler(result)
+                    })
+                } else {
+                    handler(.Success(Box(true)))
+                }
+            } else {
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+                }
             }
         }
     }

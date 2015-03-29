@@ -85,7 +85,8 @@ class ContainerViewController: UIViewController {
                     return controller
                 case "Favorites":
                     self.tabBar.add(text: bookmark.name)
-                    let controller = FavoritesViewController()
+                    //let controller = FavoritesViewController()
+                    let controller = UserViewController()
                     return controller
                 case "Search":
                     self.tabBar.add(text: bookmark.name)
@@ -105,7 +106,6 @@ class ContainerViewController: UIViewController {
         addChildViewController(controller)
         containerView.add(view: controller.view)
         if let tab = self.tabBar.tabs.first {
-            //self.tabBar.centerTab(tab)
             self.tabBar.selectTab(tab)
         }
     }
