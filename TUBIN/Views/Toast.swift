@@ -47,7 +47,7 @@ class Toast {
     func bookmark(#item: Item) {
         let options: [String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-            kCRToastTextKey: "bookmarked!",
+            kCRToastTextKey: "subscribed!",
         ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
         /*

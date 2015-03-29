@@ -81,7 +81,7 @@ extension SettingsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             var cell = tableView.dequeueReusableCellWithIdentifier("EditTableViewCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = "Bookmarks"
+            cell.textLabel?.text = "Subscribes"
             cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)!
             return cell
         case 1:
