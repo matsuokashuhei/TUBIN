@@ -209,3 +209,11 @@ extension ItemsViewController: UITableViewDelegate {
     }
 
 }
+
+extension ItemsViewController: UITableViewDelegate {
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
+    }
+
+}

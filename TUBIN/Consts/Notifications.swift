@@ -21,3 +21,6 @@ let VideoPlayerDidPrepareToPlayNotification = "VideoPlayerDidPrepareToPlayNotifi
 // In-app
 let UpgradeAppNotification = "UpgradeAppNotification"
 let RestoreAppNotification = "RestoreAppNotification"
+
+// SearchBar
+let HideKeyboardNotification = "HideKeyboardNotification"

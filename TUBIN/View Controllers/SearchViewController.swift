@@ -69,11 +69,13 @@ class SearchViewController: UIViewController {
 
         containerViews = [videosView, playlistsView, channelsView]
         configure(containerViews: containerViews)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideKeyboard:", name: HideKeyboardNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -97,13 +99,13 @@ class SearchViewController: UIViewController {
         configure(containerViews: containerViews)
 
         let itemsViewController = itemViewControllerAtSelectedSegmentIndex()
+        if searchBar.text.isEmpty {
+            return
+        }
         if itemsViewController.items.count > 0 && itemsViewController.parameters["q"] == searchBar.text {
             return
         }
         search()
-        //searchBar.delegate = itemViewControllerAtSelectedSegmentIndex()
-        //searchBar.delegate!.searchBarSearchButtonClicked!(searchBar)
-        //delegate?.didChangeItemsViewController(itemViewControllerAtSelectedSegmentIndex())
     }
 
     func containerViewAtSelectedSegmentIndex() -> UIView {
@@ -114,7 +116,6 @@ class SearchViewController: UIViewController {
         return childViewControllers[segmentedControl.selectedSegmentIndex] as ItemsViewController
     }
 
-
     func search() {
         containerViewAtSelectedSegmentIndex().hidden = false
         suggestionsTableView.hidden = true
@@ -124,13 +125,20 @@ class SearchViewController: UIViewController {
         itemsViewController.search()
         //itemsViewController.searchItems(parameters: ["q": searchBar.text])
     }
+
+    func hideKeyboard(notification: NSNotification) {
+        searchBar.resignFirstResponder()
+    }
+
 }
 
 extension SearchViewController: UITableViewDelegate {
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         searchBar.text = suggestions[indexPath.row]
         search()
     }
+
 }
 
 extension SearchViewController: UITableViewDataSource {

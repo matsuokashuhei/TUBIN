@@ -198,6 +198,7 @@ extension ContainerViewController: TabBarDelegate {
         containerView.delegate = nil
         containerView.scrollToIndexOfContentViews(index)
         containerView.delegate = self
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
 
 }
@@ -210,5 +211,6 @@ extension ContainerViewController: ContainerViewDelegate {
 
     func containerViewDidScroll(scrollView: UIScrollView) {
         tabBar.syncContentOffset(scrollView)
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
 }
