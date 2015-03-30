@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ロガー
         XCGLogger.defaultInstance().setup(logLevel: .Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 
-        // 外観
-        Appearance.apply(.Light)
-
         // Parse
         Parser.configure()
 
@@ -34,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Defaults["maxNumberOfFavorites"] = 30
             // Subscribes + 4 (Popular, Guide, Favorites, Search)
             Defaults["maxNumberOfSubscribes"] = 14
+            Defaults["theme"] = "Dark"
         }
 
         let launched = Defaults["launched"].bool!
@@ -46,6 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.debug("maxNumberOfFavorites: \(maxNumberOfFavorites)")
         let maxNumberOfSubscribes = Defaults["maxNumberOfSubscribes"].int!
         logger.debug("maxNumberOfSubscribes: \(maxNumberOfSubscribes)")
+
+        if Defaults["theme"].string == "Light" {
+            Appearance.apply(.Light)
+        } else {
+            Appearance.apply(.Dark)
+        }
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }

@@ -23,14 +23,13 @@ class Tab: UIView {
         didSet {
             if let selected = selected {
                 if selected {
-                    UIView.animateWithDuration(0.5) {
-//                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
+                    UIView.animateWithDuration(0.3) {
                         self.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
-                        self.label.textColor = UIColor.whiteColor()
+                        //self.label.textColor = UIColor.whiteColor()
+                        self.label.textColor = Appearance.backgroundColor()
                     }
                 } else {
-                    UIView.animateWithDuration(0.5) {
-//                        self.label.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
+                    UIView.animateWithDuration(0.3) {
                         self.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
                         self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
                     }
@@ -252,26 +251,26 @@ class TabBar: UIView {
         let alpha = offset - CGFloat(left)
         logger.debug("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
         if offset > 0 {
-//            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
             if alpha > 0.5 {
                 tabs[left].label.textColor = tintColor.colorWithAlphaComponent(alpha)
             } else {
-                tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 - alpha)
+                //tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 - alpha)
+                tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 - alpha)
             }
             if right < tabs.count {
-//                tabs[right].label.backgroundColor = tintColor.colorWithAlphaComponent(alpha)
                 tabs[right].backgroundColor = tintColor.colorWithAlphaComponent(alpha)
                 if alpha < 0.5 {
                     tabs[right].label.textColor = tintColor.colorWithAlphaComponent(1 - alpha)
                 } else {
-                    tabs[right].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(alpha)
+                    //tabs[right].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(alpha)
+                    tabs[right].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(alpha)
                 }
             }
         } else {
-//            tabs[left].label.backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
-            tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 + alpha)
+            //tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 + alpha)
+            tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 + alpha)
         }
     }
 

@@ -18,6 +18,14 @@ class Appearance {
         return sharedInstance.theme.tintColor()
     }
 
+    class func backgroundColor() -> UIColor {
+        return sharedInstance.theme.backgroundColor()
+    }
+
+    class func selectedFontColor() -> UIColor {
+        return sharedInstance.theme.selectedFontColor()
+    }
+
     enum Theme {
         case Light
         case Dark
@@ -34,7 +42,7 @@ class Appearance {
         func backgroundColor() -> UIColor {
             switch self {
             case .Light:
-                return UIColor.snowColor()
+                return UIColor.whiteColor()
             case .Dark:
                 return UIColor.jetColor()
             }
@@ -48,6 +56,11 @@ class Appearance {
                 return UIColor.whiteColor()
             }
         }
+
+        func selectedFontColor() -> UIColor {
+            return UIColor.whiteColor()
+        }
+
     }
 
     var theme: Theme
@@ -71,6 +84,7 @@ class Appearance {
         let tintColor = theme.tintColor()
         let backgroundColor = theme.backgroundColor()
         let fontColor = theme.fontColor()
+        let selectedFontColor = theme.selectedFontColor()
         // Status bar
         /*
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
@@ -81,13 +95,25 @@ class Appearance {
 
         // UINavigationBar
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: fontColor, NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 15.0)!]
-        //UINavigationBar.appearance().barTintColor = tintColor
-        //UINavigationBar.appearance().tintColor = tintColor
+        UINavigationBar.appearance().barTintColor = backgroundColor
+        UINavigationBar.appearance().tintColor = tintColor
+
+        // UIBarButtonItem
+        UIBarButtonItem.appearance().tintColor = tintColor
 
         // UITableView
         UITableView.appearance().backgroundColor = backgroundColor
+        // UITableViewCell
         UITableViewCell.appearance().backgroundColor = backgroundColor
         UITableViewCell.appearance().tintColor = tintColor
+        switch theme {
+        case .Light:
+            UITableViewCell.appearance().selectionStyle = .Default
+        case .Dark:
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.charcoalColor()
+            UITableViewCell.appearance().selectedBackgroundView = backgroundView
+        }
 
         // TabBar
         TabBar.appearance().tintColor = tintColor
@@ -104,13 +130,13 @@ class Appearance {
         ContainerView.appearance().backgroundColor = backgroundColor
 
         // UILabel
-        //UILabel.appearance().textColor = fontColor
+        UILabel.appearance().textColor = fontColor
 
         // UISegmentedControl
         UISegmentedControl.appearance().tintColor = tintColor
         UISegmentedControl.appearance().backgroundColor = backgroundColor
         UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Normal)
-        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: backgroundColor, NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Selected)
 
         // UIButton
         UIButton.appearance().tintColor = tintColor
