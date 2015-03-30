@@ -16,8 +16,6 @@ class FavoritesViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    @IBOutlet var editButton: UIBarButtonItem!
-
     var favorites = [Favorite]()
 
     var edited = false
@@ -33,6 +31,7 @@ class FavoritesViewController: UIViewController {
 
         configure(tableView: tableView)
         fetch()
+        setEditing(false)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: AddItemToFavoritesNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: ReloadFavoritesNotification, object: nil)
@@ -43,7 +42,6 @@ class FavoritesViewController: UIViewController {
     }
 
     func configure(#tableView: UITableView) {
-        tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
@@ -70,28 +68,46 @@ class FavoritesViewController: UIViewController {
 
     // MARK: - IBActions
 
-    @IBAction func editButtonTapped() {
-        logger.debug("called")
-        tableView.setEditing(!tableView.editing, animated: true)
-        if tableView.editing {
-            editButton.title = "Done"
-            edited = false
-            removes = []
-        } else {
-            editButton.title = "Edit"
-            if edited {
-                Spinner.show()
-                let results = Favorite.edit(updates: favorites, removes: removes)
-                switch results {
-                case .Success(let box):
-                    Spinner.dismiss()
-                case .Failure(let box):
-                    let error = box.unbox
-                    self.logger.error(error.localizedDescription)
-                    Alert.error(error)
-                }
+    func setEditing(editing: Bool) {
+        tableView.setEditing(editing, animated: true)
+        if let toolbar = tableView.tableFooterView as? UIToolbar {
+            toolbar.items?.removeAll(keepCapacity: true)
+            if tableView.editing {
+                toolbar.setItems(
+                    [UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelEditing"), UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")], animated: true)
+            } else {
+                toolbar.setItems([UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")], animated: true)
             }
         }
+    }
+
+    func startEditing() {
+        setEditing(true)
+        edited = false
+        removes = []
+    }
+
+    func endEditing() {
+        if edited {
+            Spinner.show()
+            let results = Favorite.edit(updates: favorites, removes: removes)
+            switch results {
+            case .Success(let box):
+                Spinner.dismiss()
+            case .Failure(let box):
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(error)
+            }
+            setEditing(false)
+        }
+    }
+
+    func cancelEditing() {
+        if edited {
+            fetch()
+        }
+        setEditing(false)
     }
 
 }
