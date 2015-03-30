@@ -150,6 +150,11 @@ class Appearance {
         // UIActivityIndicatorView
         UIActivityIndicatorView.appearance().color = tintColor
 
+        // UIToolbar
+        UIToolbar.appearance().barTintColor = backgroundColor
+        UIToolbar.appearance().tintColor = tintColor
+        // UIBarButtonItem
+
         // ChannelView
         ChannelView.appearance().backgroundColor = backgroundColor
 
