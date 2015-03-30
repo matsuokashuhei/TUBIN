@@ -26,19 +26,19 @@ class HistoriesViewController: UIViewController {
 
         configure(tableView: tableView)
         fetch()
+        setEditing(false)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: "WatchVideoNotification", object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func configure(#tableView: UITableView) {
-        tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
     }
 
@@ -61,6 +61,47 @@ class HistoriesViewController: UIViewController {
         }
     }
 
+    func setEditing(editing: Bool) {
+        tableView.setEditing(editing, animated: true)
+        if let toolbar = tableView.tableFooterView as? UIToolbar {
+            toolbar.items?.removeAll(keepCapacity: true)
+            if tableView.editing {
+                toolbar.setItems(
+                    [UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelEditing"), UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "endEditing")], animated: true)
+            } else {
+                toolbar.setItems([UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")], animated: true)
+            }
+        }
+    }
+
+    func startEditing() {
+        setEditing(true)
+    }
+
+    func endEditing() {
+        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+            let histories = indexPaths.map() { (indexPath) -> History in
+                return self.histories[indexPath.row]
+            }
+            History.destory(histories, handler: { (result) -> Void in
+                switch result {
+                case .Success(let box):
+                    break
+                case .Failure(let box):
+                    let error = box.unbox
+                    self.logger.error(error.localizedDescription)
+                    Alert.error(error)
+                }
+                self.fetch()
+            })
+        }
+        setEditing(false)
+    }
+
+    func cancelEditing() {
+        setEditing(false)
+    }
+
 }
 
 // MARK: - Table view Delegate
@@ -71,6 +112,9 @@ extension HistoriesViewController: UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.editing {
+            return
+        }
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         let controller = YouTubePlayerViewController(device: UIDevice.currentDevice())
         controller.video = histories[indexPath.row].video

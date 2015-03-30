@@ -125,6 +125,26 @@ extension History {
         }
     }
 
+    class func destory(histories: [History], handler: (Result<Bool, NSError>) -> Void) {
+        let query = Parser.sharedInstance.query("History")
+        query.whereKey("id", containedIn: histories.map { (history) -> String in
+            return history.video.id
+        })
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let objects = objects as? [PFObject] {
+                Parser.destroy(objects, handler: { (result) -> Void in
+                    handler(result)
+                })
+            } else {
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+                }
+            }
+        }
+    }
+
     class func destroy(handler: (Result<Bool, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("History")
         query.addDescendingOrder("watchedAt")
