@@ -120,12 +120,13 @@ extension BookmarksViewController: UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        let bookmark = bookmarks[indexPath.row]
-        if bookmark.name == "playlist" || bookmark.name == "channel" {
-            return UITableViewCellEditingStyle.Delete
-        } else {
-            return UITableViewCellEditingStyle.None
+        if tableView.editing {
+            let bookmark = bookmarks[indexPath.row]
+            if bookmark.name == "playlist" || bookmark.name == "channel" {
+                return .Delete
+            }
         }
+        return .None
     }
 
     func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
