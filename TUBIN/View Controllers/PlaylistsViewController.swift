@@ -89,18 +89,3 @@ extension PlaylistsViewController: UITableViewDelegate {
         }
     }
 }
-
-// MARK: - Navigation
-extension PlaylistsViewController {
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showPlaylist" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let destinationViewController = segue.destinationViewController as PlaylistViewController
-                destinationViewController.playlist = items[indexPath.row] as Playlist
-                destinationViewController.navigatable = true
-            }
-        }
-    }
-
-}

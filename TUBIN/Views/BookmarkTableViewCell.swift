@@ -19,13 +19,10 @@ class BookmarkTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func configure(bookmark: Bookmark) {
@@ -38,8 +35,6 @@ class BookmarkTableViewCell: UITableViewCell {
                     let image = box.unbox
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
-//                    self.thumbnailImageView.image = box.unbox
-//                    self.thumbnailImageView.contentMode = .ScaleAspectFill
                 case .Failure(let box):
                     self.logger.error(box.unbox.localizedDescription)
                 }

@@ -45,18 +45,6 @@ class ChannelsViewController: ItemsViewController {
         }
     }
 
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showChannel" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let destinationViewController = segue.destinationViewController as ChannelViewController
-                destinationViewController.channel = items[indexPath.row] as Channel
-                destinationViewController.navigatable = true
-            }
-        }
-    }
-
     // MARK: - YouTube search
 
     override func search() {

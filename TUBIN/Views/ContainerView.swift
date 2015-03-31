@@ -78,17 +78,5 @@ extension ContainerView: UIScrollViewDelegate {
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         delegate?.containerViewDidScroll(scrollView)
-        /*
-        switch scrollView.contentOffset.x {
-        case let x where x < 0:
-            return
-        case let x where x > scrollView.contentSize.width:
-            return
-        case let x where 0 < x && x < scrollView.contentSize.width:
-            delegate?.containerViewDidScroll(scrollView)
-        default:
-            return
-        }
-        */
     }
 }

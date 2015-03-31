@@ -40,20 +40,6 @@ class GuideCategoriesViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showChannels" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let category = categories[indexPath.row]
-                let destinationViewController = segue.destinationViewController as ChannelsViewController
-                destinationViewController.category = category
-                destinationViewController.navigatable = true
-                destinationViewController.search(parameters: ["categoryId": category.id])
-            }
-        }
-    }
-
     // MARK: - YouTube search
 
     func search() {
