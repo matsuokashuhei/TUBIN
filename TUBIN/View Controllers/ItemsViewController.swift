@@ -54,7 +54,6 @@ class ItemsViewController: UIViewController {
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         tableView.delegate = self
 
-        /*
         // Add long press gesture to table view
         func createLongPressGestureRecognizer() -> UILongPressGestureRecognizer {
             let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "onLongPressed:")
@@ -63,7 +62,6 @@ class ItemsViewController: UIViewController {
             return longPressGestureRecognizer
         }
         tableView.addGestureRecognizer(createLongPressGestureRecognizer())
-        */
 
     }
 
