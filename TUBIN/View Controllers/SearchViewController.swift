@@ -33,6 +33,9 @@ class SearchViewController: UIViewController {
     var suggestions = [String]()
     @IBOutlet var segmentedControl: UISegmentedControl! {
         didSet {
+            segmentedControl.setTitle(NSLocalizedString("Videos", comment: "Videos"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 1)
+            segmentedControl.setTitle(NSLocalizedString("Channels", comment: "Channels"), forSegmentAtIndex: 2)
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: .ValueChanged)
         }

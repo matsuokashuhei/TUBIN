@@ -42,7 +42,7 @@ class StoreViewController: UIViewController {
 
         edgesForExtendedLayout = .None
 
-        navigationItem.title = "Store"
+        navigationItem.title = NSLocalizedString("Store", comment: "Store")
 
         if SKPaymentQueue.canMakePayments() {
             requestProduct()
@@ -85,7 +85,8 @@ extension StoreViewController: SKProductsRequestDelegate {
             self.product = product
             if let price = formatPrice(product) {
                 upgradeButton.enabled = true
-                upgradeButton.setTitle("UPGRADE \(price)", forState: .Normal)
+                let title = NSLocalizedString("UPGRADE", comment: "UPGRADE")
+                upgradeButton.setTitle("\(title) \(price)", forState: .Normal)
                 restoreButton.enabled = true
             }
         }
@@ -134,15 +135,16 @@ extension StoreViewController: SKPaymentTransactionObserver {
                 case .Failed:
                     logger.debug("Failed")
                     Spinner.dismiss()
-                    if let error = transaction.error {
-                        let alert = UIAlertController(title: "Failed", message: error.localizedDescription, preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
-                        presentViewController(alert, animated: true, completion: nil)
-                    } else {
-                        let alert = UIAlertController(title: "Failed", message: "", preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
-                        presentViewController(alert, animated: true, completion: nil)
-                    }
+                    let message: String = {
+                        if let error = transaction.error {
+                            return error.localizedDescription
+                        } else {
+                            return ""
+                        }
+                    }()
+                    let alert = UIAlertController(title: NSLocalizedString("Failed", comment: "Failed"), message: message, preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Dismis", comment: "Dismis"), style: .Default, handler: nil))
+                    presentViewController(alert, animated: true, completion: nil)
                 case .Restored:
                     logger.debug("Restored")
                     restoreApp()

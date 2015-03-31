@@ -12,7 +12,12 @@ class UserViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var segmentedControl: UISegmentedControl! {
+        didSet {
+            segmentedControl.setTitle(NSLocalizedString("Favorites", comment: "Favorites"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Histories", comment: "Histories"), forSegmentAtIndex: 1)
+        }
+    }
 
     @IBOutlet var favoritesView: UIView!
     @IBOutlet var historiesView: UIView!

@@ -81,13 +81,13 @@ extension SettingsViewController: UITableViewDataSource {
         switch indexPath.section {
         case 0:
             var cell = tableView.dequeueReusableCellWithIdentifier("EditTableViewCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = "Subscribes"
-            cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)!
+            cell.textLabel?.text = NSLocalizedString("Subscriptions", comment: "Subscriptions")
+            cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)!
             return cell
         case 1:
             var cell = tableView.dequeueReusableCellWithIdentifier("StoreTableViewCell", forIndexPath: indexPath) as UITableViewCell
-            cell.textLabel?.text = "Upgrade"
-            cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)!
+            cell.textLabel?.text = NSLocalizedString("Upgrade", comment: "Upgrade")
+            cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)!
             return cell
         default:
             return UITableViewCell()

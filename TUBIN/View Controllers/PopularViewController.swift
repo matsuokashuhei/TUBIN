@@ -12,6 +12,8 @@ class PopularViewController: UIViewController {
 
     @IBOutlet var segmentedControl: UISegmentedControl! {
         didSet {
+            segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Channels", comment: "Channels"), forSegmentAtIndex: 1)
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         }

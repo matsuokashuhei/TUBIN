@@ -136,7 +136,8 @@ class PlaylistViewController: ItemsViewController {
                         }
                     }
                 } else {
-                    let alert = UIAlertController(title: nil, message: "Cannot subscribe to any more Playlist", preferredStyle: .Alert)
+                    let message = NSLocalizedString("Cannot subscribe to any more Playlist", comment: "これ以上のプレイリストを登録できません。")
+                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                     alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }

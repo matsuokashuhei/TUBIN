@@ -78,20 +78,20 @@ class ContainerViewController: UIViewController {
                     controller.channel = channel
                     return controller
                 case "Popular":
-                    self.tabBar.add(text: bookmark.name)
+                    self.tabBar.add(text: NSLocalizedString("Popular", comment: "Popular"))
                     let controller = PopularViewController()
                     return controller
                 case "Guide":
-                    self.tabBar.add(text: bookmark.name)
+                    self.tabBar.add(text: NSLocalizedString("Guide", comment: "Guide"))
                     let controller = GuideCategoriesViewController()
                     return controller
                 case "Favorites":
-                    self.tabBar.add(text: bookmark.name)
+                    self.tabBar.add(text: NSLocalizedString("Favorites", comment: "Favorites"))
                     //let controller = FavoritesViewController()
                     let controller = UserViewController()
                     return controller
                 case "Search":
-                    self.tabBar.add(text: bookmark.name)
+                    self.tabBar.add(text: NSLocalizedString("Search", comment: "Search"))
                     let controller = SearchViewController()
                     return controller
                 default:
@@ -103,13 +103,16 @@ class ContainerViewController: UIViewController {
                 self.containerView.add(view: controller.view)
             }
         }
-        tabBar.add(text: "Settings")
+        tabBar.add(text: NSLocalizedString("Settings", comment: "Settings"))
         let controller = SettingsViewController()
         addChildViewController(controller)
         containerView.add(view: controller.view)
+        /*
         if let tab = self.tabBar.tabs.first {
             self.tabBar.selectTab(tab)
         }
+        */
+        tabBar.selectTabAtIndex(0)
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -142,7 +145,6 @@ extension ContainerViewController {
             self.containerView.layoutIfNeeded()
             self.tabBar.selectTabAtIndex(self.containerView.views.count)
         //}
-        SVProgressHUD.showSuccessWithStatus("")
     }
 
     func addItemToBookmarks(notification: NSNotification) {

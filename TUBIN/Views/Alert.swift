@@ -33,14 +33,15 @@ class Alert {
 
     func error(error: NSError?) {
         configure()
+        let title = NSLocalizedString("Error", comment: "エラーのアラートのタイトル")
         let image = UIImage(named: "ic_warning_48px")
         if let error = error {
             logger.error(error.localizedDescription)
             //HUDController.sharedController.contentView = HUDContentView.StatusView(title: "ERROR", subtitle: error.localizedDescription, image: HUDAssets.crossImage)
-            HUDController.sharedController.contentView = HUDContentView.StatusView(title: "ERROR", subtitle: error.localizedDescription, image: image)
+            HUDController.sharedController.contentView = HUDContentView.StatusView(title: title, subtitle: error.localizedDescription, image: image)
         } else {
             //HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: HUDAssets.crossImage)
-            HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: "ERROR", image: image)
+            HUDController.sharedController.contentView = HUDContentView.SubtitleView(subtitle: title, image: image)
         }
         HUDController.sharedController.show()
         HUDController.sharedController.hide(afterDelay: 1.0)
@@ -48,8 +49,9 @@ class Alert {
 
     func success(message: String) {
         configure()
+        let title = NSLocalizedString("Success", comment: "サクセスのアラートのタイトル")
         let image = UIImage(named: "ic_check_48px")
-        HUDController.sharedController.contentView = HUDContentView.StatusView(title: "SUCCESS", subtitle: message, image: image)
+        HUDController.sharedController.contentView = HUDContentView.StatusView(title: title, subtitle: message, image: image)
         HUDController.sharedController.show()
         HUDController.sharedController.hide(afterDelay: 1.0)
     }

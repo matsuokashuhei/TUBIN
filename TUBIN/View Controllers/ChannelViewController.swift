@@ -13,7 +13,12 @@ class ChannelViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var segmentedControl: UISegmentedControl! {
+        didSet {
+            segmentedControl.setTitle(NSLocalizedString("Videos", comment: "Videos"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 1)
+        }
+    }
 
     @IBOutlet var videosView: UIView!
     @IBOutlet var playlistsView: UIView!
@@ -148,7 +153,8 @@ class ChannelViewController: UIViewController {
                         }
                     }
                 } else {
-                    let alert = UIAlertController(title: nil, message: "Cannot subscribe to any more Channel", preferredStyle: .Alert)
+                    let message = NSLocalizedString("Cannot subscribe to any more Channel", comment: "これ以上のチャンネルやプレイリストを登録できません。")
+                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                     alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }

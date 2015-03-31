@@ -47,7 +47,7 @@ class Toast {
     func bookmark(#item: Item) {
         let options: [String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-            kCRToastTextKey: "subscribed!",
+            kCRToastTextKey: NSLocalizedString("subscribed!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
         ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
         /*
@@ -70,7 +70,7 @@ class Toast {
         let options: [String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
             kCRToastTextKey: item.title,
-            kCRToastSubtitleTextKey: "favorited!"
+            kCRToastSubtitleTextKey: NSLocalizedString("favorited!", comment: "ビデオをフェイバリットに保存したときに通知するメッセージ")
         ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }

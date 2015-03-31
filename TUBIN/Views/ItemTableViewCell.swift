@@ -103,7 +103,8 @@ class VideoTableViewCell: ItemTableTableViewCell {
         } else {
             publishedAtLabel.text = ""
         }
-        viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) views"
+        //viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) views"
+        viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) " + NSLocalizedString("views", comment: "views")
         channelTitle.text = video.channelTitle
     }
 }
@@ -129,7 +130,8 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         let playlist = item as Playlist
         channelTitle.text = playlist.channelTitle
         if let itemCount = playlist.itemCount {
-            itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
+            //itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
+            itemCountLabel.text = "\(formatStringFromInt(itemCount)) " + NSLocalizedString("videos", comment: "videos")
         } else {
             itemCountLabel.text = ""
         }
@@ -156,11 +158,13 @@ class ChannelTableViewCell: ItemTableTableViewCell {
         let channel = item as Channel
         if let subscriberCount = channel.subscriberCount {
             subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"
+            subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) " + NSLocalizedString("subscribes", comment: "subscribes")
         } else {
             subscriberCountLabel.text = ""
         }
         if let videoCount = channel.videoCount {
-            videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
+            //videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
+            videoCountLabel.text = "\(formatStringFromInt(videoCount)) " + NSLocalizedString("videos", comment: "videos")
         } else {
             videoCountLabel.text = ""
         }
