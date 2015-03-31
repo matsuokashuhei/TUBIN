@@ -99,8 +99,8 @@ class FavoritesViewController: UIViewController {
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }
-            setEditing(false)
         }
+        setEditing(false)
     }
 
     func cancelEditing() {
@@ -130,7 +130,6 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            logger.debug("indexPath: \(indexPath)")
             removes.append(favorites.removeAtIndex(indexPath.row))
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             edited = true
@@ -139,6 +138,13 @@ extension FavoritesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if tableView.editing {
+            return .Delete
+        }
+        return .None
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
