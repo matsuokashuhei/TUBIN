@@ -73,8 +73,8 @@ class YouTubePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         // Navigation
         configure(navigationItem: navigationItem)
-        // Trait
-        configure(UIDevice.currentDevice().orientation)
+        // Orientation
+        configure(UIApplication.sharedApplication().statusBarOrientation)
         // YouTube player
         player.delegate = self
         if player.controller.playbackState == .Playing {
@@ -173,15 +173,27 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    func configure(orientation: UIInterfaceOrientation) {
+        edgesForExtendedLayout = UIRectEdge.None
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            if UIInterfaceOrientationIsPortrait(orientation) {
+                showPlayerController()
+            }
+            if UIInterfaceOrientationIsLandscape(orientation) {
+                edgesForExtendedLayout = UIRectEdge.Top
+            }
+        }
+    }
+
     func configure(orientation: UIDeviceOrientation) {
         edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            logger.debug("UIDevice.currentDevice().userInterfaceIdiom: .Phone")
             // iPhone
-            if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
+            if UIDeviceOrientationIsPortrait(orientation) {
                 // Portait
                 showPlayerController()
-            } else {
+            }
+            if UIDeviceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
             }
         } else {
@@ -268,6 +280,9 @@ class YouTubePlayerViewController: UIViewController {
         let delay = UInt64(0.5) * NSEC_PER_SEC
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue()) { () in
+            if UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation) {
+                return
+            }
             if UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) {
                 return
             }
