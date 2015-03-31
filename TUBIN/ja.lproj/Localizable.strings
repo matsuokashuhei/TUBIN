@@ -1,0 +1,114 @@
+/* (No Commment) */
+"%d days ago" = "%d 日前";
+
+/* (No Commment) */
+"%d hours ago" = "%d 時間前";
+
+/* (No Commment) */
+"%d minutes ago" = "%d 分前";
+
+/* (No Commment) */
+"%d months ago" = "%d ヶ月前";
+
+/* (No Commment) */
+"%d seconds ago" = "%d 秒前";
+
+/* (No Commment) */
+"%d weeks ago" = "%d 週間前";
+
+/* (No Commment) */
+"%d years ago" = "%d 年前";
+
+/* relative time */
+"1 day ago" = "1 年前";
+
+/* relative time */
+"1 hour ago" = "1 時間前";
+
+/* relative time */
+"1 minute ago" = "1 分前";
+
+/* relative time */
+"1 month ago" = "1 ヶ月前";
+
+/* relative time */
+"1 week ago" = "1 週間前";
+
+/* relative time */
+"1 year ago" = "1 年前";
+
+/* これ以上のチャンネルやプレイリストを登録できません。 */
+"Cannot subscribe to any more Channel" = "これ以上チャンネルを登録できません。";
+
+/* これ以上のプレイリストを登録できません。 */
+"Cannot subscribe to any more Playlist" = "これ以上プレイリストを登録できません。";
+
+/* Channels */
+"Channels" = "チャンネル";
+
+/* Dismis */
+"Dismis" = "閉じる";
+
+/* エラーのアラートのタイトル */
+"Error" = "エラー";
+
+/* Failed */
+"Failed" = "エラー";
+
+/* Favorites */
+"Favorites" = "お気に入り";
+
+/* Guide */
+"Guide" = "ガイド";
+
+/* Histories */
+"Histories" = "履歴";
+
+/* Playlists */
+"Playlists" = "プレイリスト";
+
+/* Popular */
+"Popular" = "ポピュラー";
+
+/* Search */
+"Search" = "検索";
+
+/* Settings */
+"Settings" = "設定";
+
+/* Store */
+"Store" = "購入";
+
+/* Subscriptions */
+"Subscriptions" = "ブックマーク";
+
+/* サクセスのアラートのタイトル */
+"Success" = "成功";
+
+/* UPGRADE */
+"UPGRADE" = "購入";
+
+/* Upgrade */
+"Upgrade" = "購入する";
+
+/* Videos */
+"Videos" = "ビデオ";
+
+/* ビデオをフェイバリットに保存したときに通知するメッセージ */
+"favorited!" = "お気に入りに保存しました。";
+
+/* relative time */
+"just now" = "今";
+
+/* プレイリストやチャンネルをブックマークしたときに通知するメッセージ */
+"subscribed!" = "ブックマークしました。";
+
+/* subscribes */
+"subscribes" = "人登録";
+
+/* videos */
+"videos" = "ビデオ";
+
+/* views */
+"views" = "回";
+
