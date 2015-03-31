@@ -10,6 +10,10 @@ import Foundation
 
 class Appearance {
 
+    struct Font {
+        static let name = "AvenirNext-Regular"
+    }
+
     class func apply(theme: Theme) {
         sharedInstance.apply(theme)
     }
@@ -27,6 +31,7 @@ class Appearance {
     }
 
     enum Theme {
+
         case Light
         case Dark
 
@@ -94,7 +99,7 @@ class Appearance {
         */
 
         // UINavigationBar
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: fontColor, NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 15.0)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: fontColor, NSFontAttributeName: UIFont(name: Font.name, size: 15.0)!]
         UINavigationBar.appearance().barTintColor = backgroundColor
         UINavigationBar.appearance().tintColor = tintColor
 
@@ -108,7 +113,11 @@ class Appearance {
         UITableViewCell.appearance().tintColor = tintColor
         switch theme {
         case .Light:
-            UITableViewCell.appearance().selectionStyle = .Default
+            //UITableViewCell.appearance().selectionStyle = .Default
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = tintColor.colorWithAlphaComponent(0.1)
+            UITableViewCell.appearance().selectedBackgroundView = backgroundView
+            break
         case .Dark:
             let backgroundView = UIView()
             backgroundView.backgroundColor = UIColor.charcoalColor()
@@ -130,13 +139,19 @@ class Appearance {
         ContainerView.appearance().backgroundColor = backgroundColor
 
         // UILabel
+        DarkLabel.appearance().backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
+        DarkLabel.appearance().textColor = UIColor.whiteColor()
+
+        TextLabel.appearance().textColor = fontColor
+        SubTextLabel.appearance().textColor = fontColor.colorWithAlphaComponent(0.5)
         UILabel.appearance().textColor = fontColor
 
         // UISegmentedControl
         UISegmentedControl.appearance().tintColor = tintColor
         UISegmentedControl.appearance().backgroundColor = backgroundColor
-        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Normal)
-        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: backgroundColor, NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Selected)
+        //UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: backgroundColor, NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Selected)
 
         // UIButton
         UIButton.appearance().tintColor = tintColor

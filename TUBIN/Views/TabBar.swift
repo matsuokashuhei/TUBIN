@@ -77,7 +77,7 @@ class Tab: UIView {
         label.textAlignment = NSTextAlignment.Center
         label.numberOfLines = 3
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        label.font = UIFont(name: "Avenir Next", size: 10)
+        label.font = UIFont(name: Appearance.Font.name, size: 12)
         label.userInteractionEnabled = true
     }
 
@@ -90,7 +90,7 @@ class Tab: UIView {
     }
 
     class func size() -> CGSize {
-        return CGSize(width: 80.0, height: 44.0)
+        return CGSize(width: 100.0, height: 44.0)
     }
 }
 

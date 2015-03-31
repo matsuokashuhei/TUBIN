@@ -123,7 +123,6 @@ class SearchViewController: UIViewController {
         let itemsViewController = itemViewControllerAtSelectedSegmentIndex()
         itemsViewController.parameters = ["q": searchBar.text]
         itemsViewController.search()
-        //itemsViewController.searchItems(parameters: ["q": searchBar.text])
     }
 
     func hideKeyboard(notification: NSNotification) {
@@ -151,7 +150,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         logger.debug("")
         var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 15.0)
+        cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)
         cell.textLabel?.text = suggestions[indexPath.row]
         return cell
     }
