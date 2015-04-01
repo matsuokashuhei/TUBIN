@@ -20,7 +20,7 @@
 "%d years ago" = "%d 年前";
 
 /* relative time */
-"1 day ago" = "1 年前";
+"1 day ago" = "1 日前";
 
 /* relative time */
 "1 hour ago" = "1 時間前";
@@ -86,10 +86,10 @@
 "Success" = "成功";
 
 /* UPGRADE */
-"UPGRADE" = "購入";
+"UPGRADE" = "購入する";
 
 /* Upgrade */
-"Upgrade" = "購入する";
+"Upgrade" = "購入";
 
 /* Videos */
 "Videos" = "ビデオ";
@@ -104,7 +104,7 @@
 "subscribed!" = "ブックマークしました。";
 
 /* subscribes */
-"subscribes" = "人登録";
+"subscribes" = "人";
 
 /* videos */
 "videos" = "ビデオ";

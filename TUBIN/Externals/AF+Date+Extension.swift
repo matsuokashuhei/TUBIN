@@ -420,14 +420,16 @@ extension NSDate {
         if seconds < 10 {
             return NSLocalizedString("just now", comment: "relative time")
         } else if seconds < 60 {
-            return NSLocalizedString("\(Int(seconds)) seconds ago", comment: "relative time")
+            //return NSLocalizedString("\(Int(seconds)) seconds ago", comment: "relative time")
+            return String(format: NSLocalizedString("%d seconds ago", comment: "relative time"), Int(seconds))
         }
 
         if minutes < 60 {
             if minutes == 1 {
                 return NSLocalizedString("1 minute ago", comment: "relative time")
             } else {
-                return NSLocalizedString("\(Int(minutes)) minutes ago", comment: "relative time")
+                //return NSLocalizedString("\(Int(minutes)) minutes ago", comment: "relative time")
+                return String(format: NSLocalizedString("%d minutes ago", comment: "relative time"), Int(minutes))
             }
         }
 
@@ -435,7 +437,8 @@ extension NSDate {
             if hours == 1 {
                 return NSLocalizedString("1 hour ago", comment: "relative time")
             } else {
-                return NSLocalizedString("\(Int(hours)) hours ago", comment: "relative time")
+                //return NSLocalizedString("\(Int(hours)) hours ago", comment: "relative time")
+                return String(format: NSLocalizedString("%d hours ago", comment: "relative time"), Int(hours))
             }
         }
 
@@ -443,7 +446,8 @@ extension NSDate {
             if days == 1 {
                 return NSLocalizedString("1 day ago", comment: "relative time")
             } else {
-                return NSLocalizedString("\(Int(days)) days ago", comment: "relative time")
+                //return NSLocalizedString("\(Int(days)) days ago", comment: "relative time")
+                return String(format: NSLocalizedString("%d days ago", comment: "relative time"), Int(days))
             }
         }
 
@@ -451,22 +455,28 @@ extension NSDate {
             if days == 7 {
                 return NSLocalizedString("1 week ago", comment: "relative time")
             } else {
-                return NSLocalizedString("\(Int(days / 7)) weeks ago", comment: "relative time")
+                //return NSLocalizedString("\(Int(days / 7)) weeks ago", comment: "relative time")
+                return String(format: NSLocalizedString("%d weeks ago", comment: "relative time"), Int(days / 7))
             }
         }
 
+        if days <= 31 {
+            return NSLocalizedString("1 month ago", comment: "relative time")
+        }
         if days <= 365 {
             if days == 30 {
                 return NSLocalizedString("1 month ago", comment: "relative time")
             } else {
-                return NSLocalizedString("\(Int(days / 30)) months ago", comment: "relative time")
+                //return NSLocalizedString("\(Int(days / 30)) months ago", comment: "relative time")
+                return String(format: NSLocalizedString("%d months ago", comment: "relative time"), Int(days / 30))
             }
         }
 
         if days / 365 == 1 {
             return NSLocalizedString("1 year ago", comment: "relative time")
         } else {
-            return NSLocalizedString("\(Int(days / 365)) years ago", comment: "relative time")
+            //return NSLocalizedString("\(Int(days / 365)) years ago", comment: "relative time")
+            return String(format: NSLocalizedString("%d years ago", comment: "relative time"), Int(days / 365))
         }
     }
 
