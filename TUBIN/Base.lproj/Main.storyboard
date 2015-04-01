@@ -34,36 +34,52 @@
                                             <constraint firstAttribute="width" secondItem="cYB-wX-KKK" secondAttribute="height" multiplier="16:9" id="U1k-Rx-wvy"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-TR-nvY" userLabel="previous">
-                                        <rect key="frame" x="136" y="18" width="48" height="48"/>
-                                        <state key="normal" image="ic_skip_previous_48px"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osE-Dd-bJw" userLabel="play">
-                                        <rect key="frame" x="192" y="18" width="48" height="48"/>
-                                        <state key="normal" image="ic_play_circle_fill_48px"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59i-7J-oid" userLabel="next">
-                                        <rect key="frame" x="248" y="18" width="48" height="48"/>
-                                        <state key="normal" image="ic_skip_next_48px"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-Sa-fFT">
-                                        <rect key="frame" x="552" y="18" width="48" height="48"/>
+                                        <rect key="frame" x="564" y="24" width="36" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="1Bl-HZ-1hP"/>
+                                            <constraint firstAttribute="height" constant="36" id="SRh-qr-qkf"/>
+                                        </constraints>
                                         <state key="normal" image="ic_chevron_right_48px"/>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-v4-aJ2">
+                                        <rect key="frame" x="136" y="8" width="420" height="68"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osE-Dd-bJw" userLabel="play">
+                                                <rect key="frame" x="186" y="10" width="48" height="48"/>
+                                                <state key="normal" image="ic_play_circle_fill_48px"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59i-7J-oid" userLabel="next">
+                                                <rect key="frame" x="238" y="10" width="48" height="48"/>
+                                                <state key="normal" image="ic_skip_next_48px"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-TR-nvY" userLabel="previous">
+                                                <rect key="frame" x="134" y="10" width="48" height="48"/>
+                                                <state key="normal" image="ic_skip_previous_48px"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="osE-Dd-bJw" firstAttribute="centerY" secondItem="59i-7J-oid" secondAttribute="centerY" id="0Rj-04-A7k"/>
+                                            <constraint firstItem="59i-7J-oid" firstAttribute="leading" secondItem="osE-Dd-bJw" secondAttribute="trailing" constant="4" id="3tZ-tF-pd5"/>
+                                            <constraint firstItem="tuO-TR-nvY" firstAttribute="centerY" secondItem="osE-Dd-bJw" secondAttribute="centerY" id="8QS-rd-4gm"/>
+                                            <constraint firstAttribute="centerY" secondItem="osE-Dd-bJw" secondAttribute="centerY" id="Q9i-kH-Xvc"/>
+                                            <constraint firstAttribute="centerX" secondItem="osE-Dd-bJw" secondAttribute="centerX" id="ekj-Yd-XzG"/>
+                                            <constraint firstItem="osE-Dd-bJw" firstAttribute="leading" secondItem="tuO-TR-nvY" secondAttribute="trailing" constant="4" id="whX-UV-zUi"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="59i-7J-oid" secondAttribute="centerY" id="1Aa-na-hbu"/>
-                                    <constraint firstAttribute="centerY" secondItem="tuO-TR-nvY" secondAttribute="centerY" id="AJL-ML-OnK"/>
-                                    <constraint firstItem="59i-7J-oid" firstAttribute="leading" secondItem="osE-Dd-bJw" secondAttribute="trailing" constant="8" id="CkT-W6-UGq"/>
                                     <constraint firstAttribute="trailing" secondItem="Xqh-Sa-fFT" secondAttribute="trailing" id="EWl-93-jOP"/>
-                                    <constraint firstItem="osE-Dd-bJw" firstAttribute="leading" secondItem="tuO-TR-nvY" secondAttribute="trailing" constant="8" id="Kjb-sO-St0"/>
+                                    <constraint firstItem="K2D-v4-aJ2" firstAttribute="leading" secondItem="cYB-wX-KKK" secondAttribute="trailing" constant="8" id="Fgy-c1-s6W"/>
                                     <constraint firstItem="cYB-wX-KKK" firstAttribute="leading" secondItem="yk0-Xn-wNc" secondAttribute="leading" constant="8" id="MY4-Gr-u0B"/>
+                                    <constraint firstAttribute="bottom" secondItem="K2D-v4-aJ2" secondAttribute="bottom" constant="8" id="ORS-Vj-4rC"/>
+                                    <constraint firstItem="K2D-v4-aJ2" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" constant="8" id="PLt-Oa-R0u"/>
                                     <constraint firstAttribute="centerY" secondItem="Xqh-Sa-fFT" secondAttribute="centerY" id="U6a-nc-fcq"/>
                                     <constraint firstItem="cYB-wX-KKK" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" constant="8" id="ZPX-Dk-YAI"/>
                                     <constraint firstAttribute="height" constant="84" id="cIs-4s-qge"/>
-                                    <constraint firstAttribute="centerY" secondItem="osE-Dd-bJw" secondAttribute="centerY" id="yyj-st-MCA"/>
-                                    <constraint firstItem="tuO-TR-nvY" firstAttribute="leading" secondItem="cYB-wX-KKK" secondAttribute="trailing" constant="8" id="zbz-W4-aET"/>
+                                    <constraint firstItem="Xqh-Sa-fFT" firstAttribute="leading" secondItem="K2D-v4-aJ2" secondAttribute="trailing" constant="8" id="lxG-gF-toJ"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="backButton" destination="Xqh-Sa-fFT" id="QZ2-qS-JnL"/>
