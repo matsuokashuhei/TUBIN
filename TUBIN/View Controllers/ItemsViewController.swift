@@ -210,8 +210,7 @@ extension ItemsViewController: UITableViewDelegate {
 
 extension ItemsViewController: UITableViewDelegate {
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
-
 }
