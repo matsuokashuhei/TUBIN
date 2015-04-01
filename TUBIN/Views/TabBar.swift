@@ -68,7 +68,23 @@ class Tab: UIView {
 
     func configure(text: String) {
         configure()
-        label.text = text
+        label.text = NSLocalizedString(text, comment: "")
+        /*
+        if text == "Favorites" {
+            imageView.image = UIImage(named: "ic_favorite_outline_48px")?.imageWithRenderingMode(.AlwaysTemplate)
+        } else if text == "Search" {
+            imageView.image = UIImage(named: "ic_search_48px")?.imageWithRenderingMode(.AlwaysTemplate)
+        } else if text == "Guide" {
+            imageView.image = UIImage(named: "ic_map_48px")?.imageWithRenderingMode(.AlwaysTemplate)
+        } else if text == "Popular" {
+            imageView.image = UIImage(named: "ic_mood_48px")?.imageWithRenderingMode(.AlwaysTemplate)
+        }
+        imageView.tintColor = Appearance.tintColor()
+        imageView.contentMode = .ScaleAspectFit
+        imageView.alpha = 0.1
+        addSubview(imageView)
+        imageView.frame = bounds
+        */
         addSubview(label)
     }
 

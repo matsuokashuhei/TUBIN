@@ -158,8 +158,20 @@ extension BookmarksViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let bookmark = bookmarks[indexPath.row]
         var cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as BookmarkTableViewCell
-        cell.configure(bookmarks[indexPath.row])
+        cell.configure(bookmark)
+        if isPresetBookmark(bookmark) {
+            cell.thumbnailImageView.alpha = 0.5
+            cell.thumbnailImageView.backgroundColor = Appearance.tintColor().colorWithAlphaComponent(0.1)
+        } else {
+            cell.thumbnailImageView.alpha = 1.0
+            cell.thumbnailImageView.backgroundColor = UIColor.clearColor()
+        }
         return cell
+    }
+
+    func isPresetBookmark(bookmark: Bookmark) -> Bool {
+        return (["search", "favorites", "popular", "guide"] as NSArray).containsObject(bookmark.name)
     }
 }

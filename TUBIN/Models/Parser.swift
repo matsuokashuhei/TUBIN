@@ -18,7 +18,7 @@ class Parser {
 
         let key = "initializedBookmarks"
         if NSUserDefaults.standardUserDefaults().boolForKey(key) == false {
-            let names = ["Popular", "Search", "Favorites", "Guide"]
+            let names = ["popular", "search", "favorites", "guide"]
             //let names = ["Popular", "Guide"]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
