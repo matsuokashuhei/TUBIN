@@ -35,6 +35,7 @@ class ContainerViewController: UIViewController {
         // Bookmarkの取得
         // ------------------
         loadBookmarks()
+        tabBar.selectTabAtIndex(0)
         // ------------------
         // Notificationの設定
         // ------------------
@@ -112,7 +113,6 @@ class ContainerViewController: UIViewController {
             self.tabBar.selectTab(tab)
         }
         */
-        tabBar.selectTabAtIndex(0)
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -121,7 +121,7 @@ class ContainerViewController: UIViewController {
     }
 
 
-    func resetBookmarks() {
+    func clearBookmarks() {
         for childViewController in childViewControllers {
             childViewController.removeFromParentViewController()
         }
@@ -136,15 +136,17 @@ extension ContainerViewController {
     // Notification
 
     func reloadBookmarks(notfication: NSNotification) {
-        resetBookmarks()
+        clearBookmarks()
         loadBookmarks()
-        //Async.main {
+        Async.main {
             self.tabBar.setNeedsLayout()
             self.tabBar.layoutIfNeeded()
             self.containerView.setNeedsLayout()
             self.containerView.layoutIfNeeded()
-            self.tabBar.selectTabAtIndex(self.containerView.views.count)
-        //}
+        }
+        let lastIndex = containerView.views.count - 1
+        tabBar.selectTabAtIndex(lastIndex)
+        containerView.scrollToIndexOfContentViews(lastIndex)
     }
 
     func addItemToBookmarks(notification: NSNotification) {
