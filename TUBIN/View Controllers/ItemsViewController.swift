@@ -201,10 +201,11 @@ extension ItemsViewController: UITableViewDelegate {
         return items.count
     }
 
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.alpha = 0
-        UIView.animateWithDuration(0.5, animations: { cell.alpha = 1 })
-    }
+// セルをタッチする操作が鈍くなるのでやめる。
+//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        cell.alpha = 0
+//        UIView.animateWithDuration(0.5, animations: { cell.alpha = 1 })
+//    }
 
 }
 
