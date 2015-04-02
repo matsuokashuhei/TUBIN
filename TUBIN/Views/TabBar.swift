@@ -203,7 +203,6 @@ class TabBar: UIView {
     }
 
     func centerTab(tab: Tab) {
-        logger.debug("")
         if scrollView.contentSize.width <= frame.width {
             scrollView.setContentOffset(CGPointZero, animated: true)
             return
@@ -255,7 +254,7 @@ class TabBar: UIView {
                 return offsetX - minOffsetX
             }
         }()
-        logger.debug("containerViewRelatedOffsetX: \(containerViewRelatedOffsetX), offsetX: \(offsetX), x: \(x)")
+        logger.verbose("containerViewRelatedOffsetX: \(containerViewRelatedOffsetX), offsetX: \(offsetX), x: \(x)")
         offsetX = x
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }
@@ -265,7 +264,7 @@ class TabBar: UIView {
         let left = Int(offset)
         let right = left + 1
         let alpha = offset - CGFloat(left)
-        logger.debug("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
+        logger.verbose("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
         if offset > 0 {
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
             if alpha > 0.5 {
