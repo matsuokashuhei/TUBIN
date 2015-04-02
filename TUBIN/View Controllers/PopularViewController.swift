@@ -12,34 +12,18 @@ class PopularViewController: UIViewController {
 
     @IBOutlet var segmentedControl: UISegmentedControl! {
         didSet {
-            segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 0)
-            segmentedControl.setTitle(NSLocalizedString("Channels", comment: "Channels"), forSegmentAtIndex: 1)
+            segmentedControl.setTitle(NSLocalizedString("Videos", comment: "Videos"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 1)
+            segmentedControl.setTitle(NSLocalizedString("Channels", comment: "Channels"), forSegmentAtIndex: 2)
             segmentedControl.selectedSegmentIndex = 0
             segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         }
     }
-    @IBOutlet var playlistsView: UIView! {
-        didSet {
-            let controller = PlaylistsViewController()
-            controller.search(parameters: parameters)
-            addChildViewController(controller)
-            playlistsView.addSubview(controller.view)
-            controller.view.frame = playlistsView.bounds
-        }
-    }
-    @IBOutlet var channelsView: UIView! {
-        didSet {
-            let controller = ChannelsViewController()
-            controller.search(parameters: parameters)
-            addChildViewController(controller)
-            channelsView.addSubview(controller.view)
-            controller.view.frame = channelsView.bounds
-        }
-    }
+    @IBOutlet weak var videosView: UIView!
+    @IBOutlet weak var playlistsView: UIView!
+    @IBOutlet weak var channelsView: UIView!
 
     var containerViews: [UIView] = []
-
-    var parameters = ["order": "viewCount"]
 
     convenience override init() {
         self.init(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
@@ -48,31 +32,38 @@ class PopularViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /*
-        let playlistViewcontroller = PlaylistsViewController()
-        playlistViewcontroller.parameters = parameters
-        addChildViewController(playlistViewcontroller)
-        playlistsView.addSubview(playlistViewcontroller.view)
-        view.frame = playlistsView.bounds
+        configure(videosView: videosView)
+        configure(playlistsView: playlistsView)
+        configure(channelsView: channelsView)
 
-        let channelsViewcontroller = ChannelsViewController()
-        channelsViewcontroller.parameters = parameters
-        addChildViewController(channelsViewcontroller)
-        channelsView.addSubview(channelsViewcontroller.view)
-        view.frame = playlistsView.bounds
-        */
+        containerViews = [videosView, playlistsView, channelsView]
 
-        containerViews = [playlistsView, channelsView]
-        containerViews.last!.hidden = true
+    }
 
-        /*
-        if let playlistsViewController = childViewControllers[0] as? PlaylistsViewController {
-            playlistsViewController.search(parameters: parameters)
-        }
-        if let channelsViewController = childViewControllers[1] as? ChannelsViewController {
-            channelsViewController.search(parameters: parameters)
-        }
-        */
+    func configure(videosView view: UIView) {
+        let controller = VideosViewController()
+        controller.videos(parameters: ["chart": "mostPopular"])
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
+    }
+
+    func configure(playlistsView view: UIView) {
+        let controller = PlaylistsViewController()
+        controller.search(parameters: ["order": "viewCount"])
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        view.hidden = true
+    }
+
+    func configure(channelsView view: UIView) {
+        let controller = ChannelsViewController()
+        controller.search(parameters: ["order": "viewCount"])
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        view.hidden = true
     }
 
     override func didReceiveMemoryWarning() {

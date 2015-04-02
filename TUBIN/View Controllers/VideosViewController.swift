@@ -39,22 +39,57 @@ class VideosViewController: ItemsViewController {
 
     override func search() {
         super.search()
-        YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
-            case .Failure(let box):
-                self.errorCompletion(box.unbox)
+        if let chart = parameters["chart"] {
+            videos()
+        } else {
+            YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
+                switch result {
+                case .Success(let box):
+                    self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
+                case .Failure(let box):
+                    self.errorCompletion(box.unbox)
+                }
             }
         }
     }
 
     override func searchMore() {
         super.searchMore()
-        YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in
-            switch response {
+        if let chart = parameters["chart"] {
+            moreVideos()
+        } else {
+            YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in
+                switch response {
+                case .Success(let box):
+                    self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                case .Failure(let box):
+                    self.errorCompletion(box.unbox)
+                }
+            }
+        }
+    }
+
+    func videos(#parameters: [String: String]) {
+        super.search(parameters: parameters)
+        videos()
+    }
+
+    func videos() {
+        YouTubeKit.videos(parameters: parameters) { (result) in
+            switch result {
             case .Success(let box):
-                self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                self.searchCompletion(page: box.unbox.page, items: box.unbox.videos)
+            case .Failure(let box):
+                self.errorCompletion(box.unbox)
+            }
+        }
+    }
+
+    func moreVideos() {
+        YouTubeKit.videos(parameters: parameters) { (result) in
+            switch result {
+            case .Success(let box):
+                self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.videos)
             case .Failure(let box):
                 self.errorCompletion(box.unbox)
             }
