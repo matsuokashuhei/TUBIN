@@ -90,7 +90,9 @@ class BookmarkTableViewCell: UITableViewCell {
         return wide
     }
 
+    // TODO: iOS 8 のバグを解消するためのコードである。バグが直っていたら消す。
     override func prepareForReuse() {
+        // http://stackoverflow.com/questions/24334305/uitableviewcell-reorder-control-disappearing-when-table-is-scrolled
         super.prepareForReuse()
         setEditing(false, animated: false)
     }
