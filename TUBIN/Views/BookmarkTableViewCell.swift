@@ -90,4 +90,9 @@ class BookmarkTableViewCell: UITableViewCell {
         return wide
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setEditing(false, animated: false)
+    }
+
 }
