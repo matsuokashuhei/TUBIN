@@ -155,6 +155,7 @@ class Appearance {
 
         // UIButton
         UIButton.appearance().tintColor = tintColor
+        MoreButton.appearance().tintColor = tintColor.colorWithAlphaComponent(0.3)
 
         // ScrubberView
         ScrubberView.appearance().tintColor = tintColor
@@ -178,6 +179,7 @@ class Appearance {
 
         // MiniPlayerView
         MiniPlayerView.appearance().backgroundColor = backgroundColor
+
     }
 
 }
