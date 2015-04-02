@@ -30,21 +30,26 @@ class Spinner {
 
     func configure() {
         // PKHUD
-        HUDController.sharedController.dimsBackground = false
-        HUDController.sharedController.userInteractionOnUnderlyingViewsEnabled = false
+        PKHUD.sharedHUD.dimsBackground = false
+        PKHUD.sharedHUD.userInteractionOnUnderlyingViewsEnabled = false
+//        HUDController.sharedController.dimsBackground = false
+//        HUDController.sharedController.userInteractionOnUnderlyingViewsEnabled = false
     }
 
     func show() {
         configure()
         // PKHUD
-        HUDController.sharedController.contentView = HUDContentView.SystemActivityIndicatorView()
-        HUDController.sharedController.show()
+        PKHUD.sharedHUD.contentView = PKHUDProgressView()
+        PKHUD.sharedHUD.show()
+        //HUDController.sharedController.contentView = HUDContentView.SystemActivityIndicatorView()
+        //HUDController.sharedController.show()
     }
 
     func dissmiss() {
         // PKHUD
         configure()
-        HUDController.sharedController.hide()
+        PKHUD.sharedHUD.hide(animated: true)
+        //HUDController.sharedController.hide()
     }
 
 }
