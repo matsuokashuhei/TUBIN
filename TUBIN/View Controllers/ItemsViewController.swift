@@ -92,6 +92,9 @@ class ItemsViewController: UIViewController {
             }
         }.main {
             self.tableView.reloadData()
+            if let q = self.parameters["q"] {
+                self.tableView.setContentOffset(CGPointZero, animated: false)
+            }
             if self.spinnable {
                 Spinner.dismiss()
             }
