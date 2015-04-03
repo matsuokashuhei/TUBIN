@@ -155,7 +155,7 @@ class Appearance {
 
         // UIButton
         UIButton.appearance().tintColor = tintColor
-        MoreButton.appearance().tintColor = tintColor.colorWithAlphaComponent(0.3)
+        MoreButton.appearance().tintColor = fontColor.colorWithAlphaComponent(0.3)
 
         // ScrubberView
         ScrubberView.appearance().tintColor = tintColor
