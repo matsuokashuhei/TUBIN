@@ -456,7 +456,7 @@ extension NSDate {
                 return NSLocalizedString("1 week ago", comment: "relative time")
             } else {
                 //return NSLocalizedString("\(Int(days / 7)) weeks ago", comment: "relative time")
-                return String(format: NSLocalizedString("%d weeks ago", comment: "relative time"), Int(days / 7))
+                return String(format: NSLocalizedString("%d weeks ago", comment: "relative time"), Int(ceil(days / 7)))
             }
         }
 
@@ -468,7 +468,7 @@ extension NSDate {
                 return NSLocalizedString("1 month ago", comment: "relative time")
             } else {
                 //return NSLocalizedString("\(Int(days / 30)) months ago", comment: "relative time")
-                return String(format: NSLocalizedString("%d months ago", comment: "relative time"), Int(days / 30))
+                return String(format: NSLocalizedString("%d months ago", comment: "relative time"), Int(ceil(days / 30)))
             }
         }
 
@@ -476,7 +476,7 @@ extension NSDate {
             return NSLocalizedString("1 year ago", comment: "relative time")
         } else {
             //return NSLocalizedString("\(Int(days / 365)) years ago", comment: "relative time")
-            return String(format: NSLocalizedString("%d years ago", comment: "relative time"), Int(days / 365))
+            return String(format: NSLocalizedString("%d years ago", comment: "relative time"), Int(ceil(days / 365)))
         }
     }
 

@@ -1,114 +1,57 @@
-/* (No Commment) */
-"%d days ago" = "%d 日前";
-
-/* (No Commment) */
-"%d hours ago" = "%d 時間前";
-
-/* (No Commment) */
-"%d minutes ago" = "%d 分前";
-
-/* (No Commment) */
-"%d months ago" = "%d ヶ月前";
-
-/* (No Commment) */
+// テーブルビュー
+"subscribes" = "人";
+"videos" = "ビデオ";
+"views" = "回";
+"just now" = "今";
 "%d seconds ago" = "%d 秒前";
-
-/* (No Commment) */
+"1 minute ago" = "1 分前";
+"%d minutes ago" = "%d 分前";
+"1 hour ago" = "1 時間前";
+"%d hours ago" = "%d 時間前";
+"1 day ago" = "1 日前";
+"%d days ago" = "%d 日前";
+"1 week ago" = "1 週間前";
 "%d weeks ago" = "%d 週間前";
-
-/* (No Commment) */
+"1 month ago" = "1 ヶ月前";
+"%d months ago" = "%d ヶ月前";
+"1 year ago" = "1 年前";
 "%d years ago" = "%d 年前";
 
-/* relative time */
-"1 day ago" = "1 日前";
-
-/* relative time */
-"1 hour ago" = "1 時間前";
-
-/* relative time */
-"1 minute ago" = "1 分前";
-
-/* relative time */
-"1 month ago" = "1 ヶ月前";
-
-/* relative time */
-"1 week ago" = "1 週間前";
-
-/* relative time */
-"1 year ago" = "1 年前";
-
-/* これ以上のチャンネルやプレイリストを登録できません。 */
+// アラート
 "Cannot subscribe to any more Channel" = "これ以上チャンネルを登録できません。";
-
-/* これ以上のプレイリストを登録できません。 */
 "Cannot subscribe to any more Playlist" = "これ以上プレイリストを登録できません。";
-
-/* Channels */
-"Channels" = "チャンネル";
-
-/* Dismis */
+"Success" = "成功";
+"Failed" = "失敗";
+"Error" = "エラー";
 "Dismis" = "閉じる";
 
-/* エラーのアラートのタイトル */
-"Error" = "エラー";
-
-/* Failed */
-"Failed" = "エラー";
-
-/* Favorites */
-"Favorites" = "お気に入り";
-
-/* Guide */
-"Guide" = "ガイド";
-
-/* Histories */
-"Histories" = "履歴";
-
-/* Playlists */
+// ブックマーク
+"Videos" = "ビデオ";
 "Playlists" = "プレイリスト";
-
-/* Popular */
-"Popular" = "ポピュラー";
-
-/* Search */
+"Channels" = "チャンネル";
+"Favorites" = "お気に入り";
+"Histories" = "履歴";
 "Search" = "検索";
-
-/* Settings */
+"Guide" = "ガイド";
+"Popular" = "人気";
 "Settings" = "設定";
 
-/* Store */
+// 設定
 "Store" = "購入";
-
-/* Subscriptions */
 "Subscriptions" = "ブックマーク";
 
-/* サクセスのアラートのタイトル */
-"Success" = "成功";
+// アプリ内課金
+"WHAT'S INCLUDED" = "購入の特典";
+"No advertisement" = "広告なし";
+"Unlimited favorites" = "お気に入りの制限なし";
+"Unlimited bookmarks" = "ブックマークの制限なし";
+"One time fee for parmanent use" = "";
 
-/* UPGRADE */
+"RESTORE" = "復元する";
 "UPGRADE" = "購入する";
 
-/* Upgrade */
-"Upgrade" = "購入";
-
-/* Videos */
-"Videos" = "ビデオ";
-
-/* ビデオをフェイバリットに保存したときに通知するメッセージ */
+// トースト
 "favorited!" = "お気に入りに保存しました。";
-
-/* relative time */
-"just now" = "今";
-
-/* プレイリストやチャンネルをブックマークしたときに通知するメッセージ */
 "subscribed!" = "ブックマークしました。";
 
-/* subscribes */
-"subscribes" = "人";
-
-/* videos */
-"videos" = "ビデオ";
-
-/* views */
-"views" = "回";
 

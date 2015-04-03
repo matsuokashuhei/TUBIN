@@ -15,8 +15,26 @@ class StoreViewController: UIViewController {
 
     var product: SKProduct?
 
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet { titleLabel.text = NSLocalizedString("WHAT'S INCLUDED", comment: "WHAT'S INCLUDED") }
+    }
+    @IBOutlet weak var text1Label: UILabel! {
+        didSet { text1Label.text = NSLocalizedString("No advertisement", comment:"No advertisement")}
+    }
+    @IBOutlet weak var text2Label: UILabel! {
+        didSet { text2Label.text = NSLocalizedString("Unlimited favorites", comment: "Unlimited favorites") }
+    }
+    @IBOutlet weak var text3Label: UILabel! {
+        didSet { text3Label.text = NSLocalizedString("Unlimited bookmarks", comment: "Unlimited bookmarks") }
+    }
+    @IBOutlet weak var text4Label: UILabel! {
+        didSet { text4Label.text = NSLocalizedString("One time fee for parmanent use", comment: "One time fee for parmanent use") }
+    }
+    @IBOutlet weak var priceLabel: UILabel!
+
     @IBOutlet weak var upgradeButton: UIButton! {
         didSet {
+            upgradeButton.setTitle(NSLocalizedString("UPGRADE", comment: "UPGRADE"), forState: .Normal)
             if SKPaymentQueue.canMakePayments() {
                 upgradeButton.addTarget(self, action: "upgradeButtonClicked:", forControlEvents: .TouchUpInside)
             }
@@ -26,6 +44,7 @@ class StoreViewController: UIViewController {
 
     @IBOutlet weak var restoreButton: UIButton! {
         didSet {
+            restoreButton.setTitle(NSLocalizedString("RESTORE", comment: "RESTORE"), forState: .Normal)
             if SKPaymentQueue.canMakePayments() {
                 restoreButton.addTarget(self, action: "restoreButtonClicked:", forControlEvents: .TouchUpInside)
             }
@@ -84,9 +103,8 @@ extension StoreViewController: SKProductsRequestDelegate {
         if let product = response.products.first as? SKProduct {
             self.product = product
             if let price = formatPrice(product) {
+                priceLabel.text = price
                 upgradeButton.enabled = true
-                let title = NSLocalizedString("UPGRADE", comment: "UPGRADE")
-                upgradeButton.setTitle("\(title) \(price)", forState: .Normal)
                 restoreButton.enabled = true
             }
         }
