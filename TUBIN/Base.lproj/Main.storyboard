@@ -18,15 +18,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eto-dd-wFc">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="511"/>
                                 <connections>
                                     <segue destination="gib-DC-RKC" kind="embed" id="xqt-WK-ksi"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0E5-5l-nuX" customClass="BorderView" customModule="TUBIN" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="511" width="600" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="0Tp-Rg-OSa"/>
+                                </constraints>
+                            </view>
                             <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yk0-Xn-wNc" customClass="MiniPlayerView" customModule="TUBIN" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="512" width="600" height="88"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-Sa-fFT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-Sa-fFT" customClass="NavigationButton" customModule="TUBIN" customModuleProvider="target">
                                         <rect key="frame" x="564" y="26" width="36" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="1Bl-HZ-1hP"/>
@@ -95,12 +102,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yk0-Xn-wNc" firstAttribute="top" secondItem="eto-dd-wFc" secondAttribute="bottom" id="5vh-Fv-ZUc"/>
+                            <constraint firstItem="0E5-5l-nuX" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="8QK-gT-Chj"/>
                             <constraint firstAttribute="trailing" secondItem="yk0-Xn-wNc" secondAttribute="trailing" id="Ig7-r5-H0Q"/>
+                            <constraint firstAttribute="trailing" secondItem="0E5-5l-nuX" secondAttribute="trailing" id="hff-ub-U0G"/>
                             <constraint firstItem="yk0-Xn-wNc" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="iOi-a3-VsR"/>
                             <constraint firstItem="eto-dd-wFc" firstAttribute="leading" secondItem="Tu3-S3-WdM" secondAttribute="leading" id="jo1-a6-gys"/>
+                            <constraint firstItem="0E5-5l-nuX" firstAttribute="top" secondItem="eto-dd-wFc" secondAttribute="bottom" id="ocz-Nr-aDN"/>
                             <constraint firstItem="eto-dd-wFc" firstAttribute="top" secondItem="Tu3-S3-WdM" secondAttribute="top" id="p7j-xa-iwa"/>
                             <constraint firstAttribute="trailing" secondItem="eto-dd-wFc" secondAttribute="trailing" id="tbr-bX-CQr"/>
+                            <constraint firstItem="yk0-Xn-wNc" firstAttribute="top" secondItem="0E5-5l-nuX" secondAttribute="bottom" id="uC9-BP-s1o"/>
                             <constraint firstItem="B19-ds-5w5" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="bottom" id="xOR-ns-Rd0"/>
                         </constraints>
                     </view>
@@ -121,7 +131,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PgK-HD-r6n"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kTw-As-Z01">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="511"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7F-hy-KfM" customClass="TabBar" customModule="TUBIN" customModuleProvider="target">
@@ -144,10 +154,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iBN-6W-oRe" customClass="ContainerView" customModule="TUBIN" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="600" height="468"/>
+                                <rect key="frame" x="0.0" y="44" width="600" height="467"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJR-he-YK8">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="468"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="467"/>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

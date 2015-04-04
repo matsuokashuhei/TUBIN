@@ -22,3 +22,9 @@ class DarkLabel: UILabel {
 
 class MoreButton: UIButton {
 }
+
+class BorderView: UIView {
+}
+
+class NavigationButton: UIButton {
+}
