@@ -33,6 +33,7 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UITableViewDelegate {
 
+    /*
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -43,6 +44,7 @@ extension SettingsViewController: UITableViewDelegate {
             return "Develop"
         }
     }
+    */
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
