@@ -93,6 +93,7 @@ class YouTubePlayerViewController: UIViewController {
 
     override func viewWillDisappear(animated: Bool) {
         player.delegate = nil
+        player.controller.view.gestureRecognizers?.removeAll(keepCapacity: true)
     }
 
     override func viewDidDisappear(animated: Bool) {
