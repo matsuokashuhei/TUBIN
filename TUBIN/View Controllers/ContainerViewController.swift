@@ -153,7 +153,6 @@ extension ContainerViewController {
     }
 
     func addItemToBookmarks(notification: NSNotification) {
-        logger.debug("bookmarks.count: \(bookmarks.count)")
         if let item = notification.userInfo?["item"] as? Item {
             Toast.bookmark(item: item)
         }

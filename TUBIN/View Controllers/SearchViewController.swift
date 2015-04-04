@@ -146,12 +146,10 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        logger.debug("")
         return suggestions.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        logger.debug("")
         var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)
         cell.textLabel?.text = suggestions[indexPath.row]
@@ -163,7 +161,6 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        logger.debug("searchText: \(searchText)")
         if (searchBar.text as NSString).length > 0 {
             YouTubeKit.suggestions(keyword: searchBar.text) { (response) -> Void in
                 switch response {
@@ -187,25 +184,19 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        logger.debug("searchBar.text: \(searchBar.text)")
         return true
     }
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        logger.debug("searchBar.text: \(searchBar.text)")
     }
     func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
-        logger.debug("searchBar.text: \(searchBar.text)")
         return true
     }
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        logger.debug("searchBar.text: \(searchBar.text)")
     }
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        logger.debug("searchBar.text: \(searchBar.text), range: \(range), text: \(text)")
         return true
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        logger.debug("searchBar.text: \(searchBar.text)")
         search()
     }
 }

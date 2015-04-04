@@ -30,7 +30,6 @@ class YouTubePlayer: NSObject {
     var playlist: [Video]!
     var nowPlaying: Video! {
         didSet(didPlaying) {
-            logger.debug(debug(controller))
             if let didPlaying = didPlaying {
                 if didPlaying.id == nowPlaying.id {
                     if controller.playbackState == .Playing {
@@ -146,7 +145,6 @@ extension YouTubePlayer {
 
     // MARK: Notifications
     func addObservers() {
-        logger.debug("")
         removeObservers()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "durationAvailable:", name: MPMovieDurationAvailableNotification, object: controller)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "readyForDisplay:", name: MPMoviePlayerReadyForDisplayDidChangeNotification, object: controller)
@@ -155,7 +153,6 @@ extension YouTubePlayer {
     }
 
     func removeObservers() {
-        logger.debug("")
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMovieDurationAvailableNotification, object: controller)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerReadyForDisplayDidChangeNotification, object: controller)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MPMoviePlayerPlaybackDidFinishNotification, object: controller)
@@ -163,7 +160,6 @@ extension YouTubePlayer {
     }
 
     func durationAvailable(notification: NSNotification) {
-        logger.debug("")
         if let player = notification.object as? MPMoviePlayerController {
             if isnormal(player.duration) {
                 delegate?.durationAvailable(controller)
@@ -172,7 +168,6 @@ extension YouTubePlayer {
     }
 
     func readyForDisplay(notification: NSNotification) {
-        logger.debug("")
         if let controller = notification.object as? MPMoviePlayerController {
             delegate?.readyForDisplay(controller)
         }
@@ -182,21 +177,20 @@ extension YouTubePlayer {
         if let controller = notification.object as? MPMoviePlayerController {
             switch controller.loadState {
             case MPMovieLoadState.Unknown:
-                logger.debug("Unknown")
+                logger.verbose("Unknown")
             case MPMovieLoadState.Playable:
-                logger.debug("Playable")
+                logger.verbose("Playable")
             case MPMovieLoadState.PlaythroughOK:
-                logger.debug("PlaythroughOK")
+                logger.verbose("PlaythroughOK")
             case MPMovieLoadState.Stalled:
-                logger.debug("Stalled")
+                logger.verbose("Stalled")
             default:
-                logger.debug("\(controller.loadState)")
+                logger.verbose("\(controller.loadState)")
             }
         }
     }
 
     func playbackDidFinish(notification: NSNotification) {
-        logger.debug("")
         playNextVideo()
         if let controller = notification.object as? MPMoviePlayerController {
             delegate?.playbackDidFinish(controller)
@@ -204,7 +198,6 @@ extension YouTubePlayer {
     }
 
     func mediaIsPreparedToPlayDidChange(notification: NSNotification) {
-        logger.debug("")
         if let controller = notification.object as? MPMoviePlayerController {
             delegate?.mediaIsPreparedToPlayDidChange(controller)
             Timer.start(target: self, selector: "playingAtTime")
@@ -215,17 +208,17 @@ extension YouTubePlayer {
         if let controller = notification.object as? MPMoviePlayerController {
             switch controller.playbackState {
             case .Stopped:
-                logger.debug("Stopped")
+                logger.verbose("Stopped")
             case .Playing:
-                logger.debug("Playing")
+                logger.verbose("Playing")
             case .Paused:
-                logger.debug("Paused")
+                logger.verbose("Paused")
             case .Interrupted:
-                logger.debug("Interrupted")
+                logger.verbose("Interrupted")
             case .SeekingForward:
-                logger.debug("SeekingForward")
+                logger.verbose("SeekingForward")
             case .SeekingBackward:
-                logger.debug("SeekingBackward")
+                logger.verbose("SeekingBackward")
             }
             delegate?.playBackStateDidChange(controller)
         }

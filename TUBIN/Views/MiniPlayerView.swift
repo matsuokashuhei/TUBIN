@@ -111,37 +111,29 @@ extension MiniPlayerView: YouTubePlayerDelegate {
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {
-        logger.debug("controller.duration: \(controller.duration)")
     }
 
     func readyForDisplay(controller: MPMoviePlayerController) {
-        logger.debug("")
     }
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
-        logger.debug("")
         addPlayerView(controller)
         player.play()
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
-        logger.verbose("")
     }
 
     func playbackDidFinish(controller: MPMoviePlayerController) {
-        logger.debug("")
     }
 
     func playBackStateDidChange(controller: MPMoviePlayerController) {
         switch controller.playbackState {
         case .Playing:
-            logger.debug("Playing")
             playButton.setImage(UIImage(named: "ic_pause_circle_outline_48px"), forState: .Normal)
         case .Paused, .Stopped:
-            logger.debug("Paused, Stopped")
             playButton.setImage(UIImage(named: "ic_play_circle_outline_48px"), forState: .Normal)
         default:
-            logger.debug("\(controller.playbackState.rawValue)")
             playButton.setImage(UIImage(named: "ic_play_circle_outline_48px"), forState: .Normal)
             break
         }
