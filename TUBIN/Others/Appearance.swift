@@ -153,6 +153,9 @@ class Appearance {
         UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: backgroundColor, NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Selected)
 
+        // UISlider
+        let image = UIImage(named: "ic_bar_24px")?.imageWithRenderingMode(.AlwaysTemplate)
+        UISlider.appearance().setThumbImage(image, forState: .Normal)
         // UIButton
         UIButton.appearance().tintColor = tintColor
         MoreButton.appearance().tintColor = fontColor.colorWithAlphaComponent(0.3)
