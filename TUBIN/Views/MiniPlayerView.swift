@@ -47,7 +47,7 @@ class MiniPlayerView: UIView {
     func show() {
         player.delegate = self
         playBackStateDidChange(player.controller)
-        height.constant = 86
+        height.constant = 88
         hidden = false
         addPlayerView(player.controller)
     }
@@ -84,7 +84,7 @@ class MiniPlayerView: UIView {
         removePlayerView(videoView)
         videoView.addSubview(controller.view)
         controller.view.frame = videoView.bounds
-        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        //controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         videoView.addConstraints([
             NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),

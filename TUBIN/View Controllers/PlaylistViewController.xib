@@ -16,15 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9Hm-nI-cuk">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9Hm-nI-cuk">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isA-Ow-nh3" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="516" width="600" height="84"/>
+                    <rect key="frame" x="0.0" y="512" width="600" height="88"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="84" id="0uD-Xl-8Ta"/>
+                        <constraint firstAttribute="height" constant="88" id="0uD-Xl-8Ta"/>
                     </constraints>
                     <connections>
                         <outlet property="height" destination="0uD-Xl-8Ta" id="x0B-lS-4hm"/>

@@ -44,7 +44,20 @@ class ItemTableTableViewCell: UITableViewCell {
             thumbnailImageView.sd_setImageWithURL(URL)
         }
         */
-
+        /*
+        if let URL = NSURL(string: item.thumbnailURL) {
+            SDWebImageManager.sharedManager().downloadImageWithURL(URL, options: SDWebImageOptions.RetryFailed, progress: { (_, _) -> Void in
+            }, completed: { (image, error, _, finished, _) -> Void in
+                if let image = image {
+                    //self.thumbnailImageView.image = image
+                    self.thumbnailImageView.image = image
+                }
+                if let error = error {
+                    self.logger.error(error.localizedDescription)
+                }
+            })
+        }
+        */
     }
 
     private func formatStringFromInt(integer: Int) -> String {
