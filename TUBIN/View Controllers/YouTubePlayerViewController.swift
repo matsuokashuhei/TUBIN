@@ -54,7 +54,6 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        logger.debug("")
 
         player.nowPlaying = video
         player.playlist = playlist
@@ -197,8 +196,6 @@ class YouTubePlayerViewController: UIViewController {
             if UIDeviceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
             }
-        } else {
-            logger.debug("UIDevice.currentDevice().userInterfaceIdiom: .Pad")
         }
     }
 
@@ -214,7 +211,6 @@ class YouTubePlayerViewController: UIViewController {
 
     func previousButtonTapped(button: UIButton) {
         if player.controller.playbackState == .Playing {
-            logger.debug("player.controller.currentPlaybackTime: \(player.controller.currentPlaybackTime)")
             if player.controller.currentPlaybackTime < 3 {
                 if let video = player.previousVideo() {
                     removePlayerView(videoView)
@@ -331,16 +327,13 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {
-        logger.debug("controller.duration: \(controller.duration)")
         scrubberView.configure(controller.duration)
     }
 
     func readyForDisplay(controller: MPMoviePlayerController) {
-        logger.debug("")
     }
 
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
-        logger.debug("")
         addPlayerView(controller)
         play()
         History.add(video) { (result) in
@@ -360,7 +353,6 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
     func playbackDidFinish(controller: MPMoviePlayerController) {
-        logger.debug("")
     }
 
     func playBackStateDidChange(controller: MPMoviePlayerController) {
@@ -370,7 +362,6 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
         case .Paused, .Stopped:
             playButton.setImage(UIImage(named: "ic_play_circle_outline_96px"), forState: .Normal)
         default:
-            logger.debug("\(controller.playbackState.rawValue)")
             break
         }
     }

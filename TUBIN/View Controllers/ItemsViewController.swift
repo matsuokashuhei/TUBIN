@@ -36,12 +36,32 @@ class ItemsViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        logger.verbose("START")
         if navigatable {
             configure(navigationItem: navigationItem)
         } else {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
         super.viewWillAppear(animated)
+        logger.verbose("END")
+    }
+
+    override func viewWillLayoutSubviews() {
+        logger.verbose("START")
+        super.viewWillLayoutSubviews()
+        logger.verbose("END")
+    }
+
+    override func viewDidLayoutSubviews() {
+        logger.verbose("START")
+        super.viewDidLayoutSubviews()
+        logger.verbose("END")
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        logger.verbose("START")
+        super.viewDidDisappear(animated)
+        logger.verbose("END")
     }
 
     func configure(#navigationItem: UINavigationItem) {
@@ -85,6 +105,7 @@ class ItemsViewController: UIViewController {
     }
 
     func searchCompletion(#page: Page, items: [Item]) {
+        logger.verbose("START")
         Async.background {
             self.items = items
             if let next = page.next {
@@ -98,6 +119,7 @@ class ItemsViewController: UIViewController {
             if self.spinnable {
                 Spinner.dismiss()
             }
+            self.logger.verbose("END")
         }
     }
 
