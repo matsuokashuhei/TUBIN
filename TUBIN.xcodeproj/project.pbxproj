@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A8001E881AD1A2A700DFCC2D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8001E861AD1A2A700DFCC2D /* Crashlytics.framework */; };
+		A8001E891AD1A2A700DFCC2D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8001E871AD1A2A700DFCC2D /* Fabric.framework */; };
 		A8584C551AC6AE640066691E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8584C531AC6AE640066691E /* UserViewController.swift */; };
 		A8584C561AC6AE640066691E /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8584C541AC6AE640066691E /* UserViewController.xib */; };
 		A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */; };
@@ -154,6 +156,8 @@
 
 /* Begin PBXFileReference section */
 		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A8001E861AD1A2A700DFCC2D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		A8001E871AD1A2A700DFCC2D /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A8584C531AC6AE640066691E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A8584C541AC6AE640066691E /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
@@ -262,8 +266,10 @@
 			files = (
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
+				A8001E881AD1A2A700DFCC2D /* Crashlytics.framework in Frameworks */,
 				A8D402B11AA8BCD500F0AAD2 /* YouTubeKit.framework in Frameworks */,
 				A8D403531AA8C34800F0AAD2 /* Alamofire.framework in Frameworks */,
+				A8001E891AD1A2A700DFCC2D /* Fabric.framework in Frameworks */,
 				A8D403551AA8C34800F0AAD2 /* LlamaKit.framework in Frameworks */,
 				A8D4035F1AA8CA4600F0AAD2 /* XCDYouTubeKit.framework in Frameworks */,
 				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
@@ -312,6 +318,8 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
+				A8001E861AD1A2A700DFCC2D /* Crashlytics.framework */,
+				A8001E871AD1A2A700DFCC2D /* Fabric.framework */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
 				A8D402951AA8B7C700F0AAD2 /* TUBINTests */,
 				A8D4027E1AA8B7C700F0AAD2 /* Products */,
@@ -559,6 +567,7 @@
 				A8D402B51AA8BCD500F0AAD2 /* Embed Frameworks */,
 				A3299E77FD011E05FD252B1B /* Embed Pods Frameworks */,
 				E388D778733501D4C64ABC35 /* Copy Pods Resources */,
+				A8001E841AD1A21700DFCC2D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -737,6 +746,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A8001E841AD1A21700DFCC2D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run fa80467db09f8f0804482b62295c68e13f7f2cec a43fb21ef50dd9fcd5889a710d3618eb16d36ca6c33cdd7a7cb08607d1cdeacb";
 		};
 		E388D778733501D4C64ABC35 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -978,6 +1000,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1005,6 +1028,7 @@
 					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
 					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -13,12 +13,12 @@ class Spinner {
 
     class func show() {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        sharedInstance.show()
+        //sharedInstance.show()
     }
 
     class func dismiss() {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        sharedInstance.dissmiss()
+        //sharedInstance.dissmiss()
     }
 
     class var sharedInstance: Spinner {
