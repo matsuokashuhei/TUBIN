@@ -28,3 +28,6 @@ class BorderView: UIView {
 
 class NavigationButton: UIButton {
 }
+
+class LabelButton: UIButton {
+}

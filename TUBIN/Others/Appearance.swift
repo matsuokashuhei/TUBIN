@@ -26,8 +26,12 @@ class Appearance {
         return sharedInstance.theme.backgroundColor()
     }
 
-    class func selectedFontColor() -> UIColor {
-        return sharedInstance.theme.selectedFontColor()
+    class func textColor() -> UIColor {
+        return sharedInstance.theme.textColor()
+    }
+
+    class func selectedTextColor() -> UIColor {
+        return sharedInstance.theme.selectedTextColor()
     }
 
     enum Theme {
@@ -38,7 +42,10 @@ class Appearance {
         func tintColor() -> UIColor {
             switch self {
             case .Light:
-                return UIColor.azureColor()
+                //return UIColor.azureColor()j
+                //return UIColor.orangeRedColor(alpha: 0.9)
+                //return UIColor.bondiBlueColor()
+                return UIColor.dodgerBlueColor()
             case .Dark:
                 return UIColor.jellyBeanColor()
             }
@@ -53,7 +60,7 @@ class Appearance {
             }
         }
 
-        func fontColor() -> UIColor {
+        func textColor() -> UIColor {
             switch self {
             case .Light:
                 return UIColor.jetColor()
@@ -62,10 +69,14 @@ class Appearance {
             }
         }
 
-        func selectedFontColor() -> UIColor {
+        func selectedTextColor() -> UIColor {
             return UIColor.whiteColor()
         }
 
+        func borderColor() -> UIColor {
+            //return UIColor(red: 235.0/255.0, green: 235.0/255.0, blue: 235.0/255.0, alpha: 1.0)
+            return UIColor.timberwolfCrayolaColor()
+        }
     }
 
     var theme: Theme
@@ -88,8 +99,9 @@ class Appearance {
         // 外観
         let tintColor = theme.tintColor()
         let backgroundColor = theme.backgroundColor()
-        let fontColor = theme.fontColor()
-        let selectedFontColor = theme.selectedFontColor()
+        let textColor = theme.textColor()
+        let selectedTextColor = theme.selectedTextColor()
+        let borderColor = theme.borderColor()
         // Status bar
         /*
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
@@ -99,7 +111,7 @@ class Appearance {
         */
 
         // UINavigationBar
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: fontColor, NSFontAttributeName: UIFont(name: Font.name, size: 15.0)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: textColor, NSFontAttributeName: UIFont(name: Font.name, size: 15.0)!]
         UINavigationBar.appearance().barTintColor = backgroundColor
         UINavigationBar.appearance().tintColor = tintColor
 
@@ -108,12 +120,14 @@ class Appearance {
 
         // UITableView
         UITableView.appearance().backgroundColor = backgroundColor
+        UITableView.appearance().separatorColor = borderColor
+        UITableView.appearance().tintColor = tintColor
+
         // UITableViewCell
         UITableViewCell.appearance().backgroundColor = backgroundColor
         UITableViewCell.appearance().tintColor = tintColor
         switch theme {
         case .Light:
-            //UITableViewCell.appearance().selectionStyle = .Default
             let backgroundView = UIView()
             backgroundView.backgroundColor = tintColor.colorWithAlphaComponent(0.1)
             UITableViewCell.appearance().selectedBackgroundView = backgroundView
@@ -142,23 +156,19 @@ class Appearance {
         DarkLabel.appearance().backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
         DarkLabel.appearance().textColor = UIColor.whiteColor()
 
-        TextLabel.appearance().textColor = fontColor
-        SubTextLabel.appearance().textColor = fontColor.colorWithAlphaComponent(0.5)
-        UILabel.appearance().textColor = fontColor
+        TextLabel.appearance().textColor = textColor
+        SubTextLabel.appearance().textColor = textColor.colorWithAlphaComponent(0.5)
+        UILabel.appearance().textColor = textColor
 
         // UISegmentedControl
         UISegmentedControl.appearance().tintColor = tintColor
         UISegmentedControl.appearance().backgroundColor = backgroundColor
-        //UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 12.0)!], forState: .Normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Normal)
         UISegmentedControl.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: backgroundColor, NSFontAttributeName: UIFont(name: Font.name, size: 12.0)!], forState: .Selected)
 
         // UISlider
         let image = UIImage(named: "ic_bar_24px")?.imageWithRenderingMode(.AlwaysTemplate)
         UISlider.appearance().setThumbImage(image, forState: .Normal)
-        // UIButton
-        UIButton.appearance().tintColor = tintColor
-        MoreButton.appearance().tintColor = fontColor.colorWithAlphaComponent(0.3)
 
         // ScrubberView
         ScrubberView.appearance().tintColor = tintColor
@@ -183,6 +193,14 @@ class Appearance {
         // MiniPlayerView
         MiniPlayerView.appearance().backgroundColor = backgroundColor
 
+        // 線
+        BorderView.appearance().backgroundColor = borderColor
+
+        // ボタン
+        UIButton.appearance().tintColor = tintColor
+        NavigationButton.appearance().tintColor = borderColor
+        LabelButton.appearance().tintColor = backgroundColor
+        LabelButton.appearance().backgroundColor = tintColor
     }
 
 }

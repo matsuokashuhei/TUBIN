@@ -36,26 +36,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Defaults["maxNumberOfFavorites"] = 30
             // Subscribes + 4 (Popular, Guide, Favorites, Search)
             Defaults["maxNumberOfSubscribes"] = 14
-            Defaults["theme"] = "Dark"
+            Defaults["theme"] = "Light"
         }
 
         let launched = Defaults["launched"].bool!
-        logger.debug("launced: \(launched)")
+        logger.verbose("launced: \(launched)")
         let upgraded = Defaults["upgraded"].bool!
-        logger.debug("upgraded: \(upgraded)")
+        logger.verbose("upgraded: \(upgraded)")
         let maxNumberOfHistories = Defaults["maxNumberOfHistories"].int!
-        logger.debug("maxNumberOfHistories: \(maxNumberOfHistories)")
+        logger.verbose("maxNumberOfHistories: \(maxNumberOfHistories)")
         let maxNumberOfFavorites = Defaults["maxNumberOfFavorites"].int!
-        logger.debug("maxNumberOfFavorites: \(maxNumberOfFavorites)")
+        logger.verbose("maxNumberOfFavorites: \(maxNumberOfFavorites)")
         let maxNumberOfSubscribes = Defaults["maxNumberOfSubscribes"].int!
-        logger.debug("maxNumberOfSubscribes: \(maxNumberOfSubscribes)")
+        logger.verbose("maxNumberOfSubscribes: \(maxNumberOfSubscribes)")
 
         if Defaults["theme"].string == "Light" {
             Appearance.apply(.Light)
         } else {
             Appearance.apply(.Dark)
         }
-        Appearance.apply(.Light)
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }
