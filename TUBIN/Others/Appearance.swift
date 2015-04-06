@@ -6,8 +6,6 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 
-import Foundation
-
 class Appearance {
 
     struct Font {
