@@ -117,7 +117,7 @@ class Appearance {
         UIBarButtonItem.appearance().tintColor = tintColor
 
         // UITableView
-        UITableView.appearance().backgroundColor = backgroundColor
+        UITableView.appearance().backgroundColor = UIColor.clearColor()
         UITableView.appearance().separatorColor = borderColor
         UITableView.appearance().tintColor = tintColor
 
@@ -187,7 +187,6 @@ class Appearance {
 
         // SearchViewController, CHannelViewController, PopularViewController, YouTubePlayerViewController
         BackgroundView.appearance().backgroundColor = backgroundColor
-        SettingsView.appearance().backgroundColor = borderColor
 
         // MiniPlayerView
         MiniPlayerView.appearance().backgroundColor = backgroundColor
