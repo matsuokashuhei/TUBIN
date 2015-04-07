@@ -57,22 +57,22 @@ class BookmarkTableViewCell: UITableViewCell {
         case "favorites":
             thumbnailImageView.image = UIImage(named: "ic_favorite_outline_48px")?.imageWithRenderingMode(.AlwaysTemplate)
             thumbnailImageView.contentMode = .ScaleAspectFit
-            titleLabel.text = "Favorites"
+            titleLabel.text = NSLocalizedString("Favorites", comment: "Favorites")
             channelTitleLabel.hidden = true
         case "popular":
             thumbnailImageView.image = UIImage(named: "ic_mood_48px")?.imageWithRenderingMode(.AlwaysTemplate)
             thumbnailImageView.contentMode = .ScaleAspectFit
-            titleLabel.text = "Popular"
+            titleLabel.text = NSLocalizedString("Popular", comment: "Popular")
             channelTitleLabel.hidden = true
         case "search":
             thumbnailImageView.image = UIImage(named: "ic_search_48px")?.imageWithRenderingMode(.AlwaysTemplate)
             thumbnailImageView.contentMode = .ScaleAspectFit
-            titleLabel.text = "Search"
+            titleLabel.text = NSLocalizedString("Search", comment: "Search")
             channelTitleLabel.hidden = true
         case "guide":
             thumbnailImageView.image = UIImage(named: "ic_map_48px")?.imageWithRenderingMode(.AlwaysTemplate)
             thumbnailImageView.contentMode = .ScaleAspectFit
-            titleLabel.text = "Guide"
+            titleLabel.text = NSLocalizedString("Guide", comment: "Guide")
             channelTitleLabel.hidden = true
         default:
             thumbnailImageView.hidden = true
