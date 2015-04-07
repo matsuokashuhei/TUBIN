@@ -27,9 +27,6 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="oVs-Vh-E7W" secondAttribute="height" multiplier="16:9" id="cbV-sw-WH9"/>
                     </constraints>
-                    <variation key="heightClass=compact" misplaced="YES">
-                        <rect key="frame" x="-55" y="0.0" width="710" height="400"/>
-                    </variation>
                     <variation key="widthClass=compact" misplaced="YES">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="226"/>
                     </variation>
@@ -149,15 +146,11 @@
                 <constraint firstAttribute="centerX" secondItem="Ecd-nq-1jK" secondAttribute="centerX" id="YQA-cq-Cqr"/>
                 <constraint firstAttribute="bottom" secondItem="Ngb-u7-E1o" secondAttribute="bottom" id="daK-df-bbA"/>
                 <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="iLt-cc-HOb"/>
-                <constraint firstAttribute="centerX" secondItem="oVs-Vh-E7W" secondAttribute="centerX" id="krN-Ih-bzV"/>
-                <constraint firstAttribute="centerY" secondItem="oVs-Vh-E7W" secondAttribute="centerY" id="pkh-8b-YOA"/>
                 <constraint firstAttribute="bottom" secondItem="BPi-Ik-WBO" secondAttribute="bottom" id="qiK-rU-0Wa"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="centerY" secondItem="htR-39-Q0L" secondAttribute="centerY" id="rtP-Qu-qQd"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="krN-Ih-bzV"/>
-                    <exclude reference="pkh-8b-YOA"/>
                     <exclude reference="QhG-dB-Xjr"/>
                     <exclude reference="iLt-cc-HOb"/>
                     <exclude reference="qiK-rU-0Wa"/>
@@ -171,10 +164,8 @@
                     <exclude reference="Ngb-u7-E1o"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="LXV-bb-GnI"/>
-                    <exclude reference="RyO-mb-1Lo"/>
-                    <include reference="krN-Ih-bzV"/>
-                    <include reference="pkh-8b-YOA"/>
+                    <include reference="LXV-bb-GnI"/>
+                    <include reference="RyO-mb-1Lo"/>
                     <include reference="QhG-dB-Xjr"/>
                     <exclude reference="Sx1-D7-ydj"/>
                     <include reference="iLt-cc-HOb"/>
