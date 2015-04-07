@@ -18,12 +18,13 @@
 "%d years ago" = "%d 年前";
 
 // アラート
-"Cannot subscribe to any more Channel" = "これ以上チャンネルを登録できません。";
-"Cannot subscribe to any more Playlist" = "これ以上プレイリストを登録できません。";
 "Success" = "成功";
 "Failed" = "失敗";
 "Error" = "エラー";
 "Dismis" = "閉じる";
+"Cannot add to favorites" = "これ以上ビデオをお気に入りにできません。";
+"Cannot bookmark to any more Channel" = "これ以上チャンネルをブックマークできません。";
+"Cannot bookmark to any more Playlist" = "これ以上プレイリストをブックマークできません。";
 
 // ブックマーク
 "Videos" = "ビデオ";
@@ -35,13 +36,22 @@
 "Guide" = "ガイド";
 "Popular" = "人気";
 "Settings" = "設定";
+"Bookmarks" = "ブックマーク";
 
 // 設定
-"Store" = "購入";
-"Subscriptions" = "ブックマーク";
+"Edit bookmarks" = "ブックマークの編集";
+"Upgrade/Restore this app" = "アプリのアップグレード・復元";
+"Share this app" = "アプリのシェア";
+"Rate this app" = "アプリのレビュー";
+
+// シェア
+"Share using" = "シェアする";
+"Best YouTube App for iPhone & iPad !" = "YouTubeがすきな人におすすめ！";
+"You haven't registered your %@ account. Please go to Settings > %@ to create one." = "%@の設定をしてください。";
 
 // アプリ内課金
-"WHAT'S INCLUDED" = "購入の特典";
+"Upgrade" = "アップグレード";
+"WHAT'S INCLUDED" = "特典";
 "No advertisement" = "広告なし";
 "Unlimited favorites" = "お気に入りの制限なし";
 "Unlimited bookmarks" = "ブックマークの制限なし";
@@ -51,7 +61,6 @@
 "UPGRADE" = "購入する";
 
 // トースト
-"favorited!" = "お気に入りに保存しました。";
-"subscribed!" = "ブックマークしました。";
+"bookmarked!" = "ブックマークしました。";
 
 

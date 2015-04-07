@@ -17,6 +17,8 @@ class ChannelViewController: UIViewController {
         didSet {
             segmentedControl.setTitle(NSLocalizedString("Videos", comment: "Videos"), forSegmentAtIndex: 0)
             segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 1)
+            segmentedControl.selectedSegmentIndex = 0
+            segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         }
     }
 
@@ -43,6 +45,7 @@ class ChannelViewController: UIViewController {
 
         edgesForExtendedLayout = .None
 
+        /*
         let videosViewController = VideosViewController()
         videosViewController.parameters = parameters
         videosViewController.navigatable = navigatable
@@ -58,10 +61,12 @@ class ChannelViewController: UIViewController {
         addChildViewController(playlistsViewController)
         playlistsView.addSubview(playlistsViewController.view)
         playlistsViewController.view.frame = playlistsView.bounds
+        */
 
+        configure(videosView: videosView)
+        configure(playlistsView: playlistsView)
         containerViews = [videosView, playlistsView]
 
-        configure(segmentedControl)
         segmentChanged(segmentedControl)
 
     }
@@ -86,27 +91,41 @@ class ChannelViewController: UIViewController {
         navigationItem.title = channel.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         Bookmark.exists(id: channel.id) { (result) in
-            switch result {
-            case .Success(let box):
-                if box.unbox {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
-                } else {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
+            let bookmarkButton: UIBarButtonItem = {
+                switch result {
+                case .Success(let box):
+                    if box.unbox {
+                        return UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
+                    } else {
+                        return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
+                    }
+                case .Failure(let box):
+                    return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
                 }
-            case .Failure(let box):
-                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
-                self.navigationItem.rightBarButtonItem = bookmarkButton
-            }
+            }()
+            self.navigationItem.rightBarButtonItem = bookmarkButton
         }
     }
 
-    func configure(segmentedControl: UISegmentedControl) {
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.addTarget(self, action: Selector("segmentChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+    func configure(videosView view: UIView) {
+        let controller = VideosViewController()
+        controller.parameters = parameters
+        controller.navigatable = navigatable
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
     }
-    
+
+    func configure(playlistsView view: UIView) {
+        let controller = PlaylistsViewController()
+        controller.parameters = parameters
+        controller.navigatable = navigatable
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        view.hidden = true
+    }
+
     func segmentChanged(sender: UISegmentedControl) {
         for view in containerViews {
             view.hidden = true

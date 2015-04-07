@@ -186,7 +186,7 @@ extension ContainerViewController {
 
     func addItemToBookmarks(notification: NSNotification) {
         if let item = notification.userInfo?["item"] as? Item {
-            Toast.bookmark(item: item)
+            Toast.show(item: item)
         }
         Bookmark.all(skip: bookmarks.count) { (result) -> Void in
             switch result {

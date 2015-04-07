@@ -187,6 +187,7 @@ class Appearance {
 
         // SearchViewController, CHannelViewController, PopularViewController, YouTubePlayerViewController
         BackgroundView.appearance().backgroundColor = backgroundColor
+        SettingsView.appearance().backgroundColor = borderColor
 
         // MiniPlayerView
         MiniPlayerView.appearance().backgroundColor = backgroundColor
@@ -199,6 +200,7 @@ class Appearance {
         NavigationButton.appearance().tintColor = borderColor
         LabelButton.appearance().tintColor = backgroundColor
         LabelButton.appearance().backgroundColor = tintColor
+
     }
 
 }

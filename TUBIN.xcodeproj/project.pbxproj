@@ -28,6 +28,7 @@
 		A88CF35A1AC5F0AA005276DD /* HistoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */; };
 		A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */; };
 		A88D7BC01AC43D020085A8F8 /* YouTubePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88D7BBF1AC43D020085A8F8 /* YouTubePlayerViewController.xib */; };
+		A88F13261AD2DF7B006695D0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88F13251AD2DF7B006695D0 /* Social.framework */; };
 		A899AE7C1AAC4C310011D5DE /* GuideCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */; };
 		A899AE7E1AAC4F4B0011D5DE /* BookmarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */; };
 		A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */; };
@@ -37,7 +38,6 @@
 		A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDE61AC595F300FB72E7 /* Appearance.swift */; };
 		A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */; };
 		A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */; };
-		A8B5DB5A1AC3207D00CCE83B /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B5DB591AC3207D00CCE83B /* BackgroundView.swift */; };
 		A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */; };
 		A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */; };
 		A8BD70F01AAB4F1B00499A71 /* PlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EF1AAB4F1B00499A71 /* PlaylistsViewController.xib */; };
@@ -176,6 +176,7 @@
 		A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoriesViewController.swift; sourceTree = "<group>"; };
 		A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoriesViewController.xib; sourceTree = "<group>"; };
 		A88D7BBF1AC43D020085A8F8 /* YouTubePlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController.xib; sourceTree = "<group>"; };
+		A88F13251AD2DF7B006695D0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A899AE7B1AAC4C310011D5DE /* GuideCategoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoriesViewController.xib; sourceTree = "<group>"; };
 		A899AE7D1AAC4F4B0011D5DE /* BookmarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarksViewController.xib; sourceTree = "<group>"; };
 		A899AE801AAC4FAC0011D5DE /* BookmarkTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkTableViewCell.xib; sourceTree = "<group>"; };
@@ -185,7 +186,6 @@
 		A89CFDE61AC595F300FB72E7 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Rainbow.swift"; sourceTree = "<group>"; };
 		A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
-		A8B5DB591AC3207D00CCE83B /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
 		A8BD70EF1AAB4F1B00499A71 /* PlaylistsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistsViewController.xib; sourceTree = "<group>"; };
@@ -264,6 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88F13261AD2DF7B006695D0 /* Social.framework in Frameworks */,
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				A8001E881AD1A2A700DFCC2D /* Crashlytics.framework in Frameworks */,
@@ -529,7 +530,6 @@
 				A8D4038A1AA8CC4400F0AAD2 /* Spinner.swift */,
 				A8D4038C1AA8CC4400F0AAD2 /* Toast.swift */,
 				A878FAD11ABB1437004AD3E4 /* ChannelView.swift */,
-				A8B5DB591AC3207D00CCE83B /* BackgroundView.swift */,
 				A8C831D81ACAECE4003E8ED9 /* VariousViews.swift */,
 			);
 			path = Views;
@@ -546,6 +546,7 @@
 		E3B2F19A660D0D52A10E95B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A88F13251AD2DF7B006695D0 /* Social.framework */,
 				A8E17F351ABE8BC000DAF54A /* StoreKit.framework */,
 				A86CC3E81AAB0456008669F2 /* iAd.framework */,
 				C86F1F1E09D2F038920B8889 /* Pods.framework */,
@@ -798,7 +799,6 @@
 				A8D403A41AA8CC4400F0AAD2 /* SettingsViewController.swift in Sources */,
 				A8D403A11AA8CC4400F0AAD2 /* PopularViewController.swift in Sources */,
 				A8E17F311ABD61E100DAF54A /* AF+Date+Extension.swift in Sources */,
-				A8B5DB5A1AC3207D00CCE83B /* BackgroundView.swift in Sources */,
 				A8D4038E1AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift in Sources */,
 				A8D403AB1AA8CC4400F0AAD2 /* LoadMoreTableViewCell.swift in Sources */,
 				A8D403A71AA8CC4400F0AAD2 /* BookmarkTableViewCell.swift in Sources */,

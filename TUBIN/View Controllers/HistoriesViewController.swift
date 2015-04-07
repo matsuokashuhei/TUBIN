@@ -124,6 +124,7 @@ extension HistoriesViewController: UITableViewDelegate {
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }

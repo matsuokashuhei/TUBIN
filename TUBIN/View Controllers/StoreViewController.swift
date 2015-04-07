@@ -61,7 +61,7 @@ class StoreViewController: UIViewController {
 
         edgesForExtendedLayout = .None
 
-        navigationItem.title = NSLocalizedString("Store", comment: "Store")
+        navigationItem.title = NSLocalizedString("Upgrade", comment: "Upgrade")
 
         if SKPaymentQueue.canMakePayments() {
             requestProduct()

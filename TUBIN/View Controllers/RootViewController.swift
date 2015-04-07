@@ -22,6 +22,7 @@ class RootViewController: UIViewController {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideMiniPlayer:", name: HideMiniPlayerNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "upgradeApp:", name: UpgradeAppNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "restoreApp:", name: RestoreAppNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveAdBannerShowableNoficication:", name: AdBannerShowableNotification, object: nil)
         }
     }
 
@@ -36,6 +37,19 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    func didReceiveAdBannerShowableNoficication(notification: NSNotification) {
+        if let upgraded = Defaults["upgraded"].bool {
+            if upgraded {
+                return
+            }
+        }
+        if let userInfo = notification.userInfo {
+            if let showable = userInfo["showable"] as? Bool {
+                canDisplayBannerAds = showable
+            }
+        }
+    }
+
     func setBannerShowable(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let showable = userInfo["showable"] as? Bool {
@@ -46,9 +60,9 @@ class RootViewController: UIViewController {
 
     func upgradeApp(notification: NSNotification) {
         Defaults["upgraded"] = true
-        Defaults["maxNumberOfHistories"] = 999
-        Defaults["maxNumberOfFavorites"] = 9999
-        Defaults["maxNumberOfSubscribes"] = 9999
+        //Defaults["maxNumberOfHistories"] = 999
+        Defaults["maxNumberOfFavorites"] = Int.max
+        Defaults["maxNumberOfSubscribes"] = Int.max
         canDisplayBannerAds = false
     }
 

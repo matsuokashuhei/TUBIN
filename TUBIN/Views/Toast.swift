@@ -10,12 +10,8 @@ import CRToast
 
 class Toast {
 
-    class func bookmark(#item: Item) {
-        sharedInstance.bookmark(item: item)
-    }
-
-    class func favorite(#item: Item) {
-        sharedInstance.favorite(item: item)
+    class func show(#item: Item) {
+        sharedInstance.show(item: item)
     }
 
     class var sharedInstance: Toast {
@@ -44,28 +40,31 @@ class Toast {
         CRToastManager.setDefaultOptions(options)
     }
 
-    func bookmark(#item: Item) {
+    func show(#item: Item) {
+        let options: [String: AnyObject] = {
+            if let video = item as? Video {
+                return [
+                    kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
+                    kCRToastTextKey: item.title,
+                    kCRToastSubtitleTextKey: NSLocalizedString("bookmarked!", comment: "ビデオをフェイバリットに保存したときに通知するメッセージ")
+                ]
+            } else {
+                return [
+                    kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
+                    kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+                ]
+            }
+        }()
+        /*
         let options: [String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-            kCRToastTextKey: NSLocalizedString("subscribed!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
         ]
-        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
-        /*
-        if let URL = NSURL(string: item.thumbnailURL) {
-        SDWebImageManager.sharedManager().downloadImageWithURL(URL, options: SDWebImageOptions.RetryFailed, progress: { (_, _) -> Void in
-        }, completed: { (image, error, SDImageCacheTypeDisk, finished, URL) -> Void in
-            if let image = image {
-            let options: [String: AnyObject] = [
-                kCRToastTextKey: item.title,
-                kCRToastImageKey: image,
-            ]
-        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
-            }
-        })
-        }
         */
+        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
 
+    /*
     func favorite(#item: Item) {
         let options: [String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
@@ -74,5 +73,6 @@ class Toast {
         ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
+    */
 
 }

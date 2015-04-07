@@ -93,6 +93,7 @@ class YouTubePlayerViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         player.delegate = nil
         player.controller.view.gestureRecognizers?.removeAll(keepCapacity: true)
+        showAds()
     }
 
     override func viewDidDisappear(animated: Bool) {
@@ -178,9 +179,11 @@ class YouTubePlayerViewController: UIViewController {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             if UIInterfaceOrientationIsPortrait(orientation) {
                 showPlayerController()
+                showAds()
             }
             if UIInterfaceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
+                hideAds()
             }
         }
     }
@@ -192,9 +195,27 @@ class YouTubePlayerViewController: UIViewController {
             if UIDeviceOrientationIsPortrait(orientation) {
                 // Portait
                 showPlayerController()
+                showAds()
             }
             if UIDeviceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
+                hideAds()
+            }
+        }
+    }
+
+    func hideAds() {
+        if let upgraded = Defaults["upgraded"].bool {
+            if !upgraded {
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AdBannerShowableNotification, object: self, userInfo: ["showable": false]))
+            }
+        }
+    }
+
+    func showAds() {
+        if let upgraded = Defaults["upgraded"].bool {
+            if !upgraded {
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AdBannerShowableNotification, object: self, userInfo: ["showable": true]))
             }
         }
     }
@@ -421,7 +442,7 @@ extension YouTubePlayerViewController {
                         }
                     }
                 } else {
-                    let alert = UIAlertController(title: nil, message: "Cannot add to favorites", preferredStyle: .Alert)
+                    let alert = UIAlertController(title: nil, message: NSLocalizedString("Cannot add to favorites", comment: "Cannot add to favorites"), preferredStyle: .Alert)
                     alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }

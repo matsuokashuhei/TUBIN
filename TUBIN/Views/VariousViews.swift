@@ -31,3 +31,9 @@ class NavigationButton: UIButton {
 
 class LabelButton: UIButton {
 }
+
+class BackgroundView: UIView {
+}
+
+class SettingsView: UIView {
+}

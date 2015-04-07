@@ -87,7 +87,7 @@
                         <outlet property="startTimeLabel" destination="7P1-5H-Pou" id="WaN-DS-3LN"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
                     <rect key="frame" x="348" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_next_48px"/>
                     <variation key="widthClass=compact" misplaced="YES">

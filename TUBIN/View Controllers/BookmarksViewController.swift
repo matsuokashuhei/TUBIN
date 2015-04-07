@@ -61,7 +61,7 @@ class BookmarksViewController: UIViewController {
     }
 
     func configure(#navigationItem: UINavigationItem) {
-        navigationItem.title = NSLocalizedString("Subscriptions", comment: "Subscriptions")
+        navigationItem.title = NSLocalizedString("Bookmarks", comment: "Bookmarks")
         setEditing(false)
     }
 

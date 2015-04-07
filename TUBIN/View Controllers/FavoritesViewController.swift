@@ -157,6 +157,7 @@ extension FavoritesViewController: UITableViewDelegate {
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
@@ -178,7 +179,7 @@ extension FavoritesViewController {
 
     func reload(notification: NSNotification) {
         if let item = notification.userInfo?["item"] as? Item {
-            Toast.favorite(item: item)
+            Toast.show(item: item)
         }
         fetch()
     }
