@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Defaults["upgraded"] = false
             Defaults["maxNumberOfHistories"] = 15
             Defaults["maxNumberOfFavorites"] = 30
-            // Subscribes + 4 (Popular, Guide, Favorites, Search)
-            Defaults["maxNumberOfSubscribes"] = 14
+            // Subscribes + 4 (Popular, Favorites, Search)
+            Defaults["maxNumberOfSubscribes"] = 13
             Defaults["theme"] = "Light"
         }
 

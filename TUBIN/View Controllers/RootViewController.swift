@@ -50,14 +50,6 @@ class RootViewController: UIViewController {
         }
     }
 
-    func setBannerShowable(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let showable = userInfo["showable"] as? Bool {
-                canDisplayBannerAds = showable
-            }
-        }
-    }
-
     func upgradeApp(notification: NSNotification) {
         Defaults["upgraded"] = true
         //Defaults["maxNumberOfHistories"] = 999

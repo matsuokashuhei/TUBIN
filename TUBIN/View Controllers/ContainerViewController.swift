@@ -111,22 +111,18 @@ class ContainerViewController: UIViewController {
                     controller.channel = channel
                     return controller
                 case "popular":
-                    //self.tabBar.add(text: NSLocalizedString("Popular", comment: "Popular"))
                     self.tabBar.add(text: "Popular")
                     let controller = PopularViewController()
                     return controller
 //                case "guide":
-//                    //self.tabBar.add(text: NSLocalizedString("Guide", comment: "Guide"))
 //                    self.tabBar.add(text: "Guide")
 //                    let controller = GuideCategoriesViewController()
 //                    return controller
                 case "favorites":
-                    //self.tabBar.add(text: NSLocalizedString("Favorites", comment: "Favorites"))
                     self.tabBar.add(text: "Favorites")
                     let controller = UserViewController()
                     return controller
                 case "search":
-                    //self.tabBar.add(text: NSLocalizedString("Search", comment: "Search"))
                     self.tabBar.add(text: "Search")
                     let controller = SearchViewController()
                     return controller
@@ -143,11 +139,6 @@ class ContainerViewController: UIViewController {
         let controller = SettingsViewController()
         addChildViewController(controller)
         containerView.add(view: controller.view)
-        /*
-        if let tab = self.tabBar.tabs.first {
-            self.tabBar.selectTab(tab)
-        }
-        */
     }
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
