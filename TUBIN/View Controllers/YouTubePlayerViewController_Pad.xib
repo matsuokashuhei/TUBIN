@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YouTubePlayerViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
                 <outlet property="channelView" destination="7TL-Zq-9n8" id="UK1-b9-9e3"/>
+                <outlet property="loadingIndicator" destination="6Vy-kl-ddG" id="CfZ-xk-sCE"/>
                 <outlet property="nextButton" destination="jOk-Bo-FNm" id="RRm-79-agF"/>
                 <outlet property="playButton" destination="bKa-D3-lYu" id="bhZ-km-ycX"/>
                 <outlet property="previousButton" destination="Vx2-b9-yvV" id="HR3-tv-O2s"/>
@@ -23,8 +24,15 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elD-it-69q">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6Vy-kl-ddG">
+                            <rect key="frame" x="290" y="159" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="centerY" secondItem="6Vy-kl-ddG" secondAttribute="centerY" id="Pbi-hv-6Nl"/>
+                        <constraint firstAttribute="centerX" secondItem="6Vy-kl-ddG" secondAttribute="centerX" id="mpz-LM-fLs"/>
                         <constraint firstAttribute="width" secondItem="elD-it-69q" secondAttribute="height" multiplier="16:9" id="wvI-AO-MAf"/>
                     </constraints>
                     <variation key="heightClass=regular-widthClass=regular" misplaced="YES">

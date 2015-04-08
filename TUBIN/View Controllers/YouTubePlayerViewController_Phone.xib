@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YouTubePlayerViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
                 <outlet property="channelView" destination="Ngb-u7-E1o" id="fMF-C0-C3f"/>
+                <outlet property="loadingIndicator" destination="M7n-Yz-8Ax" id="5Dt-1k-vh3"/>
                 <outlet property="nextButton" destination="htR-39-Q0L" id="V5B-sX-ijD"/>
                 <outlet property="playButton" destination="Ecd-nq-1jK" id="6rt-bF-2IL"/>
                 <outlet property="previousButton" destination="PCU-xZ-A2T" id="bpy-ig-5Qg"/>
@@ -23,13 +24,17 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVs-Vh-E7W">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-Yz-8Ax">
+                            <rect key="frame" x="290" y="159" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="centerY" secondItem="M7n-Yz-8Ax" secondAttribute="centerY" id="E5X-DN-8Km"/>
                         <constraint firstAttribute="width" secondItem="oVs-Vh-E7W" secondAttribute="height" multiplier="16:9" id="cbV-sw-WH9"/>
+                        <constraint firstAttribute="centerX" secondItem="M7n-Yz-8Ax" secondAttribute="centerX" id="wXZ-pu-wgf"/>
                     </constraints>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="226"/>
-                    </variation>
                     <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="451"/>
                     </variation>
@@ -75,28 +80,19 @@
                         <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="leading" secondItem="7P1-5H-Pou" secondAttribute="trailing" constant="8" id="gcD-Vh-cN8"/>
                         <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="3" id="rju-MB-EDN"/>
                     </constraints>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="0.0" y="226" width="400" height="35"/>
-                    </variation>
                     <connections>
                         <outlet property="endTimeLabel" destination="6Tg-68-RX1" id="P51-aM-Nvs"/>
                         <outlet property="slider" destination="1XQ-pE-8ZQ" id="DkQ-WK-5Z4"/>
                         <outlet property="startTimeLabel" destination="7P1-5H-Pou" id="WaN-DS-3LN"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
                     <rect key="frame" x="348" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_next_48px"/>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="248" y="277" width="48" height="48"/>
-                    </variation>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-xZ-A2T" userLabel="previous">
                     <rect key="frame" x="204" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_previous_48px"/>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="104" y="277" width="48" height="48"/>
-                    </variation>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngb-u7-E1o" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="516" width="600" height="84"/>
@@ -122,9 +118,6 @@
                         <constraint firstAttribute="height" constant="64" id="kda-wb-tAD"/>
                     </constraints>
                     <state key="normal" image="ic_play_circle_outline_96px"/>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="168" y="269" width="64" height="64"/>
-                    </variation>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

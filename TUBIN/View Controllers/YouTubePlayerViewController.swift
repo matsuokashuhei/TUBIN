@@ -14,28 +14,33 @@ class YouTubePlayerViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet var videoView: UIView!
-    @IBOutlet var scrubberView: ScrubberView! {
+    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView! {
+        didSet {
+            loadingIndicator.hidden = true
+        }
+    }
+    @IBOutlet weak var scrubberView: ScrubberView! {
         didSet {
             scrubberView.delegate = self
         }
     }
-    @IBOutlet var previousButton: UIButton! {
+    @IBOutlet weak var previousButton: UIButton! {
         didSet {
             previousButton.addTarget(self, action: "previousButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var playButton: UIButton! {
+    @IBOutlet weak var playButton: UIButton! {
         didSet {
             playButton.addTarget(self, action: "playButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var nextButton: UIButton! {
+    @IBOutlet weak var nextButton: UIButton! {
         didSet {
             nextButton.addTarget(self, action: "nextButtonTapped:", forControlEvents: .TouchUpInside)
         }
     }
-    @IBOutlet var channelView: ChannelView!
+    @IBOutlet weak var channelView: ChannelView!
 
     var player = YouTubePlayer.sharedInstance
 
@@ -54,6 +59,8 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+
+        player.delegate = self
 
         player.nowPlaying = video
         player.playlist = playlist
@@ -136,11 +143,21 @@ class YouTubePlayerViewController: UIViewController {
                 return
             }
         }
+        (channelView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+            if let subview = object as? UIView {
+                subview.removeFromSuperview()
+           }
+        }
+        (childViewControllers as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
+            if let controller = object as? ChannelViewController {
+                controller.removeFromParentViewController()
+            }
+        }
         let controller = ChannelsViewController()
         controller.navigatable = navigatable
         controller.parameters = ["channelId": video.channelId]
+        controller.spinnable = false
         controller.search()
-        //controller.spinnable = false
         //controller.search(parameters: ["channelId": video.channelId])
         controller.view.frame = channelView.bounds
         addChildViewController(controller)
@@ -167,11 +184,12 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func removePlayerView(videoView: UIView) {
-        if videoView.subviews.count > 0 {
-            (videoView.subviews as NSArray).enumerateObjectsUsingBlock { (object, index, stop) in
-                if let subview = object as? UIView {
-                    subview.removeFromSuperview()
-                }
+        for view in videoView.subviews {
+            if let view = view as? UIActivityIndicatorView {
+                continue
+            }
+            if let view = view as? UIView {
+                view.removeFromSuperview()
             }
         }
     }
@@ -347,10 +365,16 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
         self.video = video
         configure(navigationItem: navigationItem)
         configure(channelView: channelView)
+        loadingIndicator.bringSubviewToFront(videoView)
+        loadingIndicator.hidden = false
+        loadingIndicator.startAnimating()
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {
         scrubberView.configure(controller.duration)
+        loadingIndicator.stopAnimating()
+        loadingIndicator.hidden = true
+        loadingIndicator.sendSubviewToBack(videoView)
     }
 
     func readyForDisplay(controller: MPMoviePlayerController) {

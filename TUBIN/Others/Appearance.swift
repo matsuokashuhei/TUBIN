@@ -175,7 +175,7 @@ class Appearance {
         UIProgressView.appearance().tintColor = tintColor
 
         // UIActivityIndicatorView
-        UIActivityIndicatorView.appearance().color = tintColor
+        //UIActivityIndicatorView.appearance().color = tintColor
 
         // UIToolbar
         UIToolbar.appearance().barTintColor = backgroundColor

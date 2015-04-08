@@ -93,3 +93,15 @@ extension RootViewController: MiniPlayerViewDelegate {
     }
 
 }
+
+extension RootViewController: ADBannerViewDelegate {
+
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        logger.debug("")
+    }
+
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        logger.debug("")
+    }
+
+}
