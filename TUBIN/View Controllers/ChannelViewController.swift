@@ -109,6 +109,7 @@ class ChannelViewController: UIViewController {
 
     func configure(videosView view: UIView) {
         let controller = VideosViewController()
+        controller.channel = channel
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
@@ -118,6 +119,7 @@ class ChannelViewController: UIViewController {
 
     func configure(playlistsView view: UIView) {
         let controller = PlaylistsViewController()
+        controller.channel = channel
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
@@ -133,15 +135,19 @@ class ChannelViewController: UIViewController {
         containerViews[sender.selectedSegmentIndex].hidden = false
         switch sender.selectedSegmentIndex {
         case 0:
-            if let videosViewController = childViewControllers[sender.selectedSegmentIndex] as? VideosViewController {
-                if videosViewController.items.count == 0 {
-                    videosViewController.search(parameters: parameters)
+            if let controller = childViewControllers[sender.selectedSegmentIndex] as? VideosViewController {
+                if controller.items.count == 0 {
+                    controller.parameters = parameters
+                    controller.search()
+                    //controller.search(parameters: parameters)
                 }
             }
         case 1:
-            if let playlistsViewController = childViewControllers[sender.selectedSegmentIndex] as? PlaylistsViewController {
-                if playlistsViewController.items.count == 0 {
-                    playlistsViewController.search(parameters: parameters)
+            if let controller = childViewControllers[sender.selectedSegmentIndex] as? PlaylistsViewController {
+                if controller.items.count == 0 {
+                    controller.parameters = parameters
+                    controller.search()
+                    //controller.search(parameters: parameters)
                 }
             }
         default:

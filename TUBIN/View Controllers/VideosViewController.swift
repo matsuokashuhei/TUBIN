@@ -70,7 +70,9 @@ class VideosViewController: ItemsViewController {
     }
 
     func videos(#parameters: [String: String]) {
-        super.search(parameters: parameters)
+        self.parameters = parameters
+        super.search()
+        //super.search(parameters: parameters)
         videos()
     }
 

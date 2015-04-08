@@ -72,19 +72,30 @@ class PlaylistViewController: ItemsViewController {
                 switch result {
                 case .Success(let box):
                     if let channel = box.unbox.items.first {
-                       self.channel = channel
+                        self.channel = channel
+                        let controller = ChannelsViewController()
+                        controller.parameters = ["channelId": channel.id]
+                        controller.items = [channel]
+                        controller.navigatable = self.navigatable
+                        controller.view.frame = self.channelView.bounds
+                        self.addChildViewController(controller)
+                        self.channelView.addSubview(controller.view)
                     }
                 case .Failure(let box):
                     break
                 }
             }
         }
+        /*
         let controller = ChannelsViewController()
-        controller.search(parameters: ["channelId": playlist.channelId])
+        controller.parameters = ["channelId": playlist.channelId]
+        controller.search()
+        //controller.search(parameters: ["channelId": playlist.channelId])
         controller.navigatable = navigatable
         controller.view.frame = channelView.bounds
         addChildViewController(controller)
         channelView.addSubview(controller.view)
+        */
     }
 
     // MARK: - YouTube search

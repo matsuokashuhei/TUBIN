@@ -138,8 +138,10 @@ class YouTubePlayerViewController: UIViewController {
         }
         let controller = ChannelsViewController()
         controller.navigatable = navigatable
-        controller.spinnable = false
-        controller.search(parameters: ["channelId": video.channelId])
+        controller.parameters = ["channelId": video.channelId]
+        controller.search()
+        //controller.spinnable = false
+        //controller.search(parameters: ["channelId": video.channelId])
         controller.view.frame = channelView.bounds
         addChildViewController(controller)
         channelView.addSubview(controller.view)

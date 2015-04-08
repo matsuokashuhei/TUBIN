@@ -81,16 +81,16 @@ class ItemsViewController: UIViewController {
             longPressGestureRecognizer.minimumPressDuration = 1.0
             return longPressGestureRecognizer
         }
-        tableView.addGestureRecognizer(createLongPressGestureRecognizer())
+        //tableView.addGestureRecognizer(createLongPressGestureRecognizer())
 
     }
 
     // MARK: - YouTube search
 
-    func search(#parameters: [String: String]) {
-        self.parameters = parameters
-        search()
-    }
+//    func search(#parameters: [String: String]) {
+//        self.parameters = parameters
+//        search()
+//    }
 
     func search() {
         if spinnable {
@@ -112,6 +112,7 @@ class ItemsViewController: UIViewController {
                 self.parameters["pageToken"] = next
             }
         }.main {
+            self.refreshControll.endRefreshing()
             self.tableView.reloadData()
             if let q = self.parameters["q"] {
                 self.tableView.setContentOffset(CGPointZero, animated: false)
@@ -134,6 +135,7 @@ class ItemsViewController: UIViewController {
                 self.items.append(item)
             }
         }.main {
+            self.refreshControll.endRefreshing()
             self.tableView.reloadData()
             if self.spinnable {
                 Spinner.dismiss()
@@ -143,6 +145,7 @@ class ItemsViewController: UIViewController {
 
     func errorCompletion(error: NSError) {
         logger.error(error.localizedDescription)
+        self.refreshControll.endRefreshing()
         if spinnable {
             Spinner.dismiss()
         }
@@ -155,9 +158,11 @@ class ItemsViewController: UIViewController {
     func pullToRefresh() {
         parameters.removeValueForKey("pageToken")
         if !parameters.values.isEmpty {
+            spinnable = false
             search()
+            spinnable = true
         }
-        refreshControll.endRefreshing()
+        //refreshControll.endRefreshing()
     }
 
     func onLongPressed(sender: UILongPressGestureRecognizer) {

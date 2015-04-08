@@ -50,7 +50,9 @@ class PopularViewController: UIViewController {
 
     func configure(playlistsView view: UIView) {
         let controller = PlaylistsViewController()
-        controller.search(parameters: ["order": "viewCount"])
+        controller.parameters = ["order": "viewCount"]
+        controller.search()
+        //controller.search(parameters: ["order": "viewCount"])
         addChildViewController(controller)
         view.addSubview(controller.view)
         controller.view.frame = view.bounds
@@ -59,7 +61,9 @@ class PopularViewController: UIViewController {
 
     func configure(channelsView view: UIView) {
         let controller = ChannelsViewController()
-        controller.search(parameters: ["order": "viewCount"])
+        controller.parameters = ["order": "viewCount"]
+        controller.search()
+        //controller.search(parameters: ["order": "viewCount"])
         addChildViewController(controller)
         view.addSubview(controller.view)
         controller.view.frame = view.bounds

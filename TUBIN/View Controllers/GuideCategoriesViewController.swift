@@ -68,7 +68,9 @@ extension GuideCategoriesViewController: UITableViewDelegate {
         let controller = ChannelsViewController()
         controller.category = category
         controller.navigatable = true
-        controller.search(parameters: ["categoryId": category.id])
+        controller.parameters = ["categoryId": category.id]
+        controller.search()
+        //controller.search(parameters: ["categoryId": category.id])
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
