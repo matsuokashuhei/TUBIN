@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cOC-N2-Udz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cOC-N2-Udz">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -76,6 +76,10 @@
                                             <constraint firstAttribute="height" constant="72" id="pcw-wb-YNR"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi">
+                                        <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                        <state key="normal" image="ic_cancel_36px"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -86,9 +90,11 @@
                                     <constraint firstItem="K2D-v4-aJ2" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" constant="8" id="PLt-Oa-R0u"/>
                                     <constraint firstAttribute="bottom" secondItem="cYB-wX-KKK" secondAttribute="bottom" constant="8" id="QiI-IF-qHN"/>
                                     <constraint firstAttribute="centerY" secondItem="Xqh-Sa-fFT" secondAttribute="centerY" id="U6a-nc-fcq"/>
+                                    <constraint firstItem="TZa-Ua-pfi" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" id="V3g-Mp-te3"/>
                                     <constraint firstItem="cYB-wX-KKK" firstAttribute="top" secondItem="yk0-Xn-wNc" secondAttribute="top" constant="8" id="ZPX-Dk-YAI"/>
                                     <constraint firstAttribute="height" constant="88" id="cIs-4s-qge"/>
                                     <constraint firstItem="Xqh-Sa-fFT" firstAttribute="leading" secondItem="K2D-v4-aJ2" secondAttribute="trailing" constant="8" id="lxG-gF-toJ"/>
+                                    <constraint firstItem="TZa-Ua-pfi" firstAttribute="leading" secondItem="yk0-Xn-wNc" secondAttribute="leading" id="yEk-8p-5x3"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="backButton" destination="Xqh-Sa-fFT" id="QZ2-qS-JnL"/>
@@ -96,6 +102,7 @@
                                     <outlet property="nextButton" destination="59i-7J-oid" id="Usl-Kh-FWt"/>
                                     <outlet property="playButton" destination="osE-Dd-bJw" id="kc7-tz-GA9"/>
                                     <outlet property="previousButton" destination="tuO-TR-nvY" id="p9H-G2-ySh"/>
+                                    <outlet property="removeButton" destination="TZa-Ua-pfi" id="FpH-Yl-As6"/>
                                     <outlet property="videoView" destination="cYB-wX-KKK" id="hrZ-Xy-O1D"/>
                                 </connections>
                             </view>
@@ -214,6 +221,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_cancel_36px" width="36" height="36"/>
         <image name="ic_chevron_right_48px" width="48" height="48"/>
         <image name="ic_play_circle_fill_48px" width="48" height="48"/>
         <image name="ic_skip_next_48px" width="48" height="48"/>

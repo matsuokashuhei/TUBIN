@@ -38,6 +38,12 @@ class MiniPlayerView: UIView {
             backButton.addTarget(self, action: "backToVideoPlayerViewController", forControlEvents: .TouchUpInside)
         }
     }
+    @IBOutlet weak var removeButton: UIButton! {
+        didSet {
+            removeButton.addTarget(self, action: "removeButtonTapped:", forControlEvents: .TouchUpInside)
+            removeButton.hidden = true
+        }
+    }
     @IBOutlet var height: NSLayoutConstraint!
 
     var player = YouTubePlayer.sharedInstance
@@ -50,6 +56,7 @@ class MiniPlayerView: UIView {
         height.constant = 88
         hidden = false
         addPlayerView(player.controller)
+        removeButton.hidden = true
     }
 
     func hide() {
@@ -60,8 +67,10 @@ class MiniPlayerView: UIView {
     func playButtonTapped(button: UIButton) {
         if player.controller.playbackState == .Playing {
             player.pause()
+            removeButton.hidden = false
         } else {
             player.play()
+            removeButton.hidden = true
         }
     }
 
@@ -75,6 +84,10 @@ class MiniPlayerView: UIView {
         player.playNextVideo()
     }
 
+    func removeButtonTapped(button: UIButton) {
+        hide()
+    }
+
     func backToVideoPlayerViewController() {
         hide()
         delegate?.backToVideoPlayerViewController()
@@ -84,14 +97,12 @@ class MiniPlayerView: UIView {
         removePlayerView(videoView)
         videoView.addSubview(controller.view)
         controller.view.frame = videoView.bounds
-        //controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         videoView.addConstraints([
             NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Bottom, relatedBy: .Equal, toItem: videoView, attribute: .Bottom, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Trailing, relatedBy: .Equal, toItem: videoView, attribute: .Trailing, multiplier: 1, constant: 0),
         ])
-        //controller.play()
     }
 
     func removePlayerView(videoView: UIView) {
@@ -108,6 +119,10 @@ class MiniPlayerView: UIView {
 extension MiniPlayerView: YouTubePlayerDelegate {
 
     func prepareToPlay(video: Video) {
+    }
+
+    func playbackFailed(error: NSError) {
+        Alert.error(error)
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {

@@ -367,16 +367,17 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
         self.video = video
         configure(navigationItem: navigationItem)
         configure(channelView: channelView)
-        loadingIndicator.bringSubviewToFront(videoView)
-        loadingIndicator.hidden = false
-        loadingIndicator.startAnimating()
+        startLoading()
+    }
+
+    func playbackFailed(error: NSError) {
+        stopLoading()
+        Alert.error(error)
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {
         scrubberView._configure(controller.duration)
-        loadingIndicator.stopAnimating()
-        loadingIndicator.hidden = true
-        loadingIndicator.sendSubviewToBack(videoView)
+        stopLoading()
     }
 
     func readyForDisplay(controller: MPMoviePlayerController) {
@@ -415,6 +416,17 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
         }
     }
 
+    func startLoading() {
+        loadingIndicator.bringSubviewToFront(videoView)
+        loadingIndicator.hidden = false
+        loadingIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        loadingIndicator.stopAnimating()
+        loadingIndicator.hidden = true
+        loadingIndicator.sendSubviewToBack(videoView)
+    }
 }
 
 // MARK: - ScrubberViewDelegate

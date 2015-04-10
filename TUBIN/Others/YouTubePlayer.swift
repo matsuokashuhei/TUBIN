@@ -11,6 +11,7 @@ import YouTubeKit
 
 protocol YouTubePlayerDelegate {
     func prepareToPlay(video: Video)
+    func playbackFailed(error: NSError)
     func durationAvailable(controller: MPMoviePlayerController)
     func readyForDisplay(controller: MPMoviePlayerController)
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController)
@@ -73,7 +74,7 @@ class YouTubePlayer: NSObject {
                     self.controller.contentURL = nil
                     let error = box.unbox
                     self.logger.error(error.localizedDescription)
-                    Alert.error(box.unbox)
+                    self.delegate?.playbackFailed(error)
                 }
             }
         }
@@ -263,33 +264,34 @@ extension YouTubePlayer {
         return message
     }
 
-class Timer {
+    class Timer {
 
-    class func start(#target: AnyObject, selector: Selector) {
-        sharedInstance.start(target: target, selector: selector)
-    }
-
-    class func stop() {
-        sharedInstance.stop()
-    }
-
-    var timer: NSTimer? {
-        willSet {
-            stop()
+        class func start(#target: AnyObject, selector: Selector) {
+            sharedInstance.start(target: target, selector: selector)
         }
-    }
 
-    static var sharedInstance = Timer()
-
-    func start(#target: AnyObject, selector: Selector) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: target, selector: selector, userInfo: nil, repeats: true)
-    }
-
-    func stop() {
-        if let timer = timer {
-            timer.invalidate()
+        class func stop() {
+            sharedInstance.stop()
         }
+
+        var timer: NSTimer? {
+            willSet {
+                stop()
+            }
+        }
+
+        static var sharedInstance = Timer()
+
+        func start(#target: AnyObject, selector: Selector) {
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: target, selector: selector, userInfo: nil, repeats: true)
+        }
+
+        func stop() {
+            if let timer = timer {
+                timer.invalidate()
+            }
+        }
+
     }
 
-}
 }
