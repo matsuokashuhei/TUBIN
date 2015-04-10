@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -107,7 +107,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = {
             switch indexPath.section {
             case 0:

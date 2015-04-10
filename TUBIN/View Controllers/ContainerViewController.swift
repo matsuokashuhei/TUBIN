@@ -9,7 +9,8 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
-import SVProgressHUD
+//import SVProgressHUD
+import Async
 
 class ContainerViewController: UIViewController {
 
@@ -99,13 +100,13 @@ class ContainerViewController: UIViewController {
             let controller: UIViewController? = {
                 switch bookmark.name {
                 case "playlist":
-                    let playlist = bookmark.item as Playlist
+                    let playlist = bookmark.item as! Playlist
                     self.tabBar.add(item: playlist)
                     let controller = PlaylistViewController()
                     controller.playlist = playlist
                     return controller
                 case "channel":
-                    let channel = bookmark.item as Channel
+                    let channel = bookmark.item as! Channel
                     self.tabBar.add(item: channel)
                     let controller = ChannelViewController()
                     controller.channel = channel
@@ -186,13 +187,13 @@ extension ContainerViewController {
                     let controller: UIViewController? = {
                         switch bookmark.name {
                         case "playlist":
-                            let playlist = bookmark.item as Playlist
+                            let playlist = bookmark.item as! Playlist
                             self.tabBar.add(item: playlist, index: self.bookmarks.count)
                             let controller = PlaylistViewController()
                             controller.playlist = playlist
                             return controller
                         case "channel":
-                            let channel = bookmark.item as Channel
+                            let channel = bookmark.item as! Channel
                             self.tabBar.add(item: channel, index: self.bookmarks.count)
                             let controller = ChannelViewController()
                             controller.channel = channel

@@ -52,7 +52,7 @@ class StoreViewController: UIViewController {
         }
     }
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "StoreViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -79,7 +79,7 @@ class StoreViewController: UIViewController {
 
     func requestProduct() {
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        let request = SKProductsRequest(productIdentifiers: NSSet(object: "org.matsuosh.TUBIN.product1"))
+        let request = SKProductsRequest(productIdentifiers: NSSet(object: "org.matsuosh.TUBIN.product1") as Set<NSObject>)
         request.delegate = self
         request.start()
     }

@@ -109,7 +109,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
                 self.logger.error(box.unbox.localizedDescription)
             }
         }
-        let video = item as Video
+        let video = item as! Video
         durationLabel.text = video.duration
         if let publishedAt = video.publishedAt {
             publishedAtLabel.text = publishedAt.relativeTimeToString()
@@ -140,7 +140,7 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
                 self.logger.error(box.unbox.localizedDescription)
             }
         }
-        let playlist = item as Playlist
+        let playlist = item as! Playlist
         channelTitle.text = playlist.channelTitle
         if let itemCount = playlist.itemCount {
             //itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
@@ -168,7 +168,7 @@ class ChannelTableViewCell: ItemTableTableViewCell {
                 self.logger.error(box.unbox.localizedDescription)
             }
         }
-        let channel = item as Channel
+        let channel = item as! Channel
         if let subscriberCount = channel.subscriberCount {
             subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"
             subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) " + NSLocalizedString("subscribes", comment: "subscribes")

@@ -14,12 +14,7 @@ class Toast {
         sharedInstance.show(item: item)
     }
 
-    class var sharedInstance: Toast {
-        struct Singleton {
-            static let instance = Toast()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Toast()
 
     init() {
         let options: [String: AnyObject] = [

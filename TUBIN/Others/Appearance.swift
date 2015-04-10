@@ -79,12 +79,7 @@ class Appearance {
 
     var theme: Theme
 
-    class var sharedInstance: Appearance {
-        struct Singleton {
-            static let instance = Appearance()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Appearance()
 
     init() {
         theme = .Light

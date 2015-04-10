@@ -23,7 +23,7 @@ class Favorite {
     }
 
     init(object: PFObject) {
-        index = object["index"] as Int!
+        index = object["index"] as! Int
         video = Video(object: object)
     }
 

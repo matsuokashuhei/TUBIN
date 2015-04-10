@@ -24,12 +24,7 @@ class Alert {
 
     let logger = XCGLogger.defaultInstance()
 
-    class var sharedInstance: Alert {
-        struct Singleton {
-            static let instance = Alert()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Alert()
 
     func configure() {
     }

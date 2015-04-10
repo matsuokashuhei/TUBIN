@@ -9,6 +9,7 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
+import Async
 
 class FavoritesViewController: UIViewController {
 
@@ -22,7 +23,7 @@ class FavoritesViewController: UIViewController {
 
     var removes = [Favorite]()
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "FavoritesViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -31,7 +32,7 @@ class FavoritesViewController: UIViewController {
 
         configure(tableView: tableView)
         fetch()
-        setEditing(false)
+        __setEditing(false)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: AddItemToFavoritesNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: ReloadFavoritesNotification, object: nil)
@@ -68,7 +69,7 @@ class FavoritesViewController: UIViewController {
 
     // MARK: - IBActions
 
-    func setEditing(editing: Bool) {
+    func __setEditing(editing: Bool) {
         tableView.setEditing(editing, animated: true)
         if let toolbar = tableView.tableFooterView as? UIToolbar {
             toolbar.items?.removeAll(keepCapacity: true)
@@ -82,7 +83,7 @@ class FavoritesViewController: UIViewController {
     }
 
     func startEditing() {
-        setEditing(true)
+        __setEditing(true)
         edited = false
         removes = []
     }
@@ -100,14 +101,14 @@ class FavoritesViewController: UIViewController {
                 Alert.error(error)
             }
         }
-        setEditing(false)
+        __setEditing(false)
     }
 
     func cancelEditing() {
         if edited {
             fetch()
         }
-        setEditing(false)
+        __setEditing(false)
     }
 
 }
@@ -165,7 +166,7 @@ extension FavoritesViewController: UITableViewDelegate {
 extension FavoritesViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
         var favorite = favorites[indexPath.row]
         let video = favorite.video
         cell.configure(video)

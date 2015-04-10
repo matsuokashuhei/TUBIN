@@ -8,6 +8,8 @@
 
 import UIKit
 import YouTubeKit
+import Async
+import SwiftyUserDefaults
 
 class ChannelViewController: UIViewController {
 
@@ -36,7 +38,7 @@ class ChannelViewController: UIViewController {
 
     var navigatable = false
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "ChannelViewController", bundle: NSBundle.mainBundle())
     }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import LlamaKit
+import SwiftyUserDefaults
 
 class Parser {
 
@@ -16,9 +17,7 @@ class Parser {
         Parse.setApplicationId("nZZspCtivBttgR2EfrVpZMJNfYcWKvCdVT4WbjYD", clientKey: "1faakaiSg32P6fDKAO1rZGZDIatTOTmFDKsZaTe5")
         //PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
 
-        let key = "initializedBookmarks"
-        if NSUserDefaults.standardUserDefaults().boolForKey(key) == false {
-            //let names = ["popular", "search", "favorites", "guide"]
+        if !Defaults.hasKey("initializedBookmarks") {
             let names = ["popular", "search", "favorites",]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
@@ -26,7 +25,7 @@ class Parser {
                 bookmark["name"] = name
                 bookmark.pin()
             }
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: key)
+            Defaults["initializedBookmarks"] = true
         }
     }
 
@@ -35,7 +34,11 @@ class Parser {
             if success {
                 handler(.Success(Box(success)))
             } else {
-                handler(.Failure(Box(error)))
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Error.Unknown.toNSError())))
+                }
             }
         }
     }
@@ -45,7 +48,11 @@ class Parser {
             if success {
                 handler(.Success(Box(success)))
             } else {
-                handler(.Failure(Box(error)))
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Error.Unknown.toNSError())))
+                }
             }
         }
     }
@@ -55,7 +62,11 @@ class Parser {
             if success {
                 handler(.Success(Box(success)))
             } else {
-                handler(.Failure(Box(error)))
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Error.Unknown.toNSError())))
+                }
             }
         }
     }
@@ -65,19 +76,18 @@ class Parser {
             if success {
                 handler(.Success(Box(success)))
             } else {
-                handler(.Failure(Box(error)))
+                if let error = error {
+                    handler(.Failure(Box(error)))
+                } else {
+                    handler(.Failure(Box(Error.Unknown.toNSError())))
+                }
             }
         })
     }
 
     // MARK: - Static functions
 
-    class var sharedInstance: Parser {
-        struct Singleton {
-            static let instance = Parser()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Parser()
 
     func query(className: String) -> PFQuery {
         var query = PFQuery(className: className)

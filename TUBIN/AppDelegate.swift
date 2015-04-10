@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import SwiftyUserDefaults
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

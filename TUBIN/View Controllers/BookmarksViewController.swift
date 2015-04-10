@@ -8,6 +8,7 @@
 
 import UIKit
 import LlamaKit
+import Async
 
 class BookmarksViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class BookmarksViewController: UIViewController {
     var bookmarks = [Bookmark]()
     var edited = false
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "BookmarksViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -62,7 +63,7 @@ class BookmarksViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = NSLocalizedString("Bookmarks", comment: "Bookmarks")
-        setEditing(false)
+        __setEditing(false)
     }
 
     func configure(#tableView: UITableView) {
@@ -72,7 +73,7 @@ class BookmarksViewController: UIViewController {
         tableView.registerNib(UINib(nibName: "BookmarkTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "BookmarkTableViewCell")
     }
 
-    func setEditing(editing: Bool) {
+    func __setEditing(editing: Bool) {
         tableView.setEditing(editing, animated: true)
         if tableView.editing {
             let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")
@@ -87,11 +88,11 @@ class BookmarksViewController: UIViewController {
 
     func startEditing() {
         edited = false
-        setEditing(true)
+        __setEditing(true)
     }
 
     func endEditing() {
-        setEditing(false)
+        __setEditing(false)
         if edited {
             Bookmark.reset(bookmarks) { (result) in
                 switch result {
@@ -158,7 +159,7 @@ extension BookmarksViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let bookmark = bookmarks[indexPath.row]
-        var cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as BookmarkTableViewCell
+        var cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as! BookmarkTableViewCell
         cell.configure(bookmark)
         if isPresetBookmark(bookmark) {
             cell.thumbnailImageView.alpha = 0.5

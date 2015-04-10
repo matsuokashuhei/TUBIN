@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LlamaKit-Swift.h</key>
 		<data>
-		bUcHmjxzCaHZpAMfaXEh30MCpKA=
+		paV1FEkRlvlr8nd//UrT494Rqt0=
 		</data>
 		<key>Headers/LlamaKit.h</key>
 		<data>
@@ -14,23 +14,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		rcKYqwYPsBDO7slfB/+7ZfyKqWg=
+		u1Td9q6LZ7aLou5GVcLjjiBgAW8=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm.swiftdoc</key>
 		<data>
-		rO9996b/v9PUShLKb8fzaGJTxzo=
+		Hf72SOOzJnUSSlRbPw1N7STODD4=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm.swiftmodule</key>
 		<data>
-		TwvznONkMKeOTMlB46bdLkH2OFA=
+		6n638sKDmrFdvMtb8STvvPAKvLw=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		rO9996b/v9PUShLKb8fzaGJTxzo=
+		K7WVAq1FBYgt469i+wjuu10j51g=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		rKoLln7PDQ5XhPsIJCD5uUYHfHQ=
+		Hbmv8DH0mOLj+gqbgn7RN3hkMlY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -41,7 +41,7 @@
 	<dict>
 		<key>Headers/LlamaKit-Swift.h</key>
 		<data>
-		bUcHmjxzCaHZpAMfaXEh30MCpKA=
+		paV1FEkRlvlr8nd//UrT494Rqt0=
 		</data>
 		<key>Headers/LlamaKit.h</key>
 		<data>
@@ -49,19 +49,19 @@
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm.swiftdoc</key>
 		<data>
-		rO9996b/v9PUShLKb8fzaGJTxzo=
+		Hf72SOOzJnUSSlRbPw1N7STODD4=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm.swiftmodule</key>
 		<data>
-		TwvznONkMKeOTMlB46bdLkH2OFA=
+		6n638sKDmrFdvMtb8STvvPAKvLw=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		rO9996b/v9PUShLKb8fzaGJTxzo=
+		K7WVAq1FBYgt469i+wjuu10j51g=
 		</data>
 		<key>Modules/LlamaKit.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		rKoLln7PDQ5XhPsIJCD5uUYHfHQ=
+		Hbmv8DH0mOLj+gqbgn7RN3hkMlY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>

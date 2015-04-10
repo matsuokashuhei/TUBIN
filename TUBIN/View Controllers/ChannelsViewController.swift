@@ -14,7 +14,7 @@ class ChannelsViewController: ItemsViewController {
 
     var category: GuideCategory!
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "ChannelsViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -99,12 +99,12 @@ extension ChannelsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            let item = items[indexPath.row] as Channel
-            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as ChannelTableViewCell
+            let item = items[indexPath.row] as! Channel
+            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as! ChannelTableViewCell
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
@@ -116,7 +116,7 @@ extension ChannelsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let controller = ChannelViewController()
-        controller.channel = items[indexPath.row] as Channel
+        controller.channel = items[indexPath.row] as! Channel
         controller.navigatable = true
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)

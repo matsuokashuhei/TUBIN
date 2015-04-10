@@ -48,12 +48,7 @@ class YouTubePlayer: NSObject {
         }
     }
 
-    class var sharedInstance: YouTubePlayer {
-        struct Singleton {
-            static let instance = YouTubePlayer()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = YouTubePlayer()
 
     override init() {
         controller = MPMoviePlayerController()
@@ -267,7 +262,6 @@ extension YouTubePlayer {
         }
         return message
     }
-}
 
 class Timer {
 
@@ -285,12 +279,7 @@ class Timer {
         }
     }
 
-    class var sharedInstance: Timer {
-        struct Singleton {
-            static let instance = Timer()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Timer()
 
     func start(#target: AnyObject, selector: Selector) {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: target, selector: selector, userInfo: nil, repeats: true)
@@ -302,4 +291,5 @@ class Timer {
         }
     }
 
+}
 }

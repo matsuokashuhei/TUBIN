@@ -9,6 +9,8 @@
 import UIKit
 import MediaPlayer
 import YouTubeKit
+import Async
+import SwiftyUserDefaults
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -71,7 +73,7 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        configure(UIDevice.currentDevice().orientation)
+        _configure(UIDevice.currentDevice().orientation)
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
     }
 
@@ -208,7 +210,7 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
-    func configure(orientation: UIDeviceOrientation) {
+    func _configure(orientation: UIDeviceOrientation) {
         edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             // iPhone
@@ -371,7 +373,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
     func durationAvailable(controller: MPMoviePlayerController) {
-        scrubberView.configure(controller.duration)
+        scrubberView._configure(controller.duration)
         loadingIndicator.stopAnimating()
         loadingIndicator.hidden = true
         loadingIndicator.sendSubviewToBack(videoView)
@@ -396,7 +398,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
-        scrubberView.setTime(controller.currentPlaybackTime, duration: controller.duration)
+        scrubberView.__setTime(controller.currentPlaybackTime, duration: controller.duration)
     }
 
     func playbackDidFinish(controller: MPMoviePlayerController) {

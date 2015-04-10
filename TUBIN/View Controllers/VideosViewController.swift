@@ -14,7 +14,7 @@ class VideosViewController: ItemsViewController {
 
     var channel: Channel?
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "VideosViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -111,12 +111,12 @@ extension VideosViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
-            let item = items[indexPath.row] as Video
+            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+            let item = items[indexPath.row] as! Video
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as LoadMoreTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
@@ -129,8 +129,8 @@ extension VideosViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         let controller = YouTubePlayerViewController(device: UIDevice.currentDevice())
-        controller.video = items[indexPath.row] as Video
-        controller.playlist = items as [Video]
+        controller.video = items[indexPath.row] as! Video
+        controller.playlist = items as! [Video]
         controller.channel = channel
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)

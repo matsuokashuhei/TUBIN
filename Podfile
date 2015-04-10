@@ -11,5 +11,7 @@ pod 'SDWebImage', '~>3.6'
 #pod 'BigBrother', :git => 'https://github.com/marcelofabri/BigBrother'
 
 pod 'SVProgressHUD'
-pod 'PKHUD', :git => 'https://github.com/pkluz/PKHUD'
+#pod 'PKHUD', :git => 'https://github.com/pkluz/PKHUD'
 pod 'TAOverlay'
+pod 'Async', :git => 'https://github.com/duemunk/Async'
+pod 'SwiftyUserDefaults', :git => 'https://github.com/radex/SwiftyUserDefaults', :branch => 'swift-1.2'

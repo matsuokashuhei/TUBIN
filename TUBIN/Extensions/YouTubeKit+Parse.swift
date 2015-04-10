@@ -44,15 +44,15 @@ protocol Parsable {
 extension Video {
 
     convenience init(object: PFObject) {
-        let id = object["id"] as String!
+        let id = object["id"] as! String
         let publishedAt = object["publishedAt"] as? NSDate
-        let title = object["title"] as String!
-        let description = object["description"] as String!
-        let thumbnailURL = object["thumbnailURL"] as String!
-        let channelId = object["channelId"] as String!
-        let channelTitle = object["channelTitle"] as String!
-        let viewCount = (object["viewCount"] as NSString!).longLongValue
-        let duration = object["duration"] as String!
+        let title = object["title"] as! String
+        let description = object["description"] as! String
+        let thumbnailURL = object["thumbnailURL"] as! String
+        let channelId = object["channelId"] as! String
+        let channelTitle = object["channelTitle"] as! String
+        let viewCount = (object["viewCount"] as! NSString).longLongValue
+        let duration = object["duration"] as! String
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, channelId: channelId, channelTitle: channelTitle, viewCount: viewCount, duration: duration)
     }
 
@@ -77,14 +77,14 @@ extension Video {
 extension Playlist {
 
     convenience init(object: PFObject) {
-        let id = object["id"] as String!
+        let id = object["id"] as! String
         let publishedAt = object["publishedAt"] as? NSDate
-        let title = object["title"] as String!
-        let description = object["description"] as String!
-        let thumbnailURL = object["thumbnailURL"] as String!
-        let channelId = object["channelId"] as String!
-        let channelTitle = object["channelTitle"] as String!
-        let itemCount = object["itemCount"] as Int?
+        let title = object["title"] as! String
+        let description = object["description"] as! String
+        let thumbnailURL = object["thumbnailURL"] as! String
+        let channelId = object["channelId"] as! String
+        let channelTitle = object["channelTitle"] as! String
+        let itemCount = object["itemCount"] as! Int
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, channelId: channelId, channelTitle: channelTitle, itemCount: itemCount)
     }
 
@@ -108,14 +108,14 @@ extension Playlist {
 extension Channel {
 
     convenience init(object: PFObject) {
-        let id = object["id"] as String!
+        let id = object["id"] as! String
         let publishedAt = object["publishedAt"] as? NSDate
-        let title = object["title"] as String!
-        let description = object["description"] as String!
-        let thumbnailURL = object["thumbnailURL"] as String!
-        let viewCount = object["viewCount"] as Int?
-        let subscriberCount = object["subscriberCount"] as Int?
-        let videoCount = object["videoCount"] as Int?
+        let title = object["title"] as! String!
+        let description = object["description"] as! String
+        let thumbnailURL = object["thumbnailURL"] as! String
+        let viewCount = object["viewCount"] as? Int
+        let subscriberCount = object["subscriberCount"] as? Int
+        let videoCount = object["videoCount"] as? Int
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, viewCount: viewCount, subscriberCount: subscriberCount, videoCount: videoCount)
     }
 

@@ -23,7 +23,6 @@
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
-		A88CF3541AC5A068005276DD /* SwiftyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3531AC5A068005276DD /* SwiftyUserDefaults.swift */; };
 		A88CF3571AC5EB0C005276DD /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3561AC5EB0C005276DD /* History.swift */; };
 		A88CF35A1AC5F0AA005276DD /* HistoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */; };
 		A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */; };
@@ -69,7 +68,6 @@
 		A8D403611AA8CA5700F0AAD2 /* XCDYouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D4035E1AA8CA4600F0AAD2 /* XCDYouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8D4038E1AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403651AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift */; };
 		A8D4038F1AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403661AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift */; };
-		A8D403901AA8CC4400F0AAD2 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403681AA8CC4400F0AAD2 /* Async.swift */; };
 		A8D403911AA8CC4400F0AAD2 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */; };
 		A8D403921AA8CC4400F0AAD2 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */; };
 		A8D403931AA8CC4400F0AAD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */; };
@@ -171,7 +169,6 @@
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
-		A88CF3531AC5A068005276DD /* SwiftyUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyUserDefaults.swift; sourceTree = "<group>"; };
 		A88CF3561AC5EB0C005276DD /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		A88CF3581AC5F0AA005276DD /* HistoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoriesViewController.swift; sourceTree = "<group>"; };
 		A88CF3591AC5F0AA005276DD /* HistoriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoriesViewController.xib; sourceTree = "<group>"; };
@@ -219,7 +216,6 @@
 		A8D4035E1AA8CA4600F0AAD2 /* XCDYouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XCDYouTubeKit.framework; sourceTree = "<group>"; };
 		A8D403651AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Parse.swift"; sourceTree = "<group>"; };
 		A8D403661AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+XCDYouTubeKit.swift"; sourceTree = "<group>"; };
-		A8D403681AA8CC4400F0AAD2 /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCGLogger.swift; sourceTree = "<group>"; };
 		A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
@@ -441,9 +437,7 @@
 				A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */,
 				A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */,
 				A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */,
-				A8D403681AA8CC4400F0AAD2 /* Async.swift */,
 				A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */,
-				A88CF3531AC5A068005276DD /* SwiftyUserDefaults.swift */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -814,14 +808,12 @@
 				A8D4039C1AA8CC4400F0AAD2 /* FavoritesViewController.swift in Sources */,
 				A8D403A21AA8CC4400F0AAD2 /* RootViewController.swift in Sources */,
 				A8D403991AA8CC4400F0AAD2 /* ChannelsViewController.swift in Sources */,
-				A88CF3541AC5A068005276DD /* SwiftyUserDefaults.swift in Sources */,
 				A8D4039B1AA8CC4400F0AAD2 /* ContainerViewController.swift in Sources */,
 				A8D403A61AA8CC4400F0AAD2 /* VideosViewController.swift in Sources */,
 				A8D403AE1AA8CC4400F0AAD2 /* Spinner.swift in Sources */,
 				A8D403941AA8CC4400F0AAD2 /* Parser.swift in Sources */,
 				A8D403AF1AA8CC4400F0AAD2 /* TabBar.swift in Sources */,
 				A8D403A31AA8CC4400F0AAD2 /* SearchViewController.swift in Sources */,
-				A8D403901AA8CC4400F0AAD2 /* Async.swift in Sources */,
 				A8D403921AA8CC4400F0AAD2 /* Bookmark.swift in Sources */,
 				A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */,
 				A8D4039E1AA8CC4400F0AAD2 /* ItemsViewController.swift in Sources */,

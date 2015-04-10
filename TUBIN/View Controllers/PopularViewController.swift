@@ -25,7 +25,7 @@ class PopularViewController: UIViewController {
 
     var containerViews: [UIView] = []
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "PopularViewController", bundle: NSBundle.mainBundle())
     }
 

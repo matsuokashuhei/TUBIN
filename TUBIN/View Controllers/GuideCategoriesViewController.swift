@@ -9,6 +9,7 @@
 import UIKit
 import LlamaKit
 import YouTubeKit
+import Async
 
 class GuideCategoriesViewController: UIViewController {
 
@@ -26,7 +27,7 @@ class GuideCategoriesViewController: UIViewController {
 
     var categories: [GuideCategory] = []
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "GuideCategoriesViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -85,7 +86,7 @@ extension GuideCategoriesViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCellWithIdentifier("GuideCategoryTableViewCell", forIndexPath: indexPath) as GuideCategoryTableViewCell
+        var cell  = tableView.dequeueReusableCellWithIdentifier("GuideCategoryTableViewCell", forIndexPath: indexPath) as! GuideCategoryTableViewCell
         cell.configure(categories[indexPath.row])
         return cell
     }

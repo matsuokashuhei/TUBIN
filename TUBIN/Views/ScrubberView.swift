@@ -52,30 +52,30 @@ class ScrubberView: UIView {
         endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(Float64(slider.maximumValue), Int32(NSEC_PER_SEC)))
     }
 
-    func configure(duration: Double) {
+    func _configure(duration: Double) {
         configure(CMTimeMake(Int64(duration), 1))
     }
 
     func sync(controller: MPMoviePlayerController) {
-        configure(controller.duration)
-        setTime(controller.currentPlaybackTime, duration: controller.duration)
+        _configure(controller.duration)
+        __setTime(controller.currentPlaybackTime, duration: controller.duration)
     }
 
-    func setTime(currentTime: CMTime, duration: CMTime) {
+    func _setTime(currentTime: CMTime, duration: CMTime) {
         slider.value = Float(CMTimeGetSeconds(currentTime))
         startTimeLabel.text = formatTime(currentTime)
         let secondsOfEndTime = CMTimeGetSeconds(duration) - CMTimeGetSeconds(currentTime)
         endTimeLabel.text = formatTime(CMTimeMakeWithSeconds(secondsOfEndTime, Int32(NSEC_PER_SEC)))
     }
 
-    func setTime(currentTime: Double, duration: Double) {
+    func __setTime(currentTime: Double, duration: Double) {
         if isnan(currentTime) {
             return
         }
         if isnan(duration) {
             return
         }
-        setTime(CMTimeMake(Int64(currentTime), 1), duration: CMTimeMake(Int64(duration), 1))
+        _setTime(CMTimeMake(Int64(currentTime), 1), duration: CMTimeMake(Int64(duration), 1))
     }
 
     func beginSeek(sender: UISlider) {
@@ -96,11 +96,11 @@ class ScrubberView: UIView {
         if hours > 0 {
             let minutes = Int((_time / 60) % 60)
             let seconds = Int(_time % 60)
-            return NSString(format: "%d:%02ld:%02ld", hours, minutes, seconds)
+            return NSString(format: "%d:%02ld:%02ld", hours, minutes, seconds) as String
         } else {
             let minutes = Int(_time / 60)
             let seconds = Int(_time % 60)
-            return NSString(format: "%02ld:%02ld", minutes, seconds)
+            return NSString(format: "%02ld:%02ld", minutes, seconds) as String
         }
     }
 

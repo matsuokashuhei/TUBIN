@@ -24,7 +24,7 @@ class UserViewController: UIViewController {
 
     var containerViews: [UIView] = []
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "UserViewController", bundle: NSBundle.mainBundle())
     }
 

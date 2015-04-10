@@ -38,14 +38,14 @@ class Tab: UIView {
         }
     }
 
-    init(item: Item) {
+    convenience init(item: Item) {
+        self.init()
         self.item = item
-        super.init()
         configure(item)
     }
 
-    init(text: String) {
-        super.init()
+    convenience init(text: String) {
+        self.init()
         configure(text)
         addSubview(label)
         selected = false
@@ -56,7 +56,7 @@ class Tab: UIView {
         layer.borderWidth = 0.5
         //layer.borderColor = UIColor.clearColor().CGColor
         layer.borderColor = Appearance.tintColor().CGColor
-        configure(label)
+        __configure(label)
     }
 
     func configure(item: Item) {
@@ -88,7 +88,7 @@ class Tab: UIView {
         addSubview(label)
     }
 
-    func configure(label: UILabel) {
+    func __configure(label: UILabel) {
         label.frame = self.bounds
         label.textAlignment = NSTextAlignment.Center
         label.numberOfLines = 3
@@ -171,7 +171,7 @@ class TabBar: UIView {
     }
 
     func tabTapped(sender: UITapGestureRecognizer) {
-        let tab = sender.view as Tab
+        let tab = sender.view as! Tab
         selectTab(tab)
         delegate?.tabBar(self, didSelectTabAtIndex: indexOfTabs(tab))
     }

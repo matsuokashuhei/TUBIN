@@ -20,12 +20,7 @@ class Spinner {
         sharedInstance.dissmiss()
     }
 
-    class var sharedInstance: Spinner {
-        struct Singleton {
-            static let instance = Spinner()
-        }
-        return Singleton.instance
-    }
+    static var sharedInstance = Spinner()
 
     func configure() {
     }

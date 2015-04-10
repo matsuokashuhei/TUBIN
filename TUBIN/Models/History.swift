@@ -7,6 +7,7 @@
 //
 import LlamaKit
 import YouTubeKit
+import SwiftyUserDefaults
 
 class History {
 
@@ -21,7 +22,7 @@ class History {
     }
 
     init(object: PFObject) {
-        watchedAt = object["watchedAt"] as NSDate!
+        watchedAt = object["watchedAt"] as! NSDate
         video = Video(object: object)
     }
 

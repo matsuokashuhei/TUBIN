@@ -28,7 +28,7 @@ class BookmarkTableViewCell: UITableViewCell {
     func configure(bookmark: Bookmark) {
         switch bookmark.name {
         case "playlist":
-            let playlist = bookmark.item as Playlist
+            let playlist = bookmark.item as! Playlist
             playlist.thumbnailImage() { (result) -> Void in
                 switch result {
                 case .Success(let box):
@@ -42,7 +42,7 @@ class BookmarkTableViewCell: UITableViewCell {
             titleLabel.text = playlist.title
             channelTitleLabel.text = playlist.channelTitle
         case "channel":
-            let channel = bookmark.item as Channel
+            let channel = bookmark.item as! Channel
             channel.thumbnailImage() { (result) -> Void in
                 switch result {
                 case .Success(let box):

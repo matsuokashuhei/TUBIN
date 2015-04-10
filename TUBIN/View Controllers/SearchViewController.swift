@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import YouTubeKit
+import Async
 
 protocol SearchViewControllerDelegate {
     func didChangeItemsViewController(itemsViewController: ItemsViewController) -> Void
@@ -48,7 +49,7 @@ class SearchViewController: UIViewController {
 
     var delegate: SearchViewControllerDelegate?
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "SearchViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -116,7 +117,7 @@ class SearchViewController: UIViewController {
     }
 
     func itemViewControllerAtSelectedSegmentIndex() -> ItemsViewController {
-        return childViewControllers[segmentedControl.selectedSegmentIndex] as ItemsViewController
+        return childViewControllers[segmentedControl.selectedSegmentIndex] as! ItemsViewController
     }
 
     func search() {
@@ -150,7 +151,7 @@ extension SearchViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)
         cell.textLabel?.text = suggestions[indexPath.row]
         cell.textLabel?.textColor = Appearance.textColor()

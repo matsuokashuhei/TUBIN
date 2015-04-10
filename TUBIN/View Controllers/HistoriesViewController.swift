@@ -8,6 +8,7 @@
 
 import UIKit
 import YouTubeKit
+import Async
 
 class HistoriesViewController: UIViewController {
 
@@ -17,7 +18,7 @@ class HistoriesViewController: UIViewController {
 
     var histories = [History]()
 
-    convenience override init() {
+    convenience init() {
         self.init(nibName: "HistoriesViewController", bundle: NSBundle.mainBundle())
     }
 
@@ -26,7 +27,7 @@ class HistoriesViewController: UIViewController {
 
         configure(tableView: tableView)
         fetch()
-        setEditing(false)
+        __setEditing(false)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: "WatchVideoNotification", object: nil)
     }
@@ -61,7 +62,7 @@ class HistoriesViewController: UIViewController {
         }
     }
 
-    func setEditing(editing: Bool) {
+    func __setEditing(editing: Bool) {
         tableView.setEditing(editing, animated: true)
         if let toolbar = tableView.tableFooterView as? UIToolbar {
             toolbar.items?.removeAll(keepCapacity: true)
@@ -75,7 +76,7 @@ class HistoriesViewController: UIViewController {
     }
 
     func startEditing() {
-        setEditing(true)
+        __setEditing(true)
     }
 
     func endEditing() {
@@ -95,11 +96,11 @@ class HistoriesViewController: UIViewController {
                 self.fetch()
             })
         }
-        setEditing(false)
+        __setEditing(false)
     }
 
     func cancelEditing() {
-        setEditing(false)
+        __setEditing(false)
     }
 
 }
@@ -133,7 +134,7 @@ extension HistoriesViewController: UITableViewDelegate {
 extension HistoriesViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as VideoTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
         var history = histories[indexPath.row]
         let video = history.video
         cell.configure(video)

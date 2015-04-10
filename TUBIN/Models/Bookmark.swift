@@ -18,8 +18,8 @@ class Bookmark {
     var item: Item?
 
     init(object: PFObject) {
-        index = object["index"] as Int!
-        name = object["name"] as String!
+        index = object["index"] as! Int
+        name = object["name"] as! String
         if name == "playlist" {
             item = Playlist(object: object)
         }
@@ -30,14 +30,14 @@ class Bookmark {
 
     func toPFObject() -> PFObject {
         if name == "playlist" {
-            let playlist = item as Playlist
+            let playlist = item as! Playlist
             let object = playlist.toPFObject(className: "Bookmark")
             object["index"] = index
             object["name"] = name
             return object
         }
         if name == "channel" {
-            let channel = item as Channel
+            let channel = item as! Channel
             let object = channel.toPFObject(className: "Bookmark")
             object["index"] = index
             object["name"] = name
@@ -145,7 +145,7 @@ extension Bookmark {
     }
 
     class func add(#object: PFObject, handler: (Result<Bool, NSError>) -> Void) {
-        let id = object["id"] as String
+        let id = object["id"] as! String
         exists(id: id as String) { (result) in
             switch result {
             case .Success(let box):
