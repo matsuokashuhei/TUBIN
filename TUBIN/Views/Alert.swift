@@ -18,7 +18,7 @@ class Alert {
         sharedInstance.error(error, autoHide: autoHide)
     }
 
-    class func success(message: String) {
+    class func success(message: String, authoHide: Bool = true) {
         sharedInstance.success(message)
     }
 
@@ -30,28 +30,37 @@ class Alert {
     }
 
     func info(message: String, autoHide: Bool = true) {
-        TAOverlay.setOverlayLabelFont(UIFont(name: Appearance.Font.name, size:14)!)
+        let options: TAOverlayOptions
         if autoHide {
-            TAOverlay.showOverlayWithLabel(message, options: .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap | .AutoHide)
+            options = .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap | .AutoHide
         } else {
-            TAOverlay.showOverlayWithLabel(message, options: .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap)
+            options = .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap
         }
+        TAOverlay.showOverlayWithLabel(message, options: options)
     }
 
     func error(error: NSError?, autoHide: Bool = true) {
-        if let error = error {
-            TAOverlay.setOverlayLabelFont(UIFont(name: Appearance.Font.name, size:14)!)
-            if autoHide {
-                TAOverlay.showOverlayWithLabel(error.localizedDescription, options: .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap | .AutoHide)
-            } else {
-                TAOverlay.showOverlayWithLabel(error.localizedDescription, options: .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap)
-            }
+        let options: TAOverlayOptions
+        if autoHide {
+            options = .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap | .AutoHide
         } else {
-            TAOverlay.showOverlayWithLabel(nil, options: .OverlaySizeRoundedRect | .OverlayTypeError | .AllowUserInteraction | .AutoHide)
+            options = .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap
+        }
+        if let error = error {
+            TAOverlay.showOverlayWithLabel(error.localizedDescription, options: options)
+        } else {
+            TAOverlay.showOverlayWithLabel(nil, options: options)
         }
     }
 
-    func success(message: String) {
-        TAOverlay.showOverlayWithLabel(nil, options: .OverlaySizeRoundedRect | .OverlayTypeSuccess | .AllowUserInteraction | .AutoHide)
+    func success(message: String, autoHide: Bool = true) {
+        let options: TAOverlayOptions
+        if autoHide {
+            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .AllowUserInteraction | .OverlayDismissTap | .AutoHide
+        } else {
+            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .AllowUserInteraction | .OverlayDismissTap
+        }
+        TAOverlay.showOverlayWithLabel(nil, options: options)
     }
+
 }
