@@ -454,39 +454,21 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
 extension YouTubePlayerViewController {
 
     func addVideoToFavorite() {
-
-        Favorite.count { (result)in
+        navigationItem.rightBarButtonItem?.enabled = true
+        Favorite.add(video) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
-                let count = box.unbox
-                if count < Defaults["maxNumberOfFavorites"].int! {
-                    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
-                    indicator.startAnimating()
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: indicator)
-
-                    Favorite.add(self.video) { (result) in
-                        indicator.stopAnimating()
-                        switch result {
-                        case .Success(let box):
-                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
-                            Async.main {
-                                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
-                                self.navigationItem.rightBarButtonItem = favoriteButton
-                            }
-                        case .Failure(let box):
-                            let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
-                            self.navigationItem.rightBarButtonItem = favoriteButton
-                            let error = box.unbox
-                            self.logger.error(error.localizedDescription)
-                            Alert.error(box.unbox)
-                        }
-                    }
-                } else {
-                    let alert = UIAlertController(title: nil, message: NSLocalizedString("Cannot add to favorites", comment: "Cannot add to favorites"), preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": self.video]))
+                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
+                Async.main {
+                    self.navigationItem.rightBarButtonItem = favoriteButton
                 }
             case .Failure(let box):
+                let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+                Async.main {
+                    self.navigationItem.rightBarButtonItem = favoriteButton
+                }
                 let error = box.unbox
                 self.logger.error(error.localizedDescription)
                 Alert.error(box.unbox)
