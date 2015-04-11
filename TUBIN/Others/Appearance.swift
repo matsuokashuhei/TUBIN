@@ -8,6 +8,10 @@
 
 class Appearance {
 
+//    static var primaryColor = UIColor.clearColor()
+//    static var secondaryColor = UIColor.clearColor()
+//    static var backgroundColor = UIColor.clearColor()
+
     struct Font {
         static let name = "AvenirNext-Regular"
     }

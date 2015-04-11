@@ -77,8 +77,8 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi">
-                                        <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
-                                        <state key="normal" image="ic_cancel_36px"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                        <state key="normal" image="ic_highlight_remove_24px"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -221,8 +221,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_cancel_36px" width="36" height="36"/>
         <image name="ic_chevron_right_48px" width="48" height="48"/>
+        <image name="ic_highlight_remove_24px" width="24" height="24"/>
         <image name="ic_play_circle_fill_48px" width="48" height="48"/>
         <image name="ic_skip_next_48px" width="48" height="48"/>
         <image name="ic_skip_previous_48px" width="48" height="48"/>
