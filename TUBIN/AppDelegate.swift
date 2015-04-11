@@ -48,8 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.verbose("maxNumberOfHistories: \(maxNumberOfHistories)")
         let maxNumberOfFavorites = Defaults["maxNumberOfFavorites"].int!
         logger.verbose("maxNumberOfFavorites: \(maxNumberOfFavorites)")
-        let maxNumberOfSubscribes = Defaults["maxNumberOfSubscribes"].int!
-        logger.verbose("maxNumberOfSubscribes: \(maxNumberOfSubscribes)")
 
         if Defaults["theme"].string == "Light" {
             Appearance.apply(.Light)

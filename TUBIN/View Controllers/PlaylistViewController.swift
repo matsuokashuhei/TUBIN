@@ -88,16 +88,6 @@ class PlaylistViewController: ItemsViewController {
                 }
             }
         }
-        /*
-        let controller = ChannelsViewController()
-        controller.parameters = ["channelId": playlist.channelId]
-        controller.search()
-        //controller.search(parameters: ["channelId": playlist.channelId])
-        controller.navigatable = navigatable
-        controller.view.frame = channelView.bounds
-        addChildViewController(controller)
-        channelView.addSubview(controller.view)
-        */
     }
 
     // MARK: - YouTube search
@@ -127,32 +117,15 @@ class PlaylistViewController: ItemsViewController {
 
     // MARK: Bookmark
     func addPlaylistToBookmark() {
-        Bookmark.count { (result)in
+        navigationItem.rightBarButtonItem?.enabled = true
+        Bookmark.add(playlist) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
-                let count = box.unbox
-                if count < Defaults["maxNumberOfSubscribes"].int! {
-                    self.navigationItem.rightBarButtonItem?.enabled = true
-                    Bookmark.add(self.playlist) { (result) in
-                        self.navigationItem.rightBarButtonItem?.enabled = false
-                        switch result {
-                        case .Success(let box):
-                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
-                            Async.main {
-                                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-                                self.navigationItem.rightBarButtonItem = bookmarkButton
-                            }
-                        case .Failure(let box):
-                            let error = box.unbox
-                            self.logger.error(error.localizedDescription)
-                            Alert.error(box.unbox)
-                        }
-                    }
-                } else {
-                    let message = NSLocalizedString("Cannot subscribe to any more Playlist", comment: "これ以上のプレイリストを登録できません。")
-                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
+                Async.main {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
                 let error = box.unbox

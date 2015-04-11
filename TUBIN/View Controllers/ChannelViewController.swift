@@ -158,32 +158,15 @@ class ChannelViewController: UIViewController {
     }
 
     func addChannelToBookmark() {
-        Bookmark.count { (result) in
+        navigationItem.rightBarButtonItem?.enabled = true
+        Bookmark.add(channel) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
-                let count = box.unbox
-                if count < Defaults["maxNumberOfSubscribes"].int! {
-                    self.navigationItem.rightBarButtonItem?.enabled = true
-                    Bookmark.add(self.channel) { (result) in
-                        self.navigationItem.rightBarButtonItem?.enabled = false
-                        switch result {
-                        case .Success(let box):
-                            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
-                            Async.main {
-                                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-                                self.navigationItem.rightBarButtonItem = bookmarkButton
-                            }
-                        case .Failure(let box):
-                            let error = box.unbox
-                            self.logger.error(error.localizedDescription)
-                            Alert.error(error)
-                        }
-                    }
-                } else {
-                    let message = NSLocalizedString("Cannot subscribe to any more Channel", comment: "これ以上のチャンネルやプレイリストを登録できません。")
-                    let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: "Dismis", style: .Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
+                Async.main {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
                 let error = box.unbox
