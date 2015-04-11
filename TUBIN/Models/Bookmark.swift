@@ -149,7 +149,9 @@ extension Bookmark {
         exists(id: id as String) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                let exists = box.unbox
+                if exists {
+                    /*
                     self.find(id: id, handler: { (result) -> Void in
                         switch result {
                         case .Success(let box):
@@ -167,39 +169,31 @@ extension Bookmark {
                             return
                         }
                     })
-                }
-                self.count({ (result) -> Void in
-                    switch result {
-                    case .Success(let box):
-                        object["index"] = box.unbox + 1
-                        Parser.save(object, handler: { (result) -> Void in
-                            switch result {
-                            case .Success(let box):
-                                handler(.Success(Box(true)))
-                                return
-                            case .Failure(let box):
-                                handler(.Failure(box))
-                                return
+                    */
+                    return
+                } else {
+                    self.count { (result) in
+                        switch result {
+                        case .Success(let box):
+                            object["index"] = box.unbox + 1
+                            Parser.save(object) { (result) in
+                                switch result {
+                                case .Success(let box):
+                                    handler(.Success(Box(true)))
+                                case .Failure(let box):
+                                    handler(.Failure(box))
+                                }
                             }
-                        })
-                    case .Failure(let box):
-                        handler(.Failure(box))
-                        return
+                        case .Failure(let box):
+                            handler(.Failure(box))
+                        }
                     }
-                })
+                }
             case .Failure(let box):
                 handler(.Failure(box))
-                return
             }
         }
     }
-
-//    class func remove(bookmarks: [Bookmark], handler: (Result<Bool, NSError>) -> Void) {
-//        let objects = bookmarks.map { (bookmark) -> PFObject in
-//            return bookmark.toPFObject()
-//        }
-//        Parser.destroy(objects, handler: handler)
-//    }
 
     class func exists(#id: String, handler: (Result<Bool, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("Bookmark")
