@@ -103,54 +103,31 @@ extension Favorite {
     }
 
     class func add(video: Video, handler: (Result<Bool, NSError>) -> Void) {
-        exists(video) { (result) -> Void in
+        exists(video) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
-                    self.find(id: video.id, handler: { (result) -> Void in
+                let exists = box.unbox
+                if exists {
+                    return
+                } else {
+                    self.count { (result) in
                         switch result {
                         case .Success(let box):
-                            Parser.destroy(box.unbox) { (result) -> Void in
+                            var object = video.toPFObject(className: "Favorite")
+                            object["index"] = box.unbox + 1
+                            Parser.save(object) { (result) in
                                 switch result {
                                 case .Success(let box):
-                                    break
+                                    handler(.Success(Box(true)))
                                 case .Failure(let box):
                                     handler(.Failure(box))
-                                    return
                                 }
                             }
                         case .Failure(let box):
                             handler(.Failure(box))
-                            return
                         }
-                    })
-                }
-                self.count({ (result) -> Void in
-                    switch result {
-                    case .Success(let box):
-                        var object = video.toPFObject(className: "Favorite")
-                        object["index"] = box.unbox + 1
-                        Parser.save(object, handler: { (result) -> Void in
-                            switch result {
-                            case .Success(let box):
-                                video.download({ (result) in
-                                    switch result {
-                                    case .Success(let box):
-                                        handler(.Success(Box(true)))
-                                    case .Failure(let box):
-                                        handler(.Failure(box))
-                                    }
-                                })
-                            case .Failure(let box):
-                                handler(.Failure(box))
-                                return
-                            }
-                        })
-                    case .Failure(let box):
-                        handler(.Failure(box))
-                        return
                     }
-                })
+                }
             case .Failure(let box):
                 handler(.Failure(box))
             }
@@ -161,30 +138,20 @@ extension Favorite {
         Favorite.exists(video) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                let exists = box.unbox
+                if exists {
                     Favorite.find(id: video.id) { (result) in
                         switch result {
                         case .Success(let box):
                             box.unbox.unpinInBackgroundWithBlock() { (succeeded, error) in
                                 if succeeded {
-                                    if FileManager.existsFile(video.fileName()) {
-                                        FileManager.remove(video.fileName()) { (result) in
-                                            switch result {
-                                            case .Success(let box):
-                                                handler(.Success(box))
-                                            case .Failure(let box):
-                                                handler(.Failure(box))
-                                            }
-                                        }
-                                    } else {
-                                        handler(.Success(Box(true)))
-                                    }
-                                    return
-                                }
-                                if let error = error {
-                                    handler(.Failure(Box(error)))
+                                    handler(.Success(Box(true)))
                                 } else {
-                                    handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+                                    if let error = error {
+                                        handler(.Failure(Box(error)))
+                                    } else {
+                                        handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+                                    }
                                 }
                             }
                         case .Failure(let box):
@@ -208,7 +175,6 @@ extension Favorite {
             if let object = Favorite.find(id: favorite.video.id) {
                 object["index"] = index + 1
                 if object.pin() {
-                    continue
                 } else {
                     return .Failure(Box(Parser.Error.Unknown.toNSError()))
                 }
@@ -217,20 +183,6 @@ extension Favorite {
         for favorite in removes {
             if let object = Favorite.find(id: favorite.video.id) {
                 if object.unpin() {
-                    if FileManager.existsFile(favorite.video.fileName()) {
-                        var error: NSError?
-                        FileManager.remove(favorite.video.fileName()) { (result)  in
-                            switch result {
-                            case .Success(let box):
-                                break
-                            case .Failure(let box):
-                                error = box.unbox
-                            }
-                        }
-                        if let error = error {
-                            return .Failure(Box(error))
-                        }
-                    }
                 } else {
                     return .Failure(Box(Parser.Error.Unknown.toNSError()))
                 }

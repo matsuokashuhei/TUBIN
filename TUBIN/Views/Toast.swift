@@ -19,7 +19,7 @@ class Toast {
     init() {
         let options: [String: AnyObject] = [
             kCRToastTextAlignmentKey: NSTextAlignment.Center.rawValue,
-            kCRToastBackgroundColorKey: UIColor.redColor(),
+            kCRToastBackgroundColorKey: Appearance.toastColor(),
             kCRToastFontKey: UIFont(name: Appearance.Font.name, size: 14.0)!,
             kCRToastSubtitleFontKey: UIFont(name: Appearance.Font.name, size: 12.0)!,
             kCRToastNotificationPresentationTypeKey: CRToastPresentationType.Cover.rawValue,
@@ -36,6 +36,7 @@ class Toast {
     }
 
     func show(#item: Item) {
+        /*
         let options: [String: AnyObject] = {
             if let video = item as? Video {
                 return [
@@ -50,24 +51,12 @@ class Toast {
                 ]
             }
         }()
-        /*
-        let options: [String: AnyObject] = [
+        */
+        let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
-        ]
-        */
+            ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
-
-    /*
-    func favorite(#item: Item) {
-        let options: [String: AnyObject] = [
-            kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
-            kCRToastTextKey: item.title,
-            kCRToastSubtitleTextKey: NSLocalizedString("favorited!", comment: "ビデオをフェイバリットに保存したときに通知するメッセージ")
-        ]
-        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
-    }
-    */
 
 }

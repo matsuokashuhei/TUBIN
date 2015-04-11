@@ -36,6 +36,10 @@ class Appearance {
         return sharedInstance.theme.selectedTextColor()
     }
 
+    class func toastColor() -> UIColor {
+        return UIColor.redColor()
+    }
+
     enum Theme {
 
         case Light

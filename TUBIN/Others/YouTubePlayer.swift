@@ -63,19 +63,15 @@ class YouTubePlayer: NSObject {
     func startPlaying() {
         let video = nowPlaying
         delegate?.prepareToPlay(video)
-        if let fileURL = video.fileURL() {
-            startPlaying(fileURL)
-        } else {
-            video.streamURL { (result) -> Void in
-                switch result {
-                case .Success(let box):
-                    self.startPlaying(box.unbox)
-                case .Failure(let box):
-                    self.controller.contentURL = nil
-                    let error = box.unbox
-                    self.logger.error(error.localizedDescription)
-                    self.delegate?.playbackFailed(error)
-                }
+        video.streamURL { (result) -> Void in
+            switch result {
+            case .Success(let box):
+                self.startPlaying(box.unbox)
+            case .Failure(let box):
+                self.controller.contentURL = nil
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                self.delegate?.playbackFailed(error)
             }
         }
     }
