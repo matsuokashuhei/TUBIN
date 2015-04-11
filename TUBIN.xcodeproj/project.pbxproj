@@ -944,12 +944,6 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
@@ -972,12 +966,6 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/Alamofire/Carthage/Build/Mac",
-					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Checkouts/LlamaKit/Carthage/Build/Mac",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
