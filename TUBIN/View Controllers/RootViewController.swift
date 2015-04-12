@@ -53,14 +53,10 @@ class RootViewController: UIViewController {
 
     func upgradeApp(notification: NSNotification) {
         Defaults["upgraded"] = true
-        //Defaults["maxNumberOfHistories"] = 999
-        Defaults["maxNumberOfFavorites"] = Int.max
-        Defaults["maxNumberOfSubscribes"] = Int.max
         canDisplayBannerAds = false
     }
 
     func restoreApp(notification: NSNotification) {
-        Alert.success("Restored App")
         upgradeApp(notification)
     }
 

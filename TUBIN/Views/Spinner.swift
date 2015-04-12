@@ -10,9 +10,9 @@ import TAOverlay
 
 class Spinner {
 
-    class func show() {
+    class func show(options: [String: AnyObject] = ["allowUserInteraction": true]) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        sharedInstance.show()
+        sharedInstance.show(options: options)
     }
 
     class func dismiss() {
@@ -25,8 +25,18 @@ class Spinner {
     func configure() {
     }
 
-    func show() {
-        TAOverlay.showOverlayWithLabel(nil, options: .AllowUserInteraction | .OverlayTypeActivityDefault | .OverlaySizeRoundedRect)
+    func show(options: [String: AnyObject] = [:]) {
+        let overlayOptions: TAOverlayOptions
+        if let allowUserInteraction = options["allowUserInteraction"] as? Bool {
+            if allowUserInteraction {
+                overlayOptions = .AllowUserInteraction | .OverlayTypeActivityDefault | .OverlaySizeRoundedRect
+            } else {
+                overlayOptions = .OverlayTypeActivityDefault | .OverlaySizeRoundedRect
+            }
+        } else {
+            overlayOptions = .OverlayTypeActivityDefault | .OverlaySizeRoundedRect
+        }
+        TAOverlay.showOverlayWithLabel(nil, options: overlayOptions)
     }
 
     func dissmiss() {

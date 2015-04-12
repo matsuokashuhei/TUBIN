@@ -22,9 +22,13 @@
 "Failed" = "失敗";
 "Error" = "エラー";
 "Dismis" = "閉じる";
-"Cannot add to favorites" = "これ以上ビデオをお気に入りにできません。";
-"Cannot bookmark to any more Channel" = "これ以上チャンネルをブックマークできません。";
-"Cannot bookmark to any more Playlist" = "これ以上プレイリストをブックマークできません。";
+// ブックマークは３０個までです。
+//"Cannot add to favorites anymore" = "お気に入りは%d個までです。だからこれ以上追加できません。お気に入りを消して減らすか、アプリをアップグレードしてください。";
+//"Cannot add to bookmarks anymore" = "ブックマークは%d個までです。だからこれ以上は追加できません。ブックマークを消して減らすか、アプリをアップグレードしてください。";
+//"Cannot add to favorites" = "これ以上ビデオをお気に入りにできません。";
+//"Cannot add to bookmarks" = "これ以上ブックマークできません。";
+//"Cannot bookmark any more Channel" = "これ以上チャンネルをブックマークできません。";
+//"Cannot bookmark to any more Playlist" = "これ以上プレイリストをブックマークできません。";
 
 // ブックマーク
 "Videos" = "ビデオ";
@@ -40,7 +44,7 @@
 
 // 設定
 "Edit bookmarks" = "ブックマークの編集";
-"Upgrade/Restore this app" = "アプリのアップグレード・復元";
+"Ad-free on iOS" = "広告の削除";
 "Share this app" = "アプリのシェア";
 "Rate this app" = "アプリのレビュー";
 
@@ -50,15 +54,12 @@
 "You haven't registered your %@ account. Please go to Settings > %@ to create one." = "%@の設定をしてください。";
 
 // アプリ内課金
-"Upgrade" = "アップグレード";
-"WHAT'S INCLUDED" = "特典";
-"No advertisement" = "広告なし";
-"Unlimited favorites" = "お気に入りの制限なし";
-"Unlimited bookmarks" = "ブックマークの制限なし";
-"One time fee for parmanent use" = "";
-
+"Ad-free on iOS" = "広告なし版の購入";
+"Enjoy ad-free watching on iOS." = "広告なしでTUBINを楽しめます。";
 "RESTORE" = "復元する";
-"UPGRADE" = "購入する";
+"PURCHASE" = "購入する";
+"One time payment for parmanent use" = "購入は1度切りです。";
+"Restore completed" = "購入を復元しました。";
 
 // トースト
 "bookmarked!" = "ブックマークしました。";

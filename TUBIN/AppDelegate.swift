@@ -33,21 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !Defaults.hasKey("launched") {
             Defaults["launched"] = true
             Defaults["upgraded"] = false
-            Defaults["maxNumberOfHistories"] = 15
-            Defaults["maxNumberOfFavorites"] = 30
-            // Subscribes + 4 (Popular, Favorites, Search)
-            Defaults["maxNumberOfSubscribes"] = 13
+            Defaults["maxNumberOfHistories"] = 100
             Defaults["theme"] = "Light"
         }
-
-        let launched = Defaults["launched"].bool!
-        logger.verbose("launced: \(launched)")
-        let upgraded = Defaults["upgraded"].bool!
-        logger.verbose("upgraded: \(upgraded)")
-        let maxNumberOfHistories = Defaults["maxNumberOfHistories"].int!
-        logger.verbose("maxNumberOfHistories: \(maxNumberOfHistories)")
-        let maxNumberOfFavorites = Defaults["maxNumberOfFavorites"].int!
-        logger.verbose("maxNumberOfFavorites: \(maxNumberOfFavorites)")
 
         if Defaults["theme"].string == "Light" {
             Appearance.apply(.Light)

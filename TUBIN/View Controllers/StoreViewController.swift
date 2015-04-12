@@ -9,47 +9,37 @@
 import UIKit
 import StoreKit
 
+
 class StoreViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
     var product: SKProduct?
 
-    @IBOutlet weak var titleLabel: UILabel! {
-        didSet { titleLabel.text = NSLocalizedString("WHAT'S INCLUDED", comment: "WHAT'S INCLUDED") }
-    }
-    @IBOutlet weak var text1Label: UILabel! {
-        didSet { text1Label.text = NSLocalizedString("No advertisement", comment:"No advertisement")}
-    }
-    @IBOutlet weak var text2Label: UILabel! {
-        didSet { text2Label.text = NSLocalizedString("Unlimited favorites", comment: "Unlimited favorites") }
-    }
-    @IBOutlet weak var text3Label: UILabel! {
-        didSet { text3Label.text = NSLocalizedString("Unlimited bookmarks", comment: "Unlimited bookmarks") }
-    }
-    @IBOutlet weak var text4Label: UILabel! {
-        didSet { text4Label.text = NSLocalizedString("One time fee for parmanent use", comment: "One time fee for parmanent use") }
+    @IBOutlet weak var textLabel1: UILabel! {
+        didSet { textLabel1.text = NSLocalizedString("Enjoy ad-free watching on iOS.", comment: "Enjoy ad-free watching on iOS.") }
     }
     @IBOutlet weak var priceLabel: UILabel!
-
-    @IBOutlet weak var upgradeButton: UIButton! {
+    @IBOutlet weak var purchaseButton: UIButton! {
         didSet {
-            upgradeButton.setTitle(NSLocalizedString("UPGRADE", comment: "UPGRADE"), forState: .Normal)
+            purchaseButton.setTitle(NSLocalizedString("PURCHASE", comment: "PURCHASE"), forState: .Normal)
+            purchaseButton.enabled = false
             if SKPaymentQueue.canMakePayments() {
-                upgradeButton.addTarget(self, action: "upgradeButtonClicked:", forControlEvents: .TouchUpInside)
+                purchaseButton.addTarget(self, action: "purchaseButtonClicked:", forControlEvents: .TouchUpInside)
             }
-            upgradeButton.enabled = false
         }
     }
-
     @IBOutlet weak var restoreButton: UIButton! {
         didSet {
             restoreButton.setTitle(NSLocalizedString("RESTORE", comment: "RESTORE"), forState: .Normal)
+            restoreButton.enabled = false
             if SKPaymentQueue.canMakePayments() {
                 restoreButton.addTarget(self, action: "restoreButtonClicked:", forControlEvents: .TouchUpInside)
             }
-            restoreButton.enabled = false
         }
+    }
+    @IBOutlet weak var textLabel2: UILabel! {
+        didSet { textLabel2.text = NSLocalizedString("One time payment for parmanent use", comment: "One time payment for parmanent use") }
     }
 
     convenience init() {
@@ -61,7 +51,7 @@ class StoreViewController: UIViewController {
 
         edgesForExtendedLayout = .None
 
-        navigationItem.title = NSLocalizedString("Upgrade", comment: "Upgrade")
+        navigationItem.title = NSLocalizedString("Ad-free on iOS", comment: "Ad-free on iOS")
 
         if SKPaymentQueue.canMakePayments() {
             requestProduct()
@@ -79,20 +69,25 @@ class StoreViewController: UIViewController {
 
     func requestProduct() {
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        let request = SKProductsRequest(productIdentifiers: NSSet(object: "org.matsuosh.TUBIN.product1") as Set<NSObject>)
+        let request = SKProductsRequest(productIdentifiers: Set(["org.matsuosh.TUBIN.AdFree"]))
         request.delegate = self
         request.start()
     }
 
-    func upgradeButtonClicked(sender: UIButton) {
+    func purchaseButtonClicked(sender: UIButton) {
         if let product = product {
-            let payment = SKPayment(product: product)
-            SKPaymentQueue.defaultQueue().addPayment(payment)
+            if Reachability.reachabilityForInternetConnection().isReachable() {
+                let payment = SKPayment(product: product)
+                SKPaymentQueue.defaultQueue().addPayment(payment)
+            }
         }
     }
 
     func restoreButtonClicked(sender: UIButton) {
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+        if Reachability.reachabilityForInternetConnection().isReachable() {
+            Spinner.show(options: ["allowUserInteraction": false])
+            SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+        }
     }
 
 }
@@ -104,7 +99,7 @@ extension StoreViewController: SKProductsRequestDelegate {
             self.product = product
             if let price = formatPrice(product) {
                 priceLabel.text = price
-                upgradeButton.enabled = true
+                purchaseButton.enabled = true
                 restoreButton.enabled = true
             }
         }
@@ -112,12 +107,10 @@ extension StoreViewController: SKProductsRequestDelegate {
 
     func request(request: SKRequest!, didFailWithError error: NSError!) {
         logger.debug("error: \(error.localizedDescription)")
-        // TODO:
     }
 
     func requestDidFinish(request: SKRequest!) {
         logger.debug("")
-        // TODO:
     }
 
     private func formatPrice(product: SKProduct) -> String? {
@@ -138,14 +131,13 @@ extension StoreViewController: SKPaymentTransactionObserver {
 
     func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
         logger.debug("")
-        // TODO:
         for transaction in transactions {
             if let transaction = transaction as? SKPaymentTransaction {
                 // トランザクションの状況
                 switch transaction.transactionState {
                 case .Purchasing:
                     logger.debug("Purchasing")
-                    Spinner.show()
+                    Spinner.show(options: ["allowUserInteraction": false])
                 case .Purchased:
                     logger.debug("Purchased")
                     upgradeApp()
@@ -184,17 +176,16 @@ extension StoreViewController: SKPaymentTransactionObserver {
 
     func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!) {
         logger.debug("")
-        // TODO:
     }
 
     func paymentQueue(queue: SKPaymentQueue!, restoreCompletedTransactionsFailedWithError error: NSError!) {
         logger.debug("")
-        // TODO:
+        Spinner.dismiss()
     }
 
     func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
         logger.debug("")
-        // TODO:
+        Spinner.dismiss()
     }
 
     func paymentQueue(queue: SKPaymentQueue!, updatedDownloads downloads: [AnyObject]!) {
@@ -204,15 +195,25 @@ extension StoreViewController: SKPaymentTransactionObserver {
 
     func upgradeApp() {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: UpgradeAppNotification, object: self))
-        if let navigationController = navigationController {
-            navigationController.popViewControllerAnimated(true)
+        let alert = UIAlertController(title: NSLocalizedString("Success", comment: "Success"), message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: NSLocalizedString("Dismis", comment: "Dismis"), style: .Default) { (action) in
+            if let navigationController = self.navigationController {
+                navigationController.popViewControllerAnimated(true)
+            }
         }
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     func restoreApp() {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: RestoreAppNotification, object: self))
-        if let navigationController = navigationController {
-            navigationController.popViewControllerAnimated(true)
+        let alert = UIAlertController(title: NSLocalizedString("Success", comment: "Success"), message: "", preferredStyle: .Alert)
+        let action = UIAlertAction(title: NSLocalizedString("Dismis", comment: "Dismis"), style: .Default) { (action) in
+            if let navigationController = self.navigationController {
+                navigationController.popViewControllerAnimated(true)
+            }
         }
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
     }
 }

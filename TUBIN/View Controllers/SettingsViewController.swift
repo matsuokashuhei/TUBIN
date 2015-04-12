@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import SwiftyUserDefaults
 
 class SettingsViewController: UIViewController {
 
@@ -23,6 +24,11 @@ class SettingsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SettingTableViewCell")
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +58,13 @@ extension SettingsViewController: UITableViewDelegate {
             }
         case 1:
             if let navigationController = navigationController {
-                navigationController.pushViewController(StoreViewController(), animated: true)
+                if let upgraded = Defaults["upgraded"].bool {
+                    if !upgraded {
+                        navigationController.pushViewController(StoreViewController(), animated: true)
+                    }
+                } else {
+                    navigationController.pushViewController(StoreViewController(), animated: true)
+                }
             }
         case 2:
             switch indexPath.row {
@@ -113,7 +125,7 @@ extension SettingsViewController: UITableViewDataSource {
             case 0:
                 return NSLocalizedString("Edit bookmarks", comment: "Edit bookmarks")
             case 1:
-                return NSLocalizedString("Upgrade/Restore this app", comment: "Upgrade/Restore this App")
+                return NSLocalizedString("Ad-free on iOS", comment: "Ad-free on iOS")
             case 2:
                 switch indexPath.row {
                 case 0:
@@ -129,7 +141,24 @@ extension SettingsViewController: UITableViewDataSource {
         }()
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)!
         cell.textLabel?.textColor = Appearance.textColor()
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        //cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell.accessoryType = {
+            switch indexPath.section {
+            case 0:
+                return .DisclosureIndicator
+            case 1:
+                if let upgraded = Defaults["upgraded"].bool {
+                    if upgraded {
+                        return .None
+                    }
+                }
+                return .DisclosureIndicator
+            case 2:
+                return .DisclosureIndicator
+            default:
+                return .None
+            }
+        }()
         return cell
     }
 

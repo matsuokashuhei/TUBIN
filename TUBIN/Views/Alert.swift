@@ -18,8 +18,8 @@ class Alert {
         sharedInstance.error(error, autoHide: autoHide)
     }
 
-    class func success(message: String, authoHide: Bool = true) {
-        sharedInstance.success(message)
+    class func success(message: String, autoHide: Bool = true) {
+        sharedInstance.success(message, autoHide: autoHide)
     }
 
     let logger = XCGLogger.defaultInstance()
@@ -56,11 +56,11 @@ class Alert {
     func success(message: String, autoHide: Bool = true) {
         let options: TAOverlayOptions
         if autoHide {
-            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .AllowUserInteraction | .OverlayDismissTap | .AutoHide
+            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .OverlayDismissTap | .AutoHide
         } else {
-            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .AllowUserInteraction | .OverlayDismissTap
+            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .OverlayDismissTap
         }
-        TAOverlay.showOverlayWithLabel(nil, options: options)
+        TAOverlay.showOverlayWithLabel(message, options: options)
     }
 
 }
