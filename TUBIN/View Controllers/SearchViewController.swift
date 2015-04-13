@@ -154,7 +154,7 @@ extension SearchViewController: UITableViewDataSource {
         var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)
         cell.textLabel?.text = suggestions[indexPath.row]
-        cell.textLabel?.textColor = Appearance.textColor()
+        cell.textLabel?.textColor = Appearance.sharedInstance.theme.textColor
         return cell
     }
 

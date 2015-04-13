@@ -140,7 +140,7 @@ extension SettingsViewController: UITableViewDataSource {
             }
         }()
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)!
-        cell.textLabel?.textColor = Appearance.textColor()
+        cell.textLabel?.textColor = Appearance.sharedInstance.theme.textColor
         //cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell.accessoryType = {
             switch indexPath.section {

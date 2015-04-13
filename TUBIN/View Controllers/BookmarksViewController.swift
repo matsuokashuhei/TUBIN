@@ -163,7 +163,7 @@ extension BookmarksViewController: UITableViewDataSource {
         cell.configure(bookmark)
         if isPresetBookmark(bookmark) {
             cell.thumbnailImageView.alpha = 0.5
-            cell.thumbnailImageView.backgroundColor = Appearance.tintColor().colorWithAlphaComponent(0.1)
+            cell.thumbnailImageView.backgroundColor = Appearance.sharedInstance.theme.textColor.colorWithAlphaComponent(0.1)
         } else {
             cell.thumbnailImageView.alpha = 1.0
             cell.thumbnailImageView.backgroundColor = UIColor.clearColor()

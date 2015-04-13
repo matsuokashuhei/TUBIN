@@ -8,6 +8,17 @@
 
 import UIKit
 
+// MARK: - UIView
+class RootView: UIView {
+}
+
+class BackgroundView: UIView {
+}
+
+class SettingsView: UIView {
+}
+
+// MARK: - UILabel
 class TextLabel: UILabel {
 }
 
@@ -29,11 +40,11 @@ class BorderView: UIView {
 class NavigationButton: UIButton {
 }
 
-class LabelButton: UIButton {
+class PrimaryColorButton: UIButton {
 }
 
-class BackgroundView: UIView {
+class PrimaryButton: UIButton {
 }
 
-class SettingsView: UIView {
+class SecondaryButton: UIButton {
 }

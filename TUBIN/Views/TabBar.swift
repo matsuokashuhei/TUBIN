@@ -24,14 +24,14 @@ class Tab: UIView {
             if let selected = selected {
                 if selected {
                     UIView.animateWithDuration(0.3) {
-                        self.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
-                        //self.label.textColor = UIColor.whiteColor()
-                        self.label.textColor = Appearance.backgroundColor()
+                        //self.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
+                        self.label.textColor = Appearance.sharedInstance.theme.selectedTabTextColor
                     }
                 } else {
                     UIView.animateWithDuration(0.3) {
-                        self.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
-                        self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
+                        //self.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
+                        //self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
+                        self.label.textColor = Appearance.sharedInstance.theme.tabTextColor
                     }
                 }
             }
@@ -54,8 +54,8 @@ class Tab: UIView {
     private func configure() {
         frame.size = Tab.size()
         layer.borderWidth = 0.5
-        //layer.borderColor = UIColor.clearColor().CGColor
-        layer.borderColor = Appearance.tintColor().CGColor
+        //layer.borderColor = Appearance.tintColor().CGColor
+        layer.borderColor = Appearance.sharedInstance.theme.borderColor.CGColor
         __configure(label)
     }
 
@@ -265,12 +265,12 @@ class TabBar: UIView {
         let right = left + 1
         let alpha = offset - CGFloat(left)
         logger.verbose("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
+        /*
         if offset > 0 {
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
             if alpha > 0.5 {
                 tabs[left].label.textColor = tintColor.colorWithAlphaComponent(alpha)
             } else {
-                //tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 - alpha)
                 tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 - alpha)
             }
             if right < tabs.count {
@@ -278,14 +278,29 @@ class TabBar: UIView {
                 if alpha < 0.5 {
                     tabs[right].label.textColor = tintColor.colorWithAlphaComponent(1 - alpha)
                 } else {
-                    //tabs[right].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(alpha)
                     tabs[right].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(alpha)
                 }
             }
         } else {
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
-            //tabs[left].label.textColor = UIColor.whiteColor().colorWithAlphaComponent(1 + alpha)
             tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 + alpha)
+        }
+        */
+        if offset > 0 {
+            if alpha > 0.5 {
+                tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor
+            } else {
+                tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 - alpha)
+            }
+            if right < tabs.count {
+                if alpha < 0.5 {
+                    tabs[right].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 - alpha)
+                } else {
+                    tabs[right].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(alpha)
+                }
+            }
+        } else {
+            tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 + alpha)
         }
     }
 

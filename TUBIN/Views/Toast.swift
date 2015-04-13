@@ -19,7 +19,7 @@ class Toast {
     init() {
         let options: [String: AnyObject] = [
             kCRToastTextAlignmentKey: NSTextAlignment.Center.rawValue,
-            kCRToastBackgroundColorKey: Appearance.toastColor(),
+            kCRToastBackgroundColorKey: Appearance.sharedInstance.theme.secondaryColor,
             kCRToastFontKey: UIFont(name: Appearance.Font.name, size: 14.0)!,
             kCRToastSubtitleFontKey: UIFont(name: Appearance.Font.name, size: 12.0)!,
             kCRToastNotificationPresentationTypeKey: CRToastPresentationType.Cover.rawValue,

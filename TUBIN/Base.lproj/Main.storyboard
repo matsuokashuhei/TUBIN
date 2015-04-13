@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="top" id="2ZW-O1-U9M"/>
                         <viewControllerLayoutGuide type="bottom" id="B19-ds-5w5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tu3-S3-WdM">
+                    <view key="view" contentMode="scaleToFill" id="Tu3-S3-WdM" customClass="RootView" customModule="TUBIN" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -76,7 +76,7 @@
                                             <constraint firstAttribute="height" constant="72" id="pcw-wb-YNR"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi" customClass="NavigationButton" customModule="TUBIN" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <state key="normal" image="ic_highlight_remove_24px"/>
                                     </button>
