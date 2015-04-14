@@ -22,6 +22,7 @@ class SearchViewController: UIViewController {
     @IBOutlet var searchBar: UISearchBar! {
         didSet {
             searchBar.delegate = self
+            searchBar.searchBarStyle = .Default
         }
     }
     @IBOutlet var suggestionsTableView: UITableView! {

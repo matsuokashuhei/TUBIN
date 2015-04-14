@@ -25,13 +25,17 @@ class Tab: UIView {
                 if selected {
                     UIView.animateWithDuration(0.3) {
                         //self.backgroundColor = self.tintColor.colorWithAlphaComponent(1.0)
-                        self.label.textColor = Appearance.sharedInstance.theme.selectedTabTextColor
+                        //self.label.textColor = Appearance.sharedInstance.theme.selectedTabTextColor
+                        self.label.textColor = Appearance.sharedInstance.theme.selectedTab.textColor
+                        self.backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor
                     }
                 } else {
                     UIView.animateWithDuration(0.3) {
                         //self.backgroundColor = self.tintColor.colorWithAlphaComponent(0.0)
                         //self.label.textColor = self.tintColor.colorWithAlphaComponent(1.0)
-                        self.label.textColor = Appearance.sharedInstance.theme.tabTextColor
+                        //self.label.textColor = Appearance.sharedInstance.theme.tabTextColor
+                        self.label.textColor = Appearance.sharedInstance.theme.tab.textColor
+                        self.backgroundColor = Appearance.sharedInstance.theme.tab.backgroundColor
                     }
                 }
             }
@@ -54,8 +58,8 @@ class Tab: UIView {
     private func configure() {
         frame.size = Tab.size()
         layer.borderWidth = 0.5
-        //layer.borderColor = Appearance.tintColor().CGColor
-        layer.borderColor = Appearance.sharedInstance.theme.borderColor.CGColor
+        //layer.borderColor = Appearance.sharedInstance.theme.borderColor.CGColor
+        layer.borderColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.CGColor
         __configure(label)
     }
 
@@ -93,7 +97,7 @@ class Tab: UIView {
         label.textAlignment = NSTextAlignment.Center
         label.numberOfLines = 3
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-        label.font = UIFont(name: Appearance.Font.name, size: 12)
+        label.font = UIFont(name: Appearance.Font.name, size: 14)
         label.userInteractionEnabled = true
     }
 
@@ -216,9 +220,9 @@ class TabBar: UIView {
         var offsetOfTabs = contentOffsetOfTabs(tab)
         let minOffsetX = scrollView.center.x
         let maxOffsetX = scrollView.contentSize.width - (scrollView.frame.width / 2)
-        logger.verbose("scrollView.contentSize.width: \(scrollView.contentSize.width)")
-        logger.verbose("scrollView.frame.width: \(scrollView.frame.width)")
-        logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x), minOffsetX: \(minOffsetX), maxOffsetX: \(maxOffsetX)")
+        //logger.verbose("scrollView.contentSize.width: \(scrollView.contentSize.width)")
+        //logger.verbose("scrollView.frame.width: \(scrollView.frame.width)")
+        //logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x), minOffsetX: \(minOffsetX), maxOffsetX: \(maxOffsetX)")
         let x: CGFloat = {
             switch offsetOfTabs.x {
             case let offsetX where offsetX < minOffsetX:
@@ -230,7 +234,7 @@ class TabBar: UIView {
             }
         }()
         offsetOfTabs.x = x
-        logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x)")
+        //logger.verbose("offsetOfTabs.x : \(offsetOfTabs.x)")
         scrollView.setContentOffset(offsetOfTabs, animated: true)
     }
 
@@ -263,8 +267,9 @@ class TabBar: UIView {
         let offset = containerView.contentOffset.x / containerView.frame.width
         let left = Int(offset)
         let right = left + 1
+        //let alpha = offset - CGFloat(left)
         let alpha = offset - CGFloat(left)
-        logger.verbose("tabs[\(left)]が\(1 - alpha), tabs[\(left + 1)]が\(alpha)")
+        logger.verbose("backgroundColor: tabs[\(left)]が\((1 - alpha) * 0.4), tabs[\(left + 1)]が\(alpha * 0.4)")
         /*
         if offset > 0 {
             tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
@@ -287,19 +292,24 @@ class TabBar: UIView {
         }
         */
         if offset > 0 {
+            let alphaComponent = (left: (1 - alpha) * 0.4, right: alpha * 0.4)
+            //tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(1 - alpha)
+            tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(alphaComponent.left)
             if alpha > 0.5 {
-                tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor
+                tabs[left].label.textColor = Appearance.sharedInstance.theme.secondaryColor.colorWithAlphaComponent(alpha)
             } else {
                 tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 - alpha)
             }
             if right < tabs.count {
+                tabs[right].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(alphaComponent.right)
                 if alpha < 0.5 {
-                    tabs[right].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 - alpha)
+                    tabs[right].label.textColor = Appearance.sharedInstance.theme.secondaryColor.colorWithAlphaComponent(1 - alpha)
                 } else {
                     tabs[right].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(alpha)
                 }
             }
         } else {
+            tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent((1 + alpha) * 0.4)
             tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 + alpha)
         }
     }

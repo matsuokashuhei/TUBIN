@@ -19,3 +19,4 @@ pod 'SwiftyUserDefaults', :git => 'https://github.com/radex/SwiftyUserDefaults',
 pod 'Alamofire'
 pod 'XCDYouTubeKit'
 pod 'LlamaKit'
+pod 'UIImage-Helpers'

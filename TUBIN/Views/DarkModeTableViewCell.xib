@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="DarkModeTableViewCell" customModule="TUBIN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3j-Q3-vSA">
+                        <rect key="frame" x="263" y="6" width="51" height="31"/>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHV-VL-iPD">
+                        <rect key="frame" x="16" y="0.0" width="239" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="z3j-Q3-vSA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="ASE-Wz-A7D"/>
+                    <constraint firstAttribute="bottom" secondItem="dHV-VL-iPD" secondAttribute="bottom" id="HHB-8a-i97"/>
+                    <constraint firstAttribute="bottom" secondItem="z3j-Q3-vSA" secondAttribute="bottom" constant="6" id="I0F-a3-Qah"/>
+                    <constraint firstItem="dHV-VL-iPD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YnN-M4-5jT"/>
+                    <constraint firstItem="dHV-VL-iPD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bBA-TH-uqt"/>
+                    <constraint firstAttribute="trailing" secondItem="z3j-Q3-vSA" secondAttribute="trailing" constant="8" id="eLp-DH-jHe"/>
+                    <constraint firstItem="z3j-Q3-vSA" firstAttribute="leading" secondItem="dHV-VL-iPD" secondAttribute="trailing" constant="8" id="wIs-2C-6oN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="darkModeSwitch" destination="z3j-Q3-vSA" id="eVR-31-ZJt"/>
+                <outlet property="titleLabel" destination="dHV-VL-iPD" id="qmh-zc-61H"/>
+            </connections>
+            <point key="canvasLocation" x="259" y="233"/>
+        </tableViewCell>
+    </objects>
+</document>

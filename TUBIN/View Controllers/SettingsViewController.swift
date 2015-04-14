@@ -12,7 +12,11 @@ import SwiftyUserDefaults
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView: UITableView! {
+        didSet {
+            tableView.registerNib(UINib(nibName: "DarkModeTableViewCell", bundle: nil), forCellReuseIdentifier: "DarkModeTableViewCell")
+        }
+    }
 
     convenience init() {
         self.init(nibName: "SettingsViewController", bundle: NSBundle.mainBundle())
@@ -53,8 +57,13 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 0:
-            if let navigationController = navigationController {
-                navigationController.pushViewController(BookmarksViewController(), animated: true)
+            switch indexPath.row {
+            case 0:
+                if let navigationController = navigationController {
+                    navigationController.pushViewController(BookmarksViewController(), animated: true)
+                }
+            default:
+                break
             }
         case 1:
             if let navigationController = navigationController {
@@ -111,7 +120,7 @@ extension SettingsViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 1
+        case 0: return 2
         case 1: return 1
         case 2: return 2
         default: return 0
@@ -119,11 +128,30 @@ extension SettingsViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.section == 0 && indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("DarkModeTableViewCell", forIndexPath: indexPath) as! DarkModeTableViewCell
+            cell.titleLabel.font = UIFont(name: Appearance.Font.name, size: 15.0)!
+            cell.titleLabel.textColor = Appearance.sharedInstance.theme.textColor
+            cell.titleLabel.text = NSLocalizedString("Dark mode", comment: "Dark mode")
+            if Defaults["theme"].string == "Light" {
+                cell.darkModeSwitch.on = false
+            } else {
+                cell.darkModeSwitch.on = true
+            }
+            cell.darkModeSwitch.addTarget(self, action: "darkModeSwitchChanged:", forControlEvents: .ValueChanged)
+        }
         var cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = {
             switch indexPath.section {
             case 0:
-                return NSLocalizedString("Edit bookmarks", comment: "Edit bookmarks")
+                switch indexPath.row {
+                case 0:
+                    return NSLocalizedString("Edit bookmarks", comment: "Edit bookmarks")
+                case 1:
+                    return NSLocalizedString("Dark mode", comment: "Dark mode")
+                default:
+                    return ""
+                }
             case 1:
                 return NSLocalizedString("Ad-free on iOS", comment: "Ad-free on iOS")
             case 2:
@@ -145,7 +173,12 @@ extension SettingsViewController: UITableViewDataSource {
         cell.accessoryType = {
             switch indexPath.section {
             case 0:
-                return .DisclosureIndicator
+                switch indexPath.row {
+                case 0:
+                    return .DisclosureIndicator
+                default:
+                    return .None
+                }
             case 1:
                 if let upgraded = Defaults["upgraded"].bool {
                     if upgraded {
@@ -162,4 +195,26 @@ extension SettingsViewController: UITableViewDataSource {
         return cell
     }
 
+    func darkModeSwitchChanged(sender: UISwitch) {
+        println("\(sender.on)")
+        if sender.on {
+            Defaults["theme"] = "Dark"
+            Appearance.sharedInstance.apply(.Dark)
+        } else {
+            Defaults["theme"] = "Light"
+            Appearance.sharedInstance.apply(.Light)
+        }
+        /*
+        if let windows = UIApplication.sharedApplication().windows as? [UIWindow] {
+            for window in windows {
+                if let subviews = window.subviews as? [UIView] {
+                    for view in subviews {
+                        view.removeFromSuperview()
+                        window.addSubview(view)
+                    }
+                }
+            }
+        }
+        */
+    }
 }

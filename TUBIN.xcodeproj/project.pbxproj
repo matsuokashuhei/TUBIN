@@ -37,6 +37,8 @@
 		A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDE61AC595F300FB72E7 /* Appearance.swift */; };
 		A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */; };
 		A89F970D1AD8EC2A003CBE3A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89F970C1AD8EC2A003CBE3A /* Reachability.swift */; };
+		A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */; };
+		A8A1530A1ADD80AD005BA201 /* DarkModeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */; };
 		A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */; };
 		A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */; };
 		A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */; };
@@ -173,6 +175,8 @@
 		A89CFDE61AC595F300FB72E7 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Rainbow.swift"; sourceTree = "<group>"; };
 		A89F970C1AD8EC2A003CBE3A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeTableViewCell.swift; sourceTree = "<group>"; };
+		A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DarkModeTableViewCell.xib; sourceTree = "<group>"; };
 		A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
@@ -480,6 +484,8 @@
 				A8D4038C1AA8CC4400F0AAD2 /* Toast.swift */,
 				A878FAD11ABB1437004AD3E4 /* ChannelView.swift */,
 				A8C831D81ACAECE4003E8ED9 /* VariousViews.swift */,
+				A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */,
+				A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -634,6 +640,7 @@
 				A88D7BC01AC43D020085A8F8 /* YouTubePlayerViewController.xib in Resources */,
 				A876C9411AC86554000D88D8 /* texgyreadventor-italic.otf in Resources */,
 				A8BD70FE1AAB828300499A71 /* SettingsViewController.xib in Resources */,
+				A8A1530A1ADD80AD005BA201 /* DarkModeTableViewCell.xib in Resources */,
 				A8C831E21ACB0AEF003E8ED9 /* Localizable.strings in Resources */,
 				A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */,
 				A876C9401AC86554000D88D8 /* texgyreadventor-bolditalic.otf in Resources */,
@@ -760,6 +767,7 @@
 				A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */,
 				A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */,
 				A8D4039C1AA8CC4400F0AAD2 /* FavoritesViewController.swift in Sources */,
+				A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */,
 				A8D403A21AA8CC4400F0AAD2 /* RootViewController.swift in Sources */,
 				A8D403991AA8CC4400F0AAD2 /* ChannelsViewController.swift in Sources */,
 				A8D4039B1AA8CC4400F0AAD2 /* ContainerViewController.swift in Sources */,
