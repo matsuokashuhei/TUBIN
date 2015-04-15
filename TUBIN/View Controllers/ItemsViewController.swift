@@ -158,10 +158,13 @@ class ItemsViewController: UIViewController {
 
     func pullToRefresh() {
         parameters.removeValueForKey("pageToken")
+        logger.debug("parameters: \(parameters)")
         if !parameters.values.isEmpty {
             spinnable = false
             search()
             spinnable = true
+        } else {
+            refreshControll.endRefreshing()
         }
         //refreshControll.endRefreshing()
     }
