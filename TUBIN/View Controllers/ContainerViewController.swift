@@ -43,6 +43,8 @@ class ContainerViewController: UIViewController {
         // Bookmark
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addItemToBookmarks:", name: AddItemToBookmarksNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
+        // Theme
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchTheme:", name: SwitchThemeNotification, object: nil)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -220,6 +222,9 @@ extension ContainerViewController {
         }
     }
 
+    func switchTheme(notification: NSNotification) {
+        reloadBookmarks(notification)
+    }
 }
 
 extension ContainerViewController: TabBarDelegate {

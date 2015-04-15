@@ -35,6 +35,8 @@ class RootViewController: UIViewController {
                 canDisplayBannerAds = true
             }
         }
+        // Theme
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchTheme:", name: SwitchThemeNotification, object: nil)
         super.viewDidLoad()
     }
 
@@ -99,6 +101,17 @@ extension RootViewController: ADBannerViewDelegate {
 
     func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
         logger.debug("")
+    }
+
+}
+
+extension RootViewController {
+
+    func switchTheme(notification: NSNotification) {
+        if let superView = view.superview {
+            view.removeFromSuperview()
+            superView.addSubview(view)
+        }
     }
 
 }

@@ -139,6 +139,7 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.darkModeSwitch.on = true
             }
             cell.darkModeSwitch.addTarget(self, action: "darkModeSwitchChanged:", forControlEvents: .ValueChanged)
+            return cell
         }
         var cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = {
@@ -196,7 +197,6 @@ extension SettingsViewController: UITableViewDataSource {
     }
 
     func darkModeSwitchChanged(sender: UISwitch) {
-        println("\(sender.on)")
         if sender.on {
             Defaults["theme"] = "Dark"
             Appearance.sharedInstance.apply(.Dark)
@@ -204,17 +204,6 @@ extension SettingsViewController: UITableViewDataSource {
             Defaults["theme"] = "Light"
             Appearance.sharedInstance.apply(.Light)
         }
-        /*
-        if let windows = UIApplication.sharedApplication().windows as? [UIWindow] {
-            for window in windows {
-                if let subviews = window.subviews as? [UIView] {
-                    for view in subviews {
-                        view.removeFromSuperview()
-                        window.addSubview(view)
-                    }
-                }
-            }
-        }
-        */
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: SwitchThemeNotification, object: self))
     }
 }

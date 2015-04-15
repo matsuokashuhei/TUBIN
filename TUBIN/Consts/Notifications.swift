@@ -28,3 +28,6 @@ let RestoreAppNotification = "RestoreAppNotification"
 
 // SearchBar
 let HideKeyboardNotification = "HideKeyboardNotification"
+
+// Appearance
+let SwitchThemeNotification = "SwitchThemeNotification"
