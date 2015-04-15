@@ -113,6 +113,14 @@ extension RootViewController {
             view.removeFromSuperview()
             superView.addSubview(view)
         }
+        if let upgraded = Defaults["upgraded"].bool {
+            if upgraded {
+                canDisplayBannerAds = false
+            } else {
+                canDisplayBannerAds = false
+                canDisplayBannerAds = true
+            }
+        }
     }
 
 }
