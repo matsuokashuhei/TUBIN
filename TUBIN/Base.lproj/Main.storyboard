@@ -67,13 +67,20 @@
                                             <constraint firstItem="osE-Dd-bJw" firstAttribute="leading" secondItem="tuO-TR-nvY" secondAttribute="trailing" constant="4" id="whX-UV-zUi"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-wX-KKK">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYB-wX-KKK" customClass="VideoView" customModule="TUBIN" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="128" height="72"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="5hl-0Q-R3O">
+                                                <rect key="frame" x="54" y="26" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="5hl-0Q-R3O" secondAttribute="centerX" id="1u5-GE-YbU"/>
                                             <constraint firstAttribute="width" constant="128" id="3Ue-3c-tQh"/>
                                             <constraint firstAttribute="width" secondItem="cYB-wX-KKK" secondAttribute="height" multiplier="16:9" id="U1k-Rx-wvy"/>
                                             <constraint firstAttribute="height" constant="72" id="pcw-wb-YNR"/>
+                                            <constraint firstAttribute="centerY" secondItem="5hl-0Q-R3O" secondAttribute="centerY" id="saO-dZ-doc"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi" customClass="NavigationButton" customModule="TUBIN" customModuleProvider="target">
@@ -99,6 +106,7 @@
                                 <connections>
                                     <outlet property="backButton" destination="Xqh-Sa-fFT" id="QZ2-qS-JnL"/>
                                     <outlet property="height" destination="cIs-4s-qge" id="haf-Rn-fPW"/>
+                                    <outlet property="loadingIndicator" destination="5hl-0Q-R3O" id="kFi-6p-Ccu"/>
                                     <outlet property="nextButton" destination="59i-7J-oid" id="Usl-Kh-FWt"/>
                                     <outlet property="playButton" destination="osE-Dd-bJw" id="kc7-tz-GA9"/>
                                     <outlet property="previousButton" destination="tuO-TR-nvY" id="p9H-G2-ySh"/>

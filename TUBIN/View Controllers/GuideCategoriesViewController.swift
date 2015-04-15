@@ -10,6 +10,7 @@ import UIKit
 import LlamaKit
 import YouTubeKit
 import Async
+import XCGLogger
 
 class GuideCategoriesViewController: UIViewController {
 

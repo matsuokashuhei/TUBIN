@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import SwiftyUserDefaults
+import XCGLogger
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

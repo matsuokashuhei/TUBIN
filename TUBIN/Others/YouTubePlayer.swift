@@ -8,6 +8,7 @@
 
 import MediaPlayer
 import YouTubeKit
+import XCGLogger
 
 protocol YouTubePlayerDelegate {
     func prepareToPlay(video: Video)

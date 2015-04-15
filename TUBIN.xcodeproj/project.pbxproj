@@ -65,7 +65,6 @@
 		A8D402B11AA8BCD500F0AAD2 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D402AE1AA8BCCB00F0AAD2 /* YouTubeKit.framework */; };
 		A8D4038E1AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403651AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift */; };
 		A8D4038F1AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403661AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift */; };
-		A8D403911AA8CC4400F0AAD2 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */; };
 		A8D403921AA8CC4400F0AAD2 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */; };
 		A8D403931AA8CC4400F0AAD2 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */; };
 		A8D403941AA8CC4400F0AAD2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */; };
@@ -208,7 +207,6 @@
 		A8D402A81AA8BCCB00F0AAD2 /* YouTubeKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YouTubeKit.xcodeproj; path = YouTubeKit/YouTubeKit.xcodeproj; sourceTree = "<group>"; };
 		A8D403651AA8CC4400F0AAD2 /* YouTubeKit+Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Parse.swift"; sourceTree = "<group>"; };
 		A8D403661AA8CC4400F0AAD2 /* YouTubeKit+XCDYouTubeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+XCDYouTubeKit.swift"; sourceTree = "<group>"; };
-		A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCGLogger.swift; sourceTree = "<group>"; };
 		A8D4036B1AA8CC4400F0AAD2 /* Bookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		A8D4036C1AA8CC4400F0AAD2 /* Favorite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A8D4036D1AA8CC4400F0AAD2 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 				A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */,
 				A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */,
 				A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */,
-				A8D403691AA8CC4400F0AAD2 /* XCGLogger.swift */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -750,7 +747,6 @@
 				A8C831D91ACAECE4003E8ED9 /* VariousViews.swift in Sources */,
 				A8D4039A1AA8CC4400F0AAD2 /* ChannelViewController.swift in Sources */,
 				A8D403A81AA8CC4400F0AAD2 /* ContainerView.swift in Sources */,
-				A8D403911AA8CC4400F0AAD2 /* XCGLogger.swift in Sources */,
 				A8D403A41AA8CC4400F0AAD2 /* SettingsViewController.swift in Sources */,
 				A89F970D1AD8EC2A003CBE3A /* Reachability.swift in Sources */,
 				A8D403A11AA8CC4400F0AAD2 /* PopularViewController.swift in Sources */,

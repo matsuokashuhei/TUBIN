@@ -11,6 +11,7 @@ import YouTubeKit
 import LlamaKit
 import Async
 import SwiftyUserDefaults
+import XCGLogger
 
 class PlaylistViewController: ItemsViewController {
 

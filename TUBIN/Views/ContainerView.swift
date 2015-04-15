@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import XCGLogger
 
 protocol ContainerViewDelegate {
     func containerView(containerView: ContainerView, indexOfContentViews index: Int)

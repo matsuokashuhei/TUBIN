@@ -7,10 +7,10 @@
 //
 
 import UIKit
-
 import LlamaKit
 import SDWebImage
 import YouTubeKit
+import XCGLogger
 
 class ItemTableTableViewCell: UITableViewCell {
 

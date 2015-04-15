@@ -24,11 +24,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="z3j-Q3-vSA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="ASE-Wz-A7D"/>
                     <constraint firstAttribute="bottom" secondItem="dHV-VL-iPD" secondAttribute="bottom" id="HHB-8a-i97"/>
-                    <constraint firstAttribute="bottom" secondItem="z3j-Q3-vSA" secondAttribute="bottom" constant="6" id="I0F-a3-Qah"/>
                     <constraint firstItem="dHV-VL-iPD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="YnN-M4-5jT"/>
                     <constraint firstItem="dHV-VL-iPD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bBA-TH-uqt"/>
+                    <constraint firstAttribute="centerY" secondItem="z3j-Q3-vSA" secondAttribute="centerY" id="d4B-Ob-bgw"/>
                     <constraint firstAttribute="trailing" secondItem="z3j-Q3-vSA" secondAttribute="trailing" constant="8" id="eLp-DH-jHe"/>
                     <constraint firstItem="z3j-Q3-vSA" firstAttribute="leading" secondItem="dHV-VL-iPD" secondAttribute="trailing" constant="8" id="wIs-2C-6oN"/>
                 </constraints>

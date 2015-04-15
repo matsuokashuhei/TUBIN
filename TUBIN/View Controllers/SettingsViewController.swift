@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView! {
         didSet {
+            tableView.rowHeight = 60
             tableView.registerNib(UINib(nibName: "DarkModeTableViewCell", bundle: nil), forCellReuseIdentifier: "DarkModeTableViewCell")
         }
     }
@@ -193,6 +194,7 @@ extension SettingsViewController: UITableViewDataSource {
                 return .None
             }
         }()
+        cell.accessoryView?.tintColor = Appearance.sharedInstance.theme.borderColor
         return cell
     }
 

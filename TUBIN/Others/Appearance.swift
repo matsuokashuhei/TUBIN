@@ -127,6 +127,8 @@ class Appearance {
             backgroundView.backgroundColor = theme.secondaryColor.colorWithAlphaComponent(0.3)
             UITableViewCell.appearance().selectedBackgroundView = backgroundView
         }
+        // VideoView
+        VideoView.appearance().backgroundColor = theme.darkColor
         // UISearchBar
         switch theme {
         case .Light:
@@ -197,9 +199,29 @@ class Appearance {
         NavigationButton.appearance().tintColor = theme.borderColor
         PrimaryColorButton.appearance().backgroundColor = theme.primaryColor
 
+        // -------------------
         // UISwitch
-        UISwitch.appearance().onTintColor = theme.secondaryColor
-        UISwitch.appearance().thumbTintColor = theme.primaryColor
+        // -------------------
+//        UISwitch.appearance().onTintColor = theme.secondaryColor
+//        UISwitch.appearance().thumbTintColor = theme.primaryColor
+        switch theme {
+        case .Light:
+            UISwitch.appearance().thumbTintColor = theme.secondaryColor.colorWithAlphaComponent(0.4)
+        case .Dark:
+            UISwitch.appearance().thumbTintColor = theme.secondaryColor.colorWithAlphaComponent(0.4)
+            //UISwitch.appearance().thumbTintColor = theme.backgroundColor
+        }
+        UISwitch.appearance().onTintColor = theme.primaryColor
+
+        // -------------------
+        // UIActivityIndicatorView
+        // -------------------
+        switch theme {
+        case .Light:
+            UIActivityIndicatorView.appearance().color = theme.lightColor
+        case .Dark:
+            UIActivityIndicatorView.appearance().color = theme.lightColor
+        }
     }
 
 }

@@ -10,6 +10,7 @@ import UIKit
 import YouTubeKit
 import LlamaKit
 import Async
+import XCGLogger
 
 class FavoritesViewController: UIViewController {
 

@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVs-Vh-E7W">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVs-Vh-E7W" customClass="VideoView" customModule="TUBIN" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-Yz-8Ax">

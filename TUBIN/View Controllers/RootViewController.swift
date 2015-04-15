@@ -10,6 +10,7 @@ import UIKit
 import iAd
 import YouTubeKit
 import SwiftyUserDefaults
+import XCGLogger
 
 class RootViewController: UIViewController {
 

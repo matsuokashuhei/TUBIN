@@ -5,10 +5,8 @@ platform :ios, '8.0'
 
 pod 'Parse'
 #pod 'FLEX', '~> 2.0'
-#pod 'CRToast', '~> 0.0.7'
 pod 'CRToast'
-pod 'SDWebImage', '~>3.6'
-#pod 'BigBrother', :git => 'https://github.com/marcelofabri/BigBrother'
+#pod 'SDWebImage', '~>3.6'
 
 pod 'SVProgressHUD'
 #pod 'PKHUD', :git => 'https://github.com/pkluz/PKHUD'
@@ -19,4 +17,5 @@ pod 'SwiftyUserDefaults', :git => 'https://github.com/radex/SwiftyUserDefaults',
 pod 'Alamofire'
 pod 'XCDYouTubeKit'
 pod 'LlamaKit'
-pod 'UIImage-Helpers'
+pod 'Kingfisher', '~> 1.0'
+pod 'XCGLogger'

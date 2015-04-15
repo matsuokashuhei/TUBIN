@@ -10,6 +10,7 @@ import UIKit
 import YouTubeKit
 import Async
 import SwiftyUserDefaults
+import XCGLogger
 
 class ChannelViewController: UIViewController {
 

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//import QuartzCore
 import YouTubeKit
+import XCGLogger
 
 protocol TabBarDelegate {
     func tabBar(tabBar: TabBar, didSelectTabAtIndex index: Int)

@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import XCGLogger
 
 protocol ScrubberViewDelegate {
     func beginSeek(slider: UISlider)

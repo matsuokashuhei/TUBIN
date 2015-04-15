@@ -8,7 +8,7 @@
 
 import UIKit
 import StoreKit
-
+import XCGLogger
 
 class StoreViewController: UIViewController {
 

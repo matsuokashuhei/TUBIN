@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import YouTubeKit
 import Async
+import XCGLogger
 
 protocol SearchViewControllerDelegate {
     func didChangeItemsViewController(itemsViewController: ItemsViewController) -> Void

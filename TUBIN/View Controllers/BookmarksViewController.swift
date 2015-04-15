@@ -9,6 +9,7 @@
 import UIKit
 import LlamaKit
 import Async
+import XCGLogger
 
 class BookmarksViewController: UIViewController {
 

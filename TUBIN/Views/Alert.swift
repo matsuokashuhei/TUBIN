@@ -7,6 +7,7 @@
 //
 
 import TAOverlay
+import XCGLogger
 
 class Alert {
 

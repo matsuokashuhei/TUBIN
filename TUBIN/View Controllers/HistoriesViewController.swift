@@ -9,6 +9,7 @@
 import UIKit
 import YouTubeKit
 import Async
+import XCGLogger
 
 class HistoriesViewController: UIViewController {
 

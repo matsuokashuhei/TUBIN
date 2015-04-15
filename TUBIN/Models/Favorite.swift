@@ -9,6 +9,7 @@
 import Alamofire
 import LlamaKit
 import YouTubeKit
+import XCGLogger
 
 class Favorite {
 

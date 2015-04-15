@@ -8,6 +8,7 @@
 
 import UIKit
 import YouTubeKit
+import XCGLogger
 
 class BookmarkTableViewCell: UITableViewCell {
 

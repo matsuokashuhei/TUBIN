@@ -9,6 +9,7 @@
 import UIKit
 import LlamaKit
 import YouTubeKit
+import XCGLogger
 
 class GuideCategoryTableViewCell: UITableViewCell {
 

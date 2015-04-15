@@ -18,6 +18,9 @@ class BackgroundView: UIView {
 class SettingsView: UIView {
 }
 
+class VideoView: UIView {
+}
+
 // MARK: - UILabel
 class TextLabel: UILabel {
 }

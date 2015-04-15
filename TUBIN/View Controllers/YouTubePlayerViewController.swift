@@ -11,12 +11,13 @@ import MediaPlayer
 import YouTubeKit
 import Async
 import SwiftyUserDefaults
+import XCGLogger
 
 class YouTubePlayerViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var videoView: VideoView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView! {
         didSet {
             loadingIndicator.hidden = true

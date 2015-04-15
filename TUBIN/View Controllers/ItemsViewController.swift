@@ -10,6 +10,7 @@ import UIKit
 import YouTubeKit
 import LlamaKit
 import Async
+import XCGLogger
 
 class ItemsViewController: UIViewController {
 
@@ -158,7 +159,7 @@ class ItemsViewController: UIViewController {
 
     func pullToRefresh() {
         parameters.removeValueForKey("pageToken")
-        logger.debug("parameters: \(parameters)")
+        logger.debug("parameters: \(self.parameters)")
         if !parameters.values.isEmpty {
             spinnable = false
             search()

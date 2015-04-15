@@ -11,6 +11,7 @@ import YouTubeKit
 import LlamaKit
 //import SVProgressHUD
 import Async
+import XCGLogger
 
 class ContainerViewController: UIViewController {
 
