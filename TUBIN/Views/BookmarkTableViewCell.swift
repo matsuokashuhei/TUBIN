@@ -9,6 +9,7 @@
 import UIKit
 import YouTubeKit
 import XCGLogger
+import Kingfisher
 
 class BookmarkTableViewCell: UITableViewCell {
 
@@ -30,6 +31,7 @@ class BookmarkTableViewCell: UITableViewCell {
         switch bookmark.name {
         case "playlist":
             let playlist = bookmark.item as! Playlist
+            /*
             playlist.thumbnailImage() { (result) -> Void in
                 switch result {
                 case .Success(let box):
@@ -40,10 +42,20 @@ class BookmarkTableViewCell: UITableViewCell {
                     self.logger.error(box.unbox.localizedDescription)
                 }
             }
+            */
+            if let URL = NSURL(string: playlist.thumbnailURL) {
+                thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                    if let image = image {
+                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                    }
+                }
+            }
             titleLabel.text = playlist.title
             channelTitleLabel.text = playlist.channelTitle
         case "channel":
             let channel = bookmark.item as! Channel
+            /*
             channel.thumbnailImage() { (result) -> Void in
                 switch result {
                 case .Success(let box):
@@ -51,6 +63,16 @@ class BookmarkTableViewCell: UITableViewCell {
                     self.thumbnailImageView.contentMode = .ScaleAspectFit
                 case .Failure(let box):
                     self.logger.error(box.unbox.localizedDescription)
+                }
+            }
+            */
+            if let URL = NSURL(string: channel.thumbnailURL) {
+                thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                    if let image = image {
+                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                        self.thumbnailImageView.contentMode = .ScaleAspectFit
+                    }
                 }
             }
             titleLabel.text = channel.title

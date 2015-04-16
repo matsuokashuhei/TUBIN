@@ -11,6 +11,7 @@ import LlamaKit
 import SDWebImage
 import YouTubeKit
 import XCGLogger
+import Kingfisher
 
 class ItemTableTableViewCell: UITableViewCell {
 
@@ -99,6 +100,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        /*
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
@@ -107,6 +109,15 @@ class VideoTableViewCell: ItemTableTableViewCell {
                 self.thumbnailImageView.image = UIImage(CGImage: rect)
             case .Failure(let box):
                 self.logger.error(box.unbox.localizedDescription)
+            }
+        }
+        */
+        if let URL = NSURL(string: item.thumbnailURL) {
+            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                if let image = image {
+                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                }
             }
         }
         let video = item as! Video
@@ -130,6 +141,7 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        /*
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
@@ -138,6 +150,15 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
                 self.thumbnailImageView.image = UIImage(CGImage: rect)
             case .Failure(let box):
                 self.logger.error(box.unbox.localizedDescription)
+            }
+        }
+        */
+        if let URL = NSURL(string: item.thumbnailURL) {
+            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                if let image = image {
+                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                }
             }
         }
         let playlist = item as! Playlist
@@ -159,6 +180,7 @@ class ChannelTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        /*
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
@@ -166,6 +188,15 @@ class ChannelTableViewCell: ItemTableTableViewCell {
                 self.thumbnailImageView.contentMode = .ScaleAspectFit
             case .Failure(let box):
                 self.logger.error(box.unbox.localizedDescription)
+            }
+        }
+        */
+        if let URL = NSURL(string: item.thumbnailURL) {
+            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                if let image = image {
+                    self.thumbnailImageView.image = image
+                    self.thumbnailImageView.contentMode = .ScaleAspectFit
+                }
             }
         }
         let channel = item as! Channel
