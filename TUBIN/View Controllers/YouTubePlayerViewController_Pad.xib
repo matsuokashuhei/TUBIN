@@ -118,6 +118,7 @@
                 <constraint firstItem="jOk-Bo-FNm" firstAttribute="leading" secondItem="bKa-D3-lYu" secondAttribute="trailing" constant="8" id="QIw-HA-ems"/>
                 <constraint firstAttribute="trailing" secondItem="7TL-Zq-9n8" secondAttribute="trailing" id="RP9-kf-odv"/>
                 <constraint firstItem="elD-it-69q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V4p-U8-6CT"/>
+                <constraint firstAttribute="centerY" secondItem="bKa-D3-lYu" secondAttribute="centerY" id="Vc9-Tf-fK8"/>
                 <constraint firstItem="AIc-ij-rpt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XR2-JX-tgN"/>
                 <constraint firstItem="7TL-Zq-9n8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="deo-uF-lgq"/>
                 <constraint firstItem="bKa-D3-lYu" firstAttribute="top" secondItem="AIc-ij-rpt" secondAttribute="bottom" constant="8" id="eRa-zz-edo"/>
@@ -127,6 +128,20 @@
                 <constraint firstItem="AIc-ij-rpt" firstAttribute="top" secondItem="elD-it-69q" secondAttribute="bottom" constant="8" id="w38-OD-FwT"/>
                 <constraint firstAttribute="centerX" secondItem="bKa-D3-lYu" secondAttribute="centerX" id="wbs-sB-T4Q"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Vc9-Tf-fK8"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=regular">
+                <mask key="subviews">
+                    <exclude reference="7TL-Zq-9n8"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="Vc9-Tf-fK8"/>
+                    <exclude reference="eRa-zz-edo"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="346" y="480"/>
         </view>
     </objects>
