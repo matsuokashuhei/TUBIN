@@ -27,7 +27,6 @@ class ChannelViewController: UIViewController {
 
     @IBOutlet var videosView: UIView!
     @IBOutlet var playlistsView: UIView!
-
     var containerViews: [UIView] = []
 
     var channel: Channel! {
@@ -47,24 +46,6 @@ class ChannelViewController: UIViewController {
         super.viewDidLoad()
 
         edgesForExtendedLayout = .None
-
-        /*
-        let videosViewController = VideosViewController()
-        videosViewController.parameters = parameters
-        videosViewController.navigatable = navigatable
-        videosViewController.channel = channel
-        addChildViewController(videosViewController)
-        videosView.addSubview(videosViewController.view)
-        videosViewController.view.frame = videosView.bounds
-
-        let playlistsViewController = PlaylistsViewController()
-        playlistsViewController.parameters = parameters
-        playlistsViewController.navigatable = navigatable
-        playlistsViewController.channel = channel
-        addChildViewController(playlistsViewController)
-        playlistsView.addSubview(playlistsViewController.view)
-        playlistsViewController.view.frame = playlistsView.bounds
-        */
 
         configure(videosView: videosView)
         configure(playlistsView: playlistsView)
@@ -89,7 +70,7 @@ class ChannelViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = channel.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
@@ -116,8 +97,8 @@ class ChannelViewController: UIViewController {
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
-        view.addSubview(controller.view)
-        controller.view.frame = view.bounds
+//        view.addSubview(controller.view)
+//        controller.view.frame = view.bounds
     }
 
     func configure(playlistsView view: UIView) {
@@ -126,35 +107,28 @@ class ChannelViewController: UIViewController {
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
-        view.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        view.hidden = true
+//        view.addSubview(controller.view)
+//        controller.view.frame = view.bounds
+//        view.hidden = true
     }
 
     func segmentChanged(sender: UISegmentedControl) {
-        for view in containerViews {
-            view.hidden = true
-        }
-        containerViews[sender.selectedSegmentIndex].hidden = false
-        switch sender.selectedSegmentIndex {
-        case 0:
-            if let controller = childViewControllers[sender.selectedSegmentIndex] as? VideosViewController {
-                if controller.items.count == 0 {
-                    controller.parameters = parameters
-                    controller.search()
-                    //controller.search(parameters: parameters)
+        let selectedSegmentIndex = sender.selectedSegmentIndex
+        if let controller = childViewControllers[selectedSegmentIndex] as? ItemsViewController {
+            for (index, view) in enumerate(containerViews) {
+                view.hidden = index != selectedSegmentIndex
+                if view.hidden {
+                    (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in
+                        view.removeFromSuperview()
+                    }
+                } else {
+                    view.addSubview(controller.view)
+                    controller.view.frame = view.bounds
+                    if controller.items.count == 0 {
+                        controller.search()
+                    }
                 }
             }
-        case 1:
-            if let controller = childViewControllers[sender.selectedSegmentIndex] as? PlaylistsViewController {
-                if controller.items.count == 0 {
-                    controller.parameters = parameters
-                    controller.search()
-                    //controller.search(parameters: parameters)
-                }
-            }
-        default:
-            break
         }
     }
 
@@ -177,7 +151,4 @@ class ChannelViewController: UIViewController {
         }
     }
 
-    func removeFromBookmark() {
-        // TODO:
-    }
 }
