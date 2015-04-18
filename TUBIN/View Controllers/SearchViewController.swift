@@ -60,21 +60,22 @@ class SearchViewController: UIViewController {
 
         let videosViewController = VideosViewController()
         addChildViewController(videosViewController)
-        videosView.addSubview(videosViewController.view)
-        videosViewController.view.frame = videosView.bounds
+//        videosView.addSubview(videosViewController.view)
+//        videosViewController.view.frame = videosView.bounds
 
         let playlistsViewController = PlaylistsViewController()
         addChildViewController(playlistsViewController)
-        playlistsView.addSubview(playlistsViewController.view)
-        playlistsViewController.view.frame = playlistsView.bounds
+//        playlistsView.addSubview(playlistsViewController.view)
+//        playlistsViewController.view.frame = playlistsView.bounds
 
         let channelsViewController = ChannelsViewController()
         addChildViewController(channelsViewController)
-        channelsView.addSubview(channelsViewController.view)
-        channelsViewController.view.frame = channelsView.bounds
+//        channelsView.addSubview(channelsViewController.view)
+//        channelsViewController.view.frame = channelsView.bounds
 
         containerViews = [videosView, playlistsView, channelsView]
-        configure(containerViews: containerViews)
+        //configure(containerViews: containerViews)
+        segmentChanged(segmentedControl)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideKeyboard:", name: HideKeyboardNotification, object: nil)
     }
@@ -93,22 +94,25 @@ class SearchViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 
-    func configure(#containerViews: [UIView]) {
-        for view in containerViews {
-            view.hidden = true
-        }
-        containerViewAtSelectedSegmentIndex().hidden = false
-    }
-
     // MARK: - Action
     func segmentChanged(sender: UISegmentedControl) {
-        configure(containerViews: containerViews)
-
-        let itemsViewController = itemViewControllerAtSelectedSegmentIndex()
+        let selectedSegmentIndex = sender.selectedSegmentIndex
+        let controller = childViewControllers[selectedSegmentIndex] as! ItemsViewController
+        for (index, view) in enumerate(containerViews) {
+            view.hidden = index != selectedSegmentIndex
+            if view.hidden {
+                (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in
+                    view.removeFromSuperview()
+                }
+            } else {
+                view.addSubview(controller.view)
+                controller.view.frame = view.bounds
+            }
+        }
         if searchBar.text.isEmpty {
             return
         }
-        if itemsViewController.items.count > 0 && itemsViewController.parameters["q"] == searchBar.text {
+        if controller.items.count > 0 && controller.parameters["q"] == searchBar.text {
             return
         }
         search()
