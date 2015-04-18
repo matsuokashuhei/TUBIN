@@ -38,36 +38,35 @@ class PopularViewController: UIViewController {
 
         containerViews = [videosView, playlistsView, channelsView]
 
+        segmentChanged(segmentedControl)
     }
 
     func configure(videosView view: UIView) {
         let controller = VideosViewController()
-        controller.videos(parameters: ["chart": "mostPopular"])
+        controller.parameters = ["chart": "mostPopular"]
         addChildViewController(controller)
-        view.addSubview(controller.view)
-        controller.view.frame = view.bounds
+//        view.addSubview(controller.view)
+//        controller.view.frame = view.bounds
     }
 
     func configure(playlistsView view: UIView) {
         let controller = PlaylistsViewController()
         controller.parameters = ["order": "viewCount"]
-        controller.search()
-        //controller.search(parameters: ["order": "viewCount"])
+        //controller.search()
         addChildViewController(controller)
-        view.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        view.hidden = true
+//        view.addSubview(controller.view)
+//        controller.view.frame = view.bounds
+//        view.hidden = true
     }
 
     func configure(channelsView view: UIView) {
         let controller = ChannelsViewController()
         controller.parameters = ["order": "viewCount"]
-        controller.search()
-        //controller.search(parameters: ["order": "viewCount"])
+        //controller.search()
         addChildViewController(controller)
-        view.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        view.hidden = true
+//        view.addSubview(controller.view)
+//        controller.view.frame = view.bounds
+//        view.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,10 +74,23 @@ class PopularViewController: UIViewController {
     }
 
     func segmentChanged(sender: UISegmentedControl) {
-        for view in containerViews {
-            view.hidden = true
+        let selectedSegmentIndex = sender.selectedSegmentIndex
+        if let controller = childViewControllers[selectedSegmentIndex] as? ItemsViewController {
+            for (index, view) in enumerate(containerViews) {
+                view.hidden = index != selectedSegmentIndex
+                if view.hidden {
+                    (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in
+                        view.removeFromSuperview()
+                    }
+                } else {
+                    view.addSubview(controller.view)
+                    controller.view.frame = view.bounds
+                    if controller.items.count == 0 {
+                        controller.search()
+                    }
+                }
+            }
         }
-        containerViews[sender.selectedSegmentIndex].hidden = false
     }
 
 }
