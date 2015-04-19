@@ -238,8 +238,33 @@ class TabBar: UIView {
         scrollView.setContentOffset(offsetOfTabs, animated: true)
     }
 
-    func syncContentOffset(containerView: UIScrollView) {
-        syncSelectedTab(containerView)
+    func syncScroll(#contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
+        syncSelectedTab(contentOffsetX: contentOffsetX, contentSizeWidth: contentSizeWidth)
+        if scrollView.contentSize.width <= frame.width {
+            scrollView.setContentOffset(CGPointZero, animated: true)
+            return
+        }
+        let containerViewRelatedOffsetX = contentOffsetX / contentSizeWidth
+        var offsetX = scrollView.contentSize.width * containerViewRelatedOffsetX + (Tab.size().width * 0.5)
+        let minOffsetX = scrollView.center.x
+        let maxOffsetX = scrollView.contentSize.width - (scrollView.frame.width / 2)
+        let x: CGFloat = {
+            switch offsetX {
+            case let offsetX where offsetX < minOffsetX:
+                return 0
+            case let offsetX where offsetX > maxOffsetX:
+                return self.scrollView.contentSize.width - self.scrollView.frame.width
+            default:
+                return offsetX - minOffsetX
+            }
+        }()
+        logger.verbose("containerViewRelatedOffsetX: \(containerViewRelatedOffsetX), offsetX: \(offsetX), x: \(x)")
+        offsetX = x
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+    }
+
+    func syncContentOffset(containerView: UIScrollView, indexOfContentViews: Int) {
+        syncSelectedTab(containerView, indexOfContentViews: indexOfContentViews)
         if scrollView.contentSize.width <= frame.width {
             scrollView.setContentOffset(CGPointZero, animated: true)
             return
@@ -263,34 +288,44 @@ class TabBar: UIView {
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }
 
-    func syncSelectedTab(containerView: UIScrollView) {
+    func syncSelectedTab(containerView: UIScrollView, indexOfContentViews: Int) {
         let offset = containerView.contentOffset.x / containerView.frame.width
         let left = Int(offset)
         let right = left + 1
         //let alpha = offset - CGFloat(left)
         let alpha = offset - CGFloat(left)
         logger.verbose("backgroundColor: tabs[\(left)]が\((1 - alpha) * 0.4), tabs[\(left + 1)]が\(alpha * 0.4)")
-        /*
         if offset > 0 {
-            tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 - alpha)
+            let alphaComponent = (left: (1 - alpha) * 0.4, right: alpha * 0.4)
+            //tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(1 - alpha)
+            tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(alphaComponent.left)
             if alpha > 0.5 {
-                tabs[left].label.textColor = tintColor.colorWithAlphaComponent(alpha)
+                tabs[left].label.textColor = Appearance.sharedInstance.theme.secondaryColor.colorWithAlphaComponent(alpha)
             } else {
-                tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 - alpha)
+                tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 - alpha)
             }
             if right < tabs.count {
-                tabs[right].backgroundColor = tintColor.colorWithAlphaComponent(alpha)
+                tabs[right].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(alphaComponent.right)
                 if alpha < 0.5 {
-                    tabs[right].label.textColor = tintColor.colorWithAlphaComponent(1 - alpha)
+                    tabs[right].label.textColor = Appearance.sharedInstance.theme.secondaryColor.colorWithAlphaComponent(1 - alpha)
                 } else {
-                    tabs[right].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(alpha)
+                    tabs[right].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(alpha)
                 }
             }
         } else {
-            tabs[left].backgroundColor = tintColor.colorWithAlphaComponent(1 + alpha)
-            tabs[left].label.textColor = Appearance.backgroundColor().colorWithAlphaComponent(1 + alpha)
+            tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent((1 + alpha) * 0.4)
+            tabs[left].label.textColor = Appearance.sharedInstance.theme.primaryColor.colorWithAlphaComponent(1 + alpha)
         }
-        */
+    }
+
+    func syncSelectedTab(#contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
+        //let offset = contentOffsetX / contentSizeWidth
+        let offset = contentOffsetX / frame.width
+        let left = Int(offset)
+        let right = left + 1
+        //let alpha = offset - CGFloat(left)
+        let alpha = offset - CGFloat(left)
+        logger.verbose("backgroundColor: tabs[\(left)]が\((1 - alpha) * 0.4), tabs[\(left + 1)]が\(alpha * 0.4)")
         if offset > 0 {
             let alphaComponent = (left: (1 - alpha) * 0.4, right: alpha * 0.4)
             //tabs[left].backgroundColor = Appearance.sharedInstance.theme.selectedTab.backgroundColor.colorWithAlphaComponent(1 - alpha)

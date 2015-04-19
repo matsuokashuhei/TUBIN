@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import LlamaKit
-//import SVProgressHUD
 import Async
 import XCGLogger
 
@@ -38,6 +37,7 @@ class ContainerViewController: UIViewController {
         // ------------------
         loadBookmarks()
         tabBar.selectTabAtIndex(0)
+        containerView.selectViewAtIndex(0)
         // ------------------
         // Notificationの設定
         // ------------------
@@ -99,7 +99,7 @@ class ContainerViewController: UIViewController {
             Alert.error(error)
             return
         }
-        for bookmark in bookmarks {
+        for (index, bookmark) in enumerate(bookmarks) {
             let controller: UIViewController? = {
                 switch bookmark.name {
                 case "playlist":
@@ -147,7 +147,8 @@ class ContainerViewController: UIViewController {
 
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         let index = tabBar.indexOfSelectedTab()
-        containerView.scrollToIndexOfContentViews(index)
+        containerView.selectViewAtIndex(index)
+        //containerView.scrollToIndexOfContentViews(index)
     }
 
 
@@ -166,17 +167,30 @@ extension ContainerViewController {
     // Notification
 
     func reloadBookmarks(notfication: NSNotification) {
+        containerView.delegate = nil
+        tabBar.delegate = nil
         clearBookmarks()
         loadBookmarks()
+        /*
         Async.main {
             self.tabBar.setNeedsLayout()
             self.tabBar.layoutIfNeeded()
             self.containerView.setNeedsLayout()
             self.containerView.layoutIfNeeded()
         }
+        */
+//        let lastIndex = containerView.views.count - 1
+//        tabBar.selectTabAtIndex(lastIndex)
+//        containerView.selectViewAtIndex(lastIndex)
+        containerView.delegate = self
+        tabBar.delegate = self
+        tabBar.setNeedsLayout()
+        tabBar.layoutIfNeeded()
+        containerView.setNeedsLayout()
+        containerView.layoutIfNeeded()
         let lastIndex = containerView.views.count - 1
         tabBar.selectTabAtIndex(lastIndex)
-        containerView.scrollToIndexOfContentViews(lastIndex)
+        containerView.selectViewAtIndex(lastIndex)
     }
 
     func addItemToBookmarks(notification: NSNotification) {
@@ -232,7 +246,7 @@ extension ContainerViewController: TabBarDelegate {
 
     func tabBar(tabBar: TabBar, didSelectTabAtIndex index: Int) {
         containerView.delegate = nil
-        containerView.scrollToIndexOfContentViews(index)
+        containerView.selectViewAtIndex(index)
         containerView.delegate = self
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
@@ -246,7 +260,7 @@ extension ContainerViewController: ContainerViewDelegate {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
 
-    func containerViewDidScroll(scrollView: UIScrollView) {
-        tabBar.syncContentOffset(scrollView)
+    func containerViewDidScroll(contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
+        tabBar.syncScroll(contentOffsetX: contentOffsetX, contentSizeWidth: contentSizeWidth)
     }
 }

@@ -11,6 +11,7 @@ import iAd
 import YouTubeKit
 import SwiftyUserDefaults
 import XCGLogger
+import Async
 
 class RootViewController: UIViewController {
 
@@ -24,7 +25,6 @@ class RootViewController: UIViewController {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideMiniPlayer:", name: HideMiniPlayerNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "upgradeApp:", name: UpgradeAppNotification, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "restoreApp:", name: RestoreAppNotification, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveAdBannerShowableNoficication:", name: AdBannerShowableNotification, object: nil)
         }
     }
 
@@ -37,6 +37,7 @@ class RootViewController: UIViewController {
             }
         }
         // Theme
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveAdBannerShowableNoficication:", name: AdBannerShowableNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchTheme:", name: SwitchThemeNotification, object: nil)
         super.viewDidLoad()
     }
@@ -94,31 +95,21 @@ extension RootViewController: MiniPlayerViewDelegate {
 
 }
 
-extension RootViewController: ADBannerViewDelegate {
-
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        logger.debug("")
-    }
-
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
-        logger.debug("")
-    }
-
-}
-
 extension RootViewController {
 
     func switchTheme(notification: NSNotification) {
         if let superView = view.superview {
+            canDisplayBannerAds = false
             view.removeFromSuperview()
             superView.addSubview(view)
         }
-        if let upgraded = Defaults["upgraded"].bool {
-            if upgraded {
-                canDisplayBannerAds = false
-            } else {
-                canDisplayBannerAds = false
-                canDisplayBannerAds = true
+        Async.main(after: 5.0) { () -> Void in
+            if let upgraded = Defaults["upgraded"].bool {
+                if upgraded {
+                    self.canDisplayBannerAds = false
+                } else {
+                    self.canDisplayBannerAds = true
+                }
             }
         }
     }
