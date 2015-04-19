@@ -16,7 +16,7 @@ class UserViewController: UIViewController {
     @IBOutlet var segmentedControl: UISegmentedControl! {
         didSet {
             segmentedControl.setTitle(NSLocalizedString("Favorites", comment: "Favorites"), forSegmentAtIndex: 0)
-            segmentedControl.setTitle(NSLocalizedString("Histories", comment: "Histories"), forSegmentAtIndex: 1)
+            segmentedControl.setTitle(NSLocalizedString("Recents", comment: "Recents"), forSegmentAtIndex: 1)
         }
     }
 
