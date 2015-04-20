@@ -51,7 +51,7 @@
 
 // シェア
 "Share using" = "シェアする";
-#"Best YouTube App for iPhone & iPad !" = "YouTubeがすきな人におすすめ！";
+//"Best YouTube App for iPhone & iPad !" = "YouTubeがすきな人におすすめ！";
 "TUBIN" = "TUBIN";
 "You haven't registered your %@ account. Please go to Settings > %@ to create one." = "%@の設定をしてください。";
 

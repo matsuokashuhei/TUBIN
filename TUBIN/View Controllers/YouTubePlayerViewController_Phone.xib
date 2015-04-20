@@ -36,6 +36,9 @@
                         <constraint firstAttribute="width" secondItem="oVs-Vh-E7W" secondAttribute="height" multiplier="16:9" id="cbV-sw-WH9"/>
                         <constraint firstAttribute="centerX" secondItem="M7n-Yz-8Ax" secondAttribute="centerX" id="wXZ-pu-wgf"/>
                     </constraints>
+                    <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="451"/>
+                    </variation>
                     <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="451"/>
                     </variation>
@@ -162,6 +165,7 @@
                 <mask key="subviews">
                     <include reference="oVs-Vh-E7W"/>
                     <include reference="BPi-Ik-WBO"/>
+                    <exclude reference="uZf-Qf-ROO"/>
                     <exclude reference="Ngb-u7-E1o"/>
                 </mask>
                 <mask key="constraints">
