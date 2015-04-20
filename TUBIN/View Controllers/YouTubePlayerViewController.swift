@@ -203,7 +203,9 @@ class YouTubePlayerViewController: UIViewController {
             if UIInterfaceOrientationIsPortrait(orientation) {
                 showPlayerController()
                 scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.startTimeLabel.backgroundColor = UIColor.clearColor()
                 scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.endTimeLabel.backgroundColor = UIColor.clearColor()
                 showAds()
             }
             if UIInterfaceOrientationIsLandscape(orientation) {
@@ -225,7 +227,9 @@ class YouTubePlayerViewController: UIViewController {
                 // Portait
                 showPlayerController()
                 scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.startTimeLabel.backgroundColor = UIColor.clearColor()
                 scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.endTimeLabel.backgroundColor = UIColor.clearColor()
                 showAds()
             }
             if UIDeviceOrientationIsLandscape(orientation) {
