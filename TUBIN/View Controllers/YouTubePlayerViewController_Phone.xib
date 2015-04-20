@@ -43,7 +43,7 @@
                     <rect key="frame" x="0.0" y="338" width="600" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7P1-5H-Pou" customClass="TextLabel" customModule="TUBIN" customModuleProvider="target">
-                            <rect key="frame" x="8" y="9" width="54" height="19"/>
+                            <rect key="frame" x="8" y="8" width="54" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="Zwz-uo-N6G"/>
                                 <constraint firstAttribute="width" constant="54" id="tmC-mK-cs3"/>
@@ -56,7 +56,7 @@
                             <rect key="frame" x="68" y="3" width="465" height="31"/>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Tg-68-RX1" customClass="TextLabel" customModule="TUBIN" customModuleProvider="target">
-                            <rect key="frame" x="538" y="9" width="54" height="19"/>
+                            <rect key="frame" x="538" y="8" width="54" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="Ed2-M6-CB8"/>
                                 <constraint firstAttribute="width" constant="54" id="FOD-C5-2f9"/>
@@ -69,16 +69,13 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="4IZ-Wz-6KZ"/>
-                        <constraint firstItem="7P1-5H-Pou" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="9" id="4cz-hJ-tzx"/>
-                        <constraint firstAttribute="bottom" secondItem="6Tg-68-RX1" secondAttribute="bottom" constant="7" id="85x-o3-NOM"/>
                         <constraint firstItem="6Tg-68-RX1" firstAttribute="leading" secondItem="1XQ-pE-8ZQ" secondAttribute="trailing" constant="7" id="FQf-UT-TPX"/>
-                        <constraint firstAttribute="bottom" secondItem="7P1-5H-Pou" secondAttribute="bottom" constant="7" id="JJi-FD-l4W"/>
-                        <constraint firstItem="6Tg-68-RX1" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="9" id="Mdu-gW-crG"/>
+                        <constraint firstAttribute="centerY" secondItem="6Tg-68-RX1" secondAttribute="centerY" id="JMn-07-eP5"/>
+                        <constraint firstAttribute="centerY" secondItem="1XQ-pE-8ZQ" secondAttribute="centerY" id="Jqq-pi-LBt"/>
                         <constraint firstAttribute="trailing" secondItem="6Tg-68-RX1" secondAttribute="trailing" constant="8" id="SgW-hH-KP8"/>
                         <constraint firstItem="7P1-5H-Pou" firstAttribute="leading" secondItem="BPi-Ik-WBO" secondAttribute="leading" constant="8" id="T8k-IH-VaQ"/>
-                        <constraint firstAttribute="bottom" secondItem="1XQ-pE-8ZQ" secondAttribute="bottom" constant="2" id="ehz-iL-ywu"/>
                         <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="leading" secondItem="7P1-5H-Pou" secondAttribute="trailing" constant="8" id="gcD-Vh-cN8"/>
-                        <constraint firstItem="1XQ-pE-8ZQ" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="top" constant="3" id="rju-MB-EDN"/>
+                        <constraint firstAttribute="centerY" secondItem="7P1-5H-Pou" secondAttribute="centerY" id="uxk-Zr-95K"/>
                     </constraints>
                     <connections>
                         <outlet property="endTimeLabel" destination="6Tg-68-RX1" id="P51-aM-Nvs"/>
