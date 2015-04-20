@@ -79,8 +79,8 @@ extension SettingsViewController: UITableViewDelegate {
         case 2:
             switch indexPath.row {
             case 0:
-                let text = NSLocalizedString("Best YouTube App for iPhone & iPad !", comment: "Best YouTube App for iPhone & iPad !")
-                let URL = NSURL(string: "http://itunes.apple.com/app/id978972681?mt=8")
+                let text = NSLocalizedString("TUBIN", comment: "TUBIN")
+                let URL = AppStoreURL
                 let shareMenu = UIAlertController(title: nil, message: NSLocalizedString("Share using", comment: "Share using"), preferredStyle: .ActionSheet)
                 for SNS in [(name: "Twitter", type: SLServiceTypeTwitter), (name: "Facebook", type: SLServiceTypeFacebook)] {
                     let action = UIAlertAction(title: SNS.name, style: .Default) { (action) in
