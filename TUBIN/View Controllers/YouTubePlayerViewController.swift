@@ -202,10 +202,16 @@ class YouTubePlayerViewController: UIViewController {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             if UIInterfaceOrientationIsPortrait(orientation) {
                 showPlayerController()
+                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
                 showAds()
             }
             if UIInterfaceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
+                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
+                scrubberView.startTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
+                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
+                scrubberView.endTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
                 hideAds()
             }
         }
@@ -218,10 +224,16 @@ class YouTubePlayerViewController: UIViewController {
             if UIDeviceOrientationIsPortrait(orientation) {
                 // Portait
                 showPlayerController()
+                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
+                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
                 showAds()
             }
             if UIDeviceOrientationIsLandscape(orientation) {
                 edgesForExtendedLayout = UIRectEdge.Top
+                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
+                scrubberView.startTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
+                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
+                scrubberView.endTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
                 hideAds()
             }
         }
