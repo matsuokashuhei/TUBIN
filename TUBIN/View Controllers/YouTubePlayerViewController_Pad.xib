@@ -55,7 +55,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-mK-Dry">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-mK-Dry" customClass="TextLabel" customModule="TUBIN" customModuleProvider="target">
                             <rect key="frame" x="522" y="7" width="70" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="8Cw-PT-KsD"/>
@@ -86,7 +86,7 @@
                     </connections>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vx2-b9-yvV" userLabel="previous">
-                    <rect key="frame" x="220" y="389" width="48" height="48"/>
+                    <rect key="frame" x="196" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_previous_48px"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKa-D3-lYu" userLabel="play">
@@ -94,7 +94,7 @@
                     <state key="normal" image="ic_play_circle_fill_48px"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOk-Bo-FNm" userLabel="next">
-                    <rect key="frame" x="332" y="389" width="48" height="48"/>
+                    <rect key="frame" x="356" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_next_48px"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TL-Zq-9n8" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
@@ -114,34 +114,18 @@
                 <constraint firstItem="elD-it-69q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5ZI-Wo-KpP"/>
                 <constraint firstItem="Vx2-b9-yvV" firstAttribute="centerY" secondItem="bKa-D3-lYu" secondAttribute="centerY" id="Eu6-gn-L5G"/>
                 <constraint firstAttribute="trailing" secondItem="AIc-ij-rpt" secondAttribute="trailing" id="Js9-Cg-OjU"/>
-                <constraint firstItem="bKa-D3-lYu" firstAttribute="leading" secondItem="Vx2-b9-yvV" secondAttribute="trailing" constant="8" id="L5E-pL-auk"/>
-                <constraint firstItem="jOk-Bo-FNm" firstAttribute="leading" secondItem="bKa-D3-lYu" secondAttribute="trailing" constant="8" id="QIw-HA-ems"/>
+                <constraint firstItem="bKa-D3-lYu" firstAttribute="leading" secondItem="Vx2-b9-yvV" secondAttribute="trailing" constant="32" id="L5E-pL-auk"/>
+                <constraint firstItem="jOk-Bo-FNm" firstAttribute="leading" secondItem="bKa-D3-lYu" secondAttribute="trailing" constant="32" id="QIw-HA-ems"/>
                 <constraint firstAttribute="trailing" secondItem="7TL-Zq-9n8" secondAttribute="trailing" id="RP9-kf-odv"/>
                 <constraint firstItem="elD-it-69q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="V4p-U8-6CT"/>
-                <constraint firstAttribute="centerY" secondItem="bKa-D3-lYu" secondAttribute="centerY" id="Vc9-Tf-fK8"/>
                 <constraint firstItem="AIc-ij-rpt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XR2-JX-tgN"/>
                 <constraint firstItem="7TL-Zq-9n8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="deo-uF-lgq"/>
                 <constraint firstItem="bKa-D3-lYu" firstAttribute="top" secondItem="AIc-ij-rpt" secondAttribute="bottom" constant="8" id="eRa-zz-edo"/>
                 <constraint firstAttribute="bottom" secondItem="7TL-Zq-9n8" secondAttribute="bottom" id="hev-Pi-Csy"/>
-                <constraint firstItem="jOk-Bo-FNm" firstAttribute="leading" secondItem="bKa-D3-lYu" secondAttribute="trailing" constant="8" id="lR8-SV-Icp"/>
                 <constraint firstAttribute="trailing" secondItem="elD-it-69q" secondAttribute="trailing" id="pwI-bL-r64"/>
                 <constraint firstItem="AIc-ij-rpt" firstAttribute="top" secondItem="elD-it-69q" secondAttribute="bottom" constant="8" id="w38-OD-FwT"/>
                 <constraint firstAttribute="centerX" secondItem="bKa-D3-lYu" secondAttribute="centerX" id="wbs-sB-T4Q"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="Vc9-Tf-fK8"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=regular">
-                <mask key="subviews">
-                    <exclude reference="7TL-Zq-9n8"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="Vc9-Tf-fK8"/>
-                    <exclude reference="eRa-zz-edo"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="346" y="480"/>
         </view>
     </objects>
