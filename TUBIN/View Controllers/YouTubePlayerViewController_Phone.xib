@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YouTubePlayerViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
+                <outlet property="actionButton" destination="wbr-o3-PhH" id="FyV-AP-xWI"/>
                 <outlet property="channelView" destination="Ngb-u7-E1o" id="fMF-C0-C3f"/>
                 <outlet property="loadingIndicator" destination="M7n-Yz-8Ax" id="5Dt-1k-vh3"/>
                 <outlet property="nextButton" destination="htR-39-Q0L" id="V5B-sX-ijD"/>
@@ -91,8 +92,23 @@
                     <rect key="frame" x="204" y="389" width="48" height="48"/>
                     <state key="normal" image="ic_skip_previous_48px"/>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-nq-1jK" userLabel="play">
+                    <rect key="frame" x="268" y="381" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="XeK-uC-pv5"/>
+                        <constraint firstAttribute="height" constant="64" id="kda-wb-tAD"/>
+                    </constraints>
+                    <state key="normal" image="ic_play_circle_outline_96px"/>
+                </button>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZf-Qf-ROO">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="cNP-h4-kGm"/>
+                        <barButtonItem systemItem="action" id="wbr-o3-PhH"/>
+                    </items>
+                </toolbar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngb-u7-E1o" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="516" width="600" height="84"/>
+                    <rect key="frame" x="0.0" y="472" width="600" height="84"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="84" id="fMd-Qh-jIF">
@@ -108,14 +124,6 @@
                         <outlet property="height" destination="fMd-Qh-jIF" id="r3y-GK-R8O"/>
                     </connections>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-nq-1jK" userLabel="play">
-                    <rect key="frame" x="268" y="381" width="64" height="64"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="64" id="XeK-uC-pv5"/>
-                        <constraint firstAttribute="height" constant="64" id="kda-wb-tAD"/>
-                    </constraints>
-                    <state key="normal" image="ic_play_circle_outline_96px"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -123,8 +131,10 @@
                 <constraint firstItem="oVs-Vh-E7W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2eV-6O-tmM"/>
                 <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="4W5-UD-wE1"/>
                 <constraint firstItem="BPi-Ik-WBO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8ct-rb-gWh"/>
+                <constraint firstItem="uZf-Qf-ROO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8jt-Wr-eH1"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="leading" secondItem="PCU-xZ-A2T" secondAttribute="trailing" constant="16" id="J8o-aK-hg4"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="top" secondItem="BPi-Ik-WBO" secondAttribute="bottom" constant="8" id="Jel-TT-eCA"/>
+                <constraint firstAttribute="trailing" secondItem="uZf-Qf-ROO" secondAttribute="trailing" id="Ktp-hc-ulj"/>
                 <constraint firstAttribute="trailing" secondItem="oVs-Vh-E7W" secondAttribute="trailing" id="LXV-bb-GnI"/>
                 <constraint firstItem="Ngb-u7-E1o" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="McX-sE-jJo"/>
                 <constraint firstItem="BPi-Ik-WBO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QhG-dB-Xjr"/>
@@ -134,7 +144,8 @@
                 <constraint firstItem="PCU-xZ-A2T" firstAttribute="centerY" secondItem="Ecd-nq-1jK" secondAttribute="centerY" id="VXc-HW-3oZ"/>
                 <constraint firstAttribute="trailing" secondItem="Ngb-u7-E1o" secondAttribute="trailing" id="WDh-bA-btk"/>
                 <constraint firstAttribute="centerX" secondItem="Ecd-nq-1jK" secondAttribute="centerX" id="YQA-cq-Cqr"/>
-                <constraint firstAttribute="bottom" secondItem="Ngb-u7-E1o" secondAttribute="bottom" id="daK-df-bbA"/>
+                <constraint firstAttribute="bottom" secondItem="uZf-Qf-ROO" secondAttribute="bottom" id="ckL-8Q-HOQ"/>
+                <constraint firstItem="uZf-Qf-ROO" firstAttribute="top" secondItem="Ngb-u7-E1o" secondAttribute="bottom" id="gLt-hz-8I1"/>
                 <constraint firstAttribute="trailing" secondItem="BPi-Ik-WBO" secondAttribute="trailing" id="iLt-cc-HOb"/>
                 <constraint firstAttribute="bottom" secondItem="BPi-Ik-WBO" secondAttribute="bottom" id="qiK-rU-0Wa"/>
                 <constraint firstItem="Ecd-nq-1jK" firstAttribute="centerY" secondItem="htR-39-Q0L" secondAttribute="centerY" id="rtP-Qu-qQd"/>
@@ -166,6 +177,7 @@
             </variation>
             <variation key="heightClass=compact-widthClass=regular">
                 <mask key="subviews">
+                    <exclude reference="uZf-Qf-ROO"/>
                     <exclude reference="Ngb-u7-E1o"/>
                 </mask>
             </variation>

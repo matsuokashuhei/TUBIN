@@ -12,6 +12,7 @@ import YouTubeKit
 import Async
 import SwiftyUserDefaults
 import XCGLogger
+import TUSafariActivity
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -44,6 +45,12 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
     @IBOutlet weak var channelView: ChannelView!
+    @IBOutlet weak var actionButton: UIBarButtonItem! {
+        didSet {
+            actionButton.target = self
+            actionButton.action = Selector("actionButtonClicked:")
+        }
+    }
 
     var player = YouTubePlayer.sharedInstance
 
@@ -311,6 +318,13 @@ class YouTubePlayerViewController: UIViewController {
         } else{
             hidePlayerController()
         }
+    }
+
+    func actionButtonClicked(sender: UIBarButtonItem) {
+        let text = "\(video.title), via TUBIN http://appstore.com/TUBIN"
+        let URL = NSURL(string: "http://youtu.be/\(video.id)")!
+        let controller = UIActivityViewController(activityItems: [text, URL], applicationActivities: [TUSafariActivity()])
+        presentViewController(controller, animated: true, completion: nil)
     }
 
     func showPlayerController() {
