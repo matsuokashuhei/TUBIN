@@ -18,7 +18,7 @@ class Parser {
         //PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
 
         if !Defaults.hasKey("initializedBookmarks") {
-            let names = ["popular", "search", "favorites",]
+            let names = ["popular", "search", "favorites", "guide"]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
                 bookmark["index"] = index + 1

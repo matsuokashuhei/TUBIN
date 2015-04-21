@@ -31,6 +31,17 @@ class GuideCategoryTableViewCell: UITableViewCell {
 
     func configure(category: GuideCategory) {
         titleLabel.text = category.title
+        if let channel = category.channel {
+            if let URL = NSURL(string: channel.thumbnailURL) {
+                thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                    if let image = image {
+                        self.thumbnailImageView.image = image
+                        self.thumbnailImageView.contentMode = .ScaleAspectFit
+                    }
+                }
+            }
+        }
+/*
         YouTubeKit.channels(parameters: ["categoryId": category.id, "maxResults": "1"]) { (result: Result<(page: Page, channels: [Channel]), NSError>) in
             switch result {
             case .Success(let box):
@@ -54,5 +65,6 @@ class GuideCategoryTableViewCell: UITableViewCell {
                 Alert.error(error)
             }
         }
+*/
     }
 }

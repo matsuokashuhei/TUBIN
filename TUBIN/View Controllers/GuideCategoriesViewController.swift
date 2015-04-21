@@ -48,9 +48,18 @@ class GuideCategoriesViewController: UIViewController {
         YouTubeKit.guideCategories() { (result) in
             switch result {
             case .Success(let box):
-                Async.background {
-                    self.categories = box.unbox
-                }.main {
+                self.categories = box.unbox
+                for category in self.categories {
+                    YouTubeKit.channels(parameters: ["categoryId": category.id, "maxResults": "1"]) { (result: Result<(page: Page, channels: [Channel]), NSError>) in
+                        switch result {
+                        case .Success(let box):
+                            category.channel = box.unbox.channels.first
+                        case .Failure(let box):
+                            break
+                        }
+                    }
+                }
+                Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
@@ -72,10 +81,10 @@ extension GuideCategoriesViewController: UITableViewDelegate {
         controller.navigatable = true
         controller.parameters = ["categoryId": category.id]
         controller.search()
-        //controller.search(parameters: ["categoryId": category.id])
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }

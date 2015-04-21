@@ -118,10 +118,10 @@ class ContainerViewController: UIViewController {
                     self.tabBar.add(text: "Popular")
                     let controller = PopularViewController()
                     return controller
-//                case "guide":
-//                    self.tabBar.add(text: "Guide")
-//                    let controller = GuideCategoriesViewController()
-//                    return controller
+                case "guide":
+                    self.tabBar.add(text: "Guide")
+                    let controller = GuideCategoriesViewController()
+                    return controller
                 case "favorites":
                     self.tabBar.add(text: "Favorites")
                     let controller = UserViewController()
