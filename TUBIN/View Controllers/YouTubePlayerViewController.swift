@@ -77,6 +77,12 @@ class YouTubePlayerViewController: UIViewController {
 
         configure(channelView: channelView)
 
+        /*
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        }
+        */
         super.viewDidLoad()
     }
 
@@ -204,42 +210,52 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
+    enum Orientation {
+        case Portrait
+        case Landscape
+    }
+
     func configure(orientation: UIInterfaceOrientation) {
-        edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
             if UIInterfaceOrientationIsPortrait(orientation) {
-                showPlayerController()
-                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
-                scrubberView.startTimeLabel.backgroundColor = UIColor.clearColor()
-                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
-                scrubberView.endTimeLabel.backgroundColor = UIColor.clearColor()
-                showAds()
+                configure(userInterfaceIdiom: .Phone, orientation: .Portrait)
             }
             if UIInterfaceOrientationIsLandscape(orientation) {
-                edgesForExtendedLayout = UIRectEdge.Top
-                scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
-                scrubberView.startTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
-                scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
-                scrubberView.endTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
-                hideAds()
+                configure(userInterfaceIdiom: .Phone, orientation: .Landscape)
             }
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            logger.debug("view.frame: \(self.view.frame)")
         }
     }
 
     func _configure(orientation: UIDeviceOrientation) {
-        edgesForExtendedLayout = UIRectEdge.None
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            // iPhone
             if UIDeviceOrientationIsPortrait(orientation) {
-                // Portait
+                configure(userInterfaceIdiom: .Phone, orientation: .Portrait)
+            }
+            if UIDeviceOrientationIsLandscape(orientation) {
+                configure(userInterfaceIdiom: .Phone, orientation: .Landscape)
+            }
+        }
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            logger.debug("view.frame: \(self.view.frame)")
+        }
+    }
+
+    func configure(#userInterfaceIdiom: UIUserInterfaceIdiom, orientation: Orientation) {
+        edgesForExtendedLayout = UIRectEdge.None
+        switch userInterfaceIdiom {
+        case .Phone:
+            switch orientation {
+            case .Portrait:
                 showPlayerController()
                 scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
                 scrubberView.startTimeLabel.backgroundColor = UIColor.clearColor()
                 scrubberView.endTimeLabel.textColor = Appearance.sharedInstance.theme.textColor
                 scrubberView.endTimeLabel.backgroundColor = UIColor.clearColor()
                 showAds()
-            }
-            if UIDeviceOrientationIsLandscape(orientation) {
+            case .Landscape:
                 edgesForExtendedLayout = UIRectEdge.Top
                 scrubberView.startTimeLabel.textColor = Appearance.sharedInstance.theme.lightColor
                 scrubberView.startTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
@@ -247,8 +263,33 @@ class YouTubePlayerViewController: UIViewController {
                 scrubberView.endTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
                 hideAds()
             }
+        case .Pad:
+            break
+        case .Unspecified:
+            break
         }
     }
+
+    /*
+    func orientationChanged(notification: NSNotification) {
+        logger.debug("view.frame: \(self.view.frame)")
+        let collection = UITraitCollection(traitsFromCollections: [UITraitCollection(horizontalSizeClass: UIUserInterfaceSizeClass.Regular), UITraitCollection(verticalSizeClass: UIUserInterfaceSizeClass.Compact)])
+    }
+
+    override func overrideTraitCollectionForChildViewController(childViewController: UIViewController) -> UITraitCollection! {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            if view.frame.size.height > view.frame.size.width {
+                // Portrait
+                return UITraitCollection(traitsFromCollections: [UITraitCollection(horizontalSizeClass: UIUserInterfaceSizeClass.Regular), UITraitCollection(verticalSizeClass: UIUserInterfaceSizeClass.Regular)])
+            } else {
+                // Landscape
+                return UITraitCollection(traitsFromCollections: [UITraitCollection(horizontalSizeClass: UIUserInterfaceSizeClass.Unspecified), UITraitCollection(verticalSizeClass: UIUserInterfaceSizeClass.Compact)])
+            }
+        } else {
+            return UITraitCollection(traitsFromCollections: [UITraitCollection(horizontalSizeClass: UIUserInterfaceSizeClass.Regular), UITraitCollection(verticalSizeClass: UIUserInterfaceSizeClass.Regular)])
+        }
+    }
+    */
 
     func hideAds() {
         if let upgraded = Defaults["upgraded"].bool {
