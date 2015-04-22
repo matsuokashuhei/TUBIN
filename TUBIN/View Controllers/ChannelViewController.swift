@@ -151,4 +151,7 @@ class ChannelViewController: UIViewController {
         }
     }
 
+    func removeFromBookmark() {
+    }
+
 }
