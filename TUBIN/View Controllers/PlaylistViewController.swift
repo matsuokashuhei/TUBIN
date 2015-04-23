@@ -80,9 +80,9 @@ class PlaylistViewController: ItemsViewController {
                         controller.parameters = ["channelId": channel.id]
                         controller.items = [channel]
                         controller.navigatable = self.navigatable
-                        controller.view.frame = self.channelView.bounds
                         self.addChildViewController(controller)
                         self.channelView.addSubview(controller.view)
+                        controller.view.frame = self.channelView.bounds
                     }
                 case .Failure(let box):
                     break
