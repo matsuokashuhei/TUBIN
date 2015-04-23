@@ -113,7 +113,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
         }
         */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -154,7 +154,7 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         }
         */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -192,7 +192,7 @@ class ChannelTableViewCell: ItemTableTableViewCell {
         }
         */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeHolderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
                 if let image = image {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.contentMode = .ScaleAspectFit
