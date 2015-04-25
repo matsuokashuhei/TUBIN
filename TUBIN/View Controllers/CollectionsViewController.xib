@@ -4,37 +4,37 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HistoriesViewController" customModule="TUBIN" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CollectionsViewController" customModule="TUBIN" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="bpO-cb-2oH" id="moe-Uh-vuC"/>
+                <outlet property="tableView" destination="GtN-R3-Jm1" id="Bz4-tR-oqA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="BackgroundView" customModule="TUBIN" customModuleProvider="target" propertyAccessControl="all">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="BackgroundView" customModule="TUBIN" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bpO-cb-2oH">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GtN-R3-Jm1">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Y9M-5M-8Fx">
+                    <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="SnI-2e-hxl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <items>
-                            <barButtonItem style="plain" systemItem="flexibleSpace" id="qVu-Pt-cFS"/>
-                            <barButtonItem style="plain" systemItem="edit" id="Kvh-RO-pGs"/>
+                            <barButtonItem title="Item" id="mLX-Z9-Way"/>
                         </items>
                     </toolbar>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="bpO-cb-2oH" secondAttribute="trailing" id="MmX-qO-U7h"/>
-                <constraint firstAttribute="bottom" secondItem="bpO-cb-2oH" secondAttribute="bottom" id="OGM-Zm-vNM"/>
-                <constraint firstItem="bpO-cb-2oH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OPC-y3-Gfi"/>
-                <constraint firstItem="bpO-cb-2oH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qpg-fO-0yQ"/>
+                <constraint firstItem="GtN-R3-Jm1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1Ui-2K-3Dj"/>
+                <constraint firstAttribute="trailing" secondItem="GtN-R3-Jm1" secondAttribute="trailing" id="6T9-36-3JT"/>
+                <constraint firstItem="GtN-R3-Jm1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K3z-le-eIK"/>
+                <constraint firstAttribute="bottom" secondItem="GtN-R3-Jm1" secondAttribute="bottom" id="sZY-Cz-aQa"/>
             </constraints>
+            <point key="canvasLocation" x="530" y="424"/>
         </view>
     </objects>
 </document>

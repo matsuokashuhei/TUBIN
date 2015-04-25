@@ -41,6 +41,14 @@
 "Popular" = "人気";
 "Settings" = "設定";
 "Bookmarks" = "ブックマーク";
+"Collection" = "コレクション";
+
+// コレクション
+"Add to collection" = "コレクションにいれる";
+"New collection" = "新しいコレクションをつくる";
+"Edit collection" = "コレクションの名前をかえる";
+"Name" = "名前";
+"1 collection, for up to 50 videos" = "1個のコレクションに50個までしかビデオを入れられません。";
 
 // 設定
 "Edit bookmarks" = "ブックマークの編集";

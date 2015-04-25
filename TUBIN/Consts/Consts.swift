@@ -12,6 +12,9 @@ let ReloadFavoritesNotification = "ReloadFavoritesNotification"
 let AddItemToBookmarksNotification = "AddItemToBookmarksNotification"
 let BookmarksEditedNotification = "BookmarkEditedNotification"
 
+// Collection
+let CollectionDidChangeNotification = "CollectionDidChangeNotification"
+
 // MiniPlayer
 let ShowMiniPlayerNotification = "ShowMiniPlayerNotification"
 let HideMiniPlayerNotification = "HideMiniPlayerNotification"

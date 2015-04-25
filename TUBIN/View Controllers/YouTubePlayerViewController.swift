@@ -77,12 +77,6 @@ class YouTubePlayerViewController: UIViewController {
 
         configure(channelView: channelView)
 
-        /*
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        }
-        */
         super.viewDidLoad()
     }
 
@@ -135,6 +129,7 @@ class YouTubePlayerViewController: UIViewController {
         // Navigation item
         navigationItem.title = video.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        /*
         Favorite.exists(video) { (result) in
             switch result {
             case .Success(let box):
@@ -150,6 +145,9 @@ class YouTubePlayerViewController: UIViewController {
                 self.navigationItem.rightBarButtonItem = favoriteButton
             }
         }
+        */
+        let addButton = UIBarButtonItem(image: UIImage(named: "ic_playlist_add_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addVideoToFavorite")
+        self.navigationItem.rightBarButtonItem = addButton
     }
 
     func configure(#channelView: ChannelView) {
@@ -526,6 +524,8 @@ extension YouTubePlayerViewController: ScrubberViewDelegate {
 extension YouTubePlayerViewController {
 
     func addVideoToFavorite() {
+        showPopoverCollectionsViewController(video: video)
+        /*
         navigationItem.rightBarButtonItem?.enabled = true
         Favorite.add(video) { (result) in
             self.navigationItem.rightBarButtonItem?.enabled = false
@@ -546,6 +546,7 @@ extension YouTubePlayerViewController {
                 Alert.error(box.unbox)
             }
         }
+        */
     }
 
     func removeFromFavorite() {
@@ -566,4 +567,18 @@ extension YouTubePlayerViewController {
             }
         }
     }
+}
+
+extension YouTubePlayerViewController {
+
+    func showPopoverCollectionsViewController(#video: Video) {
+
+        let controller = PopoverCollectionsViewController()
+        controller.video = video
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.modalPresentationStyle = .Popover
+        navigationController.modalTransitionStyle = .CoverVertical
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+
 }

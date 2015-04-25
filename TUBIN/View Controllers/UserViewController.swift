@@ -15,7 +15,8 @@ class UserViewController: UIViewController {
 
     @IBOutlet var segmentedControl: UISegmentedControl! {
         didSet {
-            segmentedControl.setTitle(NSLocalizedString("Favorites", comment: "Favorites"), forSegmentAtIndex: 0)
+            //segmentedControl.setTitle(NSLocalizedString("Favorites", comment: "Favorites"), forSegmentAtIndex: 0)
+            segmentedControl.setTitle(NSLocalizedString("Collection", comment: "Collection"), forSegmentAtIndex: 0)
             segmentedControl.setTitle(NSLocalizedString("Recents", comment: "Recents"), forSegmentAtIndex: 1)
         }
     }
@@ -34,16 +35,15 @@ class UserViewController: UIViewController {
 
         edgesForExtendedLayout = .None
 
+        /*
         let favoritesViewController = FavoritesViewController()
         addChildViewController(favoritesViewController)
         favoritesView.addSubview(favoritesViewController.view)
         favoritesViewController.view.frame = favoritesView.bounds
+        */
 
-        let historiesViewController = HistoriesViewController()
-        addChildViewController(historiesViewController)
-        historiesView.addSubview(historiesViewController.view)
-        historiesViewController.view.frame = historiesView.bounds
-
+        configure(collectionsView: favoritesView)
+        configure(recentsView: historiesView)
         containerViews = [favoritesView, historiesView]
 
         configure(segmentedControl)
@@ -60,6 +60,20 @@ class UserViewController: UIViewController {
             view.hidden = true
         }
         containerViews[sender.selectedSegmentIndex].hidden = false
+    }
+
+    func configure(collectionsView view: UIView) {
+        let controller = CollectionsViewController()
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
+    }
+
+    func configure(recentsView view: UIView) {
+        let controller = HistoriesViewController()
+        addChildViewController(controller)
+        view.addSubview(controller.view)
+        controller.view.frame = view.bounds
     }
 
     override func didReceiveMemoryWarning() {

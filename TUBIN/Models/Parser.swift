@@ -18,6 +18,7 @@ class Parser {
         //PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
 
         if !Defaults.hasKey("initializedBookmarks") {
+            // Bookmark
             let names = ["popular", "search", "favorites", "guide"]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
@@ -26,6 +27,13 @@ class Parser {
                 bookmark.pin()
             }
             Defaults["initializedBookmarks"] = true
+
+            // Collection
+            let collection = PFObject(className: "Collection")
+            collection["index"] = 0
+            collection["title"] = "Favorite"
+            collection["videoIds"] = [String]()
+            collection.pin()
         }
     }
 

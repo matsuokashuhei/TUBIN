@@ -20,7 +20,6 @@ class ChannelsViewController: ItemsViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = UIRectEdge.None
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -40,6 +39,7 @@ class ChannelsViewController: ItemsViewController {
 
     override func configure(#navigationItem: UINavigationItem) {
         super.configure(navigationItem: navigationItem)
+        edgesForExtendedLayout = .None
         if let category = category {
             navigationItem.title = category.title
         }
