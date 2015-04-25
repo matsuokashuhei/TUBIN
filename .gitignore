@@ -43,9 +43,12 @@ DerivedData
 *.xcuserstate
 
 # TUBIN
+Podfile.lock
 Pods/
+TUBIN.xcworkspace/
 
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
+
