@@ -29,7 +29,6 @@ class CollectionViewController: UIViewController {
             tableView.delegate = self
             tableView.dataSource = self
             tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
-//            tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
         }
     }
 
@@ -182,6 +181,13 @@ extension CollectionViewController: UITableViewDataSource {
 //            return videos.count
 //        }
         return videos.count
+    }
+
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if tableView.editing {
+            return .Delete
+        }
+        return .None
     }
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

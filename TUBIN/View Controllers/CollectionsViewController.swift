@@ -24,7 +24,6 @@ class CollectionsViewController: UIViewController {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.registerNib(UINib(nibName: "CollectionTableViewCell", bundle: nil), forCellReuseIdentifier: "CollectionTableViewCell")
-            tableView.allowsSelectionDuringEditing = true
         }
     }
 
@@ -148,6 +147,13 @@ extension CollectionsViewController: UITableViewDataSource {
         return cell
     }
 
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if tableView.editing {
+            return .Delete
+        }
+        return .None
+    }
+
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             collections.removeAtIndex(indexPath.row)
@@ -156,17 +162,17 @@ extension CollectionsViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, accessoryTypeForRowWithIndexPath indexPath: NSIndexPath!) -> UITableViewCellAccessoryType {
-        if tableView.editing {
-            return .DisclosureIndicator
-        } else {
-            return .None
-        }
-    }
+//    func tableView(tableView: UITableView, accessoryTypeForRowWithIndexPath indexPath: NSIndexPath!) -> UITableViewCellAccessoryType {
+//        if tableView.editing {
+//            return .DisclosureIndicator
+//        } else {
+//            return .None
+//        }
+//    }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
+//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
 
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
