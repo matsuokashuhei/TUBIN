@@ -154,6 +154,8 @@ class YouTubePlayerViewController: UIViewController {
         if let channel = channel {
             if channel.id == video.channelId {
                 channelView.height.constant = 0
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
                 return
             }
         }
