@@ -111,6 +111,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "TUBIN"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
