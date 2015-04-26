@@ -32,7 +32,7 @@ class BookmarkTableViewCell: UITableViewCell {
         case "playlist":
             let playlist = bookmark.item as! Playlist
             if let URL = NSURL(string: playlist.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -44,7 +44,7 @@ class BookmarkTableViewCell: UITableViewCell {
         case "channel":
             let channel = bookmark.item as! Channel
             if let URL = NSURL(string: channel.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -57,12 +57,12 @@ class BookmarkTableViewCell: UITableViewCell {
         case "collection":
             let collection = bookmark.collection!
             if let thumbnailURL = collection.thumbnailURL, let URL = NSURL(string: thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None, completionHandler: { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
                     }
-                })
+                }
             }
             titleLabel.text = collection.title
             channelTitleLabel.hidden = true

@@ -100,20 +100,8 @@ class VideoTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
-        /*
-        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
-            switch result {
-            case .Success(let box):
-                let image = box.unbox
-                let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                self.thumbnailImageView.image = UIImage(CGImage: rect)
-            case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
-            }
-        }
-        */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -154,7 +142,7 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         }
         */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
@@ -192,7 +180,7 @@ class ChannelTableViewCell: ItemTableTableViewCell {
         }
         */
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                 if let image = image {
                     self.thumbnailImageView.image = image
                     self.thumbnailImageView.contentMode = .ScaleAspectFit

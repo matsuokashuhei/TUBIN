@@ -24,7 +24,7 @@ class CollectionTableViewCell: UITableViewCell {
 
     func configure(collection: Collection) {
         if let thumbnailURL = collection.thumbnailURL, URL = NSURL(string: thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, options: .None) { (image, error, imageURL) -> () in
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
