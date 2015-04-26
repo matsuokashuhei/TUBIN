@@ -51,8 +51,13 @@ class Tab: UIView {
     convenience init(text: String) {
         self.init()
         configure(text)
-        addSubview(label)
-        selected = false
+        //addSubview(label)
+        //selected = false
+    }
+
+    convenience init(collection: Collection) {
+        self.init()
+        configure(collection)
     }
 
     private func configure() {
@@ -66,30 +71,22 @@ class Tab: UIView {
     func configure(item: Item) {
         configure()
         label.text = item.title
-        addSubview(label)
-        selected = false
+//        addSubview(label)
+//        selected = false
     }
 
     func configure(text: String) {
         configure()
         label.text = NSLocalizedString(text, comment: "")
-        /*
-        if text == "Favorites" {
-            imageView.image = UIImage(named: "ic_favorite_outline_48px")?.imageWithRenderingMode(.AlwaysTemplate)
-        } else if text == "Search" {
-            imageView.image = UIImage(named: "ic_search_48px")?.imageWithRenderingMode(.AlwaysTemplate)
-        } else if text == "Guide" {
-            imageView.image = UIImage(named: "ic_map_48px")?.imageWithRenderingMode(.AlwaysTemplate)
-        } else if text == "Popular" {
-            imageView.image = UIImage(named: "ic_mood_48px")?.imageWithRenderingMode(.AlwaysTemplate)
-        }
-        imageView.tintColor = Appearance.tintColor()
-        imageView.contentMode = .ScaleAspectFit
-        imageView.alpha = 0.1
-        addSubview(imageView)
-        imageView.frame = bounds
-        */
-        addSubview(label)
+//        addSubview(label)
+//        selected = false
+    }
+
+    func configure(collection: Collection) {
+        configure()
+        label.text = collection.title
+//        addSubview(label)
+//        selected = false
     }
 
     func __configure(label: UILabel) {
@@ -99,6 +96,8 @@ class Tab: UIView {
         label.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         label.font = UIFont(name: Appearance.Font.name, size: 14)
         label.userInteractionEnabled = true
+        addSubview(label)
+        selected = false
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -153,22 +152,36 @@ class TabBar: UIView {
         delegate?.tabBar(self, didSelectTabAtIndex: indexOfSelectTab)
     }
 
-    func add(#item: Item) {
+    func add(item: Item) {
         let tab = Tab(item: item)
         tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
         tabs.append(tab)
         scrollView.addSubview(tab)
     }
 
-    func add(#text: String) {
+    func add(text: String) {
         let tab = Tab(text: text)
         tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
         tabs.append(tab)
         scrollView.addSubview(tab)
     }
 
-    func add(#item: Item, index: Int) {
+    func add(collection: Collection) {
+        let tab = Tab(collection: collection)
+        tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
+        tabs.append(tab)
+        scrollView.addSubview(tab)
+    }
+
+    func add(item: Item, index: Int) {
         let tab = Tab(item: item)
+        tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
+        tabs.insert(tab, atIndex: index)
+        scrollView.addSubview(tab)
+    }
+
+    func add(collection: Collection, index: Int) {
+        let tab = Tab(collection: collection)
         tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
         tabs.insert(tab, atIndex: index)
         scrollView.addSubview(tab)

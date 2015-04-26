@@ -16,6 +16,7 @@ class Bookmark {
     var index: Int
     let name: String
     var item: Item?
+    var collection: Collection?
 
     init(object: PFObject) {
         index = object["index"] as! Int
@@ -25,6 +26,9 @@ class Bookmark {
         }
         if name == "channel" {
             item = Channel(object: object)
+        }
+        if name == "collection" {
+            collection = Collection(object: object)
         }
     }
 
@@ -39,6 +43,13 @@ class Bookmark {
         if name == "channel" {
             let channel = item as! Channel
             let object = channel.toPFObject(className: "Bookmark")
+            object["index"] = index
+            object["name"] = name
+            return object
+        }
+        if name == "collection" {
+            let object = collection!.toPFObject(className: "Bookmark")
+            object["id"] = collection!.id
             object["index"] = index
             object["name"] = name
             return object
@@ -133,14 +144,20 @@ extension Bookmark {
     }
 
     class func add(playlist: Playlist, handler: (Result<Bool, NSError>) -> Void) {
-        var object = playlist.toPFObject(className: "Bookmark")
+        let object = playlist.toPFObject(className: "Bookmark")
         object["name"] = "playlist"
         add(object: object, handler: handler)
     }
 
     class func add(channel: Channel, handler: (Result<Bool, NSError>) -> Void) {
-        var object = channel.toPFObject(className: "Bookmark")
+        let object = channel.toPFObject(className: "Bookmark")
         object["name"] = "channel"
+        add(object: object, handler: handler)
+    }
+
+    class func add(collection: Collection, handler: (Result<Bool, NSError>) -> Void) {
+        let object = collection.toPFObject(className: "Bookmark")
+        object["name"] = "collection"
         add(object: object, handler: handler)
     }
 
@@ -151,38 +168,14 @@ extension Bookmark {
             case .Success(let box):
                 let exists = box.unbox
                 if exists {
-                    /*
-                    self.find(id: id, handler: { (result) -> Void in
-                        switch result {
-                        case .Success(let box):
-                            Parser.destroy(box.unbox) { (result) -> Void in
-                                switch result {
-                                case .Success(let box):
-                                    break
-                                case .Failure(let box):
-                                    handler(.Failure(box))
-                                    return
-                                }
-                            }
-                        case .Failure(let box):
-                            handler(.Failure(box))
-                            return
-                        }
-                    })
-                    */
-                    return
+                    handler(.Success(Box(true)))
                 } else {
                     self.count { (result) in
                         switch result {
                         case .Success(let box):
                             object["index"] = box.unbox + 1
                             Parser.save(object) { (result) in
-                                switch result {
-                                case .Success(let box):
-                                    handler(.Success(Box(true)))
-                                case .Failure(let box):
-                                    handler(.Failure(box))
-                                }
+                                handler(result)
                             }
                         case .Failure(let box):
                             handler(.Failure(box))

@@ -24,6 +24,7 @@ class CollectionsViewController: UIViewController {
             tableView.dataSource = self
             tableView.delegate = self
             tableView.registerNib(UINib(nibName: "CollectionTableViewCell", bundle: nil), forCellReuseIdentifier: "CollectionTableViewCell")
+            tableView.allowsSelectionDuringEditing = true
         }
     }
 
@@ -67,7 +68,7 @@ extension CollectionsViewController {
             case .Success(let box):
                 var objects = [PFObject]()
                 for (index, collection) in enumerate(self.collections) {
-                    let object = collection.toPFObject()
+                    let object = collection.toPFObject(className: "Collection")
                     object["index"] = index
                     objects.append(object)
                 }
@@ -225,14 +226,17 @@ extension CollectionsViewController: UITableViewDelegate {
             controller.addAction(OKAction)
             controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { (_) in })
             presentViewController(controller, animated: true, completion: nil)
-        } else {
+            return
+        }
+        if collection.videoIds.count > 0 {
             let controller = CollectionViewController()
+            controller.navigationBarHidden = false
             controller.collection = collection
             if let navigationController = navigationController {
                 navigationController.pushViewController(controller, animated: true)
             }
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }

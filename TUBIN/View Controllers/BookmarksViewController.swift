@@ -123,7 +123,7 @@ extension BookmarksViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if tableView.editing {
             let bookmark = bookmarks[indexPath.row]
-            if bookmark.name == "playlist" || bookmark.name == "channel" {
+            if bookmark.name == "playlist" || bookmark.name == "channel" || bookmark.name == "collection" {
                 return .Delete
             }
         }

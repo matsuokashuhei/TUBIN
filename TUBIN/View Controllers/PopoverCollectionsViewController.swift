@@ -54,7 +54,7 @@ class PopoverCollectionsViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         edgesForExtendedLayout = .None
-        navigationItem.title = NSLocalizedString("Add to Collection", comment: "Add to Collection")
+        navigationItem.title = NSLocalizedString("Add to collection", comment: "Add to collection")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelButtonClicked")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonClicked")
     }
@@ -82,15 +82,6 @@ extension PopoverCollectionsViewController {
         collection.add(video)
         Collection.save(collection) { (result) in
             handler(result)
-            /*
-            switch result {
-            case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
-                self.cancelButtonClicked()
-            case .Failure(let box):
-                Alert.error(box.unbox)
-            }
-            */
         }
     }
 }
@@ -99,7 +90,7 @@ extension PopoverCollectionsViewController {
 extension PopoverCollectionsViewController {
 
     @IBAction func addButtonClicked() {
-        let controller = UIAlertController(title: NSLocalizedString("New Collection", comment: "New Collection"), message: "", preferredStyle: .Alert)
+        let controller = UIAlertController(title: NSLocalizedString("New collection", comment: "New collection"), message: "", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
             let textField = controller.textFields![0] as! UITextField
             let collection = Collection(index: self.collections.count, title: textField.text)
@@ -143,21 +134,6 @@ extension PopoverCollectionsViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-//    func doneButtonClicked() {
-//        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath], indexPath = indexPaths.first {
-//            let collection = collections[indexPath.row]
-//            add(collection, video: video) { (result) in
-//                switch result {
-//                case .Success(let box):
-//                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
-//                    self.cancelButtonClicked()
-//                case .Failure(let box):
-//                    Alert.error(box.unbox)
-//                }
-//            }
-//        }
-//    }
-
 }
 
 // MARK: Table view datasource
@@ -185,6 +161,7 @@ extension PopoverCollectionsViewController: UITableViewDelegate {
             add(collection, video: video) { (result) in
                 switch result {
                 case .Success(let box):
+                    Toast.addToFavorites(video: self.video)
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
                     self.cancelButtonClicked()
                 case .Failure(let box):

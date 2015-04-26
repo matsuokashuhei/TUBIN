@@ -10,8 +10,22 @@ import CRToast
 
 class Toast {
 
+    /*
     class func show(#item: Item) {
         sharedInstance.show(item: item)
+    }
+
+    class func show() {
+        sharedInstance.show()
+    }
+    */
+
+    class func addToFavorites(#video: Video) {
+        sharedInstance.addToFavorites(video: video)
+    }
+
+    class func addToBookmarks(#item: Item) {
+        sharedInstance.addToBookmarks(item: item)
     }
 
     static var sharedInstance = Toast()
@@ -36,28 +50,38 @@ class Toast {
         CRToastManager.setDefaultOptions(options)
     }
 
-    func show(#item: Item) {
-        /*
-        let options: [String: AnyObject] = {
-            if let video = item as? Video {
-                return [
-                    kCRToastNotificationTypeKey: CRToastType.NavigationBar.rawValue,
-                    kCRToastTextKey: item.title,
-                    kCRToastSubtitleTextKey: NSLocalizedString("bookmarked!", comment: "ビデオをフェイバリットに保存したときに通知するメッセージ")
-                ]
-            } else {
-                return [
-                    kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-                    kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
-                ]
-            }
-        }()
-        */
+    func addToBookmarks(#item: Item) {
+        let options:[String: AnyObject] = [
+            kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
+            kCRToastTextKey: NSLocalizedString("Add to bookmarks!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            ]
+        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
+    }
+
+    func addToFavorites(#video: Video) {
+        let options:[String: AnyObject] = [
+            kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
+            kCRToastTextKey: NSLocalizedString("Add to favorites!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            ]
+        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
+    }
+
+    /*
+    func show() {
         let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
             ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
+
+    func show(#item: Item) {
+        let options:[String: AnyObject] = [
+            kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
+            kCRToastTextKey: NSLocalizedString("bookmarked!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            ]
+        CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
+    }
+    */
 
 }

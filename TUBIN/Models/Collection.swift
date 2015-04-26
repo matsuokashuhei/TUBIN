@@ -11,6 +11,9 @@ import YouTubeKit
 
 class Collection {
 
+    var id: String {
+        return "collection_\(title)"
+    }
     var index: Int
     var title: String
     var thumbnailURL: String?
@@ -30,8 +33,9 @@ class Collection {
         }
     }
 
-    func toPFObject() -> PFObject {
-        var object = PFObject(className: "Collection")
+    func toPFObject(#className: String) -> PFObject {
+        var object = PFObject(className: className)
+        object["id"] = id
         object["index"] = index
         object["title"] = title
         if let thumbnailURL = thumbnailURL {
@@ -133,7 +137,7 @@ extension Collection {
     }
 
     class func create(collection: Collection, handler: (Result<Bool, NSError>) -> Void) {
-        Parser.save(collection.toPFObject()) { (result) in
+        Parser.save(collection.toPFObject(className: "Collection")) { (result) in
             handler(result)
         }
     }

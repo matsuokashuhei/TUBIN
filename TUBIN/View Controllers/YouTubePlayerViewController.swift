@@ -86,6 +86,10 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     override func viewWillLayoutSubviews() {
+        if isiPhone4s() {
+            channelView.height.constant = 0
+            return
+        }
         if let channel = channel {
             if channel.id == video.channelId {
                 channelView.height.constant = 0
@@ -160,6 +164,11 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func configure(#channelView: ChannelView) {
+        // iPhone 4はチャンネルビューを出さない。
+        if isiPhone4s() {
+            channelView.height.constant = 0
+            return
+        }
         if let channel = channel {
             if channel.id == video.channelId {
                 channelView.height.constant = 0
@@ -422,6 +431,10 @@ class YouTubePlayerViewController: UIViewController {
                 }
             }
         }
+    }
+
+    func isiPhone4s() -> Bool {
+        return UIScreen.mainScreen().bounds.size.height < 568
     }
 
 }

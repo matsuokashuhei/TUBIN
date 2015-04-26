@@ -180,8 +180,8 @@ extension FavoritesViewController: UITableViewDataSource {
 extension FavoritesViewController {
 
     func reload(notification: NSNotification) {
-        if let item = notification.userInfo?["item"] as? Item {
-            Toast.show(item: item)
+        if let video = notification.userInfo?["item"] as? Video {
+            Toast.addToFavorites(video: video)
         }
         fetch()
     }

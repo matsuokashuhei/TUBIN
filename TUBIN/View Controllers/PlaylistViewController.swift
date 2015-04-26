@@ -123,7 +123,7 @@ class PlaylistViewController: ItemsViewController {
             self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
             case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
                 Async.main {
                     let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
                     self.navigationItem.rightBarButtonItem = bookmarkButton

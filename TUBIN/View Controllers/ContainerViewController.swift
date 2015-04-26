@@ -42,7 +42,7 @@ class ContainerViewController: UIViewController {
         // Notificationの設定
         // ------------------
         // Bookmark
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addItemToBookmarks:", name: AddItemToBookmarksNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addToBookmarks:", name: AddToBookmarksNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
         // Theme
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchTheme:", name: SwitchThemeNotification, object: nil)
@@ -104,30 +104,36 @@ class ContainerViewController: UIViewController {
                 switch bookmark.name {
                 case "playlist":
                     let playlist = bookmark.item as! Playlist
-                    self.tabBar.add(item: playlist)
+                    self.tabBar.add(playlist)
                     let controller = PlaylistViewController()
                     controller.playlist = playlist
                     return controller
                 case "channel":
                     let channel = bookmark.item as! Channel
-                    self.tabBar.add(item: channel)
+                    self.tabBar.add(channel)
                     let controller = ChannelViewController()
                     controller.channel = channel
                     return controller
+                case "collection":
+                    let collection = bookmark.collection!
+                    self.tabBar.add(collection)
+                    let controller = CollectionViewController()
+                    controller.collection = collection
+                    return controller
                 case "popular":
-                    self.tabBar.add(text: "Popular")
+                    self.tabBar.add("Popular")
                     let controller = PopularViewController()
                     return controller
                 case "guide":
-                    self.tabBar.add(text: "Guide")
+                    self.tabBar.add("Guide")
                     let controller = GuideCategoriesViewController()
                     return controller
                 case "favorites":
-                    self.tabBar.add(text: "Favorites")
+                    self.tabBar.add("Favorites")
                     let controller = UserViewController()
                     return controller
                 case "search":
-                    self.tabBar.add(text: "Search")
+                    self.tabBar.add("Search")
                     let controller = SearchViewController()
                     return controller
                 default:
@@ -139,7 +145,7 @@ class ContainerViewController: UIViewController {
                 self.containerView.add(view: controller.view)
             }
         }
-        tabBar.add(text: NSLocalizedString("Settings", comment: "Settings"))
+        tabBar.add(NSLocalizedString("Settings", comment: "Settings"))
         let controller = SettingsViewController()
         addChildViewController(controller)
         containerView.add(view: controller.view)
@@ -193,9 +199,9 @@ extension ContainerViewController {
         containerView.selectViewAtIndex(lastIndex)
     }
 
-    func addItemToBookmarks(notification: NSNotification) {
+    func addToBookmarks(notification: NSNotification) {
         if let item = notification.userInfo?["item"] as? Item {
-            Toast.show(item: item)
+            Toast.addToBookmarks(item: item)
         }
         Bookmark.all(skip: bookmarks.count) { (result) -> Void in
             switch result {
@@ -205,15 +211,21 @@ extension ContainerViewController {
                         switch bookmark.name {
                         case "playlist":
                             let playlist = bookmark.item as! Playlist
-                            self.tabBar.add(item: playlist, index: self.bookmarks.count)
+                            self.tabBar.add(playlist, index: self.bookmarks.count)
                             let controller = PlaylistViewController()
                             controller.playlist = playlist
                             return controller
                         case "channel":
                             let channel = bookmark.item as! Channel
-                            self.tabBar.add(item: channel, index: self.bookmarks.count)
+                            self.tabBar.add(channel, index: self.bookmarks.count)
                             let controller = ChannelViewController()
                             controller.channel = channel
+                            return controller
+                        case "collection":
+                            let collection = bookmark.collection!
+                            self.tabBar.add(collection, index: self.bookmarks.count)
+                            let controller = CollectionViewController()
+                            controller.collection = collection
                             return controller
                         default:
                             return nil

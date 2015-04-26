@@ -189,7 +189,7 @@ class ItemsViewController: UIViewController {
             Bookmark.add(playlist, handler: { (result) -> Void in
                 switch result {
                 case .Success(let box):
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": playlist]))
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": playlist]))
                 case .Failure(let box):
                     let error = box.unbox
                     self.logger.error(error.localizedDescription)
@@ -202,7 +202,7 @@ class ItemsViewController: UIViewController {
             Bookmark.add(channel, handler: { (result) -> Void in
                 switch result {
                 case .Success(let box):
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToBookmarksNotification, object: self, userInfo: ["item": channel]))
+                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": channel]))
                 case .Failure(let box):
                     let error = box.unbox
                     self.logger.error(error.localizedDescription)

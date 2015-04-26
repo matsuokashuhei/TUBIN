@@ -22,7 +22,7 @@ class CollectionViewController: UIViewController {
 
     var edited = false
 
-    var navigationBarHidden = false
+    var navigationBarHidden = true
 
     @IBOutlet var tableView: UITableView! {
         didSet {
@@ -52,6 +52,23 @@ class CollectionViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = collection.title
+        /*
+        Bookmark.exists(id: collection.id) { (result) in
+            switch result {
+            case .Success(let box):
+                if box.unbox {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmarks")
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                } else {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addToBookmarks")
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                }
+            case .Failure(let box):
+                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addToBookmarks")
+                self.navigationItem.rightBarButtonItem = bookmarkButton
+            }
+        }
+        */
     }
 
     func search() {
@@ -118,6 +135,32 @@ class CollectionViewController: UIViewController {
 
 }
 
+extension CollectionViewController {
+
+    func addToBookmarks() {
+        navigationItem.rightBarButtonItem?.enabled = true
+        Bookmark.add(collection) { (result) in
+            self.navigationItem.rightBarButtonItem?.enabled = false
+            switch result {
+            case .Success(let box):
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": self.collection]))
+                Async.main {
+                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+                    self.navigationItem.rightBarButtonItem = bookmarkButton
+                }
+            case .Failure(let box):
+                let error = box.unbox
+                self.logger.error(error.localizedDescription)
+                Alert.error(box.unbox)
+            }
+        }
+    }
+
+    func removeFromBookmarks() {
+
+    }
+
+}
 
 extension CollectionViewController {
 

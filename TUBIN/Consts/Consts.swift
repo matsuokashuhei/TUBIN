@@ -9,8 +9,9 @@
 // Bookmark
 let AddItemToFavoritesNotification = "AddItemToFavoritesNotification"
 let ReloadFavoritesNotification = "ReloadFavoritesNotification"
-let AddItemToBookmarksNotification = "AddItemToBookmarksNotification"
+//let AddItemToBookmarksNotification = "AddItemToBookmarksNotification"
 let BookmarksEditedNotification = "BookmarkEditedNotification"
+let AddToBookmarksNotification = "AddToBookmarksNotification"
 
 // Collection
 let CollectionDidChangeNotification = "CollectionDidChangeNotification"
