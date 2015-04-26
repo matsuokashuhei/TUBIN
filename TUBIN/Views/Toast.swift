@@ -53,7 +53,7 @@ class Toast {
     func addToBookmarks(#item: Item) {
         let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-            kCRToastTextKey: NSLocalizedString("Add to bookmarks!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            kCRToastTextKey: NSLocalizedString("Added to bookmarks!", comment: "Added to bookmarks!")
             ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
@@ -61,7 +61,7 @@ class Toast {
     func addToFavorites(#video: Video) {
         let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
-            kCRToastTextKey: NSLocalizedString("Add to favorites!", comment: "プレイリストやチャンネルをブックマークしたときに通知するメッセージ")
+            kCRToastTextKey: NSLocalizedString("Added to favorites!", comment: "Added to favorites")
             ]
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
