@@ -32,37 +32,45 @@ class BookmarkTableViewCell: UITableViewCell {
         case "playlist":
             let playlist = bookmark.item as! Playlist
             if let URL = NSURL(string: playlist.thumbnailURL) {
+                /*
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
                     }
                 }
+                */
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                    if let image = image {
+                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                    }
+                })
             }
             titleLabel.text = playlist.title
             channelTitleLabel.text = playlist.channelTitle
         case "channel":
             let channel = bookmark.item as! Channel
             if let URL = NSURL(string: channel.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
                         self.thumbnailImageView.contentMode = .ScaleAspectFit
                     }
-                }
+                })
             }
             titleLabel.text = channel.title
             channelTitleLabel.hidden = true
         case "collection":
             let collection = bookmark.collection!
             if let thumbnailURL = collection.thumbnailURL, let URL = NSURL(string: thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
                         let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                         self.thumbnailImageView.image = UIImage(CGImage: rect)
                     }
-                }
+                })
             }
             titleLabel.text = collection.title
             channelTitleLabel.hidden = true

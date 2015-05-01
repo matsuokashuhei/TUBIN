@@ -33,7 +33,7 @@ class GuideCategoryTableViewCell: UITableViewCell {
         titleLabel.text = category.title
         if let channel = category.channel {
             if let URL = NSURL(string: channel.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
                         self.thumbnailImageView.image = image
                         self.thumbnailImageView.contentMode = .ScaleAspectFit

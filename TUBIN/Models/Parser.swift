@@ -9,6 +9,7 @@
 import Foundation
 import LlamaKit
 import SwiftyUserDefaults
+import Parse
 
 class Parser {
 
@@ -31,7 +32,7 @@ class Parser {
             // Collection
             let collection = PFObject(className: "Collection")
             collection["index"] = 0
-            collection["title"] = "Favorite"
+            collection["title"] = NSLocalizedString("WATCH IT LATER", comment: "WATCH IT LATER")
             collection["videoIds"] = [String]()
             collection.pin()
         }

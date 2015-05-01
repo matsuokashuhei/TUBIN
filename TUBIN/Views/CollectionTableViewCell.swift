@@ -24,12 +24,20 @@ class CollectionTableViewCell: UITableViewCell {
 
     func configure(collection: Collection) {
         if let thumbnailURL = collection.thumbnailURL, URL = NSURL(string: thumbnailURL) {
+            /*
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
                 if let image = image {
                     let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                     self.thumbnailImageView.image = UIImage(CGImage: rect)
                 }
             }
+            */
+            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                if let image = image {
+                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
+                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                }
+            })
             thumbnailImageView.alpha = 1
         } else {
             thumbnailImageView.alpha = 0.5

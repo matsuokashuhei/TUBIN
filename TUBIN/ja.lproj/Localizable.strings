@@ -44,9 +44,10 @@
 "Collection" = "コレクション";
 
 // コレクション
-"Add to collection" = "コレクションにいれる";
-"New collection" = "新しいコレクションをつくる";
-"Edit collection" = "コレクションの名前をかえる";
+"WATCH IT LATER" = "あとでみる";
+"Add to favorites" = "お気に入りにいれる";
+"New collection" = "新しいコレクション";
+"Edit collection" = "コレクションの名前";
 "Name" = "名前";
 "1 collection, for up to 50 videos" = "1個のコレクションに50個までしかビデオを入れられません。";
 

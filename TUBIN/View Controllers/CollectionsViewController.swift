@@ -10,6 +10,7 @@ import UIKit
 import LlamaKit
 import XCGLogger
 import Async
+import Parse
 
 class CollectionsViewController: UIViewController {
 
@@ -195,7 +196,7 @@ extension CollectionsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let collection = collections[indexPath.row]
         if tableView.editing {
-            let controller = UIAlertController(title: NSLocalizedString("Edit Collection", comment: "Edit Collection"), message: "", preferredStyle: .Alert)
+            let controller = UIAlertController(title: NSLocalizedString("Edit collection", comment: "Edit collection"), message: "", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
                 let textField = controller.textFields![0] as! UITextField
                 collection.title = textField.text

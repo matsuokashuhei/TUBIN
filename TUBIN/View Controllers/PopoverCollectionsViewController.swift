@@ -54,7 +54,7 @@ class PopoverCollectionsViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         edgesForExtendedLayout = .None
-        navigationItem.title = NSLocalizedString("Add to collection", comment: "Add to collection")
+        navigationItem.title = NSLocalizedString("Add to favorites", comment: "Add to favorites")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelButtonClicked")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "addButtonClicked")
     }

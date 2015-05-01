@@ -8,7 +8,7 @@
 
 import UIKit
 import iAd
-import YouTubeKit
+//import YouTubeKit
 import SwiftyUserDefaults
 import XCGLogger
 import Async

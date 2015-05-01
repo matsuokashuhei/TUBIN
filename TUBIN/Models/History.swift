@@ -9,6 +9,7 @@ import LlamaKit
 import YouTubeKit
 import SwiftyUserDefaults
 import XCGLogger
+import Parse
 
 class History {
 

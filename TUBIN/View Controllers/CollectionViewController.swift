@@ -52,6 +52,7 @@ class CollectionViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = collection.title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         /*
         Bookmark.exists(id: collection.id) { (result) in
             switch result {
