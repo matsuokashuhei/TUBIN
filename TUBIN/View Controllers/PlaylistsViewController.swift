@@ -8,7 +8,7 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
 
 class PlaylistsViewController: ItemsViewController {
 
@@ -39,9 +39,9 @@ class PlaylistsViewController: ItemsViewController {
         YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
             switch result {
             case .Success(let box):
-                self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
+                self.searchCompletion(page: box.value.page, items: box.value.items)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }
@@ -51,9 +51,9 @@ class PlaylistsViewController: ItemsViewController {
         YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
             switch result {
             case .Success(let box):
-                self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                self.searchMoreCompletion(page: box.value.page, items: box.value.items)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }

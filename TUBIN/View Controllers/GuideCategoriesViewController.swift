@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LlamaKit
+import Result
 import YouTubeKit
 import Async
 import XCGLogger
@@ -48,12 +48,12 @@ class GuideCategoriesViewController: UIViewController {
         YouTubeKit.guideCategories() { (result) in
             switch result {
             case .Success(let box):
-                self.categories = box.unbox
+                self.categories = box.value
                 for category in self.categories {
                     YouTubeKit.channels(parameters: ["categoryId": category.id, "maxResults": "1"]) { (result: Result<(page: Page, channels: [Channel]), NSError>) in
                         switch result {
                         case .Success(let box):
-                            category.channel = box.unbox.channels.first
+                            category.channel = box.value.channels.first
                         case .Failure(let box):
                             break
                         }
@@ -63,7 +63,7 @@ class GuideCategoriesViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }

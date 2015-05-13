@@ -8,7 +8,8 @@
 
 import Foundation
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Parse
 
 class Bookmark {
@@ -81,7 +82,7 @@ extension Bookmark {
         all { (result: Result<[PFObject], NSError>) -> Void in
             switch result {
             case .Success(let box):
-                let bookmarks = box.unbox.map { (object) -> Bookmark in
+                let bookmarks = box.value.map { (object) -> Bookmark in
                     return Bookmark(object: object)
                 }
                 handler(.Success(Box(bookmarks)))
@@ -166,14 +167,14 @@ extension Bookmark {
         exists(id: id as String) { (result) in
             switch result {
             case .Success(let box):
-                let exists = box.unbox
+                let exists = box.value
                 if exists {
                     handler(.Success(Box(true)))
                 } else {
                     self.count { (result) in
                         switch result {
                         case .Success(let box):
-                            object["index"] = box.unbox + 1
+                            object["index"] = box.value + 1
                             Parser.save(object) { (result) in
                                 handler(result)
                             }
@@ -215,7 +216,7 @@ extension Bookmark {
         all() { (result: Result<[PFObject], NSError>) in
             switch result {
             case .Success(let box):
-                Parser.destroy(box.unbox) { (result) in
+                Parser.destroy(box.value) { (result) in
                     switch result {
                     case .Success(let box):
                         var objects = [PFObject]()

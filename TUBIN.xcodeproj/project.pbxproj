@@ -43,6 +43,8 @@
 		A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDE61AC595F300FB72E7 /* Appearance.swift */; };
 		A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */; };
 		A89F970D1AD8EC2A003CBE3A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89F970C1AD8EC2A003CBE3A /* Reachability.swift */; };
+		A8A08DD01B03A53C009F655C /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; };
+		A8A08DD11B03A53C009F655C /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */; };
 		A8A1530A1ADD80AD005BA201 /* DarkModeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */; };
 		A8A3B8C71AE9471000945D94 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A3B8C61AE9471000945D94 /* Collection.swift */; };
@@ -63,8 +65,6 @@
 		A8C831DC1ACB0AEE003E8ED9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8C831DE1ACB0AEE003E8ED9 /* InfoPlist.strings */; };
 		A8C831E21ACB0AEF003E8ED9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8C831E41ACB0AEF003E8ED9 /* Localizable.strings */; };
 		A8C831E71ACB0AF0003E8ED9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A8C831E91ACB0AF0003E8ED9 /* InfoPlist.strings */; };
-		A8C93E551AF3DA8C00C003AF /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C93E531AF3DA3800C003AF /* YouTubeKit.framework */; };
-		A8C93E561AF3DA8C00C003AF /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8C93E531AF3DA3800C003AF /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8CD32EA1AEB90C70003DABD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CD32E81AEB90C70003DABD /* CollectionViewController.swift */; };
 		A8CD32EB1AEB90C70003DABD /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */; };
 		A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */; };
@@ -124,7 +124,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A8C93E561AF3DA8C00C003AF /* YouTubeKit.framework in Embed Frameworks */,
+				A8A08DD11B03A53C009F655C /* YouTubeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +168,7 @@
 		A89CFDE61AC595F300FB72E7 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Rainbow.swift"; sourceTree = "<group>"; };
 		A89F970C1AD8EC2A003CBE3A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		A8A08DCE1B03A534009F655C /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeTableViewCell.swift; sourceTree = "<group>"; };
 		A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DarkModeTableViewCell.xib; sourceTree = "<group>"; };
 		A8A3B8C61AE9471000945D94 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 		A8C831E31ACB0AEF003E8ED9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A8C831E81ACB0AF0003E8ED9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A8C831EA1ACB0AF0003E8ED9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		A8C93E531AF3DA3800C003AF /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8CD32E81AEB90C70003DABD /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,7 +249,7 @@
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				A8001E881AD1A2A700DFCC2D /* Crashlytics.framework in Frameworks */,
-				A8C93E551AF3DA8C00C003AF /* YouTubeKit.framework in Frameworks */,
+				A8A08DD01B03A53C009F655C /* YouTubeKit.framework in Frameworks */,
 				A8001E891AD1A2A700DFCC2D /* Fabric.framework in Frameworks */,
 				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
 			);
@@ -298,7 +298,7 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
-				A8C93E531AF3DA3800C003AF /* YouTubeKit.framework */,
+				A8A08DCE1B03A534009F655C /* YouTubeKit.framework */,
 				A8001E861AD1A2A700DFCC2D /* Crashlytics.framework */,
 				A8001E871AD1A2A700DFCC2D /* Fabric.framework */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
@@ -865,7 +865,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -902,7 +902,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -922,13 +922,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5157cb76-53ed-41c8-a31b-30fda3f01e21";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TUBIN-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -942,19 +942,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shuhei Matsuoka";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shuhei Matsuoka";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5157cb76-53ed-41c8-a31b-30fda3f01e21";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TUBIN-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

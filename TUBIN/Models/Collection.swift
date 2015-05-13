@@ -6,7 +6,8 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 
-import LlamaKit
+import Result
+import Box
 import YouTubeKit
 import Parse
 
@@ -99,7 +100,7 @@ extension Collection {
         all { (result: Result<[PFObject], NSError>) in
             switch result {
             case .Success(let box):
-                let collections = box.unbox.map { (object) -> Collection in
+                let collections = box.value.map { (object) -> Collection in
                     return Collection(object: object)
                 }
                 handler(.Success(Box(collections)))
@@ -147,7 +148,7 @@ extension Collection {
         find(collection) { (result) in
             switch result {
             case .Success(let box):
-                let object = box.unbox
+                let object = box.value
                 if let thumbnailURL = collection.thumbnailURL {
                     object["thumbnailURL"] = collection.thumbnailURL
                 } else {
@@ -171,7 +172,7 @@ extension Collection {
         all() { (result: Result<[PFObject], NSError>) in
             switch result {
             case .Success(let box):
-                Parser.destroy(box.unbox) { (result) in
+                Parser.destroy(box.value) { (result) in
                     handler(result)
                 }
             case .Failure(let box):

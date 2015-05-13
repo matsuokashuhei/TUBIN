@@ -8,7 +8,7 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
 
 class VideosViewController: ItemsViewController {
 
@@ -45,9 +45,9 @@ class VideosViewController: ItemsViewController {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
+                    self.searchCompletion(page: box.value.page, items: box.value.items)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         }
@@ -61,9 +61,9 @@ class VideosViewController: ItemsViewController {
             YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in
                 switch response {
                 case .Success(let box):
-                    self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                    self.searchMoreCompletion(page: box.value.page, items: box.value.items)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         }
@@ -80,9 +80,9 @@ class VideosViewController: ItemsViewController {
         YouTubeKit.videos(parameters: parameters) { (result) in
             switch result {
             case .Success(let box):
-                self.searchCompletion(page: box.unbox.page, items: box.unbox.videos)
+                self.searchCompletion(page: box.value.page, items: box.value.videos)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }
@@ -91,9 +91,9 @@ class VideosViewController: ItemsViewController {
         YouTubeKit.videos(parameters: parameters) { (result) in
             switch result {
             case .Success(let box):
-                self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.videos)
+                self.searchMoreCompletion(page: box.value.page, items: box.value.videos)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }

@@ -51,12 +51,12 @@ class HistoriesViewController: UIViewController {
             switch result {
             case .Success(let box):
                 Async.background {
-                    self.histories = box.unbox
+                    self.histories = box.value
                 }.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }
@@ -90,7 +90,7 @@ class HistoriesViewController: UIViewController {
                 case .Success(let box):
                     break
                 case .Failure(let box):
-                    let error = box.unbox
+                    let error = box.value
                     self.logger.error(error.localizedDescription)
                     Alert.error(error)
                 }

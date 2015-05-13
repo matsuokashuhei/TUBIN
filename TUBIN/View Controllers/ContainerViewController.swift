@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Async
 import XCGLogger
 
@@ -92,9 +93,9 @@ class ContainerViewController: UIViewController {
         let result = Bookmark.all()
         switch result {
         case .Success(let box):
-            bookmarks = box.unbox
+            bookmarks = box.value
         case .Failure(let box):
-            let error = box.unbox
+            let error = box.value
             self.logger.error(error.localizedDescription)
             Alert.error(error)
             return
@@ -206,7 +207,7 @@ extension ContainerViewController {
         Bookmark.all(skip: bookmarks.count) { (result) -> Void in
             switch result {
             case .Success(let box):
-                for bookmark in box.unbox {
+                for bookmark in box.value {
                     let controller: UIViewController? = {
                         switch bookmark.name {
                         case "playlist":
@@ -242,7 +243,7 @@ extension ContainerViewController {
                 self.containerView.setNeedsLayout()
                 self.containerView.layoutIfNeeded()
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }

@@ -7,7 +7,8 @@
 //
 
 import Alamofire
-import LlamaKit
+import Result
+import Box
 import YouTubeKit
 import XCGLogger
 import Parse
@@ -108,7 +109,7 @@ extension Favorite {
         exists(video) { (result) in
             switch result {
             case .Success(let box):
-                let exists = box.unbox
+                let exists = box.value
                 if exists {
                     return
                 } else {
@@ -116,7 +117,7 @@ extension Favorite {
                         switch result {
                         case .Success(let box):
                             var object = video.toPFObject(className: "Favorite")
-                            object["index"] = box.unbox + 1
+                            object["index"] = box.value + 1
                             Parser.save(object) { (result) in
                                 switch result {
                                 case .Success(let box):
@@ -140,12 +141,12 @@ extension Favorite {
         Favorite.exists(video) { (result) in
             switch result {
             case .Success(let box):
-                let exists = box.unbox
+                let exists = box.value
                 if exists {
                     Favorite.find(id: video.id) { (result) in
                         switch result {
                         case .Success(let box):
-                            box.unbox.unpinInBackgroundWithBlock() { (succeeded, error) in
+                            box.value.unpinInBackgroundWithBlock() { (succeeded, error) in
                                 if succeeded {
                                     handler(.Success(Box(true)))
                                 } else {

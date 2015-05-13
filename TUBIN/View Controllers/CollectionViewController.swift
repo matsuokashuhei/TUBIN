@@ -10,6 +10,7 @@ import UIKit
 import YouTubeKit
 import Async
 import XCGLogger
+import Box
 
 class CollectionViewController: UIViewController {
 
@@ -57,7 +58,7 @@ class CollectionViewController: UIViewController {
         Bookmark.exists(id: collection.id) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                if box.value {
                     let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmarks")
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 } else {
@@ -80,8 +81,8 @@ class CollectionViewController: UIViewController {
             Spinner.dismiss()
             switch result {
             case .Success(let box):
-                self.videos = box.unbox.videos
-//                if let next = box.unbox.page.next {
+                self.videos = box.value.videos
+//                if let next = box.value.page.next {
 //                    self.parameters["pageToken"] = next
 //                }
                 Async.main {
@@ -89,7 +90,7 @@ class CollectionViewController: UIViewController {
                 }
             case .Failure(let box):
                 Spinner.dismiss()
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }
@@ -98,10 +99,10 @@ class CollectionViewController: UIViewController {
 //        YouTubeKit.videos(parameters: parameters) { (result) -> Void in
 //            switch result {
 //            case .Success(let box):
-//                for video in box.unbox.videos {
+//                for video in box.value.videos {
 //                    self.videos.append(video)
 //                }
-//                if let next = box.unbox.page.next {
+//                if let next = box.value.page.next {
 //                    self.parameters["pageToken"] = next
 //                } else {
 //                    self.parameters.removeValueForKey("pageToken")
@@ -110,7 +111,7 @@ class CollectionViewController: UIViewController {
 //                    self.tableView.reloadData()
 //                }
 //            case .Failure(let box):
-//                Alert.error(box.unbox)
+//                Alert.error(box.value)
 //            }
 //        }
 //    }
@@ -150,9 +151,9 @@ extension CollectionViewController {
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }
@@ -178,7 +179,7 @@ extension CollectionViewController {
                     self.search()
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             }
         }

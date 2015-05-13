@@ -52,3 +52,6 @@ TUBIN.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
 
+# Fabric
+Crashlytics.framework
+Fabric.framework

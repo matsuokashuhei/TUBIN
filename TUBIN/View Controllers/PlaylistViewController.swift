@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Async
 import SwiftyUserDefaults
 import XCGLogger
@@ -43,7 +44,7 @@ class PlaylistViewController: ItemsViewController {
         Bookmark.exists(id: playlist.id) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                if box.value {
                     let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 } else {
@@ -74,7 +75,7 @@ class PlaylistViewController: ItemsViewController {
             YouTubeKit.search(parameters: ["channelId": playlist.channelId]) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    if let channel = box.unbox.items.first {
+                    if let channel = box.value.items.first {
                         self.channel = channel
                         let controller = ChannelsViewController()
                         controller.parameters = ["channelId": channel.id]
@@ -97,9 +98,9 @@ class PlaylistViewController: ItemsViewController {
         YouTubeKit.playlistItems(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
             switch result {
             case .Success(let box):
-                self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
+                self.searchCompletion(page: box.value.page, items: box.value.items)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }
@@ -109,9 +110,9 @@ class PlaylistViewController: ItemsViewController {
         YouTubeKit.playlistItems(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
             switch result {
             case .Success(let box):
-                self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                self.searchMoreCompletion(page: box.value.page, items: box.value.items)
             case .Failure(let box):
-                self.errorCompletion(box.unbox)
+                self.errorCompletion(box.value)
             }
         }
     }
@@ -129,9 +130,9 @@ class PlaylistViewController: ItemsViewController {
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }

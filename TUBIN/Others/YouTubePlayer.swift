@@ -9,6 +9,8 @@
 import MediaPlayer
 import YouTubeKit
 import XCGLogger
+import Result
+import Box
 
 protocol YouTubePlayerDelegate {
     func prepareToPlay(video: Video)
@@ -67,10 +69,10 @@ class YouTubePlayer: NSObject {
         video.streamURL { (result) -> Void in
             switch result {
             case .Success(let box):
-                self.startPlaying(box.unbox)
+                self.startPlaying(box.value)
             case .Failure(let box):
                 self.controller.contentURL = nil
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 self.delegate?.playbackFailed(error)
             }

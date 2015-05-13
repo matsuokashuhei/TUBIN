@@ -33,9 +33,9 @@ class ItemTableTableViewCell: UITableViewCell {
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
-                self.thumbnailImageView.image = box.unbox
+                self.thumbnailImageView.image = box.value
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
+                self.logger.error(box.value.localizedDescription)
             }
         }
         */
@@ -132,11 +132,11 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
-                let image = box.unbox
+                let image = box.value
                 let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
                 self.thumbnailImageView.image = UIImage(CGImage: rect)
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
+                self.logger.error(box.value.localizedDescription)
             }
         }
         */
@@ -171,10 +171,10 @@ class ChannelTableViewCell: ItemTableTableViewCell {
         item.thumbnailImage() { (result: Result<UIImage, NSError>) in
             switch result {
             case .Success(let box):
-                self.thumbnailImageView.image = box.unbox
+                self.thumbnailImageView.image = box.value
                 self.thumbnailImageView.contentMode = .ScaleAspectFit
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
+                self.logger.error(box.value.localizedDescription)
             }
         }
         */

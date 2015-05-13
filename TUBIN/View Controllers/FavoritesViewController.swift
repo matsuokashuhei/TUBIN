@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Async
 import XCGLogger
 
@@ -56,12 +57,12 @@ class FavoritesViewController: UIViewController {
             switch result {
             case .Success(let box):
                 Async.background {
-                    self.favorites = box.unbox
+                    self.favorites = box.value
                 }.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }
@@ -97,7 +98,7 @@ class FavoritesViewController: UIViewController {
             case .Success(let box):
                 Spinner.dismiss()
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }

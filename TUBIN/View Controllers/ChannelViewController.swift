@@ -78,7 +78,7 @@ class ChannelViewController: UIViewController {
             let bookmarkButton: UIBarButtonItem = {
                 switch result {
                 case .Success(let box):
-                    if box.unbox {
+                    if box.value {
                         return UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
                     } else {
                         return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
@@ -144,7 +144,7 @@ class ChannelViewController: UIViewController {
                     self.navigationItem.rightBarButtonItem = bookmarkButton
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }

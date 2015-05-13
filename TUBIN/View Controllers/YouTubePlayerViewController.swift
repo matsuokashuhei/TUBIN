@@ -13,6 +13,7 @@ import Async
 import SwiftyUserDefaults
 import XCGLogger
 import TUSafariActivity
+import Box
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -146,7 +147,7 @@ class YouTubePlayerViewController: UIViewController {
         Favorite.exists(video) { (result) in
             switch result {
             case .Success(let box):
-                if box.unbox {
+                if box.value {
                     let favoriteButton = UIBarButtonItem(image: UIImage(named: "ic_favorite_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromFavorite")
                     self.navigationItem.rightBarButtonItem = favoriteButton
                 } else {
@@ -483,9 +484,9 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
             case .Success(let box):
                 NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "WatchVideoNotification", object: self))
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }
@@ -563,9 +564,9 @@ extension YouTubePlayerViewController {
                 Async.main {
                     self.navigationItem.rightBarButtonItem = favoriteButton
                 }
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
         */
@@ -583,9 +584,9 @@ extension YouTubePlayerViewController {
                     self.navigationItem.rightBarButtonItem = favoriteButton
                 }
             case .Failure(let box):
-                let error = box.unbox
+                let error = box.value
                 self.logger.error(error.localizedDescription)
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }

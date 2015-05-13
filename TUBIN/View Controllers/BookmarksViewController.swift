@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LlamaKit
+import Result
 import Async
 import XCGLogger
 
@@ -34,12 +34,12 @@ class BookmarksViewController: UIViewController {
             switch result {
             case .Success(let box):
                 Async.background {
-                    self.bookmarks = box.unbox
+                    self.bookmarks = box.value
                 }.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                self.logger.error(box.unbox.localizedDescription)
+                self.logger.error(box.value.localizedDescription)
             }
         }
 
@@ -103,7 +103,7 @@ class BookmarksViewController: UIViewController {
                     }
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: BookmarksEditedNotification, object: self))
                 case .Failure(let box):
-                    let error = box.unbox
+                    let error = box.value
                     self.logger.error(error.localizedDescription)
                     Alert.error(error)
                 }

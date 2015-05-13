@@ -176,11 +176,11 @@ extension SearchViewController: UISearchBarDelegate {
                     Async.main {
                         self.suggestionsTableView.hidden = false
                         self.containerViewAtSelectedSegmentIndex().hidden = true
-                        self.suggestions = box.unbox
+                        self.suggestions = box.value
                         self.suggestionsTableView.reloadData()
                     }
                 case .Failure(let box):
-                    self.logger.error(box.unbox.localizedDescription)
+                    self.logger.error(box.value.localizedDescription)
                     self.containerViewAtSelectedSegmentIndex().hidden = false
                     self.suggestionsTableView.hidden = true
                     break

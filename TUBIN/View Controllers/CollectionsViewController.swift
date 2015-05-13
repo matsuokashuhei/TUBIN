@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import LlamaKit
+import Result
+import Box
 import XCGLogger
 import Async
 import Parse
@@ -53,12 +54,12 @@ extension CollectionsViewController {
         Collection.all() { (result: Result<[Collection], NSError>) in
             switch result {
             case .Success(let box):
-                self.collections = box.unbox
+                self.collections = box.value
                 Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }
@@ -119,7 +120,7 @@ extension CollectionsViewController {
                 case .Success(let box):
                     self.fetch()
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             }
         }
@@ -214,7 +215,7 @@ extension CollectionsViewController: UITableViewDelegate {
                             Collection.count(collection, handler: { (result) -> Void in
                                 switch result {
                                 case .Success(let box):
-                                    OKAction.enabled = box.unbox == 0
+                                    OKAction.enabled = box.value == 0
                                 case .Failure(let box):
                                     OKAction.enabled = false
                                 }

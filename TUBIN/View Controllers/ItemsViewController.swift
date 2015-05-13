@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Async
 import XCGLogger
 
@@ -178,9 +179,9 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddItemToFavoritesNotification, object: self, userInfo: ["item": video]))
                 case .Failure(let box):
-                    let error = box.unbox
+                    let error = box.value
                     self.logger.error(error.localizedDescription)
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             })
             return
@@ -191,9 +192,9 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": playlist]))
                 case .Failure(let box):
-                    let error = box.unbox
+                    let error = box.value
                     self.logger.error(error.localizedDescription)
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             })
             return
@@ -204,9 +205,9 @@ class ItemsViewController: UIViewController {
                 case .Success(let box):
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": channel]))
                 case .Failure(let box):
-                    let error = box.unbox
+                    let error = box.value
                     self.logger.error(error.localizedDescription)
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             })
             return

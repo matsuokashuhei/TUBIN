@@ -5,7 +5,8 @@
 //  Created by matsuosh on 2015/03/28.
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
-import LlamaKit
+import Result
+import Box
 import YouTubeKit
 import SwiftyUserDefaults
 import XCGLogger
@@ -89,12 +90,12 @@ extension History {
         exists(video) { (result) -> Void in
             switch result {
             case .Success(let box):
-                let exists = box.unbox
+                let exists = box.value
                 if exists {
                     self.find(id: video.id, handler: { (result) -> Void in
                         switch result {
                         case .Success(let box):
-                            Parser.destroy(box.unbox) { (result) -> Void in
+                            Parser.destroy(box.value) { (result) -> Void in
                                 switch result {
                                 case .Success(let box):
                                     break

@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
+import Box
 import Async
 import XCGLogger
 
@@ -68,12 +69,12 @@ extension PopoverCollectionsViewController {
         Collection.all() { (result: Result<[Collection], NSError>) in
             switch result {
             case .Success(let box):
-                self.collections = box.unbox
+                self.collections = box.value
                 Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let box):
-                Alert.error(box.unbox)
+                Alert.error(box.value)
             }
         }
     }
@@ -101,7 +102,7 @@ extension PopoverCollectionsViewController {
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
                     self.cancelButtonClicked()
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             }
         }
@@ -115,7 +116,7 @@ extension PopoverCollectionsViewController {
                         Collection.count(collection, handler: { (result) -> Void in
                             switch result {
                             case .Success(let box):
-                                OKAction.enabled = box.unbox == 0
+                                OKAction.enabled = box.value == 0
                             case .Failure(let box):
                                 OKAction.enabled = false
                             }
@@ -165,7 +166,7 @@ extension PopoverCollectionsViewController: UITableViewDelegate {
                     NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
                     self.cancelButtonClicked()
                 case .Failure(let box):
-                    Alert.error(box.unbox)
+                    Alert.error(box.value)
                 }
             }
         } else {

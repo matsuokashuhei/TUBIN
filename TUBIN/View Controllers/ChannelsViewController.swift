@@ -8,7 +8,7 @@
 
 import UIKit
 import YouTubeKit
-import LlamaKit
+import Result
 
 class ChannelsViewController: ItemsViewController {
 
@@ -53,18 +53,18 @@ class ChannelsViewController: ItemsViewController {
             YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.searchCompletion(page: box.unbox.page, items: box.unbox.channels)
+                    self.searchCompletion(page: box.value.page, items: box.value.channels)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.searchCompletion(page: box.unbox.page, items: box.unbox.items)
+                    self.searchCompletion(page: box.value.page, items: box.value.items)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         }
@@ -76,18 +76,18 @@ class ChannelsViewController: ItemsViewController {
             YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.channels)
+                    self.searchMoreCompletion(page: box.value.page, items: box.value.channels)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
                 case .Success(let box):
-                    self.searchMoreCompletion(page: box.unbox.page, items: box.unbox.items)
+                    self.searchMoreCompletion(page: box.value.page, items: box.value.items)
                 case .Failure(let box):
-                    self.errorCompletion(box.unbox)
+                    self.errorCompletion(box.value)
                 }
             }
         }
