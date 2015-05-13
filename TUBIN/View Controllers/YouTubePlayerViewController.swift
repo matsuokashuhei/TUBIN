@@ -379,7 +379,7 @@ class YouTubePlayerViewController: UIViewController {
     }
 
     func actionButtonClicked(sender: UIBarButtonItem) {
-        let text = "\(video.title), via TUBIN http://appstore.com/TUBIN"
+        let text = "\(video.title) http://youtu.be/\(video.id) via TUBIN http://appstore.com/TUBINforYouTube"
         let URL = NSURL(string: "http://youtu.be/\(video.id)")!
         let controller = UIActivityViewController(activityItems: [text, URL], applicationActivities: [TUSafariActivity()])
         presentViewController(controller, animated: true, completion: nil)
