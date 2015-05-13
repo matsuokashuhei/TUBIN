@@ -97,7 +97,7 @@ extension SettingsViewController: UITableViewDelegate {
                     }
                     shareMenu.addAction(action)
                 }
-                shareMenu.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                shareMenu.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Cancel, handler: nil))
                 presentViewController(shareMenu, animated: true, completion: nil)
             case 1:
                 let URL = "itms-apps://itunes.apple.com/app/id978972681"

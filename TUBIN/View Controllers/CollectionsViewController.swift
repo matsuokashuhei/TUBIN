@@ -226,7 +226,7 @@ extension CollectionsViewController: UITableViewDelegate {
                 }
             }
             controller.addAction(OKAction)
-            controller.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { (_) in })
+            controller.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Cancel) { (_) in })
             presentViewController(controller, animated: true, completion: nil)
             return
         }
