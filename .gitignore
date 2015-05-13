@@ -53,5 +53,6 @@ TUBIN.xcworkspace/
 .DS_Store
 
 # Fabric
-Crashlytics.framework
-Fabric.framework
+Crashlytics.framework/
+Fabric.framework/
+
