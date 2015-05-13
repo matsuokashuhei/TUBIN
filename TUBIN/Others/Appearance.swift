@@ -5,6 +5,7 @@
 //  Created by matsuosh on 2015/03/27.
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
+import UIKit
 
 class Appearance {
 
