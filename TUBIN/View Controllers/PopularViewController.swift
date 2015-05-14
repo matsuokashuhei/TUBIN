@@ -51,7 +51,8 @@ class PopularViewController: UIViewController {
 
     func configure(playlistsView view: UIView) {
         let controller = PlaylistsViewController()
-        controller.parameters = ["order": "viewCount"]
+        let aWeekAgo = NSDate().dateByAddingDays(-7).toString(format: .Custom("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+        controller.parameters = ["order": "viewCount", "publishedAfter": aWeekAgo]
         //controller.search()
         addChildViewController(controller)
 //        view.addSubview(controller.view)
@@ -61,7 +62,8 @@ class PopularViewController: UIViewController {
 
     func configure(channelsView view: UIView) {
         let controller = ChannelsViewController()
-        controller.parameters = ["order": "viewCount"]
+        let aWeekAgo = NSDate().dateByAddingDays(-7).toString(format: .Custom("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+        controller.parameters = ["order": "viewCount", "publishedAfter": aWeekAgo]
         //controller.search()
         addChildViewController(controller)
 //        view.addSubview(controller.view)
