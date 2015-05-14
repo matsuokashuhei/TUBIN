@@ -21,7 +21,7 @@ class Parser {
 
         if !Defaults.hasKey("initializedBookmarks") {
             // Bookmark
-            let names = ["popular", "search", "favorites", "guide"]
+            let names = ["popular", "search", "favorites", "music", "guide"]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
                 bookmark["index"] = index + 1

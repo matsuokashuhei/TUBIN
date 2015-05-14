@@ -23,6 +23,9 @@
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
 		A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF21B04D11700667D8D /* UIImage+Extension.swift */; };
+		A884FAF61B04D5F400667D8D /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF41B04D5F400667D8D /* MusicViewController.swift */; };
+		A884FAF71B04D5F400667D8D /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A884FAF51B04D5F400667D8D /* MusicViewController.xib */; };
+		A884FAF91B04DD7B00667D8D /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF81B04DD7B00667D8D /* SwiftColors.swift */; };
 		A889130F1AEA64AD00E4BBE4 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889130D1AEA64AD00E4BBE4 /* CollectionsViewController.swift */; };
 		A88913101AEA64AD00E4BBE4 /* CollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A889130E1AEA64AD00E4BBE4 /* CollectionsViewController.xib */; };
 		A88913801AEABAEA00E4BBE4 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889137E1AEABAEA00E4BBE4 /* CollectionTableViewCell.swift */; };
@@ -147,6 +150,9 @@
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
 		A884FAF21B04D11700667D8D /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		A884FAF41B04D5F400667D8D /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		A884FAF51B04D5F400667D8D /* MusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
+		A884FAF81B04DD7B00667D8D /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		A889130D1AEA64AD00E4BBE4 /* CollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		A889130E1AEA64AD00E4BBE4 /* CollectionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionsViewController.xib; sourceTree = "<group>"; };
 		A889137E1AEABAEA00E4BBE4 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -378,6 +384,7 @@
 		A8D403671AA8CC4400F0AAD2 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				A884FAF81B04DD7B00667D8D /* SwiftColors.swift */,
 				A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */,
 				A884FAF21B04D11700667D8D /* UIImage+Extension.swift */,
 			);
@@ -447,6 +454,8 @@
 				A88913841AEAC1A600E4BBE4 /* PopoverCollectionsViewController.xib */,
 				A8CD32E81AEB90C70003DABD /* CollectionViewController.swift */,
 				A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */,
+				A884FAF41B04D5F400667D8D /* MusicViewController.swift */,
+				A884FAF51B04D5F400667D8D /* MusicViewController.xib */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -620,6 +629,7 @@
 				A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */,
 				A899AE811AAC4FAC0011D5DE /* BookmarkTableViewCell.xib in Resources */,
 				A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */,
+				A884FAF71B04D5F400667D8D /* MusicViewController.xib in Resources */,
 				A88CF35B1AC5F0AA005276DD /* HistoriesViewController.xib in Resources */,
 				A8584C561AC6AE640066691E /* UserViewController.xib in Resources */,
 				A8C4327C1AAAE95300425E1B /* PlaylistTableViewCell.xib in Resources */,
@@ -737,6 +747,7 @@
 				A8D403AC1AA8CC4400F0AAD2 /* MiniPlayerView.swift in Sources */,
 				A8D4039C1AA8CC4400F0AAD2 /* FavoritesViewController.swift in Sources */,
 				A88913851AEAC1A600E4BBE4 /* PopoverCollectionsViewController.swift in Sources */,
+				A884FAF91B04DD7B00667D8D /* SwiftColors.swift in Sources */,
 				A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */,
 				A8D403A21AA8CC4400F0AAD2 /* RootViewController.swift in Sources */,
 				A889130F1AEA64AD00E4BBE4 /* CollectionsViewController.swift in Sources */,
@@ -755,6 +766,7 @@
 				A88913801AEABAEA00E4BBE4 /* CollectionTableViewCell.swift in Sources */,
 				A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */,
 				A8D403A91AA8CC4400F0AAD2 /* GuideCategoryTableViewCell.swift in Sources */,
+				A884FAF61B04D5F400667D8D /* MusicViewController.swift in Sources */,
 				A8D403AA1AA8CC4400F0AAD2 /* ItemTableViewCell.swift in Sources */,
 				A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */,
 				A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */,

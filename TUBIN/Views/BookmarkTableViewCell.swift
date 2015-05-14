@@ -83,6 +83,11 @@ class BookmarkTableViewCell: UITableViewCell {
             thumbnailImageView.contentMode = .ScaleAspectFit
             titleLabel.text = NSLocalizedString("Guide", comment: "Guide")
             channelTitleLabel.hidden = true
+        case "music":
+            thumbnailImageView.image = UIImage(named: "ic_album_48px")?.imageWithRenderingMode(.AlwaysTemplate)
+            thumbnailImageView.contentMode = .ScaleAspectFit
+            titleLabel.text = NSLocalizedString("Music", comment: "Music")
+            channelTitleLabel.hidden = true
         default:
             thumbnailImageView.hidden = true
             titleLabel.text = bookmark.name

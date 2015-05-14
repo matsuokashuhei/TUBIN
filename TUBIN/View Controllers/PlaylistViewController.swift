@@ -17,6 +17,7 @@ import XCGLogger
 class PlaylistViewController: ItemsViewController {
 
     var channel: Channel?
+    var showChannel = true
 
     var playlist: Playlist! {
         didSet {
@@ -66,6 +67,10 @@ class PlaylistViewController: ItemsViewController {
     }
 
     func configure(#channelView: ChannelView) {
+        if !showChannel {
+            channelView.height.constant = 0
+            return
+        }
         if let channel = channel {
             if channel.id == playlist.channelId {
                 channelView.height.constant = 0

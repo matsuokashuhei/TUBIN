@@ -50,43 +50,11 @@ class ContainerViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        logger.verbose("START")
         if let navigationController = self.navigationController {
             navigationController.setNavigationBarHidden(true, animated: true)
             navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         }
         super.viewWillAppear(animated)
-        logger.verbose("END")
-    }
-
-    override func viewWillLayoutSubviews() {
-        logger.verbose("START")
-        super.viewWillLayoutSubviews()
-        logger.verbose("END")
-    }
-
-    override func viewDidLayoutSubviews() {
-        logger.verbose("START")
-        super.viewDidLayoutSubviews()
-        logger.verbose("END")
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        logger.verbose("START")
-        super.viewDidAppear(animated)
-        logger.verbose("END")
-    }
-
-    override func viewWillDisappear(animated: Bool) {
-        logger.verbose("START")
-        super.viewWillDisappear(animated)
-        logger.verbose("END")
-    }
-
-    override func viewDidDisappear(animated: Bool) {
-        logger.verbose("START")
-        super.viewDidDisappear(animated)
-        logger.verbose("END")
     }
 
     func loadBookmarks() {
@@ -136,6 +104,10 @@ class ContainerViewController: UIViewController {
                 case "search":
                     self.tabBar.add("Search")
                     let controller = SearchViewController()
+                    return controller
+                case "music":
+                    self.tabBar.add("Music")
+                    let controller = MusicViewController()
                     return controller
                 default:
                     return nil

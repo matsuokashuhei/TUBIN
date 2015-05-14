@@ -60,6 +60,10 @@ class Bookmark {
         object["name"] = name
         return object
     }
+
+    func isPreseted() -> Bool {
+        return (["search", "favorites", "popular", "guide", "music"] as NSArray).containsObject(name)
+    }
 }
 
 // MARK: - Class functions
