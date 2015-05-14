@@ -32,18 +32,9 @@ class BookmarkTableViewCell: UITableViewCell {
         case "playlist":
             let playlist = bookmark.item as! Playlist
             if let URL = NSURL(string: playlist.thumbnailURL) {
-                /*
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
-                    if let image = image {
-                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                        self.thumbnailImageView.image = UIImage(CGImage: rect)
-                    }
-                }
-                */
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
-                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                        self.thumbnailImageView.image = image.resizeToWide()
                     }
                 })
             }
@@ -54,8 +45,7 @@ class BookmarkTableViewCell: UITableViewCell {
             if let URL = NSURL(string: channel.thumbnailURL) {
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
-                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                        self.thumbnailImageView.image = image
                         self.thumbnailImageView.contentMode = .ScaleAspectFit
                     }
                 })
@@ -67,8 +57,7 @@ class BookmarkTableViewCell: UITableViewCell {
             if let thumbnailURL = collection.thumbnailURL, let URL = NSURL(string: thumbnailURL) {
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
-                        let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                        self.thumbnailImageView.image = UIImage(CGImage: rect)
+                        self.thumbnailImageView.image = image.resizeToWide()
                     }
                 })
             }
@@ -99,15 +88,6 @@ class BookmarkTableViewCell: UITableViewCell {
             titleLabel.text = bookmark.name
             channelTitleLabel.hidden = true
         }
-    }
-
-    private func standardToWide(standard: CGSize) -> CGRect {
-        var wide = CGRectZero
-        wide.origin.x = 0
-        wide.origin.y = (standard.height / 16.0) * 2
-        wide.size.width = standard.width
-        wide.size.height = standard.height - (standard.height / 16.0) * 4
-        return wide
     }
 
     // TODO: iOS 8 のバグを解消するためのコードである。バグが直っていたら消す。

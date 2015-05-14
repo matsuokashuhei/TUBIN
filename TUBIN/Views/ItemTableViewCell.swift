@@ -80,14 +80,6 @@ class ItemTableTableViewCell: UITableViewCell {
         return formatStringFromInt64(NSString(string: longLong).longLongValue)
     }
 
-    private func standardToWide(standard: CGSize) -> CGRect {
-        var wide = CGRectZero
-        wide.origin.x = 0
-        wide.origin.y = (standard.height / 16.0) * 2
-        wide.size.width = standard.width
-        wide.size.height = standard.height - (standard.height / 16.0) * 4
-        return wide
-    }
 }
 
 class VideoTableViewCell: ItemTableTableViewCell {
@@ -102,8 +94,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
         if let URL = NSURL(string: item.thumbnailURL) {
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
                 if let image = image {
-                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                    self.thumbnailImageView.image = image.resizeToWide()
                 }
             }
         }
@@ -114,7 +105,6 @@ class VideoTableViewCell: ItemTableTableViewCell {
         } else {
             publishedAtLabel.text = ""
         }
-        //viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) views"
         viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) " + NSLocalizedString("views", comment: "views")
         channelTitle.text = video.channelTitle
     }
@@ -128,30 +118,16 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
-        /*
-        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
-            switch result {
-            case .Success(let box):
-                let image = box.value
-                let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                self.thumbnailImageView.image = UIImage(CGImage: rect)
-            case .Failure(let box):
-                self.logger.error(box.value.localizedDescription)
-            }
-        }
-        */
         if let URL = NSURL(string: item.thumbnailURL) {
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
                 if let image = image {
-                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                    self.thumbnailImageView.image = image.resizeToWide()
                 }
             }
         }
         let playlist = item as! Playlist
         channelTitle.text = playlist.channelTitle
         if let itemCount = playlist.itemCount {
-            //itemCountLabel.text = "\(formatStringFromInt(itemCount)) videos"
             itemCountLabel.text = "\(formatStringFromInt(itemCount)) " + NSLocalizedString("videos", comment: "videos")
         } else {
             itemCountLabel.text = ""
@@ -167,17 +143,6 @@ class ChannelTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
-        /*
-        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
-            switch result {
-            case .Success(let box):
-                self.thumbnailImageView.image = box.value
-                self.thumbnailImageView.contentMode = .ScaleAspectFit
-            case .Failure(let box):
-                self.logger.error(box.value.localizedDescription)
-            }
-        }
-        */
         if let URL = NSURL(string: item.thumbnailURL) {
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
                 if let image = image {
@@ -194,7 +159,6 @@ class ChannelTableViewCell: ItemTableTableViewCell {
             subscriberCountLabel.text = ""
         }
         if let videoCount = channel.videoCount {
-            //videoCountLabel.text = "\(formatStringFromInt(videoCount)) videos"
             videoCountLabel.text = "\(formatStringFromInt(videoCount)) " + NSLocalizedString("videos", comment: "videos")
         } else {
             videoCountLabel.text = ""

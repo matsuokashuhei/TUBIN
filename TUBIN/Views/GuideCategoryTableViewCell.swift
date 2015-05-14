@@ -41,30 +41,5 @@ class GuideCategoryTableViewCell: UITableViewCell {
                 }
             }
         }
-/*
-        YouTubeKit.channels(parameters: ["categoryId": category.id, "maxResults": "1"]) { (result: Result<(page: Page, channels: [Channel]), NSError>) in
-            switch result {
-            case .Success(let box):
-                if let channel = box.value.channels.first {
-                    channel.thumbnailImage() { result in
-                        switch result {
-                        case .Success(let box):
-                            self.thumbnailImageView.image = box.value
-                            self.thumbnailImageView.contentMode = .ScaleAspectFit
-                        case .Failure(let box):
-                            let error = box.value
-                            self.logger.error(error.localizedDescription)
-                            Alert.error(error)
-                        }
-
-                    }
-                }
-            case .Failure(let box):
-                let error = box.value
-                self.logger.error(error.localizedDescription)
-                Alert.error(error)
-            }
-        }
-*/
     }
 }

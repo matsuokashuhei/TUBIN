@@ -24,18 +24,9 @@ class CollectionTableViewCell: UITableViewCell {
 
     func configure(collection: Collection) {
         if let thumbnailURL = collection.thumbnailURL, URL = NSURL(string: thumbnailURL) {
-            /*
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, imageURL) -> () in
-                if let image = image {
-                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                    self.thumbnailImageView.image = UIImage(CGImage: rect)
-                }
-            }
-            */
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if let image = image {
-                    let rect = CGImageCreateWithImageInRect(image.CGImage, self.standardToWide(image.size))
-                    self.thumbnailImageView.image = UIImage(CGImage: rect)
+                    self.thumbnailImageView.image = image.resizeToWide()
                 }
             })
             thumbnailImageView.alpha = 1
@@ -50,12 +41,4 @@ class CollectionTableViewCell: UITableViewCell {
         videoCountLabel.text = "\(collection.videoIds.count) " + NSLocalizedString("videos", comment: "videos")
     }
 
-    private func standardToWide(standard: CGSize) -> CGRect {
-        var wide = CGRectZero
-        wide.origin.x = 0
-        wide.origin.y = (standard.height / 16.0) * 2
-        wide.size.width = standard.width
-        wide.size.height = standard.height - (standard.height / 16.0) * 4
-        return wide
-    }
 }

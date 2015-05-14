@@ -12,7 +12,6 @@
 		A8001E891AD1A2A700DFCC2D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8001E871AD1A2A700DFCC2D /* Fabric.framework */; };
 		A8584C551AC6AE640066691E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8584C531AC6AE640066691E /* UserViewController.swift */; };
 		A8584C561AC6AE640066691E /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8584C541AC6AE640066691E /* UserViewController.xib */; };
-		A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */; };
 		A86CC3E61AAAF799008669F2 /* GuideCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */; };
 		A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CC3E81AAB0456008669F2 /* iAd.framework */; };
 		A86CC3EF1AAB17AB008669F2 /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */; };
@@ -23,6 +22,7 @@
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
+		A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF21B04D11700667D8D /* UIImage+Extension.swift */; };
 		A889130F1AEA64AD00E4BBE4 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889130D1AEA64AD00E4BBE4 /* CollectionsViewController.swift */; };
 		A88913101AEA64AD00E4BBE4 /* CollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A889130E1AEA64AD00E4BBE4 /* CollectionsViewController.xib */; };
 		A88913801AEABAEA00E4BBE4 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889137E1AEABAEA00E4BBE4 /* CollectionTableViewCell.swift */; };
@@ -41,7 +41,6 @@
 		A899AE8A1AAC67490011D5DE /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */; };
 		A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */; };
 		A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDE61AC595F300FB72E7 /* Appearance.swift */; };
-		A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */; };
 		A89F970D1AD8EC2A003CBE3A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89F970C1AD8EC2A003CBE3A /* Reachability.swift */; };
 		A8A08DD01B03A53C009F655C /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; };
 		A8A08DD11B03A53C009F655C /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -137,7 +136,6 @@
 		A8001E871AD1A2A700DFCC2D /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A8584C531AC6AE640066691E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A8584C541AC6AE640066691E /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
-		A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftColors.swift; sourceTree = "<group>"; };
 		A86CC3E51AAAF799008669F2 /* GuideCategoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		A86CC3E81AAB0456008669F2 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		A86CC3EE1AAB17AB008669F2 /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
@@ -148,6 +146,7 @@
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
+		A884FAF21B04D11700667D8D /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A889130D1AEA64AD00E4BBE4 /* CollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		A889130E1AEA64AD00E4BBE4 /* CollectionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionsViewController.xib; sourceTree = "<group>"; };
 		A889137E1AEABAEA00E4BBE4 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,7 +165,6 @@
 		A899AE881AAC67490011D5DE /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController_Phone.xib; sourceTree = "<group>"; };
 		A89CFDE61AC595F300FB72E7 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Rainbow.swift"; sourceTree = "<group>"; };
 		A89F970C1AD8EC2A003CBE3A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		A8A08DCE1B03A534009F655C /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeTableViewCell.swift; sourceTree = "<group>"; };
@@ -380,9 +378,8 @@
 		A8D403671AA8CC4400F0AAD2 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				A89CFDEA1AC5994300FB72E7 /* UIColor+Rainbow.swift */,
 				A8E17F301ABD61E100DAF54A /* AF+Date+Extension.swift */,
-				A86A9ABC1AC2F86600068FBB /* SwiftColors.swift */,
+				A884FAF21B04D11700667D8D /* UIImage+Extension.swift */,
 			);
 			path = Externals;
 			sourceTree = "<group>";
@@ -738,8 +735,6 @@
 				A8D403B41AA8CC9800F0AAD2 /* Consts.swift in Sources */,
 				A899AE8A1AAC67490011D5DE /* YouTubePlayerViewController.swift in Sources */,
 				A8D403AC1AA8CC4400F0AAD2 /* MiniPlayerView.swift in Sources */,
-				A89CFDED1AC5994300FB72E7 /* UIColor+Rainbow.swift in Sources */,
-				A86A9ABD1AC2F86600068FBB /* SwiftColors.swift in Sources */,
 				A8D4039C1AA8CC4400F0AAD2 /* FavoritesViewController.swift in Sources */,
 				A88913851AEAC1A600E4BBE4 /* PopoverCollectionsViewController.swift in Sources */,
 				A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */,
@@ -761,6 +756,7 @@
 				A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */,
 				A8D403A91AA8CC4400F0AAD2 /* GuideCategoryTableViewCell.swift in Sources */,
 				A8D403AA1AA8CC4400F0AAD2 /* ItemTableViewCell.swift in Sources */,
+				A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */,
 				A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */,
 				A88CF35A1AC5F0AA005276DD /* HistoriesViewController.swift in Sources */,
 				A8D4039D1AA8CC4400F0AAD2 /* GuideCategoriesViewController.swift in Sources */,
