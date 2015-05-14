@@ -49,24 +49,6 @@ class ItemsViewController: UIViewController {
         logger.verbose("END")
     }
 
-    override func viewWillLayoutSubviews() {
-        logger.verbose("START")
-        super.viewWillLayoutSubviews()
-        logger.verbose("END")
-    }
-
-    override func viewDidLayoutSubviews() {
-        logger.verbose("START")
-        super.viewDidLayoutSubviews()
-        logger.verbose("END")
-    }
-
-    override func viewDidDisappear(animated: Bool) {
-        logger.verbose("START")
-        super.viewDidDisappear(animated)
-        logger.verbose("END")
-    }
-
     func configure(#navigationItem: UINavigationItem) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
