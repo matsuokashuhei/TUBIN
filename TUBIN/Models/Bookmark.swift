@@ -205,6 +205,11 @@ extension Bookmark {
         }
     }
 
+    class func count() -> Int {
+        let query = Parser.sharedInstance.query("Bookmark")
+        return query.countObjects()
+    }
+
     class func count(handler: (Result<Int, NSError>) -> Void) {
         let query = Parser.sharedInstance.query("Bookmark")
         query.countObjectsInBackgroundWithBlock { (count, error) -> Void in

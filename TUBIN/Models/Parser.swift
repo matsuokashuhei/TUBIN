@@ -11,8 +11,11 @@ import Result
 import Box
 import SwiftyUserDefaults
 import Parse
+import XCGLogger
 
 class Parser {
+
+    let logger = XCGLogger.defaultInstance()
 
     class func configure() {
         Parse.enableLocalDatastore()
@@ -21,7 +24,7 @@ class Parser {
 
         if !Defaults.hasKey("initializedBookmarks") {
             // Bookmark
-            let names = ["popular", "search", "favorites", "music", "guide"]
+            let names = ["popular", "music", "search", "guide", "favorites"]
             for (index, name) in enumerate(names) {
                 let bookmark = PFObject(className: "Bookmark")
                 bookmark["index"] = index + 1
@@ -29,6 +32,7 @@ class Parser {
                 bookmark.pin()
             }
             Defaults["initializedBookmarks"] = true
+            Defaults["addedMusic"] = true
 
             // Collection
             let collection = PFObject(className: "Collection")
@@ -36,7 +40,20 @@ class Parser {
             collection["title"] = NSLocalizedString("WATCH IT LATER", comment: "WATCH IT LATER")
             collection["videoIds"] = [String]()
             collection.pin()
+
         }
+
+        if !Defaults.hasKey("addedMusic") {
+            let bookmark = PFObject(className: "Bookmark")
+            bookmark["index"] = Bookmark.count() + 1
+            bookmark["name"] = "music"
+            bookmark.pin()
+            Defaults["addedMusic"] = true
+            println("addMusic")
+        } else {
+            println("addedMusic")
+        }
+
     }
 
     class func save(object: PFObject, handler: (Result<Bool, NSError>) -> Void) {
