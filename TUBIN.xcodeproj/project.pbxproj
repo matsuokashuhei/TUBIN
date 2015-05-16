@@ -45,11 +45,11 @@
 		A899AE8B1AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */; };
 		A89CFDE71AC595F300FB72E7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89CFDE61AC595F300FB72E7 /* Appearance.swift */; };
 		A89F970D1AD8EC2A003CBE3A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89F970C1AD8EC2A003CBE3A /* Reachability.swift */; };
-		A8A08DD01B03A53C009F655C /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; };
-		A8A08DD11B03A53C009F655C /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8A08DCE1B03A534009F655C /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8A153091ADD80AD005BA201 /* DarkModeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */; };
 		A8A1530A1ADD80AD005BA201 /* DarkModeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */; };
 		A8A3B8C71AE9471000945D94 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A3B8C61AE9471000945D94 /* Collection.swift */; };
+		A8A4A7A01B04FA1A00068879 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A4A79F1B04FA1A00068879 /* YouTubeKit.framework */; };
+		A8A4A7A21B04FA3000068879 /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8A4A79F1B04FA1A00068879 /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8AB920D1AAC36B800974511 /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */; };
 		A8BD70EC1AAB4BAD00499A71 /* ChannelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */; };
 		A8BD70EE1AAB4EE500499A71 /* VideosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */; };
@@ -126,7 +126,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A8A08DD11B03A53C009F655C /* YouTubeKit.framework in Embed Frameworks */,
+				A8A4A7A21B04FA3000068879 /* YouTubeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,10 +172,10 @@
 		A899AE891AAC67490011D5DE /* YouTubePlayerViewController_Phone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YouTubePlayerViewController_Phone.xib; sourceTree = "<group>"; };
 		A89CFDE61AC595F300FB72E7 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		A89F970C1AD8EC2A003CBE3A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		A8A08DCE1B03A534009F655C /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8A153071ADD80AD005BA201 /* DarkModeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkModeTableViewCell.swift; sourceTree = "<group>"; };
 		A8A153081ADD80AD005BA201 /* DarkModeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DarkModeTableViewCell.xib; sourceTree = "<group>"; };
 		A8A3B8C61AE9471000945D94 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		A8A4A79F1B04FA1A00068879 /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8AB920C1AAC36B800974511 /* FavoritesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		A8BD70EB1AAB4BAD00499A71 /* ChannelsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChannelsViewController.xib; sourceTree = "<group>"; };
 		A8BD70ED1AAB4EE500499A71 /* VideosViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideosViewController.xib; sourceTree = "<group>"; };
@@ -250,10 +250,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A88F13261AD2DF7B006695D0 /* Social.framework in Frameworks */,
+				A8A4A7A01B04FA1A00068879 /* YouTubeKit.framework in Frameworks */,
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				A8001E881AD1A2A700DFCC2D /* Crashlytics.framework in Frameworks */,
-				A8A08DD01B03A53C009F655C /* YouTubeKit.framework in Frameworks */,
 				A8001E891AD1A2A700DFCC2D /* Fabric.framework in Frameworks */,
 				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
 			);
@@ -302,7 +302,7 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
-				A8A08DCE1B03A534009F655C /* YouTubeKit.framework */,
+				A8A4A79F1B04FA1A00068879 /* YouTubeKit.framework */,
 				A8001E861AD1A2A700DFCC2D /* Crashlytics.framework */,
 				A8001E871AD1A2A700DFCC2D /* Fabric.framework */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
@@ -930,7 +930,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -950,13 +950,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shuhei Matsuoka";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
