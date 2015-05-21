@@ -3,17 +3,29 @@ use_frameworks!
 
 platform :ios, '8.0'
 
-pod 'Parse'
+# UI
 pod 'CRToast'
-
 pod 'SVProgressHUD'
 pod 'TAOverlay'
-pod 'Async', :git => 'https://github.com/duemunk/Async'
-pod 'SwiftyUserDefaults', :git => 'https://github.com/radex/SwiftyUserDefaults', :branch => 'swift-1.2'
+pod 'TUSafariActivity'
 
+# HTTP
 pod 'Alamofire'
-pod 'XCDYouTubeKit'
-pod 'Result'
-pod 'Kingfisher', '~> 1.0'
+
+# Database
+pod 'Parse'
+
+# Caching
+pod 'Kingfisher'
+
+# Logging
 pod 'XCGLogger'
-pod 'TUSafariActivity', '~> 1.0'
+
+# Extensions
+pod 'Async', :git => 'https://github.com/duemunk/Async.git'
+pod 'SwiftyUserDefaults'
+pod 'Result'
+
+# Others
+pod 'XCDYouTubeKit'
+pod 'Google-Mobile-Ads-SDK', '~> 7.0'
