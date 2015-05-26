@@ -43,19 +43,19 @@ class ContainerView: UIView {
                 let oldIndexes = [oldIndex - 1, oldIndex, oldIndex + 1].filter { (index: Int) -> Bool in
                     index > -1 && index < self.views.count
                 }
-                logger.debug("oldIndex: \(oldIndex), oldIndexes: \(oldIndexes), selectedViewAtIndex: \(self.selectedViewAtIndex), newIndexes: \(newIndexes)")
+                logger.verbose("oldIndex: \(oldIndex), oldIndexes: \(oldIndexes), selectedViewAtIndex: \(self.selectedViewAtIndex), newIndexes: \(newIndexes)")
                 if oldIndex < selectedViewAtIndex {
                     for oldIndex in oldIndexes {
                         if contains(newIndexes, oldIndex) == false {
                             if let view = scrollView.subviews.first as? UIView {
-                                logger.debug("\(oldIndex)を消す。")
+                                logger.verbose("\(oldIndex)を消す。")
                                 view.removeFromSuperview()
                             }
                         }
                     }
                     for newIndex in newIndexes {
                         if contains(oldIndexes, newIndex) == false {
-                            logger.debug("\(newIndex)を足す。")
+                            logger.verbose("\(newIndex)を足す。")
                             scrollView.addSubview(views[newIndex])
                         }
                     }
@@ -64,21 +64,21 @@ class ContainerView: UIView {
                     for oldIndex in reverse(oldIndexes) {
                         if contains(newIndexes, oldIndex) == false {
                             if let view = scrollView.subviews.last as? UIView {
-                                logger.debug("\(oldIndex)を消す。")
+                                logger.verbose("\(oldIndex)を消す。")
                                 view.removeFromSuperview()
                             }
                         }
                     }
                     for newIndex in reverse(newIndexes) {
                         if contains(oldIndexes, newIndex) == false {
-                            logger.debug("\(newIndex)を足す。")
+                            logger.verbose("\(newIndex)を足す。")
                             scrollView.insertSubview(views[newIndex], atIndex: 0)
                         }
                     }
                 }
             } else {
                 for newIndex in newIndexes {
-                    logger.debug("\(newIndex)を足す。")
+                    logger.verbose("\(newIndex)を足す。")
                     scrollView.addSubview(views[newIndex])
                 }
             }
@@ -136,7 +136,7 @@ class ContainerView: UIView {
         if let subviews = scrollView.subviews as? [UIView] {
             let index = (subviews as NSArray).indexOfObject(views[index])
             let point = CGPoint(x: frame.width * CGFloat(index), y: 0)
-            logger.debug("index: \(index), point: \(point)")
+            logger.verbose("index: \(index), point: \(point)")
             scrollView.setContentOffset(point, animated: false)
         }
         /*
@@ -148,11 +148,11 @@ class ContainerView: UIView {
 
     func indexOfCurrentView() -> Int {
         let indexOfScrollView = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        logger.debug("indexOfScrollView: \(indexOfScrollView)")
+        logger.verbose("indexOfScrollView: \(indexOfScrollView)")
         if let scrollView = scrollView {
-            logger.debug("scrollView: \(scrollView)")
+            logger.verbose("scrollView: \(scrollView)")
             if let subviews = scrollView.subviews as? [UIView] {
-                logger.debug("subviews.count: \(subviews.count)")
+                logger.verbose("subviews.count: \(subviews.count)")
             }
         }
         if let subview = scrollView.subviews[indexOfScrollView] as? UIView {
@@ -185,15 +185,15 @@ class ContainerView: UIView {
 extension ContainerView: UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        logger.debug("contentOffset.x: \(scrollView.contentOffset.x)")
+        logger.verbose("contentOffset.x: \(scrollView.contentOffset.x)")
         let index = indexOfCurrentView()
-        logger.debug("index: \(index)")
+        logger.verbose("index: \(index)")
         selectViewAtIndex(index)
         delegate?.containerView(self, indexOfContentViews: index)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        logger.debug("contentOffset.x: \(scrollView.contentOffset.x)")
+        logger.verbose("contentOffset.x: \(scrollView.contentOffset.x)")
         // 現在のタブの番号
         let index = indexOfCurrentView()
         // ----------------------------
@@ -212,7 +212,7 @@ extension ContainerView: UIScrollViewDelegate {
                 return 0.0
             }
         }()
-        logger.debug("selectedViewAtIndex: \(self.selectedViewAtIndex), index: \(index), x: \(x), width: \(width), scrollView: contentOffset.x: \(scrollView.contentOffset.x), contentSize.width: \(scrollView.contentSize.width)")
+        logger.verbose("selectedViewAtIndex: \(self.selectedViewAtIndex), index: \(index), x: \(x), width: \(width), scrollView: contentOffset.x: \(scrollView.contentOffset.x), contentSize.width: \(scrollView.contentSize.width)")
         //if x < frame.width + frame.width * CGFloat(selectedViewAtIndex) {
         if index <= selectedViewAtIndex {
             delegate?.containerViewDidScroll(x, contentSizeWidth: width)
