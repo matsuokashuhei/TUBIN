@@ -128,9 +128,15 @@ extension Channel {
             object["publishedAt"] = publishedAt
         }
         object["thumbnailURL"] = thumbnailURL
-        object["viewCount"] = viewCount
-        object["subscriberCount"] = subscriberCount
-        object["videoCount"] = videoCount
+        if let viewCount = viewCount {
+            object["viewCount"] = viewCount
+        }
+        if let subscriberCount = subscriberCount {
+            object["subscriberCount"] = subscriberCount
+        }
+        if let videoCount = videoCount {
+            object["videoCount"] = videoCount
+        }
         return object
     }
 
