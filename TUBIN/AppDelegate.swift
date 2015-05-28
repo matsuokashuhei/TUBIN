@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import MediaPlayer
 import Fabric
 import Crashlytics
 import SwiftyUserDefaults
@@ -22,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // ロガー
-        XCGLogger.defaultInstance().setup(logLevel: .Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+        XCGLogger.defaultInstance().setup(logLevel: .Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 
         // Fabric
         Fabric.with([Crashlytics()])
@@ -47,5 +49,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func applicationDidBecomeActive(application: UIApplication) {
+        logger.debug("")
+    }
+
+    func applicationDidEnterBackground(application: UIApplication) {
+        logger.debug("")
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+    }
+
+    override func remoteControlReceivedWithEvent(event: UIEvent) {
+        if event.type == .RemoteControl {
+            let player = YouTubePlayer.sharedInstance
+            switch event.subtype {
+            case .RemoteControlPlay:
+                player.play()
+            case .RemoteControlPause:
+                player.pause()
+            case .RemoteControlNextTrack:
+                player.playNextVideo()
+            case .RemoteControlPreviousTrack:
+                player.playPreviousVideo()
+            default:
+                break
+            }
+        }
+    }
 }
 
