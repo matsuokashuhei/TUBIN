@@ -295,40 +295,6 @@ extension YouTubePlayer {
         controller.currentPlaybackTime = Double(seconds)
     }
 
-    // MARK: - Debug
-    func debug(controller: MPMoviePlayerController) -> String {
-        var message = "controller: "
-        message += "playbackState: "
-        switch controller.playbackState {
-        case .Stopped:
-            message += "Stopped"
-        case .Playing:
-            message += "Playing"
-        case .Paused:
-            message += "Paused"
-        case .Interrupted:
-            message += "Interrupted"
-        case .SeekingForward:
-            message += "SeekingForward"
-        case .SeekingBackward:
-            message += "SeekingBackward"
-        }
-        message += ", loadState: "
-        switch controller.loadState {
-        case MPMovieLoadState.Unknown:
-            message += "Unknown"
-        case MPMovieLoadState.Playable:
-            message += "Playable"
-        case MPMovieLoadState.PlaythroughOK:
-            message += "PlaythroughOK"
-        case MPMovieLoadState.Stalled:
-            message += "Stalled"
-        default:
-            message += "?"
-        }
-        return message
-    }
-
     class Timer {
 
         class func start(#target: AnyObject, selector: Selector) {
