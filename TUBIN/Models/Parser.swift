@@ -49,9 +49,6 @@ class Parser {
             bookmark["name"] = "music"
             bookmark.pin()
             Defaults["addedMusic"] = true
-            println("addMusic")
-        } else {
-            println("addedMusic")
         }
 
     }

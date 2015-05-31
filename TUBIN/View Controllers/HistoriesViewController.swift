@@ -25,11 +25,9 @@ class HistoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configure(tableView: tableView)
         fetch()
         __setEditing(false)
-
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: "WatchVideoNotification", object: nil)
     }
 
@@ -151,4 +149,21 @@ extension HistoriesViewController {
         fetch()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "statusBarTouched:", name: StatusBarTouchedNotification, object: nil)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
+    }
+
+    func statusBarTouched(notification: NSNotification) {
+        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        }
+    }
+    
 }

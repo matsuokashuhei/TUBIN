@@ -46,9 +46,17 @@ class CollectionViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         if let navigationController = navigationController {
             navigationController.navigationBarHidden = navigationBarHidden
         }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "statusBarTouched:", name: StatusBarTouchedNotification, object: nil)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
     func configure(#navigationItem: UINavigationItem) {
@@ -270,6 +278,16 @@ extension CollectionViewController: UITableViewDelegate {
             navigationController.pushViewController(controller, animated: true)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+}
+
+extension CollectionViewController {
+
+    func statusBarTouched(notification: NSNotification) {
+        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        }
     }
 
 }

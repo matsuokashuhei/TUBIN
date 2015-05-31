@@ -41,8 +41,15 @@ class CollectionsViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        setEditing(false, animated: true)
         super.viewWillAppear(animated)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "statusBarTouched:", name: StatusBarTouchedNotification, object: nil)
+        setEditing(false, animated: true)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
 }
@@ -239,6 +246,16 @@ extension CollectionsViewController: UITableViewDelegate {
             }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+}
+
+extension CollectionsViewController {
+
+    func statusBarTouched(notification: NSNotification) {
+        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        }
     }
 
 }

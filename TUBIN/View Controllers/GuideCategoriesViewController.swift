@@ -40,6 +40,14 @@ class GuideCategoriesViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "statusBarTouched:", name: StatusBarTouchedNotification, object: nil)
+
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
     // MARK: - YouTube search
@@ -100,4 +108,14 @@ extension GuideCategoriesViewController: UITableViewDataSource {
         cell.configure(categories[indexPath.row])
         return cell
     }
+}
+
+extension GuideCategoriesViewController {
+
+    func statusBarTouched(notification: NSNotification) {
+        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        }
+    }
+
 }

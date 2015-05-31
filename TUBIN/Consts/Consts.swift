@@ -5,12 +5,10 @@
 //  Created by matsuosh on 2015/01/20.
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
-//import Foundation
 
 // Bookmark
 let AddItemToFavoritesNotification = "AddItemToFavoritesNotification"
 let ReloadFavoritesNotification = "ReloadFavoritesNotification"
-//let AddItemToBookmarksNotification = "AddItemToBookmarksNotification"
 let BookmarksEditedNotification = "BookmarkEditedNotification"
 let AddToBookmarksNotification = "AddToBookmarksNotification"
 
@@ -23,6 +21,9 @@ let HideMiniPlayerNotification = "HideMiniPlayerNotification"
 
 // VideoPlayer
 let VideoPlayerDidPrepareToPlayNotification = "VideoPlayerDidPrepareToPlayNotification"
+
+// Status Bar
+let StatusBarTouchedNotification = "StatusBarTouchedNotification"
 
 // Ads
 let AdBannerShowableNotification = "AdBannerShowableNotification"

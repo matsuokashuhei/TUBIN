@@ -39,14 +39,19 @@ class ItemsViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        logger.verbose("START")
+        super.viewWillAppear(animated)
         if navigatable {
             configure(navigationItem: navigationItem)
         } else {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        super.viewWillAppear(animated)
-        logger.verbose("END")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "statusBarTouched:", name: StatusBarTouchedNotification, object: nil)
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
     func configure(#navigationItem: UINavigationItem) {
@@ -232,4 +237,14 @@ extension ItemsViewController: UITableViewDelegate {
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
     }
+}
+
+extension ItemsViewController {
+
+    func statusBarTouched(notification: NSNotification) {
+        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+           tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
+        }
+    }
+
 }

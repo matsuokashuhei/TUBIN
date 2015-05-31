@@ -49,11 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
-        logger.debug("")
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        if let touch = touches.first as? UITouch {
+            let location = touch.locationInView(window)
+            if CGRectContainsPoint(UIApplication.sharedApplication().statusBarFrame, location) {
+                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: StatusBarTouchedNotification, object: nil))
+            }
+        }
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidBecomeActive(application: UIApplication) {
         logger.debug("")
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
     }
