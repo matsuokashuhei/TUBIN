@@ -20,6 +20,8 @@
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
+		A87B05CB1B1B1C330032D603 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87B05C71B1B1BFF0032D603 /* YouTubeKit.framework */; };
+		A87B05CC1B1B1C330032D603 /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A87B05C71B1B1BFF0032D603 /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF21B04D11700667D8D /* UIImage+Extension.swift */; };
 		A884FAF61B04D5F400667D8D /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF41B04D5F400667D8D /* MusicViewController.swift */; };
 		A884FAF71B04D5F400667D8D /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A884FAF51B04D5F400667D8D /* MusicViewController.xib */; };
@@ -66,8 +68,6 @@
 		A8CD32EA1AEB90C70003DABD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CD32E81AEB90C70003DABD /* CollectionViewController.swift */; };
 		A8CD32EB1AEB90C70003DABD /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */; };
 		A8D1078F1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1078E1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift */; };
-		A8D107911B108E6500B5B08D /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D107901B108E6500B5B08D /* YouTubeKit.framework */; };
-		A8D107931B1091A900B5B08D /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D107901B108E6500B5B08D /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8D107951B109D9C00B5B08D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D107941B109D9C00B5B08D /* AVFoundation.framework */; };
 		A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */; };
 		A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D402861AA8B7C700F0AAD2 /* Main.storyboard */; };
@@ -122,13 +122,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A8D402B51AA8BCD500F0AAD2 /* Embed Frameworks */ = {
+		A87B05CD1B1B1C330032D603 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A8D107931B1091A900B5B08D /* YouTubeKit.framework in Embed Frameworks */,
+				A87B05CC1B1B1C330032D603 /* YouTubeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +149,7 @@
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
+		A87B05C71B1B1BFF0032D603 /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A884FAF21B04D11700667D8D /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A884FAF41B04D5F400667D8D /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		A884FAF51B04D5F400667D8D /* MusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
@@ -197,7 +198,6 @@
 		A8CD32E81AEB90C70003DABD /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
 		A8D1078E1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+MediaPlayer.swift"; sourceTree = "<group>"; };
-		A8D107901B108E6500B5B08D /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8D107941B109D9C00B5B08D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D402811AA8B7C700F0AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -255,10 +255,10 @@
 			files = (
 				A8D107951B109D9C00B5B08D /* AVFoundation.framework in Frameworks */,
 				A88F13261AD2DF7B006695D0 /* Social.framework in Frameworks */,
-				A8D107911B108E6500B5B08D /* YouTubeKit.framework in Frameworks */,
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
+				A87B05CB1B1B1C330032D603 /* YouTubeKit.framework in Frameworks */,
 				A8F211831B0E45B0001D9A07 /* Fabric.framework in Frameworks */,
 				A8F211841B0E45B0001D9A07 /* Crashlytics.framework in Frameworks */,
 			);
@@ -307,7 +307,7 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
-				A8D107901B108E6500B5B08D /* YouTubeKit.framework */,
+				A87B05C71B1B1BFF0032D603 /* YouTubeKit.framework */,
 				A8F211811B0E45B0001D9A07 /* Fabric.framework */,
 				A8F211821B0E45B0001D9A07 /* Crashlytics.framework */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
@@ -527,10 +527,10 @@
 				A8D402791AA8B7C700F0AAD2 /* Sources */,
 				A8D4027A1AA8B7C700F0AAD2 /* Frameworks */,
 				A8D4027B1AA8B7C700F0AAD2 /* Resources */,
-				A8D402B51AA8BCD500F0AAD2 /* Embed Frameworks */,
 				A3299E77FD011E05FD252B1B /* Embed Pods Frameworks */,
 				E388D778733501D4C64ABC35 /* Copy Pods Resources */,
 				A8001E841AD1A21700DFCC2D /* ShellScript */,
+				A87B05CD1B1B1C330032D603 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -934,11 +934,10 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -960,11 +959,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shuhei Matsuoka";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = TUBIN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
