@@ -160,6 +160,7 @@ class ItemsViewController: UIViewController {
 
     func onLongPressed(sender: UILongPressGestureRecognizer) {
 
+        /*
         if let video = longPressedItem(sender) as? Video {
             Favorite.add(video, handler: { (result) -> Void in
                 switch result {
@@ -199,6 +200,7 @@ class ItemsViewController: UIViewController {
             })
             return
         }
+        */
     }
 
     func longPressedItem(sender: UILongPressGestureRecognizer) -> Item? {

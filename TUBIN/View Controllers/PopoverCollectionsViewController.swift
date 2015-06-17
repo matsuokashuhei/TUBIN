@@ -25,8 +25,6 @@ class PopoverCollectionsViewController: UIViewController {
             tableView.tableFooterView = UIView(frame: CGRectZero)
             tableView.dataSource = self
             tableView.delegate = self
-//            tableView.allowsMultipleSelectionDuringEditing = true
-//            tableView.setEditing(true, animated: true)
             tableView.registerNib(UINib(nibName: "CollectionTableViewCell", bundle: nil), forCellReuseIdentifier: "CollectionTableViewCell")
         }
     }
@@ -62,29 +60,14 @@ class PopoverCollectionsViewController: UIViewController {
 
 }
 
-// MARK: - Parse
+// MARK: - Realm
 extension PopoverCollectionsViewController {
 
     func fetch() {
-        Collection.all() { (result: Result<[Collection], NSError>) in
-            switch result {
-            case .Success(let box):
-                self.collections = box.value
-                Async.main {
-                    self.tableView.reloadData()
-                }
-            case .Failure(let box):
-                Alert.error(box.value)
-            }
-        }
+        collections = Collection.all()
+        tableView.reloadData()
     }
 
-    func add(collection: Collection, video: Video, handler: (Result<Bool, NSError>) -> Void) {
-        collection.add(video)
-        Collection.save(collection) { (result) in
-            handler(result)
-        }
-    }
 }
 
 // MARK: - IB actions
@@ -94,17 +77,10 @@ extension PopoverCollectionsViewController {
         let controller = UIAlertController(title: NSLocalizedString("New collection", comment: "New collection"), message: "", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
             let textField = controller.textFields![0] as! UITextField
-            let collection = Collection(index: self.collections.count, title: textField.text)
-            collection.add(self.video)
-            Collection.create(collection) { (result) in
-                switch result {
-                case .Success(let box):
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
-                    self.cancelButtonClicked()
-                case .Failure(let box):
-                    Alert.error(box.value)
-                }
-            }
+            Collection.create(index: self.collections.count, title: textField.text, videos: [self.video])
+            Toast.addToFavorites(video: self.video)
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
+            self.cancelButtonClicked()
         }
         OKAction.enabled = false
         controller.addTextFieldWithConfigurationHandler { (textField) -> Void in
@@ -112,15 +88,7 @@ extension PopoverCollectionsViewController {
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue
                 .mainQueue()) { (notification) in
                     if textField.text != "" {
-                        let collection = Collection(index: self.collections.count, title: textField.text)
-                        Collection.count(collection, handler: { (result) -> Void in
-                            switch result {
-                            case .Success(let box):
-                                OKAction.enabled = box.value == 0
-                            case .Failure(let box):
-                                OKAction.enabled = false
-                            }
-                        })
+                        OKAction.enabled = Collection.exists(title: textField.text) == false
                     } else {
                         OKAction.enabled = false
                     }
@@ -158,17 +126,11 @@ extension PopoverCollectionsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let collection = collections[indexPath.row]
-        if collection.videoIds.count <= 50 {
-            add(collection, video: video) { (result) in
-                switch result {
-                case .Success(let box):
-                    Toast.addToFavorites(video: self.video)
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
-                    self.cancelButtonClicked()
-                case .Failure(let box):
-                    Alert.error(box.value)
-                }
-            }
+        if collection.videoCount <= 50 {
+            collection.add(video)
+            Toast.addToFavorites(video: self.video)
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
+            cancelButtonClicked()
         } else {
             Alert.info(NSLocalizedString("1 Collection, for up to 50 videos", comment: "1 Collection, for up to 50 videos"), autoHide: false)
         }

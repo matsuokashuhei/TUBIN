@@ -6,248 +6,179 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 
-import Foundation
 import YouTubeKit
-import Result
-import Box
+import RealmSwift
+import SwiftyUserDefaults
 import Parse
 
-class Bookmark {
+class Bookmark: Object {
 
-    var index: Int
-    let name: String
-    var item: Item?
-    var collection: Collection?
+    dynamic var index = 0
+    dynamic var id = ""
+    dynamic var type = ""
+    dynamic var title = ""
+    dynamic var imageName = ""
+    dynamic var _channel: RLMChannel?
+    dynamic var _playlist: RLMPlaylist?
 
-    init(object: PFObject) {
-        index = object["index"] as! Int
-        name = object["name"] as! String
-        if name == "playlist" {
-            item = Playlist(object: object)
-        }
-        if name == "channel" {
-            item = Channel(object: object)
-        }
-        if name == "collection" {
-            collection = Collection(object: object)
-        }
+    override class func primaryKey() -> String? {
+        return "id"
     }
 
-    func toPFObject() -> PFObject {
-        if name == "playlist" {
-            let playlist = item as! Playlist
-            let object = playlist.toPFObject(className: "Bookmark")
-            object["index"] = index
-            object["name"] = name
-            return object
-        }
-        if name == "channel" {
-            let channel = item as! Channel
-            let object = channel.toPFObject(className: "Bookmark")
-            object["index"] = index
-            object["name"] = name
-            return object
-        }
-        if name == "collection" {
-            let object = collection!.toPFObject(className: "Bookmark")
-            object["id"] = collection!.id
-            object["index"] = index
-            object["name"] = name
-            return object
-        }
-        let object = PFObject(className: "Bookmark")
-        object["index"] = index
-        object["name"] = name
-        return object
+    var channel: Channel? {
+        return _channel?.toItem()
+    }
+    var playlist: Playlist? {
+        return _playlist?.toItem()
+    }
+    var preseted: Bool {
+        return contains(["popular", "search", "music", "favorite", "guide"], type)
     }
 
-    func isPreseted() -> Bool {
-        return (["search", "favorites", "popular", "guide", "music"] as NSArray).containsObject(name)
+    var editable: Bool {
+        return contains(["playlist", "channel"], type)
     }
+
 }
 
-// MARK: - Class functions
 extension Bookmark {
 
-    class func all() -> Result<[Bookmark], NSError> {
-        let query = Parser.sharedInstance.query("Bookmark")
+    class func setUp() -> () {
+        // Music
+        let music = Bookmark()
+        music.type = "music"
+        music.title = "Music"
+        music.id = "tubin_music"
+        music.imageName = "ic_album_48px"
+        Bookmark.add(music)
+        // Search
+        let search = Bookmark()
+        search.type = "search"
+        search.title = "Search"
+        search.id = "tubin_search"
+        search.imageName = "ic_search_48px"
+        Bookmark.add(search)
+        // Popular
+        let popular = Bookmark()
+        popular.type = "popular"
+        popular.title = "Popular"
+        popular.id = "tubin_popular"
+        popular.imageName = "ic_mood_48px"
+        Bookmark.add(popular)
+        // Guide
+        let guide = Bookmark()
+        guide.type = "guide"
+        guide.title = "Guide"
+        guide.id = "tubin_guide"
+        guide.imageName = "ic_map_48px"
+        Bookmark.add(guide)
+        // Favorite
+        let favorite = Bookmark()
+        favorite.type = "favorite"
+        favorite.title = "Favorite"
+        favorite.id = "tubin_favorite"
+        favorite.imageName = "ic_favorite_outline_48px"
+        Bookmark.add(favorite)
+        /*
+        let names = ["popular", "music", "search", "guide", "favorites"]
+        for (index, name) in enumerate(names) {
+            let bookmark = PFObject(className: "Bookmark")
+            bookmark["index"] = index + 1
+            bookmark["name"] = name
+            bookmark.pin()
+        }
+        */
+
+        // Collection
+    }
+
+    class func migrate() -> () {
+        var query = PFQuery(className: "Bookmark")
+        query.fromLocalDatastore()
         query.addAscendingOrder("index")
         if let objects = query.findObjects() as? [PFObject] {
-            let bookmarks = objects.map { (object) -> Bookmark in
-                return Bookmark(object: object)
-            }
-            return .Success(Box(bookmarks))
-        } else {
-            return .Failure(Box(Parser.Error.Unknown.toNSError()))
-        }
-    }
-
-    class func all(handler: (Result<[Bookmark], NSError>) -> Void) {
-        all { (result: Result<[PFObject], NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                let bookmarks = box.value.map { (object) -> Bookmark in
-                    return Bookmark(object: object)
-                }
-                handler(.Success(Box(bookmarks)))
-            case .Failure(let box):
-                handler(.Failure(box))
-            }
-        }
-    }
-
-    class func all(handler: (Result<[PFObject], NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Bookmark")
-        query.addAscendingOrder("index")
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let objects = objects as? [PFObject] {
-                handler(.Success(Box(objects)))
-                return
-            }
-            if let error = error {
-                handler(.Failure(Box(error)))
-                return
-            }
-            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
-        }
-    }
-
-    class func all(#skip: Int, handler: (Result<[Bookmark], NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Bookmark")
-        query.addAscendingOrder("index")
-        query.skip = skip
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let objects = objects as? [PFObject] {
-                let bookmarks = objects.map { (object) -> Bookmark in
-                    return Bookmark(object: object)
-                }
-                handler(.Success(Box(bookmarks)))
-                return
-            }
-            if let error = error {
-                handler(.Failure(Box(error)))
-                return
-            }
-            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
-        }
-    }
-
-    class func find(#id: String, handler: (Result<[PFObject], NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Bookmark")
-        query.whereKey("id", equalTo: id)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let objects = objects as? [PFObject] {
-                handler(.Success(Box(objects)))
-                return
-            }
-            if let error = error {
-                handler(.Failure(Box(error)))
-                return
-            }
-            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
-        }
-    }
-
-    class func add(playlist: Playlist, handler: (Result<Bool, NSError>) -> Void) {
-        let object = playlist.toPFObject(className: "Bookmark")
-        object["name"] = "playlist"
-        add(object: object, handler: handler)
-    }
-
-    class func add(channel: Channel, handler: (Result<Bool, NSError>) -> Void) {
-        let object = channel.toPFObject(className: "Bookmark")
-        object["name"] = "channel"
-        add(object: object, handler: handler)
-    }
-
-    class func add(collection: Collection, handler: (Result<Bool, NSError>) -> Void) {
-        let object = collection.toPFObject(className: "Bookmark")
-        object["name"] = "collection"
-        add(object: object, handler: handler)
-    }
-
-    class func add(#object: PFObject, handler: (Result<Bool, NSError>) -> Void) {
-        let id = object["id"] as! String
-        exists(id: id as String) { (result) in
-            switch result {
-            case .Success(let box):
-                let exists = box.value
-                if exists {
-                    handler(.Success(Box(true)))
-                } else {
-                    self.count { (result) in
-                        switch result {
-                        case .Success(let box):
-                            object["index"] = box.value + 1
-                            Parser.save(object) { (result) in
-                                handler(result)
-                            }
-                        case .Failure(let box):
-                            handler(.Failure(box))
-                        }
-                    }
-                }
-            case .Failure(let box):
-                handler(.Failure(box))
-            }
-        }
-    }
-
-    class func exists(#id: String, handler: (Result<Bool, NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Bookmark")
-        query.whereKey("id", equalTo: id)
-        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
-            if let error = error {
-                handler(.Failure(Box(error)))
-            } else {
-                handler(.Success(Box(count > 0)))
-            }
-        }
-    }
-
-    class func count() -> Int {
-        let query = Parser.sharedInstance.query("Bookmark")
-        return query.countObjects()
-    }
-
-    class func count(handler: (Result<Int, NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Bookmark")
-        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
-            if let error = error {
-                handler(.Failure(Box(error)))
-            } else {
-                handler(.Success(Box(Int(count))))
-            }
-        }
-    }
-
-    class func reset(bookmarks: [Bookmark], handler: (Result<Bool, NSError>) -> Void) {
-        all() { (result: Result<[PFObject], NSError>) in
-            switch result {
-            case .Success(let box):
-                Parser.destroy(box.value) { (result) in
-                    switch result {
-                    case .Success(let box):
-                        var objects = [PFObject]()
-                        for (index, bookmark) in enumerate(bookmarks) {
-                            bookmark.index = index + 1
-                            objects.append(bookmark.toPFObject())
-                        }
+            for object in objects {
+                if let name = object["name"] as? String {
+                    if name == "playlist" {
+                        let playlist = Playlist(object: object)
                         /*
-                        let objects = bookmarks.map { (bookmark) -> PFObject in
-                            return bookmark.toPFObject()
-                        }
+                        let bookmark = Bookmark()
+                        bookmark.type = "playlist"
+                        bookmark.id = playlist.id
+                        bookmark._playlist = playlist.toObject()
                         */
-                        Parser.save(objects, handler: { (result) -> Void in
-                            handler(result)
-                        })
-                    case .Failure(let box):
-                        handler(.Failure(box))
+                        Bookmark.add(playlist)
+                    }
+                    if name == "channel" {
+                        let channel = Channel(object: object)
+                        Bookmark.add(channel)
                     }
                 }
-            case .Failure(let box):
-                handler(.Failure(box))
             }
+        }
+
+    }
+
+    /*
+    class func new(#type: String, id: String, title: String, thumbnailURL: String) -> Bookmark {
+        let bookmark = Bookmark()
+        bookmark.type = type
+        bookmark.id = id
+        bookmark.title = title
+        bookmark.thumbnailURL = thumbnailURL
+        return bookmark
+    }
+    */
+
+    class func new(playlist: Playlist) -> Bookmark {
+        let bookmark = Bookmark()
+        bookmark.type = "playlist"
+        bookmark.id = playlist.id
+        bookmark._playlist = playlist.toObject()
+        return bookmark
+    }
+
+    class func new(channel: Channel) -> Bookmark {
+        let bookmark = Bookmark()
+        bookmark.type = "channel"
+        bookmark.id = channel.id
+        bookmark._channel = channel.toObject()
+        return bookmark
+    }
+
+    class func exists(#type: String, id: String) -> Bool {
+        let results = Realm().objects(Bookmark).filter("type = '\(type)' AND id = '\(id)'")
+        return results.count > 0
+    }
+
+    class func all() -> [Bookmark] {
+        let results = Realm().objects(Bookmark).sorted("index")
+        var bookmarks = [Bookmark]()
+        for bookmark in results {
+            bookmarks.append(bookmark)
+        }
+        return bookmarks
+    }
+
+    class func add(playlist: Playlist) {
+        let bookmark = Bookmark.new(playlist)
+        add(bookmark)
+    }
+
+    class func add(channel: Channel) {
+        let bookmark = Bookmark.new(channel)
+        add(bookmark)
+    }
+
+    class func add(bookmark: Bookmark) {
+        let realm = Realm()
+        if let bookmark = realm.objectForPrimaryKey(Bookmark.self, key: bookmark.id) {
+            return
+        }
+        let bookmarks = realm.objects(Bookmark).sorted("index")
+        realm.write {
+            bookmark.index = bookmarks.count + 1
+            realm.add(bookmark)
         }
     }
 

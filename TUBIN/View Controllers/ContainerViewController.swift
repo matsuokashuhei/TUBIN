@@ -33,19 +33,12 @@ class ContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // ------------------
-        // Bookmarkの取得
-        // ------------------
+        // Bookmark
         loadBookmarks()
-        tabBar.selectTabAtIndex(0)
-        containerView.selectViewAtIndex(0)
-        // ------------------
-        // Notificationの設定
-        // ------------------
+        selectBookmarkAtIndex(0)
         // Bookmark
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addToBookmarks:", name: AddToBookmarksNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadBookmarks:", name: BookmarksEditedNotification, object: nil)
-        // Theme
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "switchTheme:", name: SwitchThemeNotification, object: nil)
     }
 
@@ -57,56 +50,65 @@ class ContainerViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        let index = tabBar.indexOfSelectedTab()
+        containerView.selectViewAtIndex(index)
+    }
+}
+
+// MARK: - Realm
+extension ContainerViewController {
+
+    func fetch() {
+        bookmarks = Bookmark.all()
+    }
+
+}
+
+// MARK: - Bookmarks
+extension ContainerViewController {
+
     func loadBookmarks() {
-        let result = Bookmark.all()
-        switch result {
-        case .Success(let box):
-            bookmarks = box.value
-        case .Failure(let box):
-            let error = box.value
-            self.logger.error(error.localizedDescription)
-            Alert.error(error)
-            return
-        }
-        for (index, bookmark) in enumerate(bookmarks) {
+        fetch()
+        for bookmark in bookmarks {
             let controller: UIViewController? = {
-                switch bookmark.name {
+                switch bookmark.type {
                 case "playlist":
-                    let playlist = bookmark.item as! Playlist
-                    self.tabBar.add(playlist)
-                    let controller = PlaylistViewController()
-                    controller.playlist = playlist
-                    return controller
+                    if let playlist = bookmark.playlist {
+                        self.tabBar.add(playlist)
+                        let controller = PlaylistViewController()
+                        controller.playlist = playlist
+                        return controller
+                    } else {
+                        return nil
+                    }
                 case "channel":
-                    let channel = bookmark.item as! Channel
-                    self.tabBar.add(channel)
-                    let controller = ChannelViewController()
-                    controller.channel = channel
-                    return controller
-                case "collection":
-                    let collection = bookmark.collection!
-                    self.tabBar.add(collection)
-                    let controller = CollectionViewController()
-                    controller.collection = collection
-                    return controller
+                    if let channel = bookmark.channel {
+                        self.tabBar.add(channel)
+                        let controller = ChannelViewController()
+                        controller.channel = channel
+                        return controller
+                    } else {
+                        return nil
+                    }
                 case "popular":
-                    self.tabBar.add("Popular")
+                    self.tabBar.add(bookmark.title)
                     let controller = PopularViewController()
                     return controller
                 case "guide":
-                    self.tabBar.add("Guide")
+                    self.tabBar.add(bookmark.title)
                     let controller = GuideCategoriesViewController()
                     return controller
-                case "favorites":
-                    self.tabBar.add("Favorites")
+                case "favorite":
+                    self.tabBar.add(bookmark.title)
                     let controller = UserViewController()
                     return controller
                 case "search":
-                    self.tabBar.add("Search")
+                    self.tabBar.add(bookmark.title)
                     let controller = SearchViewController()
                     return controller
                 case "music":
-                    self.tabBar.add("Music")
+                    self.tabBar.add(bookmark.title)
                     let controller = MusicViewController()
                     return controller
                 default:
@@ -114,112 +116,93 @@ class ContainerViewController: UIViewController {
                 }
             }()
             if let controller = controller {
-                self.addChildViewController(controller)
-                self.containerView.add(view: controller.view)
+                addChildViewController(controller)
+                containerView.add(view: controller.view)
             }
         }
         tabBar.add(NSLocalizedString("Settings", comment: "Settings"))
         let controller = SettingsViewController()
         addChildViewController(controller)
         containerView.add(view: controller.view)
+        tabBar.setNeedsLayout()
+        tabBar.layoutIfNeeded()
+        containerView.setNeedsLayout()
+        containerView.layoutIfNeeded()
     }
 
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        let index = tabBar.indexOfSelectedTab()
-        containerView.selectViewAtIndex(index)
-        //containerView.scrollToIndexOfContentViews(index)
-    }
+}
 
+// MARK: - Child views editing
+extension ContainerViewController {
 
-    func clearBookmarks() {
+    func removeBookmarks() {
+        containerView.delegate = nil
+        tabBar.delegate = nil
         for childViewController in childViewControllers {
             childViewController.removeFromParentViewController()
         }
         tabBar.clearTabs()
         containerView.clearViews()
+        containerView.delegate = self
+        tabBar.delegate = self
+    }
+
+    func selectBookmarkAtIndex(index: Int) -> () {
+        tabBar.selectTabAtIndex(index)
+        containerView.selectViewAtIndex(index)
     }
 
 }
 
+// MARK: - Notifications
 extension ContainerViewController {
 
-    // Notification
-
     func reloadBookmarks(notfication: NSNotification) {
-        containerView.delegate = nil
-        tabBar.delegate = nil
-        clearBookmarks()
+        removeBookmarks()
         loadBookmarks()
-        /*
-        Async.main {
-            self.tabBar.setNeedsLayout()
-            self.tabBar.layoutIfNeeded()
-            self.containerView.setNeedsLayout()
-            self.containerView.layoutIfNeeded()
-        }
-        */
-//        let lastIndex = containerView.views.count - 1
-//        tabBar.selectTabAtIndex(lastIndex)
-//        containerView.selectViewAtIndex(lastIndex)
-        containerView.delegate = self
-        tabBar.delegate = self
-        tabBar.setNeedsLayout()
-        tabBar.layoutIfNeeded()
-        containerView.setNeedsLayout()
-        containerView.layoutIfNeeded()
         let lastIndex = containerView.views.count - 1
-        tabBar.selectTabAtIndex(lastIndex)
-        containerView.selectViewAtIndex(lastIndex)
+        selectBookmarkAtIndex(lastIndex)
     }
 
     func addToBookmarks(notification: NSNotification) {
         if let item = notification.userInfo?["item"] as? Item {
             Toast.addToBookmarks(item: item)
         }
-        Bookmark.all(skip: bookmarks.count) { (result) -> Void in
-            switch result {
-            case .Success(let box):
-                for bookmark in box.value {
-                    let controller: UIViewController? = {
-                        switch bookmark.name {
-                        case "playlist":
-                            let playlist = bookmark.item as! Playlist
-                            self.tabBar.add(playlist, index: self.bookmarks.count)
-                            let controller = PlaylistViewController()
-                            controller.playlist = playlist
-                            return controller
-                        case "channel":
-                            let channel = bookmark.item as! Channel
-                            self.tabBar.add(channel, index: self.bookmarks.count)
-                            let controller = ChannelViewController()
-                            controller.channel = channel
-                            return controller
-                        case "collection":
-                            let collection = bookmark.collection!
-                            self.tabBar.add(collection, index: self.bookmarks.count)
-                            let controller = CollectionViewController()
-                            controller.collection = collection
-                            return controller
-                        default:
-                            return nil
-                        }
-                    }()
-                    if let controller = controller {
-                        self.addChildViewController(controller)
-                        self.containerView.add(view: controller.view, index: self.bookmarks.count)
-                        self.bookmarks.append(bookmark)
+        for bookmark in (Bookmark.all().filter { (bookmark) -> Bool in bookmark.index > self.bookmarks.count }) {
+            let controller: UIViewController? = {
+                switch bookmark.type {
+                case "playlist":
+                    if let playlist = bookmark.playlist {
+                        self.tabBar.add(playlist, index: self.bookmarks.count)
+                        let controller = PlaylistViewController()
+                        controller.playlist = playlist
+                        return controller
+                    } else {
+                        return nil
                     }
+                case "channel":
+                    if let channel = bookmark.channel {
+                        self.tabBar.add(channel, index: self.bookmarks.count)
+                        let controller = ChannelViewController()
+                        controller.channel = channel
+                        return controller
+                    } else {
+                        return nil
+                    }
+                default:
+                    return nil
                 }
-                self.tabBar.setNeedsLayout()
-                self.tabBar.layoutIfNeeded()
-                self.containerView.setNeedsLayout()
-                self.containerView.layoutIfNeeded()
-            case .Failure(let box):
-                let error = box.value
-                self.logger.error(error.localizedDescription)
-                Alert.error(error)
+            }()
+            if let controller = controller {
+                addChildViewController(controller)
+                containerView.add(view: controller.view, index: self.bookmarks.count)
+                bookmarks.append(bookmark)
             }
         }
+        tabBar.setNeedsLayout()
+        tabBar.layoutIfNeeded()
+        containerView.setNeedsLayout()
+        containerView.layoutIfNeeded()
     }
 
     func switchTheme(notification: NSNotification) {
@@ -227,6 +210,7 @@ extension ContainerViewController {
     }
 }
 
+// MARK: - Tab bar delegate
 extension ContainerViewController: TabBarDelegate {
 
     func tabBar(tabBar: TabBar, didSelectTabAtIndex index: Int) {
@@ -238,6 +222,7 @@ extension ContainerViewController: TabBarDelegate {
 
 }
 
+// MARK: - Container view delegate
 extension ContainerViewController: ContainerViewDelegate {
 
     func containerView(containerView: ContainerView, indexOfContentViews index: Int) {

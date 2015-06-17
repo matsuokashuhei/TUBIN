@@ -14,6 +14,7 @@ pod 'Alamofire'
 
 # Database
 pod 'Parse'
+pod 'RealmSwift'
 
 # Caching
 pod 'Kingfisher'
@@ -29,3 +30,4 @@ pod 'Result'
 # Others
 pod 'XCDYouTubeKit'
 pod 'Google-Mobile-Ads-SDK', '~> 7.0'
+

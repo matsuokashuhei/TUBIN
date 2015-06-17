@@ -55,11 +55,6 @@ class Tab: UIView {
         //selected = false
     }
 
-    convenience init(collection: Collection) {
-        self.init()
-        configure(collection)
-    }
-
     private func configure() {
         frame.size = Tab.size()
         layer.borderWidth = 0.5
@@ -78,13 +73,6 @@ class Tab: UIView {
     func configure(text: String) {
         configure()
         label.text = NSLocalizedString(text, comment: "")
-//        addSubview(label)
-//        selected = false
-    }
-
-    func configure(collection: Collection) {
-        configure()
-        label.text = collection.title
 //        addSubview(label)
 //        selected = false
     }
@@ -166,22 +154,8 @@ class TabBar: UIView {
         scrollView.addSubview(tab)
     }
 
-    func add(collection: Collection) {
-        let tab = Tab(collection: collection)
-        tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
-        tabs.append(tab)
-        scrollView.addSubview(tab)
-    }
-
     func add(item: Item, index: Int) {
         let tab = Tab(item: item)
-        tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
-        tabs.insert(tab, atIndex: index)
-        scrollView.addSubview(tab)
-    }
-
-    func add(collection: Collection, index: Int) {
-        let tab = Tab(collection: collection)
         tab.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tabTapped:"))
         tabs.insert(tab, atIndex: index)
         scrollView.addSubview(tab)

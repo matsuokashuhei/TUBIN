@@ -11,7 +11,8 @@ import Result
 import Box
 import XCGLogger
 import Async
-import Parse
+//import Parse
+import RealmSwift
 
 class CollectionsViewController: UIViewController {
 
@@ -20,6 +21,8 @@ class CollectionsViewController: UIViewController {
     var collections = [Collection]()
 
     var edited = false
+
+    var removes = [Collection]()
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -48,51 +51,34 @@ class CollectionsViewController: UIViewController {
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        //NSNotificationCenter.defaultCenter().removeObserver(self)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
 }
 
-// MARK: - Parse
+// MARK: - Realm
 extension CollectionsViewController {
 
     func fetch() {
-        Collection.all() { (result: Result<[Collection], NSError>) in
-            switch result {
-            case .Success(let box):
-                self.collections = box.value
-                Async.main {
-                    self.tableView.reloadData()
-                }
-            case .Failure(let box):
-                Alert.error(box.value)
-            }
-        }
+        collections = Collection.all()
+        tableView.reloadData()
     }
 
-    func reset(handler: (Result<Bool, NSError>) -> Void) {
-        Collection.deleteAll { (result) -> Void in
-            switch result {
-            case .Success(let box):
-                var objects = [PFObject]()
-                for (index, collection) in enumerate(self.collections) {
-                    let object = collection.toPFObject(className: "Collection")
-                    object["index"] = index
-                    objects.append(object)
-                }
-                Parser.save(objects) { (result) in
-                    handler(result)
-                }
-                break
-            case .Failure(let box):
-                break
+    func edit() {
+        let realm = Realm()
+        realm.write {
+            for collection in self.removes {
+                realm.delete(collection)
+            }
+            for (index, collection) in enumerate(self.collections) {
+                collection.index = index
             }
         }
     }
 
 }
 
+// MARK: - Table view editing
 extension CollectionsViewController {
 
     override func setEditing(editing: Bool, animated: Bool) {
@@ -115,21 +101,16 @@ extension CollectionsViewController {
     }
 
     func startEditing() {
+        removes = []
         setEditing(true, animated: true)
     }
 
     func endEditing() {
         if edited {
             Spinner.show()
-            reset() { (result) in
-                Spinner.dismiss()
-                switch result {
-                case .Success(let box):
-                    self.fetch()
-                case .Failure(let box):
-                    Alert.error(box.value)
-                }
-            }
+            edit()
+            fetch()
+            Spinner.dismiss()
         }
         setEditing(false, animated: true)
     }
@@ -143,7 +124,7 @@ extension CollectionsViewController {
 
 }
 
-// MARK: - Table view datasource
+// MARK: - Table view data source
 extension CollectionsViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -166,23 +147,11 @@ extension CollectionsViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            collections.removeAtIndex(indexPath.row)
+            removes.append(collections.removeAtIndex(indexPath.row))
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             edited = true
         }
     }
-
-//    func tableView(tableView: UITableView, accessoryTypeForRowWithIndexPath indexPath: NSIndexPath!) -> UITableViewCellAccessoryType {
-//        if tableView.editing {
-//            return .DisclosureIndicator
-//        } else {
-//            return .None
-//        }
-//    }
-
-//    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        return true
-//    }
 
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -218,15 +187,7 @@ extension CollectionsViewController: UITableViewDelegate {
                 NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue
                     .mainQueue()) { (notification) in
                         if textField.text != "" {
-                            let collection = Collection(index: self.collections.count, title: textField.text)
-                            Collection.count(collection, handler: { (result) -> Void in
-                                switch result {
-                                case .Success(let box):
-                                    OKAction.enabled = box.value == 0
-                                case .Failure(let box):
-                                    OKAction.enabled = false
-                                }
-                            })
+                            OKAction.enabled = Collection.exists(title: textField.text) == false
                         } else {
                             OKAction.enabled = false
                         }
@@ -237,7 +198,7 @@ extension CollectionsViewController: UITableViewDelegate {
             presentViewController(controller, animated: true, completion: nil)
             return
         }
-        if collection.videoIds.count > 0 {
+        if collection.videoCount > 0 {
             let controller = CollectionViewController()
             controller.navigationBarHidden = false
             controller.collection = collection

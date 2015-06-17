@@ -23,7 +23,7 @@ class CollectionTableViewCell: UITableViewCell {
     }
 
     func configure(collection: Collection) {
-        if let thumbnailURL = collection.thumbnailURL, URL = NSURL(string: thumbnailURL) {
+        if let URL = NSURL(string: collection.thumbnailURL) where URL.absoluteString?.isEmpty == false {
             thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                 if let image = image {
                     self.thumbnailImageView.image = image.resizeToWide()
@@ -35,10 +35,10 @@ class CollectionTableViewCell: UITableViewCell {
             thumbnailImageView.backgroundColor = Appearance.sharedInstance.theme.textColor.colorWithAlphaComponent(0.1)
             thumbnailImageView.image = UIImage(named: "ic_favorite_outline_48px")?.imageWithRenderingMode(.AlwaysTemplate)
             thumbnailImageView.contentMode = .ScaleAspectFit
-            titleLabel.text = NSLocalizedString("Favorites", comment: "Favorites")
+            //titleLabel.text = NSLocalizedString("Favorites", comment: "Favorites")
         }
         titleLabel.text = collection.title
-        videoCountLabel.text = "\(collection.videoIds.count) " + NSLocalizedString("videos", comment: "videos")
+        videoCountLabel.text = "\(collection.videoCount) " + NSLocalizedString("videos", comment: "videos")
     }
 
 }

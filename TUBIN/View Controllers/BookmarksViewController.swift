@@ -10,14 +10,23 @@ import UIKit
 import Result
 import Async
 import XCGLogger
+import RealmSwift
 
 class BookmarksViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.tableFooterView = UIView(frame: CGRectZero)
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.registerNib(UINib(nibName: "BookmarkTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "BookmarkTableViewCell")
+        }
+    }
 
     var bookmarks = [Bookmark]()
+    var removes = [Bookmark]()
     var edited = false
 
     convenience init() {
@@ -26,36 +35,19 @@ class BookmarksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configure(navigationItem: navigationItem)
-        configure(tableView: tableView)
-
-        Bookmark.all { (result: Result<[Bookmark], NSError>) -> Void in
-            switch result {
-            case .Success(let box):
-                Async.background {
-                    self.bookmarks = box.value
-                }.main {
-                    self.tableView.reloadData()
-                }
-            case .Failure(let box):
-                self.logger.error(box.value.localizedDescription)
-            }
-        }
-
-        if let navigationController = self.navigationController {
-            configure(navigationItem: navigationItem)
-        }
+        fetch()
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+        setEditing(false, animated: true)
     }
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        tableView.setEditing(false, animated: false)
+        setEditing(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,56 +56,69 @@ class BookmarksViewController: UIViewController {
 
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = NSLocalizedString("Bookmarks", comment: "Bookmarks")
-        __setEditing(false)
-    }
-
-    func configure(#tableView: UITableView) {
-        tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.registerNib(UINib(nibName: "BookmarkTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "BookmarkTableViewCell")
-    }
-
-    func __setEditing(editing: Bool) {
-        tableView.setEditing(editing, animated: true)
-        if tableView.editing {
-            let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")
-            navigationItem.rightBarButtonItem = button
-        } else {
-            let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")
-            navigationItem.rightBarButtonItem = button
-        }
-    }
-
-    // MARK: - Actions
-
-    func startEditing() {
-        edited = false
-        __setEditing(true)
-    }
-
-    func endEditing() {
-        __setEditing(false)
-        if edited {
-            Bookmark.reset(bookmarks) { (result) in
-                switch result {
-                case .Success(let box):
-                    Async.main {
-                        self.tableView.reloadData()
-                    }
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: BookmarksEditedNotification, object: self))
-                case .Failure(let box):
-                    let error = box.value
-                    self.logger.error(error.localizedDescription)
-                    Alert.error(error)
-                }
-            }
-            edited = false
-        }
     }
 
 }
 
+// MARK: - Realm
+extension BookmarksViewController {
+
+    func fetch() {
+        Spinner.show()
+        bookmarks = Bookmark.all()
+        tableView.reloadData()
+        Spinner.dismiss()
+    }
+
+    func edit() {
+        Spinner.show()
+        let realm = Realm()
+        realm.write {
+            for bookmark in self.removes {
+                realm.delete(bookmark)
+            }
+            for (index, bookmark) in enumerate(self.bookmarks) {
+                bookmark.index = index + 1
+            }
+        }
+        Spinner.dismiss()
+    }
+
+}
+
+// MARK: - Table view editing
+extension BookmarksViewController {
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        tableView.setEditing(editing, animated: true)
+        navigationItem.rightBarButtonItem = {
+            if self.tableView.editing {
+                return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")
+            } else {
+                return UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")
+            }
+        }()
+        super.setEditing(editing, animated: animated)
+        edited = false
+    }
+
+    func startEditing() {
+        removes = []
+        setEditing(true, animated: true)
+    }
+
+    func endEditing() {
+        if edited {
+            edit()
+            fetch()
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: BookmarksEditedNotification, object: self))
+        }
+        setEditing(false, animated: true)
+    }
+
+}
+
+// MARK: - Table view dalegate
 extension BookmarksViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -123,7 +128,7 @@ extension BookmarksViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if tableView.editing {
             let bookmark = bookmarks[indexPath.row]
-            if bookmark.name == "playlist" || bookmark.name == "channel" || bookmark.name == "collection" {
+            if bookmark.editable {
                 return .Delete
             }
         }
@@ -145,13 +150,14 @@ extension BookmarksViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let bookmark = bookmarks.removeAtIndex(indexPath.row)
+            removes.append(bookmarks.removeAtIndex(indexPath.row))
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             edited = true
-            tableView.reloadData()
         }
     }
 }
 
+// MARK: - Table view data source
 extension BookmarksViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,7 +168,7 @@ extension BookmarksViewController: UITableViewDataSource {
         let bookmark = bookmarks[indexPath.row]
         var cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as! BookmarkTableViewCell
         cell.configure(bookmark)
-        if bookmark.isPreseted() {
+        if bookmark.preseted {
             cell.thumbnailImageView.alpha = 0.5
             cell.thumbnailImageView.backgroundColor = Appearance.sharedInstance.theme.textColor.colorWithAlphaComponent(0.1)
         } else {

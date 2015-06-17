@@ -16,7 +16,7 @@ class ChannelViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet var segmentedControl: UISegmentedControl! {
+    @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
             segmentedControl.setTitle(NSLocalizedString("Videos", comment: "Videos"), forSegmentAtIndex: 0)
             segmentedControl.setTitle(NSLocalizedString("Playlists", comment: "Playlists"), forSegmentAtIndex: 1)
@@ -25,8 +25,8 @@ class ChannelViewController: UIViewController {
         }
     }
 
-    @IBOutlet var videosView: UIView!
-    @IBOutlet var playlistsView: UIView!
+    @IBOutlet weak var videosView: UIView!
+    @IBOutlet weak var playlistsView: UIView!
     var containerViews: [UIView] = []
 
     var channel: Channel! {
@@ -74,21 +74,13 @@ class ChannelViewController: UIViewController {
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = channel.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        Bookmark.exists(id: channel.id) { (result) in
-            let bookmarkButton: UIBarButtonItem = {
-                switch result {
-                case .Success(let box):
-                    if box.value {
-                        return UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
-                    } else {
-                        return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
-                    }
-                case .Failure(let box):
-                    return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addChannelToBookmark")
-                }
-            }()
-            self.navigationItem.rightBarButtonItem = bookmarkButton
-        }
+        navigationItem.rightBarButtonItem = {
+            if Bookmark.exists(type: "channel", id: self.channel.id) {
+                return UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
+            } else {
+                return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addPlaylistToBookmark")
+            }
+        }()
     }
 
     func configure(videosView view: UIView) {
@@ -97,8 +89,6 @@ class ChannelViewController: UIViewController {
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
-//        view.addSubview(controller.view)
-//        controller.view.frame = view.bounds
     }
 
     func configure(playlistsView view: UIView) {
@@ -107,9 +97,6 @@ class ChannelViewController: UIViewController {
         controller.parameters = parameters
         controller.navigatable = navigatable
         addChildViewController(controller)
-//        view.addSubview(controller.view)
-//        controller.view.frame = view.bounds
-//        view.hidden = true
     }
 
     func segmentChanged(sender: UISegmentedControl) {
@@ -134,6 +121,11 @@ class ChannelViewController: UIViewController {
 
     func addChannelToBookmark() {
         navigationItem.rightBarButtonItem?.enabled = true
+        Bookmark.add(channel)
+        navigationItem.rightBarButtonItem?.enabled = false
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": self.channel]))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        /*
         Bookmark.add(channel) { (result) in
             self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
@@ -149,6 +141,7 @@ class ChannelViewController: UIViewController {
                 Alert.error(error)
             }
         }
+        */
     }
 
     func removeFromBookmark() {

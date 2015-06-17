@@ -6,73 +6,74 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 
-import Result
-import Box
+//import Result
+//import Box
 import YouTubeKit
+import RealmSwift
+import XCGLogger
+
 import Parse
 
-class Collection {
+class Collection: Object {
 
-    var id: String {
-        return "collection_\(title)"
-    }
-    var index: Int
-    var title: String
-    var thumbnailURL: String?
-    var videoIds = [String]()
+    let logger = XCGLogger.defaultInstance()
 
-    init(index: Int, title: String) {
-        self.index = index
-        self.title = title
+    dynamic var index = 0
+    dynamic var title = ""
+    dynamic var thumbnailURL = ""
+    dynamic var videoIds = ""
+
+    var videoCount: Int {
+        return arrayedVideoIds.count
     }
 
-    init(object: PFObject) {
-        index = object["index"] as! Int
-        title = object["title"] as! String
-        thumbnailURL = object["thumbnailURL"] as? String
-        if let videoIds = object["videoIds"] as? [String] {
-            self.videoIds = videoIds
+    private var arrayedVideoIds: [String] {
+        return split(videoIds) { $0 == "," }
+    }
+
+    override static func primaryKey() -> String? {
+        return "title"
+    }
+
+    func save() {
+        let realm = Realm()
+        realm.write {
+            realm.add(self)
         }
     }
 
-    func toPFObject(#className: String) -> PFObject {
-        var object = PFObject(className: className)
-        object["id"] = id
-        object["index"] = index
-        object["title"] = title
-        if let thumbnailURL = thumbnailURL {
-            object["thumbnailURL"] = thumbnailURL
+    func set(#videos: [Video]) {
+        let realm = Realm()
+        realm.write {
+            if let video = videos.first {
+                self.thumbnailURL = video.thumbnailURL
+            } else {
+                self.thumbnailURL = ""
+            }
+            self.videoIds = ",".join(videos.map() { (video) -> String in video.id })
         }
-        object["videoIds"] = videoIds
-        return object
-    }
-
-    func add(video: Video) {
-        if contains(videoIds, video.id) {
-            return
-        }
-        if videoIds.count == 0 {
-            thumbnailURL = video.thumbnailURL
-        }
-        videoIds.append(video.id)
-    }
-
-    func set(videos: [Video]) {
-        /*
-        if let video = videos.first {
-            thumbnailURL = video.thumbnailURL
-        } else {
-            thumbnailURL = nil
-        }
-        */
-        thumbnailURL = videos.first?.thumbnailURL
-        videoIds = videos.map() { (video) -> String in video.id }
     }
 
     func insert(video: Video, atIndex: Int) {
-        videoIds.insert(video.id, atIndex: atIndex)
+        var arrayedIds = arrayedVideoIds
+        arrayedIds.insert(video.id, atIndex: atIndex)
         if atIndex == 0 {
             thumbnailURL = video.thumbnailURL
+        }
+    }
+
+    func add(video: Video) {
+        var arrayedIds = split(videoIds) { $0 == "," }
+        if contains(arrayedIds, video.id) {
+            return
+        }
+        let realm = Realm()
+        realm.write {
+            if arrayedIds.count == 0 {
+                self.thumbnailURL = video.thumbnailURL
+            }
+            arrayedIds.append(video.id)
+            self.videoIds = ",".join(arrayedIds)
         }
     }
 
@@ -80,104 +81,71 @@ class Collection {
 
 extension Collection {
 
-    class func all(handler: (Result<[PFObject], NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Collection")
+    class func setUp() -> () {
+        let realm = Realm()
+        realm.write {
+            realm.add(self.new(index: 0, title: NSLocalizedString("WATCH IT LATER", comment: "WATCH IT LATER")))
+        }
+    }
+
+    class func migrate() -> () {
+        var query = PFQuery(className: "Collection")
+        query.fromLocalDatastore()
         query.addAscendingOrder("index")
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let objects = objects as? [PFObject] {
-                handler(.Success(Box(objects)))
-                return
-            }
-            if let error = error {
-                handler(.Failure(Box(error)))
-                return
-            }
-            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
-        }
-    }
-
-    class func all(handler: (Result<[Collection], NSError>) -> Void) {
-        all { (result: Result<[PFObject], NSError>) in
-            switch result {
-            case .Success(let box):
-                let collections = box.value.map { (object) -> Collection in
-                    return Collection(object: object)
+        if let objects = query.findObjects() as? [PFObject] {
+            let realm = Realm()
+            realm.write {
+                for object in objects {
+                    if let index = object["index"] as? Int, let title = object["title"] as? String, let videoIds = object["videoIds"] as? [String] {
+                        let collection = Collection()
+                        collection.index = index
+                        collection.title = title
+                        if let thumbnailURL = object["thumbnailURL"] as? String {
+                            collection.thumbnailURL = thumbnailURL
+                        }
+                        collection.videoIds = ",".join(videoIds)
+                        realm.add(collection)
+                    }
                 }
-                handler(.Success(Box(collections)))
-            case .Failure(let box):
-                handler(.Failure(box))
             }
         }
     }
 
-    class func find(collection: Collection, handler: (Result<PFObject, NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Collection")
-        query.whereKey("title", equalTo: collection.title)
-        query.getFirstObjectInBackgroundWithBlock { (object, error) in
-            if let object = object {
-                handler(.Success(Box(object)))
-                return
+    class func new(#index: Int, title: String) -> Collection {
+        let collection = Collection()
+        collection.index = index
+        collection.title = title
+        return collection
+    }
+
+    class func create(#index: Int, title: String, videos: [Video]) {
+        let realm = Realm()
+        realm.write {
+            let collection = Collection()
+            collection.index = index
+            collection.title = title
+            if let video = videos.first {
+                collection.thumbnailURL = video.thumbnailURL
             }
-            if let error = error {
-                handler(.Failure(Box(error)))
-                return
-            }
-            handler(.Failure(Box(Parser.Error.Unknown.toNSError())))
+            collection.videoIds = ",".join(videos.map { (video) in video.id })
+            realm.add(collection)
         }
     }
 
-    class func count(collection: Collection, handler: (Result<Int, NSError>) -> Void) {
-        let query = Parser.sharedInstance.query("Collection")
-        query.whereKey("title", equalTo: collection.title)
-        query.countObjectsInBackgroundWithBlock { (count, error) -> Void in
-            if let error = error {
-                handler(.Failure(Box(error)))
-            } else {
-                handler(.Success(Box(Int(count))))
-            }
+    class func all() -> [Collection] {
+        let results = Realm().objects(Collection).sorted("index")
+        var collections = [Collection]()
+        for collection in results {
+            collections.append(collection)
         }
+        return collections 
     }
 
-    class func create(collection: Collection, handler: (Result<Bool, NSError>) -> Void) {
-        Parser.save(collection.toPFObject(className: "Collection")) { (result) in
-            handler(result)
-        }
-    }
-
-    class func save(collection: Collection, handler: (Result<Bool, NSError>) -> Void) {
-        find(collection) { (result) in
-            switch result {
-            case .Success(let box):
-                let object = box.value
-                if let thumbnailURL = collection.thumbnailURL {
-                    object["thumbnailURL"] = collection.thumbnailURL
-                } else {
-                    object.removeObjectForKey("thumbnailURL")
-                }
-                if collection.videoIds.count > 0 {
-                    object["videoIds"] = collection.videoIds
-                } else {
-                    object.removeObjectForKey("videoIds")
-                }
-                Parser.save(object) { (result) in
-                    handler(result)
-                }
-            case .Failure(let box):
-                handler(.Failure(box))
-            }
-        }
-    }
-
-    class func deleteAll(handler: (Result<Bool, NSError>) -> Void) {
-        all() { (result: Result<[PFObject], NSError>) in
-            switch result {
-            case .Success(let box):
-                Parser.destroy(box.value) { (result) in
-                    handler(result)
-                }
-            case .Failure(let box):
-                handler(.Failure(box))
-            }
+    class func exists(#title: String) -> Bool {
+        if let collection = Realm().objectForPrimaryKey(Collection.self, key: title) {
+            return true
+        } else {
+            return false
         }
     }
 

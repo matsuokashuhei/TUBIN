@@ -479,6 +479,9 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         addPlayerView(controller)
         play()
+        History.create(video)
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "WatchVideoNotification", object: self))
+        /*
         History.add(video) { (result) in
             switch result {
             case .Success(let box):
@@ -489,6 +492,7 @@ extension YouTubePlayerViewController: YouTubePlayerDelegate {
                 Alert.error(box.value)
             }
         }
+        */
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {
@@ -573,6 +577,7 @@ extension YouTubePlayerViewController {
     }
 
     func removeFromFavorite() {
+        /*
         navigationItem.rightBarButtonItem?.enabled = true
         Favorite.remove(video) { (result) in
             self.navigationItem.rightBarButtonItem?.enabled = false
@@ -589,6 +594,7 @@ extension YouTubePlayerViewController {
                 Alert.error(box.value)
             }
         }
+        */
     }
 }
 

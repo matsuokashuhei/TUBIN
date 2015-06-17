@@ -172,6 +172,8 @@ extension MiniPlayerView: YouTubePlayerDelegate {
     func mediaIsPreparedToPlayDidChange(controller: MPMoviePlayerController) {
         addPlayerView(controller)
         player.play()
+        History.create(player.nowPlaying)
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "WatchVideoNotification", object: self))
     }
 
     func playingAtTime(controller: MPMoviePlayerController) {

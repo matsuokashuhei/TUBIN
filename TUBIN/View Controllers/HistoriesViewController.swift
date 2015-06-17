@@ -10,14 +10,24 @@ import UIKit
 import YouTubeKit
 import Async
 import XCGLogger
+import RealmSwift
 
 class HistoriesViewController: UIViewController {
 
     let logger = XCGLogger.defaultInstance()
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+            tableView.allowsMultipleSelectionDuringEditing = true
+            tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
+        }
+    }
 
     var histories = [History]()
+
+    var edited = false
 
     convenience init() {
         self.init(nibName: "HistoriesViewController", bundle: NSBundle.mainBundle())
@@ -25,57 +35,51 @@ class HistoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure(tableView: tableView)
-        fetch()
-        __setEditing(false)
+        setEditing(false, animated: true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload:", name: "WatchVideoNotification", object: nil)
+        fetch()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    func configure(#tableView: UITableView) {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsMultipleSelectionDuringEditing = true
-        tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
-    }
+}
 
-    // MARK: - Parse
+// MARK: - Realm
+extension HistoriesViewController {
 
     func fetch() {
-        History.all { (result) -> Void in
-            switch result {
-            case .Success(let box):
-                Async.background {
-                    self.histories = box.value
-                }.main {
-                    self.tableView.reloadData()
-                }
-            case .Failure(let box):
-                let error = box.value
-                self.logger.error(error.localizedDescription)
-                Alert.error(error)
-            }
-        }
+        histories = History.all()
+        tableView.reloadData()
     }
 
-    func __setEditing(editing: Bool) {
-        tableView.setEditing(editing, animated: true)
+}
+
+// MARK: - Table view editing
+extension HistoriesViewController {
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        tableView.setEditing(editing, animated: animated)
         if let toolbar = tableView.tableFooterView as? UIToolbar {
             toolbar.items?.removeAll(keepCapacity: true)
-            if tableView.editing {
-                toolbar.setItems(
-                    [UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelEditing"), UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "endEditing")], animated: true)
+            if editing {
+                let cancel = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelEditing")
+                let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+                let trash = UIBarButtonItem(barButtonSystemItem: .Trash, target: self, action: "endEditing")
+                toolbar.setItems([cancel, space, trash], animated: true)
             } else {
-                toolbar.setItems([UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil), UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")], animated: true)
+                let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+                let edit = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "startEditing")
+                toolbar.setItems([space, edit], animated: true)
             }
         }
+        super.setEditing(editing, animated: animated)
+        edited = false
     }
 
     func startEditing() {
-        __setEditing(true)
+        setEditing(true, animated: true)
     }
 
     func endEditing() {
@@ -83,28 +87,24 @@ class HistoriesViewController: UIViewController {
             let histories = indexPaths.map() { (indexPath) -> History in
                 return self.histories[indexPath.row]
             }
-            History.destory(histories, handler: { (result) -> Void in
-                switch result {
-                case .Success(let box):
-                    break
-                case .Failure(let box):
-                    let error = box.value
-                    self.logger.error(error.localizedDescription)
-                    Alert.error(error)
-                }
-                self.fetch()
-            })
+            Spinner.show()
+            History.destroy(histories)
+            Spinner.dismiss()
+            fetch()
         }
-        __setEditing(false)
+        setEditing(false, animated: true)
     }
 
     func cancelEditing() {
-        __setEditing(false)
+        if edited {
+            fetch()
+        }
+        setEditing(false, animated: true)
     }
 
 }
 
-// MARK: - Table view Delegate
+// MARK: - Table view delegate
 extension HistoriesViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,9 +118,7 @@ extension HistoriesViewController: UITableViewDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)
         let controller = YouTubePlayerViewController(device: UIDevice.currentDevice())
         controller.video = histories[indexPath.row].video
-        controller.playlist = histories.map { (history) -> Video in
-            return history.video
-        }
+        controller.playlist = histories.map { (history) in return history.video }
         if let navigationController = navigationController {
             navigationController.pushViewController(controller, animated: true)
         }
@@ -156,7 +154,6 @@ extension HistoriesViewController {
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        //NSNotificationCenter.defaultCenter().removeObserver(self)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 

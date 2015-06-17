@@ -11,6 +11,7 @@ import YouTubeKit
 import Async
 import XCGLogger
 import Box
+import RealmSwift
 
 class CollectionViewController: UIViewController {
 
@@ -18,8 +19,6 @@ class CollectionViewController: UIViewController {
 
     var collection: Collection!
     var videos = [Video]()
-
-//    var parameters = [String: String]()
 
     var edited = false
 
@@ -42,7 +41,7 @@ class CollectionViewController: UIViewController {
 
         configure(navigationItem: navigationItem)
         setEditing(false, animated: true)
-        search()
+        fetch()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -55,44 +54,28 @@ class CollectionViewController: UIViewController {
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        //NSNotificationCenter.defaultCenter().removeObserver(self)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
     func configure(#navigationItem: UINavigationItem) {
         navigationItem.title = collection.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        /*
-        Bookmark.exists(id: collection.id) { (result) in
-            switch result {
-            case .Success(let box):
-                if box.value {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmarks")
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
-                } else {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addToBookmarks")
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
-                }
-            case .Failure(let box):
-                let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addToBookmarks")
-                self.navigationItem.rightBarButtonItem = bookmarkButton
-            }
-        }
-        */
     }
 
-    func search() {
+
+}
+
+// MARK: - YouTubeKit
+extension CollectionViewController {
+
+    func fetch() {
         Spinner.show()
-//        parameters = ["id": ",".join(collection.videoIds)]
-        let parameters = ["id": ",".join(collection.videoIds)]
+        let parameters = ["id": collection.videoIds]
         YouTubeKit.videos(parameters: parameters) { (result) -> Void in
             Spinner.dismiss()
             switch result {
             case .Success(let box):
                 self.videos = box.value.videos
-//                if let next = box.value.page.next {
-//                    self.parameters["pageToken"] = next
-//                }
                 Async.main {
                     self.tableView.reloadData()
                 }
@@ -103,26 +86,27 @@ class CollectionViewController: UIViewController {
         }
     }
 
-//    func searchMore() {
-//        YouTubeKit.videos(parameters: parameters) { (result) -> Void in
-//            switch result {
-//            case .Success(let box):
-//                for video in box.value.videos {
-//                    self.videos.append(video)
-//                }
-//                if let next = box.value.page.next {
-//                    self.parameters["pageToken"] = next
-//                } else {
-//                    self.parameters.removeValueForKey("pageToken")
-//                }
-//                Async.main {
-//                    self.tableView.reloadData()
-//                }
-//            case .Failure(let box):
-//                Alert.error(box.value)
-//            }
-//        }
-//    }
+}
+
+
+// MARK: - Realm
+extension CollectionViewController {
+
+    func edit() {
+        let realm = Realm()
+        realm.write {
+            if let video = self.videos.first {
+                self.collection.thumbnailURL = video.thumbnailURL
+            } else {
+                self.collection.thumbnailURL = ""
+            }
+            self.collection.videoIds = ",".join(self.videos.map() { (video) -> String in video.id })
+        }
+    }
+}
+
+// MARK: - Table editing
+extension CollectionViewController {
 
     override func setEditing(editing: Bool, animated: Bool) {
         tableView.setEditing(editing, animated: animated)
@@ -143,60 +127,23 @@ class CollectionViewController: UIViewController {
         edited = false
     }
 
-}
-
-extension CollectionViewController {
-
-    func addToBookmarks() {
-        navigationItem.rightBarButtonItem?.enabled = true
-        Bookmark.add(collection) { (result) in
-            self.navigationItem.rightBarButtonItem?.enabled = false
-            switch result {
-            case .Success(let box):
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": self.collection]))
-                Async.main {
-                    let bookmarkButton = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-                    self.navigationItem.rightBarButtonItem = bookmarkButton
-                }
-            case .Failure(let box):
-                let error = box.value
-                self.logger.error(error.localizedDescription)
-                Alert.error(box.value)
-            }
-        }
-    }
-
-    func removeFromBookmarks() {
-
-    }
-
-}
-
-extension CollectionViewController {
-
     func startEditing() {
         setEditing(true, animated: true)
     }
 
     func endEditing() {
         if edited {
-            collection.set(videos)
-            Collection.save(collection) { (result) in
-                switch result {
-                case .Success(let box):
-                    self.search()
-                    NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
-                case .Failure(let box):
-                    Alert.error(box.value)
-                }
-            }
+            Spinner.show()
+            edit()
+            Spinner.dismiss()
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
         }
         setEditing(false, animated: true)
     }
 
     func cancelEditing() {
         if edited {
-            search()
+            fetch()
         }
         setEditing(false, animated: true)
     }
@@ -206,16 +153,6 @@ extension CollectionViewController {
 extension CollectionViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        if indexPath.row < videos.count {
-//            let video = videos[indexPath.row]
-//            let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
-//            cell.configure(video)
-//            return cell
-//        } else {
-//            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
-//            cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
-//            return cell
-//        }
         let video = videos[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
         cell.configure(video)
@@ -223,16 +160,6 @@ extension CollectionViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView.editing {
-//            return videos.count
-//        } else {
-//            if videos.count > 0 {
-//                if let pageToken = parameters["pageToken"] {
-//                    return videos.count + 1
-//                }
-//            }
-//            return videos.count
-//        }
         return videos.count
     }
 

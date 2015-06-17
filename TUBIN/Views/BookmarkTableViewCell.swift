@@ -28,6 +28,37 @@ class BookmarkTableViewCell: UITableViewCell {
     }
 
     func configure(bookmark: Bookmark) {
+        switch bookmark.type {
+        case "playlist":
+            if let playlist = bookmark.playlist, let URL = NSURL(string: playlist.thumbnailURL) {
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                    if let image = image {
+                        self.thumbnailImageView.image = image.resizeToWide()
+                    }
+                })
+                titleLabel.text = playlist.title
+                channelTitleLabel.text = playlist.channelTitle
+            }
+        case "channel":
+            if let channel = bookmark.playlist, let URL = NSURL(string: channel.thumbnailURL) {
+                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
+                    if let image = image {
+                        self.thumbnailImageView.image = image.resizeToWide()
+                    }
+                })
+                titleLabel.text = channel.title
+                channelTitleLabel.hidden = true
+            }
+        case "popular", "music", "search", "favorite", "guide":
+            thumbnailImageView.image = UIImage(named: bookmark.imageName)?.imageWithRenderingMode(.AlwaysTemplate)
+            thumbnailImageView.contentMode = .ScaleAspectFit
+            //titleLabel.text = NSLocalizedString("Favorites", comment: "Favorites")
+            titleLabel.text = NSLocalizedString(bookmark.title, comment: bookmark.title)
+            channelTitleLabel.hidden = true
+        default:
+            break
+        }
+        /*
         switch bookmark.name {
         case "playlist":
             let playlist = bookmark.item as! Playlist
@@ -54,7 +85,8 @@ class BookmarkTableViewCell: UITableViewCell {
             channelTitleLabel.hidden = true
         case "collection":
             let collection = bookmark.collection!
-            if let thumbnailURL = collection.thumbnailURL, let URL = NSURL(string: thumbnailURL) {
+            //if let thumbnailURL = collection.thumbnailURL, let URL = NSURL(string: thumbnailURL) {
+            if let URL = NSURL(string: collection.thumbnailURL) {
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
                         self.thumbnailImageView.image = image.resizeToWide()
@@ -93,6 +125,7 @@ class BookmarkTableViewCell: UITableViewCell {
             titleLabel.text = bookmark.name
             channelTitleLabel.hidden = true
         }
+        */
     }
 
     // TODO: iOS 8 のバグを解消するためのコードである。バグが直っていたら消す。

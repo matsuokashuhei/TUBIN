@@ -3,7 +3,7 @@
 //  Tubin
 //
 //  Created by matsuosh on 2015/02/28.
-//  Copyright (c) 2015年 matsuosh. All rights reserved.
+//  Copyright (c) 2015蟷ｴ matsuosh. All rights reserved.
 //
 
 import Alamofire
@@ -14,24 +14,24 @@ extension Item {
 
     /*
     convenience init(object: PFObject) {
-        let id = object["id"] as String!
-        let publishedAt = object["publishedAt"] as? NSDate
-        let title = object["title"] as String!
-        let description = object["description"] as String!
-        let thumbnailURL = object["thumbnailURL"] as String!
-        self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL)
+    let id = object["id"] as String!
+    let publishedAt = object["publishedAt"] as? NSDate
+    let title = object["title"] as String!
+    let description = object["description"] as String!
+    let thumbnailURL = object["thumbnailURL"] as String!
+    self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL)
     }
 
     func toPFObject(#className: String) -> PFObject {
-        var object = PFObject(className: className)
-        object["id"] = self.id
-        object["title"] = self.title
-        object["description"] = self.description
-        if let publishedAt = self.publishedAt {
-            object["publishedAt"] = publishedAt
-        }
-        object["thumbnailURL"] = self.thumbnailURL
-        return object
+    var object = PFObject(className: className)
+    object["id"] = self.id
+    object["title"] = self.title
+    object["description"] = self.description
+    if let publishedAt = self.publishedAt {
+    object["publishedAt"] = publishedAt
+    }
+    object["thumbnailURL"] = self.thumbnailURL
+    return object
     }
     */
 }
@@ -128,15 +128,9 @@ extension Channel {
             object["publishedAt"] = publishedAt
         }
         object["thumbnailURL"] = thumbnailURL
-        if let viewCount = viewCount {
-            object["viewCount"] = viewCount
-        }
-        if let subscriberCount = subscriberCount {
-            object["subscriberCount"] = subscriberCount
-        }
-        if let videoCount = videoCount {
-            object["videoCount"] = videoCount
-        }
+        object["viewCount"] = viewCount
+        object["subscriberCount"] = subscriberCount
+        object["videoCount"] = videoCount
         return object
     }
 

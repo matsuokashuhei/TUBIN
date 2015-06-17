@@ -24,6 +24,13 @@ class PlaylistViewController: ItemsViewController {
             parameters = ["playlistId": playlist.id]
         }
     }
+    /*
+    var playlist: (id: String, title: String, thumbnailURL: String, channelId: String?)! {
+        didSet {
+            parameters = ["playlistId":playlist.id]
+        }
+    }
+    */
 
     @IBOutlet var channelView: ChannelView!
 
@@ -42,6 +49,14 @@ class PlaylistViewController: ItemsViewController {
         super.configure(navigationItem: navigationItem)
         navigationItem.title = playlist.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = {
+            if Bookmark.exists(type: "playlist", id: self.playlist.id) {
+                return UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "removeFromBookmark")
+            } else {
+                return UIBarButtonItem(image: UIImage(named: "ic_bookmark_outline_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: "addPlaylistToBookmark")
+            }
+        }()
+        /*
         Bookmark.exists(id: playlist.id) { (result) in
             switch result {
             case .Success(let box):
@@ -57,6 +72,7 @@ class PlaylistViewController: ItemsViewController {
                 self.navigationItem.rightBarButtonItem = bookmarkButton
             }
         }
+        */
     }
 
     override func configure(#tableView: UITableView) {
@@ -125,6 +141,11 @@ class PlaylistViewController: ItemsViewController {
     // MARK: Bookmark
     func addPlaylistToBookmark() {
         navigationItem.rightBarButtonItem?.enabled = true
+        Bookmark.add(playlist)
+        navigationItem.rightBarButtonItem?.enabled = false
+        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: AddToBookmarksNotification, object: self, userInfo: ["item": self.playlist]))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic_bookmark_24px"), style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        /*
         Bookmark.add(playlist) { (result) in
             self.navigationItem.rightBarButtonItem?.enabled = false
             switch result {
@@ -140,6 +161,7 @@ class PlaylistViewController: ItemsViewController {
                 Alert.error(box.value)
             }
         }
+        */
     }
 
     func removeFromBookmark() {

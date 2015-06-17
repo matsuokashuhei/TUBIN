@@ -30,14 +30,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics()])
 
         // Parse
-        Parser.configure()
+        //Parser.configure()
 
         // Settings
-        if !Defaults.hasKey("launched") {
+        if Defaults.hasKey("launched") {
+            if !Defaults.hasKey("migrated") {
+                Parser.configure()
+                Bookmark.setUp()
+                Bookmark.migrate()
+                Collection.migrate()
+                Parser.goodbye()
+                Defaults["migrated"] = true
+            }
+        } else {
+            Bookmark.setUp()
+            Collection.setUp()
             Defaults["launched"] = true
+            Defaults["migrated"] = true
             Defaults["upgraded"] = false
             Defaults["maxNumberOfHistories"] = 100
-            Defaults["theme"] = "Light"
+            Defaults["theme"] = "Dark"
         }
 
         if Defaults["theme"].string == "Light" {
