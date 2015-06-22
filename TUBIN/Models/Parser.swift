@@ -23,11 +23,15 @@ class Parser {
     }
 
     class func goodbye() {
-        if let objects = PFQuery(className: "Bookmark").findObjects() as? [PFObject] {
-            PFObject.deleteAll(objects)
-        }
-        if let objects = PFQuery(className: "Bookmark").findObjects() as? [PFObject] {
-            PFObject.deleteAll(objects)
+        for className in ["Bookmark", "Favorite", "History"] {
+            if let objects = PFQuery(className: className).findObjects() as? [PFObject] {
+                let result = PFObject.deleteAll(objects)
+                if result {
+                    XCGLogger.defaultInstance().info("\(className) を削除しました。")
+                }
+                let count = PFQuery(className: className).countObjects()
+                XCGLogger.defaultInstance().info("\(className) のcountObjects()は\(count)個です。")
+            }
         }
     }
 

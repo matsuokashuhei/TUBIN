@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // ロガー
-        XCGLogger.defaultInstance().setup(logLevel: .Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+        XCGLogger.defaultInstance().setup(logLevel: .Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
 
         // Fabric
         Fabric.with([Crashlytics()])
@@ -34,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Settings
         if Defaults.hasKey("launched") {
+            // 1.1以下のバージョンで起動したことがある場合
             if !Defaults.hasKey("migrated") {
+                // DBをマイグレートしていない場合
                 Parser.configure()
                 Bookmark.setUp()
                 Bookmark.migrate()
@@ -49,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Defaults["migrated"] = true
             Defaults["upgraded"] = false
             Defaults["maxNumberOfHistories"] = 100
-            Defaults["theme"] = "Dark"
+            Defaults["theme"] = "Light"
         }
 
         if Defaults["theme"].string == "Light" {
