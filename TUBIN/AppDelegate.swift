@@ -13,6 +13,7 @@ import Fabric
 import Crashlytics
 import SwiftyUserDefaults
 import XCGLogger
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -59,6 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             Appearance.apply(.Dark)
         }
+
+        // Realmのマイグレーション
+//        setSchemaVersion(1, Realm.defaultPath) { (migration, oldSchemaVersion) -> () in
+//        }
+        // App Storeのスクリーンショットをとるとき
+        //Defaults["upgraded"] = true
         // TODO: AppDelegateを綺麗に保つ4つのテクニック http://qiita.com/nori0620/items/66ebc623f63fc3f0ca20 を読んでコードを整えること。
         return true
     }

@@ -176,21 +176,24 @@ extension CollectionsViewController: UITableViewDelegate {
             let controller = UIAlertController(title: NSLocalizedString("Edit collection", comment: "Edit collection"), message: "", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
                 let textField = controller.textFields![0] as! UITextField
-                collection.title = textField.text
-                self.edited = true
+                let realm = Realm()
+                realm.write {
+                    collection.title = textField.text
+                }
+                //self.edited = true
                 tableView.reloadData()
+                self.setEditing(false, animated: true)
             }
             OKAction.enabled = false
             controller.addTextFieldWithConfigurationHandler { (textField) -> Void in
                 textField.placeholder = NSLocalizedString("Name", comment: "Name")
                 textField.text = collection.title
-                NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue
-                    .mainQueue()) { (notification) in
-                        if textField.text != "" {
-                            OKAction.enabled = Collection.exists(title: textField.text) == false
-                        } else {
-                            OKAction.enabled = false
-                        }
+                NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                    if textField.text != "" {
+                        OKAction.enabled = Collection.exists(title: textField.text) == false
+                    } else {
+                        OKAction.enabled = false
+                    }
                 }
             }
             controller.addAction(OKAction)

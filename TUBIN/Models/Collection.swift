@@ -31,9 +31,11 @@ class Collection: Object {
         return split(videoIds) { $0 == "," }
     }
 
+    /*
     override static func primaryKey() -> String? {
         return "title"
     }
+    */
 
     func save() {
         let realm = Realm()
@@ -142,11 +144,15 @@ extension Collection {
     }
 
     class func exists(#title: String) -> Bool {
-        if let collection = Realm().objectForPrimaryKey(Collection.self, key: title) {
+        let results = Realm().objects(Collection.self).filter("title = '\(title)'")
+        return results.count > 0
+        /*
+        //if let collections = Realm().objects(Collection.self).filter("title = '\(title)'") {
             return true
         } else {
             return false
         }
+        */
     }
 
 }

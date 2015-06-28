@@ -85,13 +85,12 @@ extension PopoverCollectionsViewController {
         OKAction.enabled = false
         controller.addTextFieldWithConfigurationHandler { (textField) -> Void in
             textField.placeholder = NSLocalizedString("Name", comment: "Name")
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue
-                .mainQueue()) { (notification) in
-                    if textField.text != "" {
-                        OKAction.enabled = Collection.exists(title: textField.text) == false
-                    } else {
-                        OKAction.enabled = false
-                    }
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                if textField.text != "" {
+                    OKAction.enabled = Collection.exists(title: textField.text) == false
+                } else {
+                    OKAction.enabled = false
+                }
             }
         }
         controller.addAction(OKAction)

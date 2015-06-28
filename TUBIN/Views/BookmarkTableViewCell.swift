@@ -38,12 +38,14 @@ class BookmarkTableViewCell: UITableViewCell {
                 })
                 titleLabel.text = playlist.title
                 channelTitleLabel.text = playlist.channelTitle
+                channelTitleLabel.hidden = false
             }
         case "channel":
-            if let channel = bookmark.playlist, let URL = NSURL(string: channel.thumbnailURL) {
+            if let channel = bookmark.channel, let URL = NSURL(string: channel.thumbnailURL) {
                 thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
                     if let image = image {
-                        self.thumbnailImageView.image = image.resizeToWide()
+                        self.thumbnailImageView.image = image
+                        self.thumbnailImageView.contentMode = .ScaleAspectFit
                     }
                 })
                 titleLabel.text = channel.title

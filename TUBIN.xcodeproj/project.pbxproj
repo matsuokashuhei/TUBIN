@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A82FC4391B300C9D0001E452 /* YouTubeKit+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */; };
-		A82FC4421B31BF270001E452 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82FC4411B31BF270001E452 /* YouTubeKit.framework */; };
-		A82FC4441B31BF330001E452 /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A82FC4411B31BF270001E452 /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A85785ED1B31C6080089AC4D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85785EC1B31C6080089AC4D /* Parser.swift */; };
 		A85785EF1B31CAF20089AC4D /* YouTubeKit+Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85785EE1B31CAF20089AC4D /* YouTubeKit+Parse.swift */; };
 		A8584C551AC6AE640066691E /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8584C531AC6AE640066691E /* UserViewController.swift */; };
@@ -71,6 +69,8 @@
 		A8CD32EB1AEB90C70003DABD /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */; };
 		A8D1078F1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1078E1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift */; };
 		A8D107951B109D9C00B5B08D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D107941B109D9C00B5B08D /* AVFoundation.framework */; };
+		A8D17CEB1B3FDF7700A4D877 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D17CE91B3FDF6500A4D877 /* YouTubeKit.framework */; };
+		A8D17CEC1B3FDF7700A4D877 /* YouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8D17CE91B3FDF6500A4D877 /* YouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8D402831AA8B7C700F0AAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */; };
 		A8D402881AA8B7C700F0AAD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8D402861AA8B7C700F0AAD2 /* Main.storyboard */; };
 		A8D4028A1AA8B7C700F0AAD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D402891AA8B7C700F0AAD2 /* Images.xcassets */; };
@@ -125,7 +125,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A82FC4441B31BF330001E452 /* YouTubeKit.framework in Embed Frameworks */,
+				A8D17CEC1B3FDF7700A4D877 /* YouTubeKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +135,6 @@
 /* Begin PBXFileReference section */
 		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Realm.swift"; sourceTree = "<group>"; };
-		A82FC4411B31BF270001E452 /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A85785EC1B31C6080089AC4D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		A85785EE1B31CAF20089AC4D /* YouTubeKit+Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Parse.swift"; sourceTree = "<group>"; };
 		A8584C531AC6AE640066691E /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +197,7 @@
 		A8CD32E91AEB90C70003DABD /* CollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
 		A8D1078E1B1077D900B5B08D /* YouTubeKit+MediaPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+MediaPlayer.swift"; sourceTree = "<group>"; };
 		A8D107941B109D9C00B5B08D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A8D17CE91B3FDF6500A4D877 /* YouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YouTubeKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/YouTubeKit-eyjpezvmaiswtpaujpwpkekltvte/Build/Products/Debug-iphoneos/YouTubeKit.framework"; sourceTree = "<group>"; };
 		A8D4027D1AA8B7C700F0AAD2 /* TUBIN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TUBIN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D402811AA8B7C700F0AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D402821AA8B7C700F0AAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				A86CC3E91AAB0456008669F2 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
-				A82FC4421B31BF270001E452 /* YouTubeKit.framework in Frameworks */,
+				A8D17CEB1B3FDF7700A4D877 /* YouTubeKit.framework in Frameworks */,
 				A8F211831B0E45B0001D9A07 /* Fabric.framework in Frameworks */,
 				A8F211841B0E45B0001D9A07 /* Crashlytics.framework in Frameworks */,
 			);
@@ -302,7 +302,7 @@
 		A8D402741AA8B7C700F0AAD2 = {
 			isa = PBXGroup;
 			children = (
-				A82FC4411B31BF270001E452 /* YouTubeKit.framework */,
+				A8D17CE91B3FDF6500A4D877 /* YouTubeKit.framework */,
 				A8F211811B0E45B0001D9A07 /* Fabric.framework */,
 				A8F211821B0E45B0001D9A07 /* Crashlytics.framework */,
 				A8D4027F1AA8B7C700F0AAD2 /* TUBIN */,
@@ -852,6 +852,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -895,6 +896,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -921,7 +923,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -931,7 +933,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5157cb76-53ed-41c8-a31b-30fda3f01e21";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TUBIN-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -956,7 +958,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5157cb76-53ed-41c8-a31b-30fda3f01e21";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TUBIN-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
