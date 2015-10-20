@@ -36,9 +36,11 @@ public extension SWColor {
     :param:   hexString
     :returns: color with the given hex string
     */
+    /*
     public convenience init?(hexString: String) {
         self.init(hexString: hexString, alpha: 1.0)
     }
+    */
 
     /**
     Create non-autoreleased color with in the given hex string and alpha
@@ -47,6 +49,7 @@ public extension SWColor {
     :param:   alpha
     :returns: color with the given hex string and alpha
     */
+    /*
     public convenience init?(hexString: String, alpha: Float) {
         var hex = hexString
 
@@ -89,6 +92,7 @@ public extension SWColor {
             return nil
         }
     }
+    */
 
     /**
     Create non-autoreleased color with in the given hex value
@@ -97,9 +101,11 @@ public extension SWColor {
     :param:   hex
     :returns: color with the given hex value
     */
+    /*
     public convenience init?(hex: Int) {
         self.init(hex: hex, alpha: 1.0)
     }
+    */
 
     /**
     Create non-autoreleased color with in the given hex value and alpha
@@ -108,8 +114,10 @@ public extension SWColor {
     :param:   alpha
     :returns: color with the given hex value and alpha
     */
+    /*
     public convenience init?(hex: Int, alpha: Float) {
         var hexString = NSString(format: "%2X", hex)
         self.init(hexString: hexString as String, alpha: alpha)
     }
+    */
 }

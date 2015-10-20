@@ -32,11 +32,11 @@ class Bookmark: Object {
         return _playlist?.toItem()
     }
     var preseted: Bool {
-        return contains(["popular", "search", "music", "favorite", "guide"], type)
+        return ["popular", "search", "music", "favorite", "guide"].contains(type)
     }
 
     var editable: Bool {
-        return contains(["playlist", "channel"], type)
+        return ["playlist", "channel"].contains(type)
     }
 
 }
@@ -93,10 +93,11 @@ extension Bookmark {
     }
 
     class func migrate() -> () {
-        var query = PFQuery(className: "Bookmark")
-        query.fromLocalDatastore()
-        query.addAscendingOrder("index")
-        if let objects = query.findObjects() as? [PFObject] {
+        do {
+            let query = PFQuery(className: "Bookmark")
+            query.fromLocalDatastore()
+            query.addAscendingOrder("index")
+            let objects = try query.findObjects()
             for object in objects {
                 if let name = object["name"] as? String {
                     if name == "playlist" {
@@ -115,6 +116,7 @@ extension Bookmark {
                     }
                 }
             }
+        } catch _ as NSError {
         }
 
     }
@@ -146,18 +148,26 @@ extension Bookmark {
         return bookmark
     }
 
-    class func exists(#type: String, id: String) -> Bool {
-        let results = Realm().objects(Bookmark).filter("type = '\(type)' AND id = '\(id)'")
-        return results.count > 0
+    class func exists(type type: String, id: String) -> Bool {
+        do {
+            let results = try Realm().objects(Bookmark).filter("type = '\(type)' AND id = '\(id)'")
+            return results.count > 0
+        } catch {
+            return false
+        }
     }
 
     class func all() -> [Bookmark] {
-        let results = Realm().objects(Bookmark).sorted("index")
-        var bookmarks = [Bookmark]()
-        for bookmark in results {
-            bookmarks.append(bookmark)
+        do {
+            let results = try Realm().objects(Bookmark).sorted("index")
+            var bookmarks = [Bookmark]()
+            for bookmark in results {
+                bookmarks.append(bookmark)
+            }
+            return bookmarks
+        } catch {
+            return [Bookmark]()
         }
-        return bookmarks
     }
 
     class func add(playlist: Playlist) {
@@ -171,14 +181,17 @@ extension Bookmark {
     }
 
     class func add(bookmark: Bookmark) {
-        let realm = Realm()
-        if let bookmark = realm.objectForPrimaryKey(Bookmark.self, key: bookmark.id) {
-            return
-        }
-        let bookmarks = realm.objects(Bookmark).sorted("index")
-        realm.write {
-            bookmark.index = bookmarks.count + 1
-            realm.add(bookmark)
+        do {
+            let realm = try Realm()
+            if let bookmark = try realm.objectForPrimaryKey(Bookmark.self, key: bookmark.id) {
+                return
+            }
+            let bookmarks = realm.objects(Bookmark).sorted("index")
+            try realm.write {
+                bookmark.index = bookmarks.count + 1
+                realm.add(bookmark)
+            }
+        } catch {
         }
     }
 

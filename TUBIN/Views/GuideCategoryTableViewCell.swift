@@ -9,6 +9,7 @@
 import UIKit
 import YouTubeKit
 import XCGLogger
+import AlamofireImage
 
 class GuideCategoryTableViewCell: UITableViewCell {
 
@@ -32,12 +33,8 @@ class GuideCategoryTableViewCell: UITableViewCell {
         titleLabel.text = category.title
         if let channel = category.channel {
             if let URL = NSURL(string: channel.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
-                    if let image = image {
-                        self.thumbnailImageView.image = image
-                        self.thumbnailImageView.contentMode = .ScaleAspectFit
-                    }
-                }
+                thumbnailImageView.af_setImageWithURL(URL)
+                thumbnailImageView.contentMode = .ScaleAspectFit
             }
         }
     }

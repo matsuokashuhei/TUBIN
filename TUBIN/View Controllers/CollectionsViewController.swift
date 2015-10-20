@@ -8,7 +8,6 @@
 
 import UIKit
 import Result
-import Box
 import XCGLogger
 import Async
 //import Parse
@@ -65,14 +64,18 @@ extension CollectionsViewController {
     }
 
     func edit() {
-        let realm = Realm()
-        realm.write {
-            for collection in self.removes {
-                realm.delete(collection)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                for collection in self.removes {
+                    realm.delete(collection)
+                }
+                for (index, collection) in self.collections.enumerate() {
+                    collection.index = index
+                }
             }
-            for (index, collection) in enumerate(self.collections) {
-                collection.index = index
-            }
+        } catch let error as NSError {
+            logger.error(error.description)
         }
     }
 
@@ -175,10 +178,10 @@ extension CollectionsViewController: UITableViewDelegate {
         if tableView.editing {
             let controller = UIAlertController(title: NSLocalizedString("Edit collection", comment: "Edit collection"), message: "", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
-                let textField = controller.textFields![0] as! UITextField
-                let realm = Realm()
-                realm.write {
-                    collection.title = textField.text
+                let textField = controller.textFields![0] 
+                let realm = try! Realm()
+                try! realm.write {
+                    collection.title = textField.text!
                 }
                 //self.edited = true
                 tableView.reloadData()
@@ -190,7 +193,7 @@ extension CollectionsViewController: UITableViewDelegate {
                 textField.text = collection.title
                 NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
                     if textField.text != "" {
-                        OKAction.enabled = Collection.exists(title: textField.text) == false
+                        OKAction.enabled = Collection.exists(title: textField.text!) == false
                     } else {
                         OKAction.enabled = false
                     }
@@ -217,7 +220,7 @@ extension CollectionsViewController: UITableViewDelegate {
 extension CollectionsViewController {
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

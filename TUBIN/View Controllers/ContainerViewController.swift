@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import Result
-import Box
 import Async
 import XCGLogger
 
@@ -214,6 +213,7 @@ extension ContainerViewController {
 extension ContainerViewController: TabBarDelegate {
 
     func tabBar(tabBar: TabBar, didSelectTabAtIndex index: Int) {
+        logger.verbose("index: \(index)")
         containerView.delegate = nil
         containerView.selectViewAtIndex(index)
         containerView.delegate = self

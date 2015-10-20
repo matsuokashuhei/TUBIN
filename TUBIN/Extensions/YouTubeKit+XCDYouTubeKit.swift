@@ -8,7 +8,6 @@
 
 import YouTubeKit
 import Result
-import Box
 import XCDYouTubeKit
 
 extension Video {
@@ -23,21 +22,21 @@ extension Video {
     func streamURL(handler: (Result<NSURL, NSError>) -> Void) {
         XCDYouTubeClient.defaultClient().getVideoWithIdentifier(id) { (video, error) -> Void in
             if let error = error {
-                handler(.Failure(Box(error)))
+                handler(.Failure(error))
                 return
             }
             if let video = video {
                 for quality in [Quality.FullHigh, Quality.High, Quality.Medium, Quality.Low] {
                     if let streamURL = video.streamURLs[quality.rawValue] as? NSURL {
-                        handler(.Success(Box(streamURL)))
+                        handler(.Success(streamURL))
                         return
                     }
                 }
                 let error = NSError(domain: "XCDYouTubeKitErrorDomain", code: 99999, userInfo: [NSLocalizedDescriptionKey: "XCDYouTubeKit did not return streamURL."])
-                handler(.Failure(Box(error)))
+                handler(.Failure(error))
             } else {
                 let error = NSError(domain: "XCDYouTubeKitErrorDomain", code: 99999, userInfo: [NSLocalizedDescriptionKey: "XCDYouTubeKit did not return video."])
-                handler(.Failure(Box(error)))
+                handler(.Failure(error))
             }
         }
     }

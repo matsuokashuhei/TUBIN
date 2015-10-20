@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         // ロガー
-        XCGLogger.defaultInstance().setup(logLevel: .Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+        XCGLogger.defaultInstance().setup(.Verbose, showLogIdentifier: false, showFunctionName: true, showThreadName: true, showLogLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: nil, fileLogLevel: nil)
 
         // Fabric
         Fabric.with([Crashlytics()])
@@ -70,13 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
-        if let touch = touches.first as? UITouch {
-            let location = touch.locationInView(window)
-            if CGRectContainsPoint(UIApplication.sharedApplication().statusBarFrame, location) {
-                NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: StatusBarTouchedNotification, object: nil))
-            }
+        guard let touch = touches.first else {
+            return
+        }
+        let location = touch.locationInView(window)
+        if CGRectContainsPoint(UIApplication.sharedApplication().statusBarFrame, location) {
+            NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: StatusBarTouchedNotification, object: nil))
         }
     }
 
@@ -85,7 +86,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
     }
 
-    override func remoteControlReceivedWithEvent(event: UIEvent) {
+    override func remoteControlReceivedWithEvent(event: UIEvent?) {
+        guard let event = event else {
+            return
+        }
         if event.type == .RemoteControl {
             let player = YouTubePlayer.sharedInstance
             switch event.subtype {
@@ -102,5 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+
 }
 

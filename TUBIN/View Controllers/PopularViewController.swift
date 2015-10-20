@@ -78,7 +78,7 @@ class PopularViewController: UIViewController {
     func segmentChanged(sender: UISegmentedControl) {
         let selectedSegmentIndex = sender.selectedSegmentIndex
         if let controller = childViewControllers[selectedSegmentIndex] as? ItemsViewController {
-            for (index, view) in enumerate(containerViews) {
+            for (index, view) in containerViews.enumerate() {
                 view.hidden = index != selectedSegmentIndex
                 if view.hidden {
                     (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in

@@ -20,11 +20,11 @@ class Toast {
     }
     */
 
-    class func addToFavorites(#video: Video) {
+    class func addToFavorites(video video: Video) {
         sharedInstance.addToFavorites(video: video)
     }
 
-    class func addToBookmarks(#item: Item) {
+    class func addToBookmarks(item item: Item) {
         sharedInstance.addToBookmarks(item: item)
     }
 
@@ -50,7 +50,7 @@ class Toast {
         CRToastManager.setDefaultOptions(options)
     }
 
-    func addToBookmarks(#item: Item) {
+    func addToBookmarks(item item: Item) {
         let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastTextKey: NSLocalizedString("Added to bookmarks!", comment: "Added to bookmarks!")
@@ -58,7 +58,7 @@ class Toast {
         CRToastManager.showNotificationWithOptions(options, completionBlock: nil)
     }
 
-    func addToFavorites(#video: Video) {
+    func addToFavorites(video video: Video) {
         let options:[String: AnyObject] = [
             kCRToastNotificationTypeKey: CRToastType.StatusBar.rawValue,
             kCRToastTextKey: NSLocalizedString("Added to favorites!", comment: "Added to favorites")

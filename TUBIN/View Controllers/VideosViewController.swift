@@ -8,7 +8,7 @@
 
 import UIKit
 import YouTubeKit
-import Result
+import Alamofire
 
 class VideosViewController: ItemsViewController {
 
@@ -28,7 +28,7 @@ class VideosViewController: ItemsViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func configure(#tableView: UITableView) {
+    override func configure(tableView tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
@@ -44,10 +44,10 @@ class VideosViewController: ItemsViewController {
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    self.searchCompletion(page: box.value.page, items: box.value.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchCompletion(page: value.page, items: value.items)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         }
@@ -60,16 +60,16 @@ class VideosViewController: ItemsViewController {
         } else {
             YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in
                 switch response {
-                case .Success(let box):
-                    self.searchMoreCompletion(page: box.value.page, items: box.value.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchMoreCompletion(page: value.page, items: value.items)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         }
     }
 
-    func videos(#parameters: [String: String]) {
+    func videos(parameters parameters: [String: String]) {
         self.parameters = parameters
         super.search()
         //super.search(parameters: parameters)
@@ -79,10 +79,10 @@ class VideosViewController: ItemsViewController {
     func videos() {
         YouTubeKit.videos(parameters: parameters) { (result) in
             switch result {
-            case .Success(let box):
-                self.searchCompletion(page: box.value.page, items: box.value.videos)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchCompletion(page: value.page, items: value.videos)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -90,10 +90,10 @@ class VideosViewController: ItemsViewController {
     func moreVideos() {
         YouTubeKit.videos(parameters: parameters) { (result) in
             switch result {
-            case .Success(let box):
-                self.searchMoreCompletion(page: box.value.page, items: box.value.videos)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchMoreCompletion(page: value.page, items: value.videos)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -111,20 +111,16 @@ extension VideosViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
             let item = items[indexPath.row] as! Video
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
-
-}
-
-extension VideosViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)

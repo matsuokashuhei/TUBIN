@@ -10,7 +10,6 @@ import UIKit
 import YouTubeKit
 import Async
 import Result
-import Box
 
 class MusicViewController: UIViewController {
 
@@ -66,15 +65,15 @@ class MusicViewController: UIViewController {
 extension MusicViewController {
 
     func fetch() {
-        YouTubeKit.playlists(parameters: ["id": ",".join(playlistIds)]) { result in
+        YouTubeKit.playlists(parameters: ["id": playlistIds.joinWithSeparator(",")]) { result in
             switch result {
-            case .Success(let box):
-                self.playlists = box.value
+            case .Success(let playlists):
+                self.playlists = playlists
                 Async.main {
                     self.tableView.reloadData()
                 }
-            case .Failure(let box):
-                Alert.error(box.value)
+            case .Failure(let error):
+                Alert.error(error)
             }
         }
     }
@@ -125,7 +124,7 @@ extension MusicViewController {
     }
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

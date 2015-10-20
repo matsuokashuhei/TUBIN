@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import Result
-import Box
 import Async
 import XCGLogger
 
@@ -54,12 +53,12 @@ class ItemsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 
-    func configure(#tableView: UITableView) {
+    func configure(tableView tableView: UITableView) {
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         tableView.delegate = self
@@ -94,7 +93,7 @@ class ItemsViewController: UIViewController {
         }
     }
 
-    func searchCompletion(#page: Page, items: [Item]) {
+    func searchCompletion(page page: Page, items: [Item]) {
         logger.verbose("START")
         Async.background {
             self.items = items
@@ -114,7 +113,7 @@ class ItemsViewController: UIViewController {
         }
     }
 
-    func searchMoreCompletion(#page: Page, items: [Item]) {
+    func searchMoreCompletion(page page: Page, items: [Item]) {
         Async.background {
             if let next = page.next {
                 self.parameters["pageToken"] = next
@@ -219,22 +218,12 @@ extension ItemsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.count > 0 {
-            if let pageToken = parameters["pageToken"] {
+            if let _ = parameters["pageToken"] {
                 return items.count + 1
             }
         }
         return items.count
     }
-
-// セルをタッチする操作が鈍くなるのでやめる。
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        cell.alpha = 0
-//        UIView.animateWithDuration(0.5, animations: { cell.alpha = 1 })
-//    }
-
-}
-
-extension ItemsViewController: UITableViewDelegate {
 
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: HideKeyboardNotification, object: self))
@@ -244,7 +233,7 @@ extension ItemsViewController: UITableViewDelegate {
 extension ItemsViewController {
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

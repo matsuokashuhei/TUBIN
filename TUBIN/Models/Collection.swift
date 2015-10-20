@@ -28,7 +28,8 @@ class Collection: Object {
     }
 
     private var arrayedVideoIds: [String] {
-        return split(videoIds) { $0 == "," }
+        return videoIds.componentsSeparatedByString(",")
+        //return split(videoIds.characters) { $0 == "," }
     }
 
     /*
@@ -38,21 +39,29 @@ class Collection: Object {
     */
 
     func save() {
-        let realm = Realm()
-        realm.write {
-            realm.add(self)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(self)
+            }
+        } catch let error as NSError {
+            logger.error(error.description)
         }
     }
 
-    func set(#videos: [Video]) {
-        let realm = Realm()
-        realm.write {
-            if let video = videos.first {
-                self.thumbnailURL = video.thumbnailURL
-            } else {
-                self.thumbnailURL = ""
+    func set(videos videos: [Video]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if let video = videos.first {
+                    self.thumbnailURL = video.thumbnailURL
+                } else {
+                    self.thumbnailURL = ""
+                }
+                self.videoIds = videos.map() { (video) -> String in video.id }.joinWithSeparator(",")
             }
-            self.videoIds = ",".join(videos.map() { (video) -> String in video.id })
+        } catch let error as NSError {
+            logger.error(error.description)
         }
     }
 
@@ -65,17 +74,21 @@ class Collection: Object {
     }
 
     func add(video: Video) {
-        var arrayedIds = split(videoIds) { $0 == "," }
-        if contains(arrayedIds, video.id) {
+        var arrayedIds = videoIds.componentsSeparatedByString(",")
+        if arrayedIds.contains(video.id) {
             return
         }
-        let realm = Realm()
-        realm.write {
-            if arrayedIds.count == 0 {
-                self.thumbnailURL = video.thumbnailURL
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if arrayedIds.count == 0 {
+                    self.thumbnailURL = video.thumbnailURL
+                }
+                arrayedIds.append(video.id)
+                self.videoIds = arrayedIds.joinWithSeparator(",")
             }
-            arrayedIds.append(video.id)
-            self.videoIds = ",".join(arrayedIds)
+        } catch let error as NSError {
+            logger.error(error.description)
         }
     }
 
@@ -84,19 +97,24 @@ class Collection: Object {
 extension Collection {
 
     class func setUp() -> () {
-        let realm = Realm()
-        realm.write {
-            realm.add(self.new(index: 0, title: NSLocalizedString("WATCH IT LATER", comment: "WATCH IT LATER")))
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(self.new(index: 0, title: NSLocalizedString("WATCH IT LATER", comment: "WATCH IT LATER")))
+            }
+        } catch let error as NSError {
+            XCGLogger.defaultInstance().error(error.description)
         }
     }
 
     class func migrate() -> () {
-        var query = PFQuery(className: "Collection")
-        query.fromLocalDatastore()
-        query.addAscendingOrder("index")
-        if let objects = query.findObjects() as? [PFObject] {
-            let realm = Realm()
-            realm.write {
+        do {
+            let query = PFQuery(className: "Collection")
+            query.fromLocalDatastore()
+            query.addAscendingOrder("index")
+            let objects = try query.findObjects()
+            let realm = try Realm()
+            try realm.write {
                 for object in objects {
                     if let index = object["index"] as? Int, let title = object["title"] as? String, let videoIds = object["videoIds"] as? [String] {
                         let collection = Collection()
@@ -105,47 +123,54 @@ extension Collection {
                         if let thumbnailURL = object["thumbnailURL"] as? String {
                             collection.thumbnailURL = thumbnailURL
                         }
-                        collection.videoIds = ",".join(videoIds)
+                        collection.videoIds = videoIds.joinWithSeparator(",")
                         realm.add(collection)
                     }
                 }
             }
+        } catch let error as NSError {
+            XCGLogger.defaultInstance().error(error.description)
         }
     }
 
-    class func new(#index: Int, title: String) -> Collection {
+    class func new(index index: Int, title: String) -> Collection {
         let collection = Collection()
         collection.index = index
         collection.title = title
         return collection
     }
 
-    class func create(#index: Int, title: String, videos: [Video]) {
-        let realm = Realm()
-        realm.write {
-            let collection = Collection()
-            collection.index = index
-            collection.title = title
-            if let video = videos.first {
-                collection.thumbnailURL = video.thumbnailURL
+    class func create(index index: Int, title: String, videos: [Video]) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                let collection = Collection()
+                collection.index = index
+                collection.title = title
+                if let video = videos.first {
+                    collection.thumbnailURL = video.thumbnailURL
+                }
+                collection.videoIds = videos.map { (video) in video.id }.joinWithSeparator(",")
+                realm.add(collection)
             }
-            collection.videoIds = ",".join(videos.map { (video) in video.id })
-            realm.add(collection)
+        } catch let error as NSError {
+            XCGLogger.defaultInstance().error(error.description)
         }
     }
 
     class func all() -> [Collection] {
-        let results = Realm().objects(Collection).sorted("index")
-        var collections = [Collection]()
-        for collection in results {
-            collections.append(collection)
+        do {
+            let results = try Realm().objects(Collection).sorted("index")
+            let collections = results.map { (result) -> Collection in result }
+            return collections
+        } catch let error as NSError {
+            XCGLogger.defaultInstance().error(error.description)
+            return [Collection]()
         }
-        return collections 
     }
 
-    class func exists(#title: String) -> Bool {
-        let results = Realm().objects(Collection.self).filter("title = '\(title)'")
-        return results.count > 0
+    class func exists(title title: String) -> Bool {
+        return try! Realm().objects(Collection.self).filter("title = '\(title)'").count > 0
         /*
         //if let collections = Realm().objects(Collection.self).filter("title = '\(title)'") {
             return true

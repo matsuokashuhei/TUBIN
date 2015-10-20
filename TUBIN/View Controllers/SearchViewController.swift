@@ -90,7 +90,7 @@ class SearchViewController: UIViewController {
     }
 
     // MARK: - Configuration
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 
@@ -98,7 +98,7 @@ class SearchViewController: UIViewController {
     func segmentChanged(sender: UISegmentedControl) {
         let selectedSegmentIndex = sender.selectedSegmentIndex
         let controller = childViewControllers[selectedSegmentIndex] as! ItemsViewController
-        for (index, view) in enumerate(containerViews) {
+        for (index, view) in containerViews.enumerate() {
             view.hidden = index != selectedSegmentIndex
             if view.hidden {
                 (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in
@@ -109,9 +109,16 @@ class SearchViewController: UIViewController {
                 controller.view.frame = view.bounds
             }
         }
+        if let text = searchBar.text {
+            if text.isEmpty {
+                return
+            }
+        }
+        /*
         if searchBar.text.isEmpty {
             return
         }
+        */
         if controller.items.count > 0 && controller.parameters["q"] == searchBar.text {
             return
         }
@@ -127,11 +134,14 @@ class SearchViewController: UIViewController {
     }
 
     func search() {
+        guard let text = searchBar.text else {
+            return
+        }
         containerViewAtSelectedSegmentIndex().hidden = false
         suggestionsTableView.hidden = true
         searchBar.resignFirstResponder()
         let itemsViewController = itemViewControllerAtSelectedSegmentIndex()
-        itemsViewController.parameters = ["q": searchBar.text]
+        itemsViewController.parameters = ["q": text]
         itemsViewController.search()
     }
 
@@ -157,7 +167,7 @@ extension SearchViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SuggestionTableViewCell", forIndexPath: indexPath)
         cell.textLabel?.font = UIFont(name: Appearance.Font.name, size: 15.0)
         cell.textLabel?.text = suggestions[indexPath.row]
         cell.textLabel?.textColor = Appearance.sharedInstance.theme.textColor
@@ -169,26 +179,26 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if (searchBar.text as NSString).length > 0 {
-            YouTubeKit.suggestions(keyword: searchBar.text) { (response) -> Void in
-                switch response {
-                case .Success(let box):
-                    Async.main {
-                        self.suggestionsTableView.hidden = false
-                        self.containerViewAtSelectedSegmentIndex().hidden = true
-                        self.suggestions = box.value
-                        self.suggestionsTableView.reloadData()
-                    }
-                case .Failure(let box):
-                    self.logger.error(box.value.localizedDescription)
-                    self.containerViewAtSelectedSegmentIndex().hidden = false
-                    self.suggestionsTableView.hidden = true
-                    break
-                }
-            }
-        } else {
+        guard let text = searchBar.text where text.characters.count > 0 else {
             self.containerViewAtSelectedSegmentIndex().hidden = false
             self.suggestionsTableView.hidden = true
+            return
+        }
+        YouTubeKit.suggestions(keyword: text) { (response) -> Void in
+            switch response {
+            case .Success(let suggestions):
+                Async.main {
+                    self.suggestionsTableView.hidden = false
+                    self.containerViewAtSelectedSegmentIndex().hidden = true
+                    self.suggestions = suggestions
+                    self.suggestionsTableView.reloadData()
+                }
+            case .Failure(let error):
+                self.logger.error(error.localizedDescription)
+                self.containerViewAtSelectedSegmentIndex().hidden = false
+                self.suggestionsTableView.hidden = true
+                break
+            }
         }
     }
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {

@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import Result
+import Alamofire
+//import Result
 
 class PlaylistsViewController: ItemsViewController {
 
@@ -26,7 +27,7 @@ class PlaylistsViewController: ItemsViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func configure(#tableView: UITableView) {
+    override func configure(tableView tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "PlaylistTableViewCell", bundle: nil), forCellReuseIdentifier: "PlaylistTableViewCell")
@@ -38,10 +39,10 @@ class PlaylistsViewController: ItemsViewController {
         super.search()
         YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
             switch result {
-            case .Success(let box):
-                self.searchCompletion(page: box.value.page, items: box.value.items)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchCompletion(page: value.page, items: value.items)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -50,10 +51,10 @@ class PlaylistsViewController: ItemsViewController {
         super.searchMore()
         YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Playlist]), NSError>) -> Void in
             switch result {
-            case .Success(let box):
-                self.searchMoreCompletion(page: box.value.page, items: box.value.items)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchMoreCompletion(page: value.page, items: value.items)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -64,20 +65,16 @@ extension PlaylistsViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            var cell  = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
+            let cell  = tableView.dequeueReusableCellWithIdentifier("PlaylistTableViewCell", forIndexPath: indexPath) as! PlaylistTableViewCell
             let item = items[indexPath.row] as! Playlist
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
-    
-}
-
-extension PlaylistsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let controller = PlaylistViewController()

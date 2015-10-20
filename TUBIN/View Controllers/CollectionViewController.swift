@@ -10,7 +10,6 @@ import UIKit
 import YouTubeKit
 import Async
 import XCGLogger
-import Box
 import RealmSwift
 
 class CollectionViewController: UIViewController {
@@ -57,7 +56,7 @@ class CollectionViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: StatusBarTouchedNotification, object: nil)
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         navigationItem.title = collection.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
@@ -74,14 +73,14 @@ extension CollectionViewController {
         YouTubeKit.videos(parameters: parameters) { (result) -> Void in
             Spinner.dismiss()
             switch result {
-            case .Success(let box):
-                self.videos = box.value.videos
+            case .Success(let value):
+                self.videos = value.videos
                 Async.main {
                     self.tableView.reloadData()
                 }
-            case .Failure(let box):
+            case .Failure(let error):
                 Spinner.dismiss()
-                Alert.error(box.value)
+                Alert.error(error)
             }
         }
     }
@@ -93,14 +92,18 @@ extension CollectionViewController {
 extension CollectionViewController {
 
     func edit() {
-        let realm = Realm()
-        realm.write {
-            if let video = self.videos.first {
-                self.collection.thumbnailURL = video.thumbnailURL
-            } else {
-                self.collection.thumbnailURL = ""
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if let video = self.videos.first {
+                    self.collection.thumbnailURL = video.thumbnailURL
+                } else {
+                    self.collection.thumbnailURL = ""
+                }
+                self.collection.videoIds = self.videos.map() { (video) -> String in video.id }.joinWithSeparator(",")
             }
-            self.collection.videoIds = ",".join(self.videos.map() { (video) -> String in video.id })
+        } catch let error as NSError {
+            logger.error(error.description)
         }
     }
 }
@@ -212,7 +215,7 @@ extension CollectionViewController: UITableViewDelegate {
 extension CollectionViewController {
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

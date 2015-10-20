@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class CollectionTableViewCell: UITableViewCell {
 
@@ -23,12 +25,17 @@ class CollectionTableViewCell: UITableViewCell {
     }
 
     func configure(collection: Collection) {
-        if let URL = NSURL(string: collection.thumbnailURL) where URL.absoluteString?.isEmpty == false {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                if let image = image {
-                    self.thumbnailImageView.image = image.resizeToWide()
+        if let URL = NSURL(string: collection.thumbnailURL) where URL.absoluteString.isEmpty == false {
+            Alamofire.request(.GET, URL).responseImage { (response) in
+                switch response.result {
+                case .Success(let image):
+                    let wideImage = image.resizeToWide()
+                    self.thumbnailImageView.image = wideImage
+                    //self.thumbnailImageView.image = image.resizeToWide()
+                case .Failure(let error):
+                    break
                 }
-            })
+            }
             thumbnailImageView.alpha = 1
         } else {
             thumbnailImageView.alpha = 0.5

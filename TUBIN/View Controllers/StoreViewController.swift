@@ -9,6 +9,7 @@
 import UIKit
 import StoreKit
 import XCGLogger
+import ReachabilitySwift
 
 class StoreViewController: UIViewController {
 
@@ -75,16 +76,17 @@ class StoreViewController: UIViewController {
     }
 
     func purchaseButtonClicked(sender: UIButton) {
-        if let product = product {
-            if Reachability.reachabilityForInternetConnection().isReachable() {
-                let payment = SKPayment(product: product)
-                SKPaymentQueue.defaultQueue().addPayment(payment)
-            }
+        guard let product = self.product else {
+            return
+        }
+        if let reachability = Reachability.reachabilityForInternetConnection() where reachability.isReachable() {
+            let payment = SKPayment(product: product)
+            SKPaymentQueue.defaultQueue().addPayment(payment)
         }
     }
 
     func restoreButtonClicked(sender: UIButton) {
-        if Reachability.reachabilityForInternetConnection().isReachable() {
+        if let reachability = Reachability.reachabilityForInternetConnection() where reachability.isReachable() {
             Spinner.show(options: ["allowUserInteraction": false])
             SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
         }
@@ -94,8 +96,8 @@ class StoreViewController: UIViewController {
 
 extension StoreViewController: SKProductsRequestDelegate {
 
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
-        if let product = response.products.first as? SKProduct {
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        if let product = response.products.first {
             self.product = product
             if let price = formatPrice(product) {
                 priceLabel.text = price
@@ -105,11 +107,11 @@ extension StoreViewController: SKProductsRequestDelegate {
         }
     }
 
-    func request(request: SKRequest!, didFailWithError error: NSError!) {
+    func request(request: SKRequest, didFailWithError error: NSError) {
         logger.debug("error: \(error.localizedDescription)")
     }
 
-    func requestDidFinish(request: SKRequest!) {
+    func requestDidFinish(request: SKRequest) {
         logger.debug("")
     }
 
@@ -129,68 +131,65 @@ extension StoreViewController: SKProductsRequestDelegate {
 
 extension StoreViewController: SKPaymentTransactionObserver {
 
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         logger.debug("")
         for transaction in transactions {
-            if let transaction = transaction as? SKPaymentTransaction {
-                // トランザクションの状況
-                switch transaction.transactionState {
-                case .Purchasing:
-                    logger.debug("Purchasing")
-                    Spinner.show(options: ["allowUserInteraction": false])
-                case .Purchased:
-                    logger.debug("Purchased")
-                    upgradeApp()
-                    Spinner.dismiss()
-                case .Failed:
-                    logger.debug("Failed")
-                    Spinner.dismiss()
-                    let message: String = {
-                        if let error = transaction.error {
-                            return error.localizedDescription
-                        } else {
-                            return ""
-                        }
-                    }()
-                    let alert = UIAlertController(title: NSLocalizedString("Failed", comment: "Failed"), message: message, preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("Dismis", comment: "Dismis"), style: .Default, handler: nil))
-                    presentViewController(alert, animated: true, completion: nil)
-                case .Restored:
-                    logger.debug("Restored")
-                    restoreApp()
-                    Spinner.dismiss()
-                case .Deferred:
-                    logger.debug("Defered")
-                    Spinner.dismiss()
-                }
-                // トランザクションの終了
-                switch transaction.transactionState {
-                case .Purchased, .Failed, .Restored:
-                    SKPaymentQueue.defaultQueue().finishTransaction(transaction)
-                default:
-                    break
-                }
+            // トランザクションの状況
+            switch transaction.transactionState {
+            case .Purchasing:
+                logger.debug("Purchasing")
+                Spinner.show(options: ["allowUserInteraction": false])
+            case .Purchased:
+                logger.debug("Purchased")
+                upgradeApp()
+                Spinner.dismiss()
+            case .Failed:
+                logger.debug("Failed")
+                Spinner.dismiss()
+                let message: String = {
+                    if let error = transaction.error {
+                        return error.localizedDescription
+                    } else {
+                        return ""
+                    }
+                }()
+                let alert = UIAlertController(title: NSLocalizedString("Failed", comment: "Failed"), message: message, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Dismis", comment: "Dismis"), style: .Default, handler: nil))
+                presentViewController(alert, animated: true, completion: nil)
+            case .Restored:
+                logger.debug("Restored")
+                restoreApp()
+                Spinner.dismiss()
+            case .Deferred:
+                logger.debug("Defered")
+                Spinner.dismiss()
+            }
+            // トランザクションの終了
+            switch transaction.transactionState {
+            case .Purchased, .Failed, .Restored:
+                SKPaymentQueue.defaultQueue().finishTransaction(transaction)
+            default:
+                break
             }
         }
     }
 
-    func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
         logger.debug("")
     }
 
-    func paymentQueue(queue: SKPaymentQueue!, restoreCompletedTransactionsFailedWithError error: NSError!) {
+    func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
         logger.debug("")
         Spinner.dismiss()
     }
 
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
         logger.debug("")
         Spinner.dismiss()
     }
 
-    func paymentQueue(queue: SKPaymentQueue!, updatedDownloads downloads: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, updatedDownloads downloads: [SKDownload]) {
         logger.debug("")
-        // TODO:
     }
 
     func upgradeApp() {

@@ -13,7 +13,6 @@ import Async
 import SwiftyUserDefaults
 import XCGLogger
 import TUSafariActivity
-import Box
 
 class YouTubePlayerViewController: UIViewController {
 
@@ -137,7 +136,7 @@ class YouTubePlayerViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         // Navigation bar
         navigationController?.setNavigationBarHidden(!navigatable, animated: true)
         // Navigation item
@@ -164,7 +163,7 @@ class YouTubePlayerViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = addButton
     }
 
-    func configure(#channelView: ChannelView) {
+    func configure(channelView channelView: ChannelView) {
         // iPhone 4はチャンネルビューを出さない。
         if isPhone4s() {
             channelView.height.constant = 0
@@ -201,7 +200,8 @@ class YouTubePlayerViewController: UIViewController {
         removePlayerView(videoView)
         videoView.addSubview(controller.view)
         controller.view.frame = videoView.bounds
-        controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        //controller.view.setTranslatesAutoresizingMaskIntoConstraints(false)
         videoView.addConstraints([
             NSLayoutConstraint(item: controller.view, attribute: .Top, relatedBy: .Equal, toItem: videoView, attribute: .Top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: controller.view, attribute: .Leading, relatedBy: .Equal, toItem: videoView, attribute: .Leading, multiplier: 1, constant: 0),
@@ -218,12 +218,10 @@ class YouTubePlayerViewController: UIViewController {
 
     func removePlayerView(videoView: UIView) {
         for view in videoView.subviews {
-            if let view = view as? UIActivityIndicatorView {
+            if let _ = view as? UIActivityIndicatorView {
                 continue
             }
-            if let view = view as? UIView {
-                view.removeFromSuperview()
-            }
+            view.removeFromSuperview()
         }
     }
 
@@ -260,7 +258,7 @@ class YouTubePlayerViewController: UIViewController {
         }
     }
 
-    func configure(#userInterfaceIdiom: UIUserInterfaceIdiom, orientation: Orientation) {
+    func configure(userInterfaceIdiom userInterfaceIdiom: UIUserInterfaceIdiom, orientation: Orientation) {
         edgesForExtendedLayout = UIRectEdge.None
         switch userInterfaceIdiom {
         case .Phone:
@@ -600,7 +598,7 @@ extension YouTubePlayerViewController {
 
 extension YouTubePlayerViewController {
 
-    func showPopoverCollectionsViewController(#video: Video) {
+    func showPopoverCollectionsViewController(video video: Video) {
 
         let controller = PopoverCollectionsViewController()
         controller.video = video

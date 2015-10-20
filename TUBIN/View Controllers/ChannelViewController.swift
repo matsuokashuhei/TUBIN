@@ -71,7 +71,7 @@ class ChannelViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         navigationItem.title = channel.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = {
@@ -102,7 +102,7 @@ class ChannelViewController: UIViewController {
     func segmentChanged(sender: UISegmentedControl) {
         let selectedSegmentIndex = sender.selectedSegmentIndex
         if let controller = childViewControllers[selectedSegmentIndex] as? ItemsViewController {
-            for (index, view) in enumerate(containerViews) {
+            for (index, view) in containerViews.enumerate() {
                 view.hidden = index != selectedSegmentIndex
                 if view.hidden {
                     (view.subviews as NSArray).enumerateObjectsUsingBlock { (view, index, stop) in

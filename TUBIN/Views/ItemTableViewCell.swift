@@ -8,8 +8,11 @@
 
 import UIKit
 import YouTubeKit
+
+import Async
+import Alamofire
+import AlamofireImage
 import XCGLogger
-import Kingfisher
 
 class ItemTableTableViewCell: UITableViewCell {
 
@@ -28,35 +31,6 @@ class ItemTableTableViewCell: UITableViewCell {
 
     func configure(item: Item) {
         titleLabel.text = item.title
-        /*
-        item.thumbnailImage() { (result: Result<UIImage, NSError>) in
-            switch result {
-            case .Success(let box):
-                self.thumbnailImageView.image = box.value
-            case .Failure(let box):
-                self.logger.error(box.value.localizedDescription)
-            }
-        }
-        */
-        /*
-        if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.sd_setImageWithURL(URL)
-        }
-        */
-        /*
-        if let URL = NSURL(string: item.thumbnailURL) {
-            SDWebImageManager.sharedManager().downloadImageWithURL(URL, options: SDWebImageOptions.RetryFailed, progress: { (_, _) -> Void in
-            }, completed: { (image, error, _, finished, _) -> Void in
-                if let image = image {
-                    //self.thumbnailImageView.image = image
-                    self.thumbnailImageView.image = image
-                }
-                if let error = error {
-                    self.logger.error(error.localizedDescription)
-                }
-            })
-        }
-        */
     }
 
     private func formatStringFromInt(integer: Int) -> String {
@@ -84,16 +58,22 @@ class ItemTableTableViewCell: UITableViewCell {
 class VideoTableViewCell: ItemTableTableViewCell {
 
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var channelTitle: UILabel!
+    @IBOutlet weak var channelTitleLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
     @IBOutlet weak var publishedAtLabel: UILabel!
 
     override func configure(item: Item) {
         super.configure(item)
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
-                if let image = image {
-                    self.thumbnailImageView.image = image.resizeToWide()
+            Alamofire.request(.GET, URL).responseImage { (response) in
+                switch response.result {
+                case .Success(let image):
+                    let wideImage = image.resizeToWide()
+                    self.thumbnailImageView.image = wideImage
+                    self.thumbnailImageView.contentMode = .ScaleAspectFit
+                    //self.thumbnailImageView.image = image.resizeToWide()
+                case .Failure(_):
+                    break
                 }
             }
         }
@@ -105,7 +85,7 @@ class VideoTableViewCell: ItemTableTableViewCell {
             publishedAtLabel.text = ""
         }
         viewCountLabel.text = "\(formatStringFromInt64(video.viewCount)) " + NSLocalizedString("views", comment: "views")
-        channelTitle.text = video.channelTitle
+        channelTitleLabel.text = video.channelTitle
     }
 }
 
@@ -118,9 +98,13 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
     override func configure(item: Item) {
         super.configure(item)
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
-                if let image = image {
+            Alamofire.request(.GET, URL).responseImage { (response) in
+                switch response.result {
+                case .Success(let image):
                     self.thumbnailImageView.image = image.resizeToWide()
+                    self.thumbnailImageView.contentMode = .ScaleAspectFit
+                case .Failure(_):
+                    break
                 }
             }
         }
@@ -143,12 +127,8 @@ class ChannelTableViewCell: ItemTableTableViewCell {
     override func configure(item: Item) {
         super.configure(item)
         if let URL = NSURL(string: item.thumbnailURL) {
-            thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) -> () in
-                if let image = image {
-                    self.thumbnailImageView.image = image
-                    self.thumbnailImageView.contentMode = .ScaleAspectFit
-                }
-            }
+            thumbnailImageView.af_setImageWithURL(URL)
+            thumbnailImageView.contentMode = .ScaleAspectFit
         }
         let channel = item as! Channel
         if let subscriberCount = channel.subscriberCount {

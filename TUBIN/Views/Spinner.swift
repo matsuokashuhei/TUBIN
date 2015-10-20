@@ -10,7 +10,7 @@ import TAOverlay
 
 class Spinner {
 
-    class func show(options: [String: AnyObject] = ["allowUserInteraction": true]) {
+    class func show(options options: [String: AnyObject] = ["allowUserInteraction": true]) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         sharedInstance.show(options: options)
     }
@@ -27,7 +27,7 @@ class Spinner {
         SVProgressHUD.setForegroundColor(Appearance.sharedInstance.theme.primaryColor)
     }
 
-    func show(options: [String: AnyObject] = [:]) {
+    func show(options options: [String: AnyObject] = [:]) {
         configure()
         SVProgressHUD.show()
         /*

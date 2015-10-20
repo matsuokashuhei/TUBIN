@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 matsuosh. All rights reserved.
 //
 import UIKit
+import UIColor_Hex_Swift
 
 class Appearance {
 
@@ -23,11 +24,11 @@ class Appearance {
         case Dark
 
         var primaryColor: UIColor {
-            return UIColor(hexString: "FC115D")!
+            return UIColor(rgba: "#FC115D")
         }
 
         var secondaryColor: UIColor {
-            return UIColor(hexString: "524065")!
+            return UIColor(rgba: "#524065")
         }
 
         var darkColor: UIColor {
@@ -36,7 +37,7 @@ class Appearance {
         }
 
         var lightColor: UIColor {
-            return UIColor(hexString: "FFFFFF")!
+            return UIColor(rgba: "#FFFFFF")
         }
 
         var backgroundColor: UIColor {

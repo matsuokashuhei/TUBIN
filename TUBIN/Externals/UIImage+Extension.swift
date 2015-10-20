@@ -8,9 +8,13 @@
 
 import UIKit
 
+import XCGLogger
+
 extension UIImage {
 
     func resizeToWide() -> UIImage {
+        return self
+        /*
         func resizeToWide() -> CGRect {
             let width = size.width
             let height = CGFloat(CGFloat(size.width / 16) * 9)
@@ -20,8 +24,32 @@ extension UIImage {
             return CGRect(x: x, y: y, width: width, height: height)
         }
         let wideRect = resizeToWide()
-        let wideCGImage = CGImageCreateWithImageInRect(CGImage, wideRect)
-        return UIImage(CGImage: wideCGImage)!
+        if let wideCGImage = CGImageCreateWithImageInRect(CGImage, wideRect) {
+            return UIImage(CGImage: wideCGImage)
+        } else {
+            return self
+        }
+        */
+        /*
+        XCGLogger.defaultInstance().verbose("size: \(size)")
+        let rect: CGRect = {
+            //let size = CGSize(width: self.size.width, height: self.size.width * (9 / 16))
+            let width = self.size.width
+            let height = self.size.width * (9 / 16)
+            let x: CGFloat = 0
+            let y: CGFloat = (self.size.height - height) / 2
+            return CGRect(x: x, y: y, width: width, height: height)
+        }()
+        XCGLogger.defaultInstance().verbose("rect: \(rect)")
+        guard
+            let wideCGImage = CGImageCreateWithImageInRect(self.CGImage, rect) else {
+            //let wideImage = UIImage(CGImage: wideCGImage) else {
+            return self
+        }
+        let wideImage = UIImage(CGImage: wideCGImage)
+        return wideImage
+        //return UIImage(CGImage: wideCGImage)
+        */
     }
 
 }

@@ -11,7 +11,6 @@ import AVFoundation
 import YouTubeKit
 import XCGLogger
 import Result
-import Box
 import Async
 
 protocol YouTubePlayerDelegate {
@@ -79,11 +78,18 @@ class YouTubePlayer: NSObject {
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillResignActive:", name: UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidEnterBackground:", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         // バックグランドでの再生とマナーモードでの音声出力の設定
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        } catch let error as NSError {
+            logger.error(error.localizedDescription)
+        }
+        /*
         var error: NSError?
         AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error: &error)
         if let error = error {
             logger.error(error.localizedDescription)
         }
+        */
 //        AVAudioSession.sharedInstance().setActive(true, error: &error)
 //        if let error = error {
 //            logger.error(error.localizedDescription)
@@ -97,19 +103,18 @@ class YouTubePlayer: NSObject {
         delegate?.prepareToPlay(video)
         video.streamURL { (result) -> Void in
             switch result {
-            case .Success(let box):
-                self.startPlaying(box.value)
+            case .Success(let URL):
+                self.startPlaying(URL)
                 video.playingInfo { result in
                     switch result {
-                    case .Success(let box):
-                        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = result.value
+                    case .Success(let playingInfo):
+                        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = playingInfo
                     default:
                         break
                     }
                 }
-            case .Failure(let box):
+            case .Failure(let error):
                 self.controller.contentURL = nil
-                let error = box.value
                 self.logger.error(error.localizedDescription)
                 self.delegate?.playbackFailed(error)
             }
@@ -127,7 +132,7 @@ class YouTubePlayer: NSObject {
     func play() {
         playInBackground = true
         logger.debug("")
-        if let contentURL = controller.contentURL {
+        if let _ = controller.contentURL {
             controller.play()
         } else {
             startPlaying()
@@ -297,7 +302,7 @@ extension YouTubePlayer {
 
     class Timer {
 
-        class func start(#target: AnyObject, selector: Selector) {
+        class func start(target target: AnyObject, selector: Selector) {
             sharedInstance.start(target: target, selector: selector)
         }
 
@@ -313,7 +318,7 @@ extension YouTubePlayer {
 
         static var sharedInstance = Timer()
 
-        func start(#target: AnyObject, selector: Selector) {
+        func start(target target: AnyObject, selector: Selector) {
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: target, selector: selector, userInfo: nil, repeats: true)
         }
 

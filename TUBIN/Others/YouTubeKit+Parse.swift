@@ -38,7 +38,7 @@ extension Item {
 
 protocol Parsable {
     init(object: PFObject)
-    func toPFObject(#className: String) -> PFObject
+    func toPFObject(className className: String) -> PFObject
 }
 
 extension Video {
@@ -56,7 +56,7 @@ extension Video {
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, channelId: channelId, channelTitle: channelTitle, viewCount: viewCount, duration: duration)
     }
 
-    func toPFObject(#className: String) -> PFObject {
+    func toPFObject(className className: String) -> PFObject {
         var object = PFObject(className: className)
         object["id"] = self.id
         object["title"] = self.title
@@ -88,7 +88,7 @@ extension Playlist {
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, channelId: channelId, channelTitle: channelTitle, itemCount: itemCount)
     }
 
-    func toPFObject(#className: String) -> PFObject {
+    func toPFObject(className className: String) -> PFObject {
         var object = PFObject(className: className)
         object["id"] = id
         object["title"] = title
@@ -119,7 +119,7 @@ extension Channel {
         self.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL, viewCount: viewCount, subscriberCount: subscriberCount, videoCount: videoCount)
     }
 
-    func toPFObject(#className: String) -> PFObject {
+    func toPFObject(className className: String) -> PFObject {
         var object = PFObject(className: className)
         object["id"] = id
         object["title"] = title

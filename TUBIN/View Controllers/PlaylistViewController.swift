@@ -7,9 +7,10 @@
 //
 
 import UIKit
+
 import YouTubeKit
-import Result
-import Box
+
+import Alamofire
 import Async
 import SwiftyUserDefaults
 import XCGLogger
@@ -45,7 +46,7 @@ class PlaylistViewController: ItemsViewController {
         configure(channelView: channelView)
     }
 
-    override func configure(#navigationItem: UINavigationItem) {
+    override func configure(navigationItem navigationItem: UINavigationItem) {
         super.configure(navigationItem: navigationItem)
         navigationItem.title = playlist.title
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
@@ -75,14 +76,14 @@ class PlaylistViewController: ItemsViewController {
         */
     }
 
-    override func configure(#tableView: UITableView) {
+    override func configure(tableView tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
-    func configure(#channelView: ChannelView) {
+    func configure(channelView channelView: ChannelView) {
         if !showChannel {
             channelView.height.constant = 0
             return
@@ -95,8 +96,8 @@ class PlaylistViewController: ItemsViewController {
         } else {
             YouTubeKit.search(parameters: ["channelId": playlist.channelId]) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    if let channel = box.value.items.first {
+                case .Success(let value):
+                    if let channel = value.items.first {
                         self.channel = channel
                         let controller = ChannelsViewController()
                         controller.parameters = ["channelId": channel.id]
@@ -106,7 +107,7 @@ class PlaylistViewController: ItemsViewController {
                         self.channelView.addSubview(controller.view)
                         controller.view.frame = self.channelView.bounds
                     }
-                case .Failure(let box):
+                case .Failure(let error):
                     break
                 }
             }
@@ -118,10 +119,10 @@ class PlaylistViewController: ItemsViewController {
         super.search()
         YouTubeKit.playlistItems(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
             switch result {
-            case .Success(let box):
-                self.searchCompletion(page: box.value.page, items: box.value.items)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchCompletion(page: value.page, items: value.items)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -130,10 +131,10 @@ class PlaylistViewController: ItemsViewController {
         super.searchMore()
         YouTubeKit.playlistItems(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
             switch result {
-            case .Success(let box):
-                self.searchMoreCompletion(page: box.value.page, items: box.value.items)
-            case .Failure(let box):
-                self.errorCompletion(box.value)
+            case .Success(let value):
+                self.searchMoreCompletion(page: value.page, items: value.items)
+            case .Failure(let error):
+                self.errorCompletion(error)
             }
         }
     }
@@ -173,20 +174,16 @@ extension PlaylistViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
-            var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
             let item = items[indexPath.row] as! Video
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
-
-}
-
-extension PlaylistViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         NSNotificationCenter.defaultCenter().postNotificationName(HideMiniPlayerNotification, object: self)

@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Result
 import YouTubeKit
 import Async
+import Alamofire
 import XCGLogger
 
 class GuideCategoriesViewController: UIViewController {
@@ -55,14 +55,14 @@ class GuideCategoriesViewController: UIViewController {
     func search() {
         YouTubeKit.guideCategories() { (result) in
             switch result {
-            case .Success(let box):
-                self.categories = box.value
+            case .Success(let categories):
+                self.categories = categories
                 for category in self.categories {
                     YouTubeKit.channels(parameters: ["categoryId": category.id, "maxResults": "1"]) { (result: Result<(page: Page, channels: [Channel]), NSError>) in
                         switch result {
-                        case .Success(let box):
-                            category.channel = box.value.channels.first
-                        case .Failure(let box):
+                        case .Success(let value):
+                            category.channel = value.channels.first
+                        case .Failure(let error):
                             break
                         }
                     }
@@ -70,8 +70,7 @@ class GuideCategoriesViewController: UIViewController {
                 Async.main {
                     self.tableView.reloadData()
                 }
-            case .Failure(let box):
-                let error = box.value
+            case .Failure(let error):
                 self.logger.error(error.localizedDescription)
                 Alert.error(error)
             }
@@ -104,7 +103,7 @@ extension GuideCategoriesViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell  = tableView.dequeueReusableCellWithIdentifier("GuideCategoryTableViewCell", forIndexPath: indexPath) as! GuideCategoryTableViewCell
+        let cell  = tableView.dequeueReusableCellWithIdentifier("GuideCategoryTableViewCell", forIndexPath: indexPath) as! GuideCategoryTableViewCell
         cell.configure(categories[indexPath.row])
         return cell
     }
@@ -113,7 +112,7 @@ extension GuideCategoriesViewController: UITableViewDataSource {
 extension GuideCategoriesViewController {
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

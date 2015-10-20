@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -28,8 +28,10 @@
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-Yz-8Ax">
                             <rect key="frame" x="290" y="159" width="20" height="20"/>
+                            <animations/>
                         </activityIndicatorView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerY" secondItem="M7n-Yz-8Ax" secondAttribute="centerY" id="E5X-DN-8Km"/>
@@ -45,6 +47,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7P1-5H-Pou" customClass="TextLabel" customModule="TUBIN" customModuleProvider="target">
                             <rect key="frame" x="8" y="8" width="54" height="19"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="Zwz-uo-N6G"/>
                                 <constraint firstAttribute="width" constant="54" id="tmC-mK-cs3"/>
@@ -55,9 +58,11 @@
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1XQ-pE-8ZQ">
                             <rect key="frame" x="68" y="3" width="465" height="31"/>
+                            <animations/>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Tg-68-RX1" customClass="TextLabel" customModule="TUBIN" customModuleProvider="target">
                             <rect key="frame" x="538" y="8" width="54" height="19"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="Ed2-M6-CB8"/>
                                 <constraint firstAttribute="width" constant="54" id="FOD-C5-2f9"/>
@@ -67,6 +72,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="4IZ-Wz-6KZ"/>
@@ -88,14 +94,17 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htR-39-Q0L" userLabel="next">
                     <rect key="frame" x="348" y="389" width="48" height="48"/>
+                    <animations/>
                     <state key="normal" image="ic_skip_next_48px"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-xZ-A2T" userLabel="previous">
                     <rect key="frame" x="204" y="389" width="48" height="48"/>
+                    <animations/>
                     <state key="normal" image="ic_skip_previous_48px"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-nq-1jK" userLabel="play">
                     <rect key="frame" x="268" y="381" width="64" height="64"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="64" id="XeK-uC-pv5"/>
                         <constraint firstAttribute="height" constant="64" id="kda-wb-tAD"/>
@@ -104,6 +113,7 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngb-u7-E1o" customClass="ChannelView" customModule="TUBIN" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="512" width="600" height="88"/>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="88" id="6VF-cX-JXb">
@@ -116,12 +126,14 @@
                 </view>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uZf-Qf-ROO">
                     <rect key="frame" x="0.0" y="468" width="600" height="44"/>
+                    <animations/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="cNP-h4-kGm"/>
                         <barButtonItem systemItem="action" id="wbr-o3-PhH"/>
                     </items>
                 </toolbar>
             </subviews>
+            <animations/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="htR-39-Q0L" firstAttribute="leading" secondItem="Ecd-nq-1jK" secondAttribute="trailing" constant="16" id="1Io-P9-js2"/>

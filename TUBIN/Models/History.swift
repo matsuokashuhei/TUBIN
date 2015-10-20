@@ -27,7 +27,7 @@ class History: Object {
 
 extension History {
 
-    class func new(#watchedAt: NSDate, video: Video) -> History {
+    class func new(watchedAt watchedAt: NSDate, video: Video) -> History {
         let history = History()
         history.watchedAt = watchedAt
         history.id = video.id
@@ -36,35 +36,48 @@ extension History {
     }
 
     class func all() -> [History] {
-        let results = Realm().objects(History).sorted("watchedAt", ascending: false)
-        var histories = [History]()
-        for history in results {
-            histories.append(history)
+        do {
+            let results = try Realm().objects(History).sorted("watchedAt", ascending: false)
+            var histories = [History]()
+            for history in results {
+                histories.append(history)
+            }
+            return histories
+        } catch let error as NSError {
+            // TODO:
+            return [History]()
         }
-        return histories
     }
 
     class func create(video: Video) {
-        let realm = Realm()
-        realm.write {
-            if let history = realm.objectForPrimaryKey(History.self, key: video.id) {
-                realm.delete(history)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if let history = realm.objectForPrimaryKey(History.self, key: video.id) {
+                    realm.delete(history)
+                }
+                let history = History.new(watchedAt: NSDate(), video: video)
+                realm.add(history)
+                let results = realm.objects(History).sorted("watchedAt", ascending: false)
+                if results.count > Defaults["maxNumberOfHistories"].int! {
+                    realm.delete(results.first!)
+                }
             }
-            let history = History.new(watchedAt: NSDate(), video: video)
-            realm.add(history)
-            let results = realm.objects(History).sorted("watchedAt", ascending: false)
-            if results.count > Defaults["maxNumberOfHistories"].int! {
-                realm.delete(results.first!)
-            }
+        } catch let error as NSError {
+            // TODO:
         }
     }
 
     class func destroy(histories: [History]) {
-        let realm = Realm()
-        realm.write {
-            for history in histories {
-                realm.delete(history)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                for history in histories {
+                    realm.delete(history)
+                }
             }
+        } catch let error as NSError {
+            // TODO:
         }
     }
 }

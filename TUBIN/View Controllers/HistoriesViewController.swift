@@ -83,16 +83,19 @@ extension HistoriesViewController {
     }
 
     func endEditing() {
-        if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
-            let histories = indexPaths.map() { (indexPath) -> History in
-                return self.histories[indexPath.row]
-            }
-            Spinner.show()
-            History.destroy(histories)
-            Spinner.dismiss()
-            fetch()
+        guard let indexPaths = tableView.indexPathsForSelectedRows else {
+            return
         }
-        setEditing(false, animated: true)
+        let histories = indexPaths.map() { (indexPath) -> History in
+            return self.histories[indexPath.row]
+        }
+        Spinner.show()
+        History.destroy(histories)
+        Spinner.dismiss()
+        fetch()
+        defer {
+            setEditing(false, animated: true)
+        }
     }
 
     func cancelEditing() {
@@ -131,8 +134,8 @@ extension HistoriesViewController: UITableViewDelegate {
 extension HistoriesViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
-        var history = histories[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("VideoTableViewCell", forIndexPath: indexPath) as! VideoTableViewCell
+        let history = histories[indexPath.row]
         let video = history.video
         cell.configure(video)
         return cell
@@ -158,7 +161,7 @@ extension HistoriesViewController {
     }
 
     func statusBarTouched(notification: NSNotification) {
-        if tableView.numberOfSections() > 0 && tableView.numberOfRowsInSection(0) > 0 {
+        if tableView.numberOfSections > 0 && tableView.numberOfRowsInSection(0) > 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Top, animated: true)
         }
     }

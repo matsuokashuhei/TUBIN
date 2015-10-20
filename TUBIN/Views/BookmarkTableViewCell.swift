@@ -9,7 +9,8 @@
 import UIKit
 import YouTubeKit
 import XCGLogger
-import Kingfisher
+import Alamofire
+import AlamofireImage
 
 class BookmarkTableViewCell: UITableViewCell {
 
@@ -31,23 +32,29 @@ class BookmarkTableViewCell: UITableViewCell {
         switch bookmark.type {
         case "playlist":
             if let playlist = bookmark.playlist, let URL = NSURL(string: playlist.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                    if let image = image {
+                Alamofire.request(.GET, URL).responseImage { (response) in
+                    switch response.result {
+                    case .Success(let image):
                         self.thumbnailImageView.image = image.resizeToWide()
+                    case .Failure(_):
+                        break
                     }
-                })
+                }
                 titleLabel.text = playlist.title
                 channelTitleLabel.text = playlist.channelTitle
                 channelTitleLabel.hidden = false
             }
         case "channel":
             if let channel = bookmark.channel, let URL = NSURL(string: channel.thumbnailURL) {
-                thumbnailImageView.kf_setImageWithURL(URL, placeholderImage: nil, optionsInfo: nil, completionHandler: { (image, error, cacheType, imageURL) -> () in
-                    if let image = image {
-                        self.thumbnailImageView.image = image
+                Alamofire.request(.GET, URL).responseImage { (response) in
+                    switch response.result {
+                    case .Success(let image):
+                        self.thumbnailImageView.image = image.resizeToWide()
                         self.thumbnailImageView.contentMode = .ScaleAspectFit
+                    case .Failure(_):
+                        break
                     }
-                })
+                }
                 titleLabel.text = channel.title
                 channelTitleLabel.hidden = true
             }

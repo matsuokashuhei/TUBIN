@@ -33,9 +33,9 @@ class Alert {
     func info(message: String, autoHide: Bool = true) {
         let options: TAOverlayOptions
         if autoHide {
-            options = .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap | .AutoHide
+            options = [.OverlaySizeRoundedRect, .OverlayTypeInfo, .OverlayTypeText, .OverlayDismissTap, .AutoHide]
         } else {
-            options = .OverlaySizeRoundedRect | .OverlayTypeInfo | .OverlayTypeText | .OverlayDismissTap
+            options = [.OverlaySizeRoundedRect, .OverlayTypeInfo, .OverlayTypeText, .OverlayDismissTap]
         }
         TAOverlay.showOverlayWithLabel(message, options: options)
     }
@@ -43,9 +43,9 @@ class Alert {
     func error(error: NSError?, autoHide: Bool = true) {
         let options: TAOverlayOptions
         if autoHide {
-            options = .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap | .AutoHide
+            options = [.OverlaySizeRoundedRect, .OverlayTypeError, .OverlayTypeText, .OverlayDismissTap, .AutoHide]
         } else {
-            options = .OverlaySizeRoundedRect | .OverlayTypeError | .OverlayTypeText | .OverlayDismissTap
+            options = [.OverlaySizeRoundedRect, .OverlayTypeError, .OverlayTypeText, .OverlayDismissTap]
         }
         if let error = error {
             TAOverlay.showOverlayWithLabel(error.localizedDescription, options: options)
@@ -57,9 +57,9 @@ class Alert {
     func success(message: String, autoHide: Bool = true) {
         let options: TAOverlayOptions
         if autoHide {
-            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .OverlayDismissTap | .AutoHide
+            options = [.OverlaySizeRoundedRect, .OverlayTypeSuccess, .OverlayDismissTap, .AutoHide]
         } else {
-            options = .OverlaySizeRoundedRect | .OverlayTypeSuccess | .OverlayDismissTap
+            options = [.OverlaySizeRoundedRect, .OverlayTypeSuccess, .OverlayDismissTap]
         }
         TAOverlay.showOverlayWithLabel(message, options: options)
     }

@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import Result
+//import Result
+import Alamofire
 
 class ChannelsViewController: ItemsViewController {
 
@@ -30,14 +31,14 @@ class ChannelsViewController: ItemsViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func configure(#tableView: UITableView) {
+    override func configure(tableView tableView: UITableView) {
         super.configure(tableView: tableView)
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "ChannelTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ChannelTableViewCell")
         tableView.registerNib(UINib(nibName: "LoadMoreTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "LoadMoreTableViewCell")
     }
 
-    override func configure(#navigationItem: UINavigationItem) {
+    override func configure(navigationItem navigationItem: UINavigationItem) {
         super.configure(navigationItem: navigationItem)
         edgesForExtendedLayout = .None
         if let category = category {
@@ -49,22 +50,22 @@ class ChannelsViewController: ItemsViewController {
 
     override func search() {
         super.search()
-        if let category = category {
+        if let _ = category {
             YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    self.searchCompletion(page: box.value.page, items: box.value.channels)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchCompletion(page: value.page, items: value.channels)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    self.searchCompletion(page: box.value.page, items: box.value.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchCompletion(page: value.page, items: value.items)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         }
@@ -72,22 +73,22 @@ class ChannelsViewController: ItemsViewController {
 
     override func searchMore() {
         super.searchMore()
-        if let category = category {
+        if let _ = category {
             YouTubeKit.channels(parameters: parameters) { (result: Result<(page: Page, channels: [Channel]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    self.searchMoreCompletion(page: box.value.page, items: box.value.channels)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchMoreCompletion(page: value.page, items: value.channels)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Channel]), NSError>) -> Void in
                 switch result {
-                case .Success(let box):
-                    self.searchMoreCompletion(page: box.value.page, items: box.value.items)
-                case .Failure(let box):
-                    self.errorCompletion(box.value)
+                case .Success(let value):
+                    self.searchMoreCompletion(page: value.page, items: value.items)
+                case .Failure(let error):
+                    self.errorCompletion(error)
                 }
             }
         }
@@ -100,19 +101,15 @@ extension ChannelsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < items.count {
             let item = items[indexPath.row] as! Channel
-            var cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as! ChannelTableViewCell
+            let cell  = tableView.dequeueReusableCellWithIdentifier("ChannelTableViewCell", forIndexPath: indexPath) as! ChannelTableViewCell
             cell.configure(item)
             return cell
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("LoadMoreTableViewCell", forIndexPath: indexPath) as! LoadMoreTableViewCell
             cell.button.addTarget(self, action: "searchMore", forControlEvents: UIControlEvents.TouchUpInside)
             return cell
         }
     }
-
-}
-
-extension ChannelsViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let controller = ChannelViewController()

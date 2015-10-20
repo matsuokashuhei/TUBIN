@@ -88,7 +88,7 @@ class Tab: UIView {
         selected = false
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -130,7 +130,7 @@ class TabBar: UIView {
         scrollView.contentSize.width = Tab.size().width * CGFloat(tabs.count)
         scrollView.contentSize.height = Tab.size().height
         // Tab
-        for (index, tab) in enumerate(tabs) {
+        for (index, tab) in tabs.enumerate() {
             tab.frame.size = Tab.size()
             tab.frame.origin.x = tab.frame.size.width * CGFloat(index)
             tab.frame.origin.y = 0
@@ -225,7 +225,7 @@ class TabBar: UIView {
         scrollView.setContentOffset(offsetOfTabs, animated: true)
     }
 
-    func syncScroll(#contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
+    func syncScroll(contentOffsetX contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
         syncSelectedTab(contentOffsetX: contentOffsetX, contentSizeWidth: contentSizeWidth)
         if scrollView.contentSize.width <= frame.width {
             scrollView.setContentOffset(CGPointZero, animated: true)
@@ -305,7 +305,7 @@ class TabBar: UIView {
         }
     }
 
-    func syncSelectedTab(#contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
+    func syncSelectedTab(contentOffsetX contentOffsetX: CGFloat, contentSizeWidth: CGFloat) {
         //let offset = contentOffsetX / contentSizeWidth
         let offset = contentOffsetX / frame.width
         let left = Int(offset)
@@ -355,7 +355,7 @@ class TabBar: UIView {
     }
 
     func indexOfSelectedTab() -> Int {
-        for (index, tab) in enumerate(tabs) {
+        for (index, tab) in tabs.enumerate() {
             if let selected = tab.selected {
                 if selected {
                     return index

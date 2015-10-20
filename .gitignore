@@ -52,6 +52,8 @@ TUBIN.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 .DS_Store
 
+Carthage/*
+
 # Fabric
 Crashlytics.framework/
 Fabric.framework/

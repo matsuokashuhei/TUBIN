@@ -54,7 +54,7 @@ class BookmarksViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         navigationItem.title = NSLocalizedString("Bookmarks", comment: "Bookmarks")
     }
 
@@ -72,16 +72,22 @@ extension BookmarksViewController {
 
     func edit() {
         Spinner.show()
-        let realm = Realm()
-        realm.write {
-            for bookmark in self.removes {
-                realm.delete(bookmark)
+        do {
+            let realm = try Realm()
+            try realm.write {
+                for bookmark in self.removes {
+                    realm.delete(bookmark)
+                }
+                for (index, bookmark) in self.bookmarks.enumerate() {
+                    bookmark.index = index + 1
+                }
             }
-            for (index, bookmark) in enumerate(self.bookmarks) {
-                bookmark.index = index + 1
-            }
+        } catch let error as NSError {
+            logger.error(error.description)
         }
-        Spinner.dismiss()
+        defer {
+            Spinner.dismiss()
+        }
     }
 
 }

@@ -25,7 +25,7 @@ class ScrubberView: UIView {
         didSet {
             slider.addTarget(self, action: "beginSeek:", forControlEvents: .TouchDown)
             slider.addTarget(self, action: "seekPositionChanged:", forControlEvents: .ValueChanged)
-            slider.addTarget(self, action: "endSeek:", forControlEvents: (.TouchUpInside | .TouchUpOutside | .TouchCancel))
+            slider.addTarget(self, action: "endSeek:", forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchCancel])
         }
     }
     @IBOutlet weak var startTimeLabel: UILabel!

@@ -8,7 +8,6 @@
 
 import Foundation
 import Result
-import Box
 import SwiftyUserDefaults
 import Parse
 import XCGLogger
@@ -24,14 +23,8 @@ class Parser {
 
     class func goodbye() {
         for className in ["Bookmark", "Favorite", "History"] {
-            if let objects = PFQuery(className: className).findObjects() as? [PFObject] {
-                let result = PFObject.deleteAll(objects)
-                if result {
-                    XCGLogger.defaultInstance().info("\(className) を削除しました。")
-                }
-                let count = PFQuery(className: className).countObjects()
-                XCGLogger.defaultInstance().info("\(className) のcountObjects()は\(count)個です。")
-            }
+            let objects = try! PFQuery(className: className).findObjects()
+            try! PFObject.deleteAll(objects)
         }
     }
 

@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import Result
-import Box
 import Async
 import XCGLogger
 
@@ -51,7 +50,7 @@ class PopoverCollectionsViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func configure(#navigationItem: UINavigationItem) {
+    func configure(navigationItem navigationItem: UINavigationItem) {
         edgesForExtendedLayout = .None
         navigationItem.title = NSLocalizedString("Add to favorites", comment: "Add to favorites")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelButtonClicked")
@@ -76,8 +75,8 @@ extension PopoverCollectionsViewController {
     @IBAction func addButtonClicked() {
         let controller = UIAlertController(title: NSLocalizedString("New collection", comment: "New collection"), message: "", preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (_) in
-            let textField = controller.textFields![0] as! UITextField
-            Collection.create(index: self.collections.count, title: textField.text, videos: [self.video])
+            let textField = controller.textFields![0] 
+            Collection.create(index: self.collections.count, title: textField.text!, videos: [self.video])
             Toast.addToFavorites(video: self.video)
             NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: CollectionDidChangeNotification, object: self))
             self.cancelButtonClicked()
@@ -87,7 +86,7 @@ extension PopoverCollectionsViewController {
             textField.placeholder = NSLocalizedString("Name", comment: "Name")
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
                 if textField.text != "" {
-                    OKAction.enabled = Collection.exists(title: textField.text) == false
+                    OKAction.enabled = Collection.exists(title: textField.text!) == false
                 } else {
                     OKAction.enabled = false
                 }
@@ -113,7 +112,7 @@ extension PopoverCollectionsViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let collection = collections[indexPath.row]
-        var cell = tableView.dequeueReusableCellWithIdentifier("CollectionTableViewCell", forIndexPath: indexPath) as! CollectionTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CollectionTableViewCell", forIndexPath: indexPath) as! CollectionTableViewCell
         cell.configure(collection)
         return cell
     }

@@ -9,9 +9,24 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>YouTubeKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>A83324941BD2660700CD2DC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A833249D1BD2660700CD2DC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A8D4027C1AA8B7C700F0AAD2</key>
 		<dict>
 			<key>primary</key>
