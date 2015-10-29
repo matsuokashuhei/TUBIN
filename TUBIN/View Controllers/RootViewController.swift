@@ -10,7 +10,7 @@ import UIKit
 import iAd
 import SwiftyUserDefaults
 import XCGLogger
-import Async
+import AsyncSwift
 
 class RootViewController: UIViewController {
 

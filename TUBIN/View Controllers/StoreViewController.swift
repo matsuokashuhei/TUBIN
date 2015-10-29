@@ -79,16 +79,26 @@ class StoreViewController: UIViewController {
         guard let product = self.product else {
             return
         }
-        if let reachability = Reachability.reachabilityForInternetConnection() where reachability.isReachable() {
-            let payment = SKPayment(product: product)
-            SKPaymentQueue.defaultQueue().addPayment(payment)
+        do {
+            if try Reachability.reachabilityForInternetConnection().isReachable() {
+                let payment = SKPayment(product: product)
+                SKPaymentQueue.defaultQueue().addPayment(payment)
+            }
+        } catch let error as NSError {
+            logger.error(error.description)
+            return
         }
     }
 
     func restoreButtonClicked(sender: UIButton) {
-        if let reachability = Reachability.reachabilityForInternetConnection() where reachability.isReachable() {
-            Spinner.show(options: ["allowUserInteraction": false])
-            SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+        do {
+            if try Reachability.reachabilityForInternetConnection().isReachable() {
+                Spinner.show(options: ["allowUserInteraction": false])
+                SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
+            }
+        } catch let error as NSError {
+            logger.error(error.description)
+            return
         }
     }
 

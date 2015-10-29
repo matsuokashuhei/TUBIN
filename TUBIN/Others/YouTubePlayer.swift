@@ -11,7 +11,7 @@ import AVFoundation
 import YouTubeKit
 import XCGLogger
 import Result
-import Async
+import AsyncSwift
 
 protocol YouTubePlayerDelegate {
     // 再生の準備したとき

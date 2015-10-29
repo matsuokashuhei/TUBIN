@@ -10,7 +10,6 @@ import UIKit
 import YouTubeKit
 import XCGLogger
 import Alamofire
-import AlamofireImage
 
 class BookmarkTableViewCell: UITableViewCell {
 
@@ -32,12 +31,14 @@ class BookmarkTableViewCell: UITableViewCell {
         switch bookmark.type {
         case "playlist":
             if let playlist = bookmark.playlist, let URL = NSURL(string: playlist.thumbnailURL) {
-                Alamofire.request(.GET, URL).responseImage { (response) in
+                Alamofire.request(.GET, URL).responseData { (response) in
                     switch response.result {
-                    case .Success(let image):
-                        self.thumbnailImageView.image = image.resizeToWide()
-                    case .Failure(_):
-                        break
+                    case .Success(let data):
+                        if let image = UIImage(data: data) {
+                            self.thumbnailImageView.image = image.toWide()
+                        }
+                    case .Failure(let error):
+                        self.logger.error(error.description)
                     }
                 }
                 titleLabel.text = playlist.title
@@ -46,13 +47,14 @@ class BookmarkTableViewCell: UITableViewCell {
             }
         case "channel":
             if let channel = bookmark.channel, let URL = NSURL(string: channel.thumbnailURL) {
-                Alamofire.request(.GET, URL).responseImage { (response) in
+                Alamofire.request(.GET, URL).responseData { (response) in
                     switch response.result {
-                    case .Success(let image):
-                        self.thumbnailImageView.image = image.resizeToWide()
-                        self.thumbnailImageView.contentMode = .ScaleAspectFit
-                    case .Failure(_):
-                        break
+                    case .Success(let data):
+                        if let image = UIImage(data: data) {
+                            self.thumbnailImageView.image = image.toWide()
+                        }
+                    case .Failure(let error):
+                        self.logger.error(error.description)
                     }
                 }
                 titleLabel.text = channel.title

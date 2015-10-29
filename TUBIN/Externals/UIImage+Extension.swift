@@ -12,6 +12,23 @@ import XCGLogger
 
 extension UIImage {
 
+    func toWide() -> UIImage {
+        let rect: CGRect = {
+            let width = self.size.width
+            let height = self.size.width * (9 / 16)
+            let x: CGFloat = 0
+            let y: CGFloat = (self.size.height - height) / 2
+            return CGRect(x: x, y: y, width: width, height: height)
+        }()
+        XCGLogger.defaultInstance().verbose("rect: \(rect)")
+        if let CGImage = CGImageCreateWithImageInRect(self.CGImage, rect) {
+            return UIImage(CGImage: CGImage)
+        } else {
+            return self
+        }
+    }
+
+    /*
     func resizeToWide() -> UIImage {
         return self
         /*
@@ -51,5 +68,6 @@ extension UIImage {
         //return UIImage(CGImage: wideCGImage)
         */
     }
+    */
 
 }

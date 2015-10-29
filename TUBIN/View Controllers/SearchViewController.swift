@@ -9,7 +9,8 @@
 import UIKit
 import Alamofire
 import YouTubeKit
-import Async
+//import Async
+import AsyncSwift
 import XCGLogger
 
 protocol SearchViewControllerDelegate {

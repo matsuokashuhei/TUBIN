@@ -53,6 +53,7 @@ TUBIN.xcworkspace/
 .DS_Store
 
 Carthage/*
+YouTubeKit/Carthage/*
 
 # Fabric
 Crashlytics.framework/

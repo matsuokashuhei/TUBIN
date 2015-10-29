@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 
 class CollectionTableViewCell: UITableViewCell {
 
@@ -26,12 +25,12 @@ class CollectionTableViewCell: UITableViewCell {
 
     func configure(collection: Collection) {
         if let URL = NSURL(string: collection.thumbnailURL) where URL.absoluteString.isEmpty == false {
-            Alamofire.request(.GET, URL).responseImage { (response) in
+            Alamofire.request(.GET, URL).responseData { (response) in
                 switch response.result {
-                case .Success(let image):
-                    let wideImage = image.resizeToWide()
-                    self.thumbnailImageView.image = wideImage
-                    //self.thumbnailImageView.image = image.resizeToWide()
+                case .Success(let data):
+                    if let image = UIImage(data: data) {
+                        self.thumbnailImageView.image = image.toWide()
+                    }
                 case .Failure(let error):
                     break
                 }

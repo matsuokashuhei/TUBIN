@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import Result
-import Async
 import XCGLogger
 
 class PopoverCollectionsViewController: UIViewController {

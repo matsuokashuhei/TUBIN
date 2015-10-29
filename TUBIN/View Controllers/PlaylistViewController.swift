@@ -11,7 +11,6 @@ import UIKit
 import YouTubeKit
 
 import Alamofire
-import Async
 import SwiftyUserDefaults
 import XCGLogger
 

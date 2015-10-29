@@ -66,8 +66,8 @@ public class Item: Initializable {
             let title = snippet["title"] as? String,
             let description = snippet["description"] as? String,
             let thumbnails = snippet["thumbnails"] as? NSDictionary,
-            let thumbnail = thumbnails["default"] as? NSDictionary,
-            let thumbnailURL = thumbnail["url"] as? String else {
+            let defaultThumbnail = thumbnails["default"] as? NSDictionary,
+            let defaultThumbnailURL = defaultThumbnail["url"] as? String else {
             self.id = ""
             self.publishedAt = NSDate()
             self.title = ""
@@ -83,7 +83,11 @@ public class Item: Initializable {
         }
         self.title = title
         self.description = description
-        self.thumbnailURL = thumbnailURL
+        if let standardThumbnail = thumbnails["standard"] as? NSDictionary, let standardThumbnailURL = standardThumbnail["url"] as? String {
+            self.thumbnailURL = standardThumbnailURL
+        } else {
+            self.thumbnailURL = defaultThumbnailURL
+        }
     }
 
     public init(id: String, publishedAt: NSDate?, title: String, description: String, thumbnailURL: String) {
@@ -94,10 +98,19 @@ public class Item: Initializable {
         self.thumbnailURL = thumbnailURL
     }
 
-
     public func thumbnailImage(handler: (Result<UIImage, NSError>) -> Void) {
-        Alamofire.request(.GET, thumbnailURL).responseImage { (response) in
-            handler(response.result)
+        Alamofire.request(.GET, thumbnailURL).responseData { (response) in
+            switch response.result {
+            case .Success(let data):
+                if let image = UIImage(data: data) {
+                    handler(.Success(image))
+                } else {
+                    // TODO:
+                    handler(.Failure(NSError(domain: "TUBINErrorDomain", code: 999, userInfo: nil)))
+                }
+            case .Failure(let error):
+                handler(.Failure(error))
+            }
         }
     }
 
@@ -143,6 +156,8 @@ public class Video: Item {
         self.duration = duration
         super.init(id: id, publishedAt: publishedAt, title: title, description: description, thumbnailURL: thumbnailURL)
     }
+
+    
 }
 
 extension Video: APIDelegate {

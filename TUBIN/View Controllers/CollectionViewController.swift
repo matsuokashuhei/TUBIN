@@ -8,7 +8,7 @@
 
 import UIKit
 import YouTubeKit
-import Async
+import AsyncSwift
 import XCGLogger
 import RealmSwift
 

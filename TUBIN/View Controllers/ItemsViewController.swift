@@ -9,7 +9,7 @@
 import UIKit
 import YouTubeKit
 import Result
-import Async
+import AsyncSwift
 import XCGLogger
 
 class ItemsViewController: UIViewController {

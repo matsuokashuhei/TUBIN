@@ -9,7 +9,6 @@
 import UIKit
 import YouTubeKit
 import XCGLogger
-import AlamofireImage
 
 class GuideCategoryTableViewCell: UITableViewCell {
 

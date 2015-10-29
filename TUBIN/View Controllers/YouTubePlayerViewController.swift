@@ -9,7 +9,6 @@
 import UIKit
 import MediaPlayer
 import YouTubeKit
-import Async
 import SwiftyUserDefaults
 import XCGLogger
 import TUSafariActivity
@@ -278,9 +277,7 @@ class YouTubePlayerViewController: UIViewController {
                 scrubberView.endTimeLabel.backgroundColor = Appearance.sharedInstance.theme.darkColor.colorWithAlphaComponent(0.5)
                 hideAds()
             }
-        case .Pad:
-            break
-        case .Unspecified:
+        default:
             break
         }
     }

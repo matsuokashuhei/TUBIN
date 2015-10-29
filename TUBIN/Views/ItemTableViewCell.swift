@@ -9,9 +9,7 @@
 import UIKit
 import YouTubeKit
 
-import Async
 import Alamofire
-import AlamofireImage
 import XCGLogger
 
 class ItemTableTableViewCell: UITableViewCell {
@@ -64,19 +62,28 @@ class VideoTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        item.thumbnailImage { (result) in
+            switch result {
+            case .Success(let image):
+                self.thumbnailImageView.image = image.toWide()
+            case .Failure(let error):
+                self.logger.error(error.description)
+            }
+        }
+        /*
         if let URL = NSURL(string: item.thumbnailURL) {
-            Alamofire.request(.GET, URL).responseImage { (response) in
+            Alamofire.request(.GET, URL).responseData { (response) in
                 switch response.result {
-                case .Success(let image):
-                    let wideImage = image.resizeToWide()
-                    self.thumbnailImageView.image = wideImage
-                    self.thumbnailImageView.contentMode = .ScaleAspectFit
-                    //self.thumbnailImageView.image = image.resizeToWide()
-                case .Failure(_):
-                    break
+                case .Success(let data):
+                    if let image = UIImage(data: data) {
+                        self.thumbnailImageView.image = image.toWide()
+                    }
+                case .Failure(let error):
+                    self.logger.error(error.description)
                 }
             }
         }
+        */
         let video = item as! Video
         durationLabel.text = video.duration
         if let publishedAt = video.publishedAt {
@@ -97,15 +104,12 @@ class PlaylistTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
-        if let URL = NSURL(string: item.thumbnailURL) {
-            Alamofire.request(.GET, URL).responseImage { (response) in
-                switch response.result {
-                case .Success(let image):
-                    self.thumbnailImageView.image = image.resizeToWide()
-                    self.thumbnailImageView.contentMode = .ScaleAspectFit
-                case .Failure(_):
-                    break
-                }
+        item.thumbnailImage { (result) in
+            switch result {
+            case .Success(let image):
+                self.thumbnailImageView.image = image.toWide()
+            case .Failure(let error):
+                self.logger.error(error.description)
             }
         }
         let playlist = item as! Playlist
@@ -126,10 +130,21 @@ class ChannelTableViewCell: ItemTableTableViewCell {
 
     override func configure(item: Item) {
         super.configure(item)
+        item.thumbnailImage { (result) in
+            switch result {
+            case .Success(let image):
+                self.thumbnailImageView.image = image
+                self.thumbnailImageView.contentMode = .ScaleAspectFit
+            case .Failure(let error):
+                self.logger.error(error.description)
+            }
+        }
+        /*
         if let URL = NSURL(string: item.thumbnailURL) {
             thumbnailImageView.af_setImageWithURL(URL)
             thumbnailImageView.contentMode = .ScaleAspectFit
         }
+        */
         let channel = item as! Channel
         if let subscriberCount = channel.subscriberCount {
             subscriberCountLabel.text = "\(formatStringFromInt(subscriberCount)) subscribes"

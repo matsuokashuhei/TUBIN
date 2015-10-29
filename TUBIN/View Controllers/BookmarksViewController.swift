@@ -8,7 +8,6 @@
 
 import UIKit
 import Result
-import Async
 import XCGLogger
 import RealmSwift
 

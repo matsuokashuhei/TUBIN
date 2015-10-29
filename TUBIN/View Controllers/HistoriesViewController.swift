@@ -8,7 +8,6 @@
 
 import UIKit
 import YouTubeKit
-import Async
 import XCGLogger
 import RealmSwift
 
