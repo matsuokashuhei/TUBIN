@@ -8,6 +8,7 @@
 import YouTubeKit
 import SwiftyUserDefaults
 import RealmSwift
+import XCGLogger
 
 class History: Object {
 
@@ -44,7 +45,7 @@ extension History {
             }
             return histories
         } catch let error as NSError {
-            // TODO:
+            XCGLogger.defaultInstance().error(error.description)
             return [History]()
         }
     }
@@ -64,7 +65,7 @@ extension History {
                 }
             }
         } catch let error as NSError {
-            // TODO:
+            XCGLogger.defaultInstance().error(error.description)
         }
     }
 
@@ -77,7 +78,7 @@ extension History {
                 }
             }
         } catch let error as NSError {
-            // TODO:
+            XCGLogger.defaultInstance().error(error.description)
         }
     }
 }

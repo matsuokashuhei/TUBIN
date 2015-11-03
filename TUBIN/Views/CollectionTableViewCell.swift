@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import XCGLogger
 
 class CollectionTableViewCell: UITableViewCell {
 
@@ -32,7 +33,7 @@ class CollectionTableViewCell: UITableViewCell {
                         self.thumbnailImageView.image = image.toWide()
                     }
                 case .Failure(let error):
-                    break
+                    XCGLogger.defaultInstance().error(error.description)
                 }
             }
             thumbnailImageView.alpha = 1

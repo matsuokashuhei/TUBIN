@@ -63,6 +63,7 @@ class GuideCategoriesViewController: UIViewController {
                         case .Success(let value):
                             category.channel = value.channels.first
                         case .Failure(let error):
+                            self.logger.error(error.description)
                             break
                         }
                     }

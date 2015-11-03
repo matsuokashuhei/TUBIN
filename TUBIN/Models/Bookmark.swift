@@ -183,7 +183,7 @@ extension Bookmark {
     class func add(bookmark: Bookmark) {
         do {
             let realm = try Realm()
-            if let bookmark = try realm.objectForPrimaryKey(Bookmark.self, key: bookmark.id) {
+            if let _ = realm.objectForPrimaryKey(Bookmark.self, key: bookmark.id) {
                 return
             }
             let bookmarks = realm.objects(Bookmark).sorted("index")

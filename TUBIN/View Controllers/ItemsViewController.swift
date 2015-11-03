@@ -103,7 +103,7 @@ class ItemsViewController: UIViewController {
         }.main {
             self.refreshControll.endRefreshing()
             self.tableView.reloadData()
-            if let q = self.parameters["q"] {
+            if let _ = self.parameters["q"] {
                 self.tableView.setContentOffset(CGPointZero, animated: false)
             }
             if self.spinnable {

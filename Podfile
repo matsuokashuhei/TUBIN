@@ -25,4 +25,6 @@ pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift
 #pod 'Async', :git => 'https://github.com/JohnCoates/Async.git'
 pod 'AsyncSwift'
 pod 'RealmSwift'
-pod 'GCDKit'
+#pod 'GCDKit'
+
+pod 'XCDYouTubeKit'

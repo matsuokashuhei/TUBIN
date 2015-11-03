@@ -39,7 +39,7 @@ class VideosViewController: ItemsViewController {
 
     override func search() {
         super.search()
-        if let chart = parameters["chart"] {
+        if let _ = parameters["chart"] {
             videos()
         } else {
             YouTubeKit.search(parameters: parameters) { (result: Result<(page: Page, items: [Video]), NSError>) -> Void in
@@ -55,7 +55,7 @@ class VideosViewController: ItemsViewController {
 
     override func searchMore() {
         super.searchMore()
-        if let chart = parameters["chart"] {
+        if let _ = parameters["chart"] {
             moreVideos()
         } else {
             YouTubeKit.search(parameters: parameters) { (response: Result<(page: Page, items: [Video]), NSError>) -> Void in

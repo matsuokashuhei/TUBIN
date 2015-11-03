@@ -57,7 +57,7 @@ extension Video {
     }
 
     func toPFObject(className className: String) -> PFObject {
-        var object = PFObject(className: className)
+        let object = PFObject(className: className)
         object["id"] = self.id
         object["title"] = self.title
         object["description"] = self.description
@@ -89,7 +89,7 @@ extension Playlist {
     }
 
     func toPFObject(className className: String) -> PFObject {
-        var object = PFObject(className: className)
+        let object = PFObject(className: className)
         object["id"] = id
         object["title"] = title
         object["description"] = description
@@ -120,7 +120,7 @@ extension Channel {
     }
 
     func toPFObject(className className: String) -> PFObject {
-        var object = PFObject(className: className)
+        let object = PFObject(className: className)
         object["id"] = id
         object["title"] = title
         object["description"] = description

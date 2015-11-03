@@ -107,6 +107,7 @@ class PlaylistViewController: ItemsViewController {
                         controller.view.frame = self.channelView.bounds
                     }
                 case .Failure(let error):
+                    self.logger.error(error.description)
                     break
                 }
             }

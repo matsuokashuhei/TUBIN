@@ -171,7 +171,7 @@ extension BookmarksViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let bookmark = bookmarks[indexPath.row]
-        var cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as! BookmarkTableViewCell
+        let cell  = tableView.dequeueReusableCellWithIdentifier("BookmarkTableViewCell", forIndexPath: indexPath) as! BookmarkTableViewCell
         cell.configure(bookmark)
         if bookmark.preseted {
             cell.thumbnailImageView.alpha = 0.5

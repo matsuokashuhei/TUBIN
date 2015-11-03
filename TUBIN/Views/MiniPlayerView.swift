@@ -120,12 +120,10 @@ class MiniPlayerView: UIView {
 
     func removePlayerView(videoView: UIView) {
         for view in videoView.subviews {
-            if let view = view as? UIActivityIndicatorView {
+            if let _ = view as? UIActivityIndicatorView {
                 continue
             }
-            if let view = view as? UIView {
-                view.removeFromSuperview()
-            }
+            view.removeFromSuperview()
         }
         /*
         if videoView.subviews.count > 0 {

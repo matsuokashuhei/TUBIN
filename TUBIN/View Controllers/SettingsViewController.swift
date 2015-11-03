@@ -142,7 +142,7 @@ extension SettingsViewController: UITableViewDataSource {
             cell.darkModeSwitch.addTarget(self, action: "darkModeSwitchChanged:", forControlEvents: .ValueChanged)
             return cell
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SettingTableViewCell", forIndexPath: indexPath) 
         cell.textLabel?.text = {
             switch indexPath.section {
             case 0:
