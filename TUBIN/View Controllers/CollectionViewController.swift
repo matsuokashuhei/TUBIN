@@ -8,9 +8,10 @@
 
 import UIKit
 import YouTubeKit
-import AsyncSwift
-import XCGLogger
+//import AsyncSwift
+import GCDKit
 import RealmSwift
+import XCGLogger
 
 class CollectionViewController: UIViewController {
 
@@ -75,7 +76,8 @@ extension CollectionViewController {
             switch result {
             case .Success(let value):
                 self.videos = value.videos
-                Async.main {
+                GCDBlock.async(.Main) {
+                //Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let error):

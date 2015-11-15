@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; };
+		A80431341BF8DEF500B1E813 /* GCDKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80431321BF8DEE100B1E813 /* GCDKit.framework */; };
+		A80431351BF8DEF500B1E813 /* GCDKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A80431321BF8DEE100B1E813 /* GCDKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A82FC4391B300C9D0001E452 /* YouTubeKit+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */; };
 		A83324981BD2660700CD2DC1 /* YouTubeKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A83324971BD2660700CD2DC1 /* YouTubeKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A833249F1BD2660700CD2DC1 /* YouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A83324951BD2660700CD2DC1 /* YouTubeKit.framework */; };
@@ -167,6 +169,7 @@
 			files = (
 				A894A8531BE51BC1007256C3 /* SVProgressHUD.framework in Embed Frameworks */,
 				A894A84D1BE51BC0007256C3 /* AlamofireImage.framework in Embed Frameworks */,
+				A80431351BF8DEF500B1E813 /* GCDKit.framework in Embed Frameworks */,
 				A894A84F1BE51BC0007256C3 /* CRToast.framework in Embed Frameworks */,
 				A894A8511BE51BC1007256C3 /* Result.framework in Embed Frameworks */,
 				A83324AB1BD2660700CD2DC1 /* YouTubeKit.framework in Embed Frameworks */,
@@ -180,6 +183,7 @@
 
 /* Begin PBXFileReference section */
 		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A80431321BF8DEE100B1E813 /* GCDKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDKit.framework; path = Carthage/Build/iOS/GCDKit.framework; sourceTree = "<group>"; };
 		A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Realm.swift"; sourceTree = "<group>"; };
 		A83324951BD2660700CD2DC1 /* YouTubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YouTubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83324971BD2660700CD2DC1 /* YouTubeKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YouTubeKit.h; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A80431341BF8DEF500B1E813 /* GCDKit.framework in Frameworks */,
 				A894A85B1BE51C35007256C3 /* Social.framework in Frameworks */,
 				A894A85A1BE51C2B007256C3 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
@@ -621,6 +626,7 @@
 		E3B2F19A660D0D52A10E95B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A80431321BF8DEE100B1E813 /* GCDKit.framework */,
 				A894A8421BE51BC0007256C3 /* Alamofire.framework */,
 				A894A8431BE51BC0007256C3 /* AlamofireImage.framework */,
 				A894A8441BE51BC0007256C3 /* CRToast.framework */,
@@ -926,6 +932,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/GCDKit.framework",
 			);
 			outputPaths = (
 			);

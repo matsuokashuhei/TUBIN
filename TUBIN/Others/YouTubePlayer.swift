@@ -11,7 +11,8 @@ import AVFoundation
 import YouTubeKit
 import XCGLogger
 import Result
-import AsyncSwift
+//import AsyncSwift
+import GCDKit
 
 protocol YouTubePlayerDelegate {
     // 再生の準備したとき
@@ -338,7 +339,8 @@ extension YouTubePlayer {
         logger.debug("playInBackground: \(self.playInBackground)")
         if playInBackground {
             self.logger.debug("")
-            Async.main(after: 2.0) {
+            //Async.main(after: 2.0) {
+            GCDBlock.async(.Main) {
                 self.logger.debug("")
                 //if self.controller.playbackState != .Playing {
                     //self.logger.debug("play()")

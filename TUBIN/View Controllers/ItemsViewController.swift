@@ -8,8 +8,9 @@
 
 import UIKit
 import YouTubeKit
+//import AsyncSwift
+import GCDKit
 import Result
-import AsyncSwift
 import XCGLogger
 
 class ItemsViewController: UIViewController {
@@ -95,12 +96,14 @@ class ItemsViewController: UIViewController {
 
     func searchCompletion(page page: Page, items: [Item]) {
         logger.verbose("START")
-        Async.background {
+        GCDBlock.async(.Default) {
+        //Async.background {
             self.items = items
             if let next = page.next {
                 self.parameters["pageToken"] = next
             }
-        }.main {
+        //}.main {
+        }.notify(.Main) {
             self.refreshControll.endRefreshing()
             self.tableView.reloadData()
             if let _ = self.parameters["q"] {
@@ -114,7 +117,8 @@ class ItemsViewController: UIViewController {
     }
 
     func searchMoreCompletion(page page: Page, items: [Item]) {
-        Async.background {
+        //Async.background {
+        GCDBlock.async(.Default) {
             if let next = page.next {
                 self.parameters["pageToken"] = next
             } else {
@@ -123,7 +127,8 @@ class ItemsViewController: UIViewController {
             for item in items {
                 self.items.append(item)
             }
-        }.main {
+        //}.main {
+        }.notify(.Main) {
             self.refreshControll.endRefreshing()
             self.tableView.reloadData()
             if self.spinnable {

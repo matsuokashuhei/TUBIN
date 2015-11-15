@@ -8,7 +8,8 @@
 
 import UIKit
 import YouTubeKit
-import AsyncSwift
+//import AsyncSwift
+import GCDKit
 import Result
 
 class MusicViewController: UIViewController {
@@ -69,7 +70,8 @@ extension MusicViewController {
             switch result {
             case .Success(let playlists):
                 self.playlists = playlists
-                Async.main {
+                GCDBlock.async(.Main) {
+                //Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let error):
