@@ -8,8 +8,9 @@
 
 import UIKit
 import YouTubeKit
-import AsyncSwift
+//import AsyncSwift
 import Alamofire
+import GCDKit
 import XCGLogger
 
 class GuideCategoriesViewController: UIViewController {
@@ -68,7 +69,8 @@ class GuideCategoriesViewController: UIViewController {
                         }
                     }
                 }
-                Async.main {
+                GCDBlock.async(.Main) {
+                //Async.main {
                     self.tableView.reloadData()
                 }
             case .Failure(let error):

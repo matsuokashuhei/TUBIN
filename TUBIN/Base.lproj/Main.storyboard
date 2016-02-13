@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cOC-N2-Udz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cOC-N2-Udz">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,6 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eto-dd-wFc" propertyAccessControl="all">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
-                                <animations/>
                                 <connections>
                                     <segue destination="gib-DC-RKC" kind="embed" id="xqt-WK-ksi"/>
                                 </connections>
@@ -30,7 +29,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-Sa-fFT" customClass="NavigationButton" customModule="TUBIN" customModuleProvider="target">
                                         <rect key="frame" x="564" y="26" width="36" height="36"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="1Bl-HZ-1hP"/>
                                             <constraint firstAttribute="height" constant="36" id="SRh-qr-qkf"/>
@@ -42,21 +40,17 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osE-Dd-bJw" userLabel="play">
                                                 <rect key="frame" x="182" y="12" width="48" height="48"/>
-                                                <animations/>
                                                 <state key="normal" image="ic_play_circle_fill_48px"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59i-7J-oid" userLabel="next">
                                                 <rect key="frame" x="234" y="12" width="48" height="48"/>
-                                                <animations/>
                                                 <state key="normal" image="ic_skip_next_48px"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuO-TR-nvY" userLabel="previous">
                                                 <rect key="frame" x="130" y="12" width="48" height="48"/>
-                                                <animations/>
                                                 <state key="normal" image="ic_skip_previous_48px"/>
                                             </button>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="osE-Dd-bJw" firstAttribute="centerY" secondItem="59i-7J-oid" secondAttribute="centerY" id="0Rj-04-A7k"/>
@@ -73,10 +67,8 @@
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="5hl-0Q-R3O">
                                                 <rect key="frame" x="54" y="26" width="20" height="20"/>
-                                                <animations/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="5hl-0Q-R3O" secondAttribute="centerX" id="1u5-GE-YbU"/>
@@ -88,11 +80,9 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZa-Ua-pfi" customClass="NavigationButton" customModule="TUBIN" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                                        <animations/>
                                         <state key="normal" image="ic_highlight_remove_24px"/>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Xqh-Sa-fFT" secondAttribute="trailing" id="EWl-93-jOP"/>
@@ -130,7 +120,6 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="yk0-Xn-wNc" secondAttribute="trailing" id="Ig7-r5-H0Q"/>
@@ -167,10 +156,8 @@
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sd7-Jl-uT8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                        <animations/>
                                     </scrollView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0a1-Z1-jFx"/>
@@ -188,10 +175,8 @@
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJR-he-YK8">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="468"/>
-                                        <animations/>
                                     </scrollView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="NJR-he-YK8" firstAttribute="top" secondItem="iBN-6W-oRe" secondAttribute="top" id="Glh-kT-pii"/>
@@ -204,7 +189,6 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iBN-6W-oRe" secondAttribute="trailing" id="3Bs-8d-jlD"/>
@@ -235,7 +219,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8BW-zQ-f6T">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

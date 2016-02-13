@@ -1,3 +1,5 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
@@ -23,8 +25,7 @@ pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift
 #pod 'Google-Mobile-Ads-SDK', '~> 7.0'
 
 #pod 'Async', :git => 'https://github.com/JohnCoates/Async.git'
-pod 'AsyncSwift'
+#pod 'AsyncSwift'
 pod 'RealmSwift'
 #pod 'GCDKit'
 
-pod 'XCDYouTubeKit'

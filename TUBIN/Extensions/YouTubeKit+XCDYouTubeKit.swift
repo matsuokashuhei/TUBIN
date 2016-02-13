@@ -27,7 +27,7 @@ extension Video {
             }
             if let video = video {
                 for quality in [Quality.FullHigh, Quality.High, Quality.Medium, Quality.Low] {
-                    if let streamURL = video.streamURLs[quality.rawValue] as? NSURL {
+                    if let streamURL = video.streamURLs[quality.rawValue] {
                         handler(.Success(streamURL))
                         return
                     }

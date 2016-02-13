@@ -10,7 +10,8 @@ import UIKit
 import Alamofire
 import YouTubeKit
 //import Async
-import AsyncSwift
+//import AsyncSwift
+import GCDKit
 import XCGLogger
 
 protocol SearchViewControllerDelegate {
@@ -188,7 +189,8 @@ extension SearchViewController: UISearchBarDelegate {
         YouTubeKit.suggestions(keyword: text) { (response) -> Void in
             switch response {
             case .Success(let suggestions):
-                Async.main {
+                GCDBlock.async(.Main) {
+                //Async.main {
                     self.suggestionsTableView.hidden = false
                     self.containerViewAtSelectedSegmentIndex().hidden = true
                     self.suggestions = suggestions

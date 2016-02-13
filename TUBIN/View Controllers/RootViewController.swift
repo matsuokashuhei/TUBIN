@@ -10,7 +10,8 @@ import UIKit
 import iAd
 import SwiftyUserDefaults
 import XCGLogger
-import AsyncSwift
+//import AsyncSwift
+import GCDKit
 
 class RootViewController: UIViewController {
 
@@ -102,7 +103,8 @@ extension RootViewController {
             view.removeFromSuperview()
             superView.addSubview(view)
         }
-        Async.main(after: 5.0) { () -> Void in
+        GCDBlock.after(.Main, delay: 5.0) {
+        //Async.main(after: 5.0) { () -> Void in
             if let upgraded = Defaults["upgraded"].bool {
                 if upgraded {
                     self.canDisplayBannerAds = false
