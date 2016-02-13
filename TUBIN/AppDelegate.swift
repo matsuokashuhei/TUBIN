@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Defaults["migrated"] = true
             Defaults["upgraded"] = false
             Defaults["maxNumberOfHistories"] = 100
-            Defaults["theme"] = "Light"
+            Defaults["theme"] = "Dark"
         }
 
         if Defaults["theme"].string == "Light" {

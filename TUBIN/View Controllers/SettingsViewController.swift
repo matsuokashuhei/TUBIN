@@ -79,7 +79,7 @@ extension SettingsViewController: UITableViewDelegate {
         case 2:
             switch indexPath.row {
             case 0:
-                let text = NSLocalizedString("TUBIN", comment: "TUBIN")
+                let text = NSLocalizedString("YO!!!TUBE", comment: "YO!!!TUBE")
                 let URL = NSURL(string: AppStoreURL)!
                 let shareMenu = UIAlertController(title: nil, message: NSLocalizedString("Share using", comment: "Share using"), preferredStyle: .ActionSheet)
                 for SNS in [(name: "Twitter", type: SLServiceTypeTwitter), (name: "Facebook", type: SLServiceTypeFacebook)] {
