@@ -35,6 +35,8 @@
 		A878FAD21ABB1437004AD3E4 /* ChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878FAD11ABB1437004AD3E4 /* ChannelView.swift */; };
 		A8799DB71AC1B6D9005FC4A6 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */; };
 		A8799DB81AC1B6D9005FC4A6 /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */; };
+		A87E9C3F1C6CDDF9005819A4 /* XCDYouTubeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87E9C3E1C6CDDF9005819A4 /* XCDYouTubeKit.framework */; };
+		A87E9C401C6CDDF9005819A4 /* XCDYouTubeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A87E9C3E1C6CDDF9005819A4 /* XCDYouTubeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A884FAF31B04D11700667D8D /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF21B04D11700667D8D /* UIImage+Extension.swift */; };
 		A884FAF61B04D5F400667D8D /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A884FAF41B04D5F400667D8D /* MusicViewController.swift */; };
 		A884FAF71B04D5F400667D8D /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A884FAF51B04D5F400667D8D /* MusicViewController.xib */; };
@@ -174,6 +176,7 @@
 				A894A8511BE51BC1007256C3 /* Result.framework in Embed Frameworks */,
 				A83324AB1BD2660700CD2DC1 /* YouTubeKit.framework in Embed Frameworks */,
 				A894A84B1BE51BC0007256C3 /* Alamofire.framework in Embed Frameworks */,
+				A87E9C401C6CDDF9005819A4 /* XCDYouTubeKit.framework in Embed Frameworks */,
 				A894A8591BE51BC1007256C3 /* XCGLogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -211,6 +214,7 @@
 		A878FAD11ABB1437004AD3E4 /* ChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelView.swift; sourceTree = "<group>"; };
 		A8799DB51AC1B6D9005FC4A6 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A8799DB61AC1B6D9005FC4A6 /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
+		A87E9C3E1C6CDDF9005819A4 /* XCDYouTubeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCDYouTubeKit.framework; path = Carthage/Build/iOS/XCDYouTubeKit.framework; sourceTree = "<group>"; };
 		A884FAF21B04D11700667D8D /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A884FAF41B04D5F400667D8D /* MusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		A884FAF51B04D5F400667D8D /* MusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A80431341BF8DEF500B1E813 /* GCDKit.framework in Frameworks */,
+				A87E9C3F1C6CDDF9005819A4 /* XCDYouTubeKit.framework in Frameworks */,
 				A894A85B1BE51C35007256C3 /* Social.framework in Frameworks */,
 				A894A85A1BE51C2B007256C3 /* iAd.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
@@ -626,6 +631,7 @@
 		E3B2F19A660D0D52A10E95B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A87E9C3E1C6CDDF9005819A4 /* XCDYouTubeKit.framework */,
 				A80431321BF8DEE100B1E813 /* GCDKit.framework */,
 				A894A8421BE51BC0007256C3 /* Alamofire.framework */,
 				A894A8431BE51BC0007256C3 /* AlamofireImage.framework */,
@@ -913,12 +919,14 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/local/bin/carthage copy-frameworks";
-			shellScript = "";
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/Carthage copy-frameworks";
 		};
 		A83324851BD262A000CD2DC1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -933,6 +941,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SVProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/GCDKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/XCDYouTubeKit.framework",
 			);
 			outputPaths = (
 			);

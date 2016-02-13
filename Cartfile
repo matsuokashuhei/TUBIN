@@ -2,10 +2,10 @@ github "Alamofire/Alamofire" ~> 3.0
 github "Alamofire/AlamofireImage" ~> 2.0
 #github "duemunk/Async" ~> 1.4
 github "antitypical/Result" ~> 0.6
-#github "matsuosh/XCDYouTubeKit"
+github "0xced/XCDYouTubeKit"
 github "TransitApp/SVProgressHUD"
 #github "radex/SwiftyUserDefaults"
-#github "realm/realm-cocoa"
+github "realm/realm-cocoa"
 github "cruffenach/CRToast"
 github "DaveWoodCom/XCGLogger"
 github "JohnEstropia/GCDKit"
