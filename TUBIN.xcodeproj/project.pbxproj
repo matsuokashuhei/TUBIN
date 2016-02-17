@@ -671,7 +671,6 @@
 				A83324911BD2660700CD2DC1 /* Frameworks */,
 				A83324921BD2660700CD2DC1 /* Headers */,
 				A83324931BD2660700CD2DC1 /* Resources */,
-				A82879841BD3DD96000F1DBA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -912,21 +911,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run fa80467db09f8f0804482b62295c68e13f7f2cec a43fb21ef50dd9fcd5889a710d3618eb16d36ca6c33cdd7a7cb08607d1cdeacb";
-		};
-		A82879841BD3DD96000F1DBA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/Carthage copy-frameworks";
 		};
 		A83324851BD262A000CD2DC1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
