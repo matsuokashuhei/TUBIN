@@ -15,6 +15,7 @@ import Result
 class MusicViewController: UIViewController {
 
     let playlistIds = [
+        /*
         "PLFgquLnL59alW3xmYiWRaoz0oM3H17Lth", // New Music This Week
         "PLFgquLnL59ak5gmnz28ZiMd59ryeTPXjT", // Emerging Sounds
         "PLFgquLnL59akA2PflFpeQG9L01VFg90wS", // Latest Music Videos
@@ -36,6 +37,25 @@ class MusicViewController: UIViewController {
         "PLQog_FHUHAFVRsO4otlwzn0bZspSAefOl", // Top Soul Music Tracks
         "PLzauiyXIK7Rj1h23BPvDb3sQwmzHhRuyX", // Top Blues Tracks
         "PLFgquLnL59amXJGk8qUBA_5pvYlr9x53K", // Hungry Hits
+        */
+        "PLFgquLnL59alJAK6gWHt-QNloshBk3AAh", // The Daily 40
+        "PLFgquLnL59amuJEYnzXUxiZw5UXCVhWkn", // Latest
+        "PLFgquLnL59akxb6yWTTNMSZ0-d051B4kL", // On The Rise
+        "PLFPg_IUxqnZNnACUGsfn50DySIOVSkiKI", // Electronic
+        "PLcfQmtiAG0X-fmM85dPlql5wfYbmFumzQ", // Latin
+        "PLDcnymzs18LWrKzHmzrGH1JzLBqrHi3xQ", // Pop
+        "PL47oRh0-pTouthHPv6AbALWPvPJHlKiF7", // Alternative
+        "PLL4IwRtlZcbvbCM7OmXGtzNoSR0IyVT02", // Trap
+        "PLYAYp5OI4lRLf_oZapf5T5RUZeUcF9eRO", // Reggae
+        "PLH6pfBXQXHEC2uDmDy5oi3tHW6X8kZ2Jo", // Hip Hop
+        "PLvLX2y1VZ-tFJCfRG7hi_OjIAyCriNUT2", // Country
+        "PLFRSDckdQc1th9sUu8hpV1pIbjjBgRmDw", // R&B
+        "PLr8RdoI29cXIlkmTAQDgOuwBhDh3yJDBQ", // Pop Rock
+        "PL0zQrw6ZA60Z6JT4lFH-lAq5AfDnO2-aE", // Pop
+        "PLfY-m4YMsF-OM1zG80pMguej_Ufm8t0VC", // Heavy Metal
+        // "https://www.youtube.com/playlist?list=PLXupg6NyTvTxw5-_rzIsBgqJ2tysQFYt5", // Mexican
+        "PLQog_FHUHAFUDDQPOTeAWSHwzFV1Zz5PZ", // Soul
+        "PLVXq77mXV53-Np39jM456si2PeTrEm9Mj", // Classic
     ]
     var playlists = [Playlist]()
 

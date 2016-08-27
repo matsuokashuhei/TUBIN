@@ -150,8 +150,8 @@ class ContainerView: UIView {
     }
 
     func indexOfCurrentView() -> Int {
-        logger.verbose("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
-        logger.verbose("scrollView.frame.width: \(scrollView.frame.width)")
+        logger.verbose("scrollView.contentOffset.x: \(self.scrollView.contentOffset.x)")
+        logger.verbose("scrollView.frame.width: \(self.scrollView.frame.width)")
         let indexOfScrollView = Int(scrollView.contentOffset.x / scrollView.frame.width)
         logger.verbose("indexOfScrollView: \(indexOfScrollView)")
         if indexOfScrollView < scrollView.subviews.count {

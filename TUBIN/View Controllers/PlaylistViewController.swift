@@ -11,7 +11,6 @@ import UIKit
 import YouTubeKit
 
 import Alamofire
-import SwiftyUserDefaults
 import XCGLogger
 
 class PlaylistViewController: ItemsViewController {

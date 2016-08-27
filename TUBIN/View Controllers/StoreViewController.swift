@@ -9,7 +9,8 @@
 import UIKit
 import StoreKit
 import XCGLogger
-import ReachabilitySwift
+import Reachability
+//import ReachabilitySwift
 
 class StoreViewController: UIViewController {
 

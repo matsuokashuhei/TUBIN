@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		64E880D67FB76184E153219D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86F1F1E09D2F038920B8889 /* Pods.framework */; };
+		97E4DFB88907DD8E6C4D8ED3 /* Pods_TUBIN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2EF016593A5EE55452ABFB /* Pods_TUBIN.framework */; };
+		A80379631D7189DF0042696E /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80379601D7188630042696E /* Reachability.framework */; };
+		A80379641D7189E50042696E /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80379601D7188630042696E /* Reachability.framework */; };
+		A80379651D7189E50042696E /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A80379601D7188630042696E /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A80379681D718C330042696E /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80379661D718C330042696E /* Realm.framework */; };
+		A80379691D718C330042696E /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A80379661D718C330042696E /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A803796A1D718C330042696E /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80379671D718C330042696E /* RealmSwift.framework */; };
+		A803796B1D718C330042696E /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A80379671D718C330042696E /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A80431341BF8DEF500B1E813 /* GCDKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80431321BF8DEE100B1E813 /* GCDKit.framework */; };
 		A80431351BF8DEF500B1E813 /* GCDKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A80431321BF8DEE100B1E813 /* GCDKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A82FC4391B300C9D0001E452 /* YouTubeKit+Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */; };
@@ -171,13 +178,16 @@
 			files = (
 				A894A8531BE51BC1007256C3 /* SVProgressHUD.framework in Embed Frameworks */,
 				A894A84D1BE51BC0007256C3 /* AlamofireImage.framework in Embed Frameworks */,
+				A803796B1D718C330042696E /* RealmSwift.framework in Embed Frameworks */,
 				A80431351BF8DEF500B1E813 /* GCDKit.framework in Embed Frameworks */,
 				A894A84F1BE51BC0007256C3 /* CRToast.framework in Embed Frameworks */,
 				A894A8511BE51BC1007256C3 /* Result.framework in Embed Frameworks */,
 				A83324AB1BD2660700CD2DC1 /* YouTubeKit.framework in Embed Frameworks */,
 				A894A84B1BE51BC0007256C3 /* Alamofire.framework in Embed Frameworks */,
+				A80379651D7189E50042696E /* Reachability.framework in Embed Frameworks */,
 				A87E9C401C6CDDF9005819A4 /* XCDYouTubeKit.framework in Embed Frameworks */,
 				A894A8591BE51BC1007256C3 /* XCGLogger.framework in Embed Frameworks */,
+				A80379691D718C330042696E /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,7 +195,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		069827026B79EE3BAF9839E0 /* Pods-TUBIN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUBIN.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TUBIN/Pods-TUBIN.debug.xcconfig"; sourceTree = "<group>"; };
+		319EBE150B4006B9E4BCB1AF /* Pods-TUBIN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TUBIN.release.xcconfig"; path = "Pods/Target Support Files/Pods-TUBIN/Pods-TUBIN.release.xcconfig"; sourceTree = "<group>"; };
+		8A2EF016593A5EE55452ABFB /* Pods_TUBIN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TUBIN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A80379601D7188630042696E /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		A80379661D718C330042696E /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		A80379671D718C330042696E /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		A80431321BF8DEE100B1E813 /* GCDKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDKit.framework; path = Carthage/Build/iOS/GCDKit.framework; sourceTree = "<group>"; };
 		A82FC4381B300C9D0001E452 /* YouTubeKit+Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YouTubeKit+Realm.swift"; sourceTree = "<group>"; };
 		A83324951BD2660700CD2DC1 /* YouTubeKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YouTubeKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,7 +323,6 @@
 		A8F211821B0E45B0001D9A07 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A8F74B261BD4060D00BCB384 /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
 		C86F1F1E09D2F038920B8889 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC4E299ADCEB0834ABF32773 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,10 +347,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A80379681D718C330042696E /* Realm.framework in Frameworks */,
 				A80431341BF8DEF500B1E813 /* GCDKit.framework in Frameworks */,
 				A87E9C3F1C6CDDF9005819A4 /* XCDYouTubeKit.framework in Frameworks */,
 				A894A85B1BE51C35007256C3 /* Social.framework in Frameworks */,
 				A894A85A1BE51C2B007256C3 /* iAd.framework in Frameworks */,
+				A803796A1D718C330042696E /* RealmSwift.framework in Frameworks */,
 				A8E17F361ABE8BC000DAF54A /* StoreKit.framework in Frameworks */,
 				A83324AA1BD2660700CD2DC1 /* YouTubeKit.framework in Frameworks */,
 				A894A84A1BE51BC0007256C3 /* Alamofire.framework in Frameworks */,
@@ -344,10 +360,12 @@
 				A894A84C1BE51BC0007256C3 /* AlamofireImage.framework in Frameworks */,
 				A894A8501BE51BC1007256C3 /* Result.framework in Frameworks */,
 				A894A8521BE51BC1007256C3 /* SVProgressHUD.framework in Frameworks */,
+				A80379641D7189E50042696E /* Reachability.framework in Frameworks */,
 				A894A84E1BE51BC0007256C3 /* CRToast.framework in Frameworks */,
-				64E880D67FB76184E153219D /* Pods.framework in Frameworks */,
 				A8F211831B0E45B0001D9A07 /* Fabric.framework in Frameworks */,
 				A8F211841B0E45B0001D9A07 /* Crashlytics.framework in Frameworks */,
+				A80379631D7189DF0042696E /* Reachability.framework in Frameworks */,
+				97E4DFB88907DD8E6C4D8ED3 /* Pods_TUBIN.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,11 +379,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		312E13B13F6572AC183F56F9 /* Pods */ = {
+		993C01BC28657DE972D0FEF3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EC4E299ADCEB0834ABF32773 /* Pods.debug.xcconfig */,
-				5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */,
+				069827026B79EE3BAF9839E0 /* Pods-TUBIN.debug.xcconfig */,
+				319EBE150B4006B9E4BCB1AF /* Pods-TUBIN.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -437,9 +455,9 @@
 				A83324961BD2660700CD2DC1 /* YouTubeKit */,
 				A83324A41BD2660700CD2DC1 /* YouTubeKitTests */,
 				A8D4027E1AA8B7C700F0AAD2 /* Products */,
-				312E13B13F6572AC183F56F9 /* Pods */,
 				E3B2F19A660D0D52A10E95B2 /* Frameworks */,
 				A8D403B71AA8CCCF00F0AAD2 /* TUBIN-Bridging-Header.h */,
+				993C01BC28657DE972D0FEF3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -631,6 +649,9 @@
 		E3B2F19A660D0D52A10E95B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A80379661D718C330042696E /* Realm.framework */,
+				A80379671D718C330042696E /* RealmSwift.framework */,
+				A80379601D7188630042696E /* Reachability.framework */,
 				A87E9C3E1C6CDDF9005819A4 /* XCDYouTubeKit.framework */,
 				A80431321BF8DEE100B1E813 /* GCDKit.framework */,
 				A894A8421BE51BC0007256C3 /* Alamofire.framework */,
@@ -645,6 +666,7 @@
 				A8E17F351ABE8BC000DAF54A /* StoreKit.framework */,
 				A86CC3E81AAB0456008669F2 /* iAd.framework */,
 				C86F1F1E09D2F038920B8889 /* Pods.framework */,
+				8A2EF016593A5EE55452ABFB /* Pods_TUBIN.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -704,15 +726,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A8D4029C1AA8B7C700F0AAD2 /* Build configuration list for PBXNativeTarget "TUBIN" */;
 			buildPhases = (
-				2B52D818EF4D7F9ED21380C9 /* Check Pods Manifest.lock */,
+				C474B223582D37323ADC3224 /* [CP] Check Pods Manifest.lock */,
 				A8D402791AA8B7C700F0AAD2 /* Sources */,
 				A8D4027A1AA8B7C700F0AAD2 /* Frameworks */,
 				A8D4027B1AA8B7C700F0AAD2 /* Resources */,
-				A3299E77FD011E05FD252B1B /* Embed Pods Frameworks */,
-				E388D778733501D4C64ABC35 /* Copy Pods Resources */,
 				A8001E841AD1A21700DFCC2D /* ShellScript */,
 				A82FC4401B31BEA20001E452 /* Embed Frameworks */,
 				A83324851BD262A000CD2DC1 /* ShellScript */,
+				2B7E276227ACC8E169F5681A /* [CP] Embed Pods Frameworks */,
+				919C999AFE80DE90ACE625E1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -869,34 +891,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2B52D818EF4D7F9ED21380C9 /* Check Pods Manifest.lock */ = {
+		2B7E276227ACC8E169F5681A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TUBIN/Pods-TUBIN-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A3299E77FD011E05FD252B1B /* Embed Pods Frameworks */ = {
+		919C999AFE80DE90ACE625E1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TUBIN/Pods-TUBIN-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A8001E841AD1A21700DFCC2D /* ShellScript */ = {
@@ -926,6 +948,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/XCGLogger.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/GCDKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XCDYouTubeKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 			);
 			outputPaths = (
 			);
@@ -933,19 +956,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/Carthage copy-frameworks";
 		};
-		E388D778733501D4C64ABC35 /* Copy Pods Resources */ = {
+		C474B223582D37323ADC3224 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1284,7 +1307,7 @@
 		};
 		A8D4029D1AA8B7C700F0AAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC4E299ADCEB0834ABF32773 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 069827026B79EE3BAF9839E0 /* Pods-TUBIN.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -1312,7 +1335,7 @@
 		};
 		A8D4029E1AA8B7C700F0AAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5959A20FD6CAE948A5A1FD8D /* Pods.release.xcconfig */;
+			baseConfigurationReference = 319EBE150B4006B9E4BCB1AF /* Pods-TUBIN.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
